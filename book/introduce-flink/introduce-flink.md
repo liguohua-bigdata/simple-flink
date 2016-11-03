@@ -59,3 +59,6 @@ flink liberaries:
 ####flink生态圈
 ![](images/20150716204639_931.png) 
 
+
+####flink算上生态圈的软件栈
+![](images/Snip20161103_11.png) 
