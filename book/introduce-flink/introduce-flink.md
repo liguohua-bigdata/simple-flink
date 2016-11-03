@@ -26,7 +26,7 @@ flink和Hadoop一样是一个主从式的分布式系统。
 
 
 内部结构架构
-![](images/Snip20161103_11.png) 
+![](images/20161027406.png) 
 ####flink软件栈
 ![](images/Snip20161103_10.png) 
 ```
