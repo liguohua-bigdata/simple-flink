@@ -11,8 +11,8 @@ github地址：https://github.com/apache/flink
 ![](images/Snip20161103_8.png) 
 
 ####flink基本架构
+######flink基本架构
 flink和Hadoop一样是一个主从式的分布式系统。
-
 ![](images/Snip20161103_9.png) 
 >
 .主节点
@@ -21,12 +21,29 @@ flink和Hadoop一样是一个主从式的分布式系统。
 .从节点
 负责执行计算任务
 负责报告计算任务的执行情况
+######flink原理架构
 
-内部结构架构？？？？？？？
+######flink和HDFS结合后的架构
+![](images/Picture1.png) 
+```
+Flink运行时包含了两种类型的处理器：
+    1.Master (Job Manager): 处理job的提交，资源的调度，元数据的管理，运行状态监控等。
+    2.Workers (Task Managers):分解job变成各种operation，并执行operation完成job任务。
+    3.数据在node之间流动，优先计算本datanode中的data block，本node没有，才考虑拉取其他node上的block。
+    4.所有操作都基于内存，在计算完成后可以写入各种持久化存储系统，如hdfs,hbase等。
+```
 
-
-内部结构架构
+######flink运行时架构
 ![](images/20161027406.png) 
+>
+```
+Flink运行时包含了两种类型的处理器：
+master处理器：也称之为JobManagers用于协调分布式执行。它们用来调度task，协调检查点，协调失败时恢复等。
+Flink运行时至少存在一个master处理器。一个高可用的运行模式会存在多个master处理器，它们其中有一个是leader，而其他的都是standby。
+worker处理器：也称之为TaskManagers用于执行一个dataflow的task(或者特殊的subtask)、数据缓冲和data stream的交换。
+Flink运行时至少会存在一个worker处理器。
+```
+
 ####flink软件栈
 ![](images/Snip20161103_10.png) 
 ```
