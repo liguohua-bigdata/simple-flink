@@ -22,9 +22,12 @@ flink和Hadoop一样是一个主从式的分布式系统。
 负责执行计算任务
 负责报告计算任务的执行情况
 ######flink原理架构
-
+![](images/Picture0.png) 
+######flink物理部署架构图
+![](images/Snip20161105_4.png) 
 ######flink和HDFS结合后的架构
 ![](images/Picture1.png) 
+![](images/Snip20161105_5.png) 
 ```
 Flink运行时包含了两种类型的处理器：
     1.Master (Job Manager): 处理job的提交，资源的调度，元数据的管理，运行状态监控等。
@@ -33,6 +36,9 @@ Flink运行时包含了两种类型的处理器：
     4.所有操作都基于内存，在计算完成后可以写入各种持久化存储系统，如hdfs,hbase等。
 ```
 
+
+ 
+ 
 ######flink运行时架构
 ![](images/20161027406.png) 
 >
@@ -77,5 +83,19 @@ flink liberaries:
 ![](images/20150716204639_931.png) 
 
 
-####flink算上生态圈的软件栈
+####flink大数据生态圈的软件栈1
 ![](images/Snip20161103_11.png) 
+####flink大数据生态圈的软件栈2
+![](images/Snip20161105_1.png) 
+
+---
+######flink的物理部署架构
+![](images/Snip20161105_10.png)
+######flink和Hadoop的物理部署架构
+![](images/Snip20161105_9.png)
+######client的作用
+![](images/Snip20161105_12.png)
+######job manager的作用
+![](images/Snip20161105_13.png)
+######task manager的作用
+![](images/Snip20161105_15.png)
