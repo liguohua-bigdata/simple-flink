@@ -94,8 +94,21 @@ flink liberaries:
 ######flink和Hadoop的物理部署架构
 ![](images/Snip20161105_9.png)
 ######client的作用
+Type extraction
+Optimize: in all APIs not just SQL queries as in Spark
+Construct job Dataflow graph
+Pass job Dataflow graph to job manager
+Retrieve job results
 ![](images/Snip20161105_12.png)
+
 ######job manager的作用
+Parallelization: Create Execution Graph
+Scheduling: Assign tasks to task managers
+State tracking: Supervise the execution
 ![](images/Snip20161105_13.png)
 ######task manager的作用
+Operations are split up into tasks depending on the specified parallelism
+Each parallel instance of an operation runs in a separate task slot
+The scheduler may run several tasks from different operators in one task slot
+
 ![](images/Snip20161105_15.png)
