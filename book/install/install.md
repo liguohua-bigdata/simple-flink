@@ -210,12 +210,34 @@ ll
 计算hdfs://qingcheng11:9000/input/flink/README.txt中单词的个数      
 执行命令：
 ```
-cd ${FLINK_HOME}/examples/batch
-ll
+${FLINK_HOME}/bin/flink run -p 8 ${FLINK_HOME}/examples/batch/WordCount.jar \
+--input  hdfs://qingcheng11:9000/input/flink/README.txt \
+--output hdfs://qingcheng11:9000/output/flink/readme_result
+
+其中：-p 8：是设置8个任务并发执行，每个任务输出一个结果到hdfs上hdfs上将生产8个结果文件。
 ```
 执行效果：  
-
-       
+![](images/Snip20161113_81.png)   
+fink web ui中的效果：  
+![](images/Snip20161113_82.png)  
+hadoop hdfs  web ui中的效果：  
+![](images/Snip20161113_83.png) 
+查看生产文件  
+```
+ hadoop fs -text /output/flink/readme_result/2
+```
+![](images/Snip20161113_85.png)             
+ 
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       
 ####五、flink流处理测试        
 0.测试规划如下：  
