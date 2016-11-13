@@ -18,6 +18,8 @@ shell中的执行效果：
 web ui中的执行效果：
 ![](images/Snip20161114_87.png) 
 
+
+
 ---
 2.map()方法    
 ```
@@ -45,6 +47,9 @@ shell中的执行效果：
 ![](images/Snip20161114_91.png) 
 web ui中的执行效果：
 ![](images/Snip20161114_92.png)    
+    
+    
+    
     
 ---
 3.flatMap()方法    
