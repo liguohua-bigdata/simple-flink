@@ -256,15 +256,15 @@ ${FLINK_HOME}/bin/flink run  ${FLINK_HOME}/examples/streaming/SocketWindowWordCo
 执行效果：  
 ![](images/Snip20161113_74.png)          
        
-3.打开消息输出端
-3.1找到输出文件
-找到有输出内容的flink-*-taskmanager-*-*.out文件，这里讲会有处理日志的输出。
+3.打开消息输出端  
+3.1找到输出文件  
+找到有输出内容的flink-*-taskmanager-*-*.out文件，这里讲会有处理日志的输出。  
 ```
 cd ${FLINK_HOME}/log/
 ll
 ```
 执行效果：  
-![](images/Snip20161113_72.png)         
+![](images/Snip20161113_71.png)         
 本例中找的的文件名为flink-root-taskmanager-1-qingcheng11.out
 3.2查看输出文件内容
 ```
