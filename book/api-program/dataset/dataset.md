@@ -111,3 +111,32 @@ shell中的执行效果：
 ![](images/Snip20161114_95.png) 
 web ui中的执行效果：
 ![](images/Snip20161114_96.png) 
+
+
+---
+5.filter()方法    
+```
+The Filter transformation applies a user-defined filter function on each element of 
+a DataSet and retains only those elements for which the function returns true.
+```
+执行程序：
+```scale
+val input: DataSet[String] = benv.fromElements("zhangsan boy", "lisi is a girl so sex","wangwu boy")
+val result=input.filter{_.contains("boy")}
+result.print()
+```
+程序解析：
+```scale
+//1.创建一个 DataSet其元素为String类型
+val input: DataSet[String] = benv.fromElements("zhangsan boy", "lisi is a girl so sex","wangwu boy")
+
+//2.过滤出包含'boy'字样的元素
+val result=input.filter{_.contains("boy")}
+
+//3.将结果显示出来
+result.print()
+```
+shell中的执行效果：
+![](images/Snip20161114_97.png) 
+web ui中的执行效果：
+![](images/Snip20161114_99.png) 
