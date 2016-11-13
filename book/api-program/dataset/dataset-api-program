@@ -1,0 +1,35 @@
+
+**********************************************************************************************************************************
+
+val input: DataSet[String] = benv.fromElements("A", "B", "C", "D", "E", "F", "G", "H")
+input.print()
+
+
+**********************************************************************************************************************************
+
+
+val input: DataSet[Int] = benv.fromElements(23, 67, 18, 29, 32, 56, 4, 27)
+val result=input.map(_*2)
+result.print()
+
+
+**********************************************************************************************************************************
+
+val input: DataSet[String] = benv.fromElements("zhangsan boy", "lisi girl")
+val result=input.flatMap { _.split(" ") }
+result.print()
+
+
+**********************************************************************************************************************************
+
+val input: DataSet[String] = benv.fromElements("A", "B", "C", "D", "E", "F", "G", "H")
+val result: DataSet[(Long, String)] = input.zipWithIndex
+result.print()
+
+**********************************************************************************************************************************
+
+val input: DataSet[String] = benv.fromElements("A", "B", "C", "D", "E", "F", "G", "H")
+val result2: DataSet[(Long, String)] = input.zipWithUniqueId
+result2.print()
+
+
