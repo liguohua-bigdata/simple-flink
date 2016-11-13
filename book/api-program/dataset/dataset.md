@@ -1,10 +1,11 @@
----
+
 1.print()方法    
 执行程序：
 ```scale
 val input: DataSet[String] = benv.fromElements("A", "B", "C", "D", "E", "F", "G", "H")
 input.print()
 ```
+
 程序解析：
 ```scale
 //1.创建一个 DataSet其元素为String类型
@@ -13,8 +14,10 @@ val input: DataSet[String] = benv.fromElements("A", "B", "C", "D", "E", "F", "G"
 //2.将DataSet的内容打印出来
 input.print()
 ```
+
 shell中的执行效果：
 ![](images/Snip20161114_86.png) 
+
 web ui中的执行效果：
 ![](images/Snip20161114_87.png) 
 
@@ -42,6 +45,7 @@ val result=input.map(_*2)
 //3.将DataSet中的每个元素输出出来
 result.print()
 ```
+
 shell中的执行效果：
 ![](images/Snip20161114_91.png) 
 web ui中的执行效果：
