@@ -106,7 +106,7 @@ scp -r ${FLINK_HOME}/conf/*  qingcheng12:${FLINK_HOME}/conf/
 scp -r ${FLINK_HOME}/conf/*  qingcheng13:${FLINK_HOME}/conf/
 ```
 
-5.启动flin服务
+5.启动flink服务
 执行命令：
 ```
 ${FLINK_HOME}/bin/start-cluster.sh
@@ -205,7 +205,7 @@ cd ${FLINK_HOME}/examples/batch
 ll
 ```
 执行效果：  
-![](images/Snip20161113_69.png)             
+![](images/Snip20161113_71.png)             
 2.2运行wordcount程序  
 计算hdfs://qingcheng11:9000/input/flink/README.txt中单词的个数      
 执行命令：
