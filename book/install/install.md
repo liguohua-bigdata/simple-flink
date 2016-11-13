@@ -5,7 +5,7 @@ http://flink.apache.org
 ![](images/Snip20161113_50.png) 
 1.2进入下载页面：   
 http://flink.apache.org/downloads.html
-![](images/Snip20161113_50.png) 
+![](images/Snip20161113_68.png) 
 1.3获取下载地址：
 ![](images/Snip20161113_54.png) 
 选择相应的版本，下载地址为http://mirrors.tuna.tsinghua.edu.cn/apache/flink/flink-1.1.3/flink-1.1.3-bin-hadoop27-scala_2.10.tgz   
