@@ -8,7 +8,7 @@ http://flink.apache.org/downloads.html
 ![](images/Snip20161113_50.png) 
 1.3获取下载地址：
 ![](images/Snip20161113_54.png) 
-选择相应的版本，下载地址为http://mirrors.tuna.tsinghua.edu.cn/apache/flink/flink-1.1.3/flink-1.1.3-bin-hadoop27-scala_2.10.tgz
+选择相应的版本，下载地址为http://mirrors.tuna.tsinghua.edu.cn/apache/flink/flink-1.1.3/flink-1.1.3-bin-hadoop27-scala_2.10.tgz   
 2.下载并解压flink
 2.1下载命令：
 ```
@@ -20,8 +20,8 @@ wget http://mirrors.tuna.tsinghua.edu.cn/apache/flink/flink-1.1.3/flink-1.1.3-bi
 ```
 tar -zxvf flink-1.1.3-bin-hadoop27-scala_2.10.tgz
 ```
-解压得到flink-1.1.3文件夹，文件夹中的内容如下：
-![](images/Snip20161113_55.png) 
+解压得到flink-1.1.3文件夹，文件夹中的内容如下：   
+![](images/Snip20161113_55.png)    
 3.分发flink及其环境变量  
 3.1分发flink  
 分发命令：  
@@ -57,14 +57,14 @@ scp -r /bigdata/software/flink-1.1.3  qingcheng13:/bigdata/software/
 
 ####二、flink在standalone模式主节点下无HA的部署实战
 1.部署规划：  
-![](images/Snip20161113_56.png) 
-2.配置flink-conf.yaml文件
+![](images/Snip20161113_56.png)   
+2.配置flink-conf.yaml文件  
 执行命令：
 ```
 vim ${FLINK_HOME}/conf/flink-conf.yaml
 ```
 添加内容：  
-    在flink-conf.yaml文件中添加如下内容。
+    在flink-conf.yaml文件中添加如下内容。  
 ```
 # The TaskManagers will try to connect to the JobManager on that host.
 jobmanager.rpc.address: qingcheng11
