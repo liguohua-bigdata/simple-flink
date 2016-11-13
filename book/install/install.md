@@ -64,7 +64,7 @@ scp -r /bigdata/software/flink-1.1.3  qingcheng13:/bigdata/software/
 vim ${FLINK_HOME}/conf/flink-conf.yaml
 ```
 添加内容：  
-    在flink-conf.yaml文件中添加如下内容。  
+    在flink-conf.yaml文件中进行一些基本的配置，本此要修改的内容如下。  
 ```
 # The TaskManagers will try to connect to the JobManager on that host.
 jobmanager.rpc.address: qingcheng11
