@@ -48,6 +48,10 @@ web ui中的执行效果：
     
 ---
 3.flatMap()方法    
+```
+The FlatMap transformation applies a user-defined flat-map function on each element of a DataSet. 
+This variant of a map function can return arbitrary many result elements (including none) for each input element.
+```
 执行程序：
 ```scale
 val input: DataSet[String] = benv.fromElements("zhangsan boy", "lisi girl")
@@ -69,3 +73,34 @@ shell中的执行效果：
 ![](images/Snip20161114_88.png) 
 web ui中的执行效果：
 ![](images/Snip20161114_89.png) 
+
+
+
+---
+3.mapPartition()方法    
+```
+MapPartition transforms a parallel partition in a single function call. The map-partition function gets the partition
+as Iterable and can produce an arbitrary number of result values. The number of elements in each partition depends on
+the degree-of-parallelism and previous operations.
+```
+执行程序：
+```scale
+val input: DataSet[String] = benv.fromElements("zhangsan boy", "lisi is a girl so sex")
+val result=input.mapPartition{in => Some(in.size)}
+result.print()
+```
+程序解析：
+```scale
+//1.创建一个 DataSet其元素为String类型
+val input: DataSet[String] = benv.fromElements("zhangsan boy", "lisi is a girl so sex")
+
+//2.??????????????
+val result=input.mapPartition{in => Some(in.size)}
+
+//3.将结果显示出来
+result.print()
+```
+shell中的执行效果：
+![](images/Snip20161114_95.png) 
+web ui中的执行效果：
+![](images/Snip20161114_96.png) 

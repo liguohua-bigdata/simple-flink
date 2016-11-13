@@ -22,6 +22,73 @@ result.print()
 
 **********************************************************************************************************************************
 
+val input: DataSet[String] = benv.fromElements("zhangsan boy", "lisi girl")
+val result=input.mapPartition{in => Some(in.size)}
+result.print()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+**********************************************************************************************************************************
+
 val input: DataSet[String] = benv.fromElements("A", "B", "C", "D", "E", "F", "G", "H")
 val result: DataSet[(Long, String)] = input.zipWithIndex
 result.print()
