@@ -56,7 +56,8 @@ web ui中的执行效果：
 3.flatMap()方法    
 ```
 The FlatMap transformation applies a user-defined flat-map function on each element of a DataSet. 
-This variant of a map function can return arbitrary many result elements (including none) for each input element.
+This variant of a map function can return arbitrary many result elements
+(including none) for each input element.
 ```
 执行程序：
 ```scale
