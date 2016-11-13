@@ -152,8 +152,42 @@ Task Manager情况：
     ${FLINK_HOME}/bin/start-scala-shell.sh remote qingcheng11 6123
 ```
        
+  
+####三、flink第一个程序      
+1.创建文件夹并上传flink的readme文件  
+执行命令：
+```
+hadoop fs -mkdir -p  /input/flink
+hadoop fs -put  ${FLINK_HOME}/README.txt  /input/flink/
+```
+执行效果：
+![](images/Snip20161113_63.png)   
+   
+  
+2.打开start-scala-shell.sh
+执行命令：
+```
+${FLINK_HOME}/bin/start-scala-shell.sh remote qingcheng11 6123
+```
+执行效果：
+![](images/Snip20161113_64.png)   
+   
+3.执行第一个flink程序
+执行程序：
+```
+val file=benv.readTextFile("hdfs://qingcheng11:9000/input/flink/README.txt")
+val flinks=file.filter(l =>l.contains("flink"))
+flinks.print()
+val count=flinks.count
+```
+shell执行效果：
+![](images/Snip20161113_65.png)
+web执行效果一：
+![](images/Snip20161113_66.png)
+web执行效果二：
+![](images/Snip20161113_67.png)             
        
-####三、flink批处理测试       
+####四、flink批处理测试       
        
 1.创建文件夹并上传flink的readme文件  
 执行命令：
@@ -163,8 +197,6 @@ hadoop fs -put  ${FLINK_HOME}/README.txt  /input/flink/
 ```
 执行效果：  
 ![](images/Snip20161113_63.png)     
-       
-  
 2.运行wordcount程序  
 2.1检查安装包中是否存在WordCount.jar  
 执行命令：
@@ -182,13 +214,29 @@ cd ${FLINK_HOME}/examples/batch
 ll
 ```
 执行效果：  
-![](images/Snip20161113_69.png)   
+
        
       
-####四、flink流处理测试   
+####五、flink流处理测试   
 测试规划如下：
-          
-        
+![](images/Snip20161113_79.png)  
+```
+1.消息发送者
+    在qingcheng12的9874端口发送消息
+2.消息处理者
+    qingcheng13上提交${FLINK_HOME}/examples/streaming/SocketWindowWordCount.jar 
+3.消息处理集群
+    主节点：
+        qingcheng11
+    从节点：
+        qingcheng11
+        qingcheng12
+        qingcheng13
+4.结果输出
+    计算结果将输出到主节点的${FLINK_HOME}/log/中
+    也就是本例中的${FLINK_HOME}/log/flink-root-taskmanager-1-qingcheng11.out
+```
+
 1.打开消息发送端
 执行命令：
 ```
@@ -254,42 +302,11 @@ flume : 1
 4.3在本例中，执行效果像下面的样子：  
 ![](images/Snip20161113_75.png)          
        
+4.4在本例中，flink的webUI效果像下面的样子：  
+![](images/Snip20161113_76.png)          
+              
        
        
        
        
        
-       
-        
-1.创建文件夹并上传flink的readme文件  
-执行命令：
-```
-hadoop fs -mkdir -p  /input/flink
-hadoop fs -put  ${FLINK_HOME}/README.txt  /input/flink/
-```
-执行效果：
-![](images/Snip20161113_63.png)   
-   
-  
-2.打开start-scala-shell.sh
-执行命令：
-```
-${FLINK_HOME}/bin/start-scala-shell.sh remote qingcheng11 6123
-```
-执行效果：
-![](images/Snip20161113_64.png)   
-   
-3.执行第一个flink程序
-执行程序：
-```
-val file=benv.readTextFile("hdfs://qingcheng11:9000/input/flink/README.txt")
-val flinks=file.filter(l =>l.contains("flink"))
-flinks.print()
-val count=flinks.count
-```
-shell执行效果：
-![](images/Snip20161113_65.png)
-web执行效果一：
-![](images/Snip20161113_66.png)
-web执行效果二：
-![](images/Snip20161113_67.png)      
