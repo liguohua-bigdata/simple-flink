@@ -55,7 +55,6 @@ scp -r /bigdata/software/flink-1.1.3  qingcheng13:/bigdata/software/
    -bash: /bigdata/software/flink-1.1.3: Is a directory
 ```
 
-
 ####二、flink在standalone模式主节点下无HA的部署实战
 1.部署规划：  
 ![](images/Snip20161113_56.png) 
@@ -124,8 +123,7 @@ jps
 执行效果：
 ![](images/Snip20161113_58.png) 
 
-
-5.2查看flink的web界面验证服务  
+6.2查看flink的web界面验证服务  
 打开网址：  
     在浏览器中打开如下网址
 ```
@@ -140,25 +138,57 @@ Task Manager情况：
 ![](images/Snip20161113_61.png) 
 可以看出flink集群的整体情况。说明flink在standalone模式下主节点无HA的部署实战是成功的。
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-5.常用命令
+7.flink的常用命令
 ```
-nohup ${FLINK_HOME}/bin/start-cluster.sh &
-${FLINK_HOME}/bin/stop-cluster.sh
-${FLINK_HOME}/bin/webclient.sh start
-${FLINK_HOME}/bin/webclient.sh stop
-${FLINK_HOME}/bin/start-scala-shell.sh
+1.启动集群
+    ${FLINK_HOME}/bin/start-cluster.sh 
+2.关闭集群
+    ${FLINK_HOME}/bin/stop-cluster.sh
+3.启动web客户端
+    ${FLINK_HOME}/bin/webclient.sh start
+4.关闭web客户端
+    ${FLINK_HOME}/bin/webclient.sh stop
+5.启动Scala-shell
+    ${FLINK_HOME}/bin/start-scala-shell.sh remote qingcheng11 6123
 ```
        
+       
+       
+       
+       
+       
+       
+       
+       
+1.创建文件夹并上传flink的readme文件
+执行命令：
+```
+hadoop fs -mkdir -p  /input/flink
+hadoop fs -put  ${FLINK_HOME}/README.txt  /input/flink/
+```
+执行效果：
+![](images/Snip20161113_63.png)   
+   
+  
+2.打开start-scala-shell.sh
+执行命令：
+```
+${FLINK_HOME}/bin/start-scala-shell.sh remote qingcheng11 6123
+```
+执行效果：
+![](images/Snip20161113_64.png)   
+   
+3.执行第一个flink程序
+执行程序：
+```
+val file=benv.readTextFile("hdfs://qingcheng11:9000/input/flink/README.txt")
+val flinks=file.filter(l =>l.contains("flink"))
+flinks.print()
+val count=flinks.count
+```
+shell执行效果：
+![](images/Snip20161113_65.png)
+web执行效果一：
+![](images/Snip20161113_66.png)
+web执行效果二：
+![](images/Snip20161113_67.png)      
