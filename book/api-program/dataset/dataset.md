@@ -87,7 +87,8 @@ web ui中的执行效果：
 ```
 MapPartition transforms a parallel partition in a single function call. The map-partition
 function gets the partition as Iterable and can produce an arbitrary number of result values.
-The number of elements in each partition depends on the degree-of-parallelism and previous operations.
+The number of elements in each partition depends on the degree-of-parallelism and previous 
+operations.
 ```
 执行程序：
 ```scale
