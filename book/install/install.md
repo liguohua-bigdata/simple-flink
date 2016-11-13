@@ -153,6 +153,106 @@ Task Manager情况：
 ```
        
        
+####三、flink批处理测试       
+       
+1.创建文件夹并上传flink的readme文件  
+执行命令：
+```
+hadoop fs -mkdir -p  /input/flink
+hadoop fs -put  ${FLINK_HOME}/README.txt  /input/flink/
+```
+执行效果：  
+![](images/Snip20161113_63.png)     
+       
+  
+2.运行wordcount程序  
+2.1检查安装包中是否存在WordCount.jar  
+执行命令：
+```
+cd ${FLINK_HOME}/examples/batch
+ll
+```
+执行效果：  
+![](images/Snip20161113_69.png)             
+2.2运行wordcount程序  
+计算hdfs://qingcheng11:9000/input/flink/README.txt中单词的个数      
+执行命令：
+```
+cd ${FLINK_HOME}/examples/batch
+ll
+```
+执行效果：  
+![](images/Snip20161113_69.png)   
+       
+      
+####四、flink流处理测试   
+测试规划如下：
+          
+        
+1.打开消息发送端
+执行命令：
+```
+nc -l -p  9874
+```
+执行效果：  
+![](images/Snip20161113_72.png)     
+       
+2.打开消息处理端  
+打开flink流消息处理client程序  
+执行命令：
+```
+${FLINK_HOME}/bin/flink run  ${FLINK_HOME}/examples/streaming/SocketWindowWordCount.jar \
+--hostname  qingcheng12 \
+--port   9874
+```
+执行效果：  
+![](images/Snip20161113_74.png)          
+       
+3.打开消息输出端
+3.1找到输出文件
+找到有输出内容的flink-*-taskmanager-*-*.out文件，这里讲会有处理日志的输出。
+```
+cd ${FLINK_HOME}/log/
+ll
+```
+执行效果：  
+![](images/Snip20161113_72.png)         
+本例中找的的文件名为flink-root-taskmanager-1-qingcheng11.out
+3.2查看输出文件内容
+```
+tail -f flink-root-taskmanager-1-qingcheng11.out
+```   
+    
+4.输入数据 ，运行程序     
+在消息发送端不断的输入单词，则可以看到在消息输出端有新内容不断的输出。  
+4.1在本例中，像下面的样子发送数据：    
+```
+flink spark
+storm hadoop
+hadoop hue
+flink flink
+spark flume
+...........
+...........
+...........
+........... 
+```         
+4.2在本例中，输出的数据像下面的样子：    
+```
+hadoop : 4
+flume : 1
+hue : 1
+flink : 3
+storm : 1
+spark : 2
+hadoop : 2
+flume : 1
+...........
+...........
+........... 
+```          
+4.3在本例中，执行效果像下面的样子：  
+![](images/Snip20161113_75.png)          
        
        
        
@@ -160,7 +260,8 @@ Task Manager情况：
        
        
        
-1.创建文件夹并上传flink的readme文件
+        
+1.创建文件夹并上传flink的readme文件  
 执行命令：
 ```
 hadoop fs -mkdir -p  /input/flink
