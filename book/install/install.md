@@ -59,3 +59,106 @@ scp -r /bigdata/software/flink-1.1.3  qingcheng13:/bigdata/software/
 ####二、flink在standalone模式主节点下无HA的部署实战
 1.部署规划：  
 ![](images/Snip20161113_56.png) 
+2.配置flink-conf.yaml文件
+执行命令：
+```
+vim ${FLINK_HOME}/conf/flink-conf.yaml
+```
+添加内容：  
+    在flink-conf.yaml文件中添加如下内容。
+```
+# The TaskManagers will try to connect to the JobManager on that host.
+jobmanager.rpc.address: qingcheng11
+
+# The heap size for the JobManager JVM
+jobmanager.heap.mb: 1024
+
+# The heap size for the TaskManager JVM
+taskmanager.heap.mb: 1024
+
+# The number of task slots that each TaskManager offers. Each slot runs one parallel pipeline.
+taskmanager.numberOfTaskSlots: 4
+
+# The parallelism used for programs that did not specify and other parallelism.
+parallelism.default: 12
+
+# You can also directly specify the paths to hdfs-default.xml and hdfs-site.xml
+# via keys 'fs.hdfs.hdfsdefault' and 'fs.hdfs.hdfssite'.
+ fs.hdfs.hadoopconf: /bigdata/software/hadoop-2.7.2
+```
+
+3.配置slaves文件  
+此文件用于指定从节点，一行一个节点.   
+执行命令：
+```
+vim ${FLINK_HOME}/conf/slaves
+```
+添加内容：  
+    在slaves文件中添加如下内容，表示集群的taskManager.
+```
+qingcheng11
+qingcheng12
+qingcheng13
+```
+4.分发配置文件
+执行命令：
+```
+scp -r ${FLINK_HOME}/conf/*  qingcheng12:${FLINK_HOME}/conf/
+scp -r ${FLINK_HOME}/conf/*  qingcheng13:${FLINK_HOME}/conf/
+```
+
+5.启动flin服务
+执行命令：
+```
+${FLINK_HOME}/bin/start-cluster.sh
+```
+执行效果：
+![](images/Snip20161113_57.png) 
+
+6.验证flink服务   
+6.1查看进程验证flink服务，在所有机器上执行，可以看到各自对应的进程名称。   
+执行命令：
+```
+jps
+```
+执行效果：
+![](images/Snip20161113_58.png) 
+
+
+5.2查看flink的web界面验证服务  
+打开网址：  
+    在浏览器中打开如下网址
+```
+http://qingcheng11:8081
+```
+执行效果：  
+集群情况：
+![](images/Snip20161113_59.png) 
+Job Manager情况：
+![](images/Snip20161113_62.png) 
+Task Manager情况：
+![](images/Snip20161113_61.png) 
+可以看出flink集群的整体情况。说明flink在standalone模式下主节点无HA的部署实战是成功的。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5.常用命令
+```
+nohup ${FLINK_HOME}/bin/start-cluster.sh &
+${FLINK_HOME}/bin/stop-cluster.sh
+${FLINK_HOME}/bin/webclient.sh start
+${FLINK_HOME}/bin/webclient.sh stop
+${FLINK_HOME}/bin/start-scala-shell.sh
+```
+       
