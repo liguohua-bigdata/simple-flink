@@ -1,3 +1,4 @@
+---
 1.print()方法    
 执行程序：
 ```scale
@@ -17,8 +18,12 @@ shell中的执行效果：
 web ui中的执行效果：
 ![](images/Snip20161114_87.png) 
 
-
+---
 2.map()方法    
+```
+The Map transformation applies a user-defined map function on each element of a DataSet. 
+It implements a one-to-one mapping, that is, exactly one element must be returned by the function.
+```
 执行程序：
 ```scale
 val input: DataSet[Int] = benv.fromElements(23, 67, 18, 29, 32, 56, 4, 27)
@@ -39,9 +44,9 @@ result.print()
 shell中的执行效果：
 ![](images/Snip20161114_91.png) 
 web ui中的执行效果：
-![](images/Snip20161114_92.png) 
-
-
+![](images/Snip20161114_92.png)    
+    
+---
 3.flatMap()方法    
 执行程序：
 ```scale
