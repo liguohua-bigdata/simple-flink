@@ -1,5 +1,5 @@
 
-1.print()方法    
+#####1.print()方法    
 执行程序：
 ```scale
 val input: DataSet[String] = benv.fromElements("A", "B", "C", "D", "E", "F", "G", "H")
@@ -21,9 +21,7 @@ shell中的执行效果：
 web ui中的执行效果：
 ![](images/Snip20161114_87.png) 
 
-
----
-2.map()方法    
+#####2.map()方法    
 ```
 The Map transformation applies a user-defined map function on each element of a DataSet. 
 It implements a one-to-one mapping, that is, exactly one element must be returned by the function.
@@ -51,9 +49,7 @@ shell中的执行效果：
 web ui中的执行效果：
 ![](images/Snip20161114_92.png)    
     
-    
----
-3.flatMap()方法    
+#####3.flatMap()方法    
 ```
 The FlatMap transformation applies a user-defined flat-map function on each 
 element of a DataSet. This variant of a map function can return arbitrary 
@@ -82,8 +78,7 @@ web ui中的执行效果：
 ![](images/Snip20161114_89.png) 
 
 
----
-4.mapPartition()方法    
+#####4.mapPartition()方法    
 ```
 MapPartition transforms a parallel partition in a single function call. The map-partition
 function gets the partition as Iterable and can produce an arbitrary number of result values.
@@ -114,7 +109,7 @@ web ui中的执行效果：
 
 
 ---
-5.filter()方法    
+#####5.filter()方法    
 ```
 The Filter transformation applies a user-defined filter function on each element of 
 a DataSet and retains only those elements for which the function returns true.

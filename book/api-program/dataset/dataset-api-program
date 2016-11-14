@@ -27,11 +27,20 @@ val result=input.mapPartition{in => Some(in.size)}
 result.print()
 
 
+**********************************************************************************************************************************
+
+
+val input = benv.fromElements(("zhangsan", 18000), ("lisi", 20000))
+val result=input.project(1, 0)
+result.print()
 
 
 
-
-
+case class WordCount(name: String, salary: Int)
+val input = benv.fromElements(
+    WordCount("hello", 1),
+    WordCount("world", 2))
+input.keyBy("name")
 
 
 
