@@ -165,6 +165,15 @@ hadoop fs -put  ${FLINK_HOME}/README.txt  /input/flink/
    
   
 2.打开start-scala-shell.sh
+${FLINK_HOME}/bin/start-scala-shell.sh是flink提供的交互式clinet,可以用于代码片段的测试，方便开发工作。
+它有两种启动方式，一种是工作在本地，另一种是工作到集群。本例中因为机器连接非常方便，就直接使用集群进行测试，在
+开发中，如果集群连接不是非常方便，可以连接到本地，在本地开发测试通过后，再连接到集群进行部署工作。
+```
+1.本地连接
+    ${FLINK_HOME}/bin/start-scala-shell.sh local
+2.集群连接    
+    ${FLINK_HOME}/bin/start-scala-shell.sh remote <hostname> <portnumber>
+```
 执行命令：
 ```
 ${FLINK_HOME}/bin/start-scala-shell.sh remote qingcheng11 6123
