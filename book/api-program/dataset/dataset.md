@@ -1,4 +1,3 @@
-
 #####1.print()方法    
 执行程序：
 ```scale
@@ -135,3 +134,35 @@ shell中的执行效果：
 ![](images/Snip20161114_97.png) 
 web ui中的执行效果：
 ![](images/Snip20161114_99.png) 
+
+---
+#####5.reduce
+```
+Combines a group of elements into a single element by repeatedly combining two elements into one. 
+Reduce may be applied on a full data set, or on a grouped data set.
+```
+执行程序：
+```scale
+val a: DataSet[Int] = benv.fromElements(2,5,9,8,7,3)
+val b: DataSet[Int] = a.reduce { _ + _ }
+b.collect
+```
+程序解析：
+```scale
+//1.创建一个 DataSet其元素为Int类型
+Scala-Flink> val a: DataSet[Int] = benv.fromElements(2,5,9,8,7,3)
+a: org.apache.flink.api.scala.DataSet[Int] = org.apache.flink.api.scala.DataSet@c7ac49c
+
+//2.将DataSet中的元素，reduce起来
+Scala-Flink> val b: DataSet[Int] = a.reduce { _ + _ }
+b: org.apache.flink.api.scala.DataSet[Int] = org.apache.flink.api.scala.DataSet@487bc869
+
+//3.显示计算结果
+Scala-Flink> b.collect
+res6: Seq[Int] = Buffer(34)
+
+```
+shell中的执行效果：
+![](images/Snip20161118_89.png) 
+web ui中的执行效果：
+![](images/Snip20161118_91.png) 
