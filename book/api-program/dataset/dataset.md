@@ -141,6 +141,7 @@ web ui中的执行效果：
 Combines a group of elements into a single element by repeatedly combining two elements into one. 
 Reduce may be applied on a full data set, or on a grouped data set.
 ```
+######reduce示例一：Int类型的DataSet做reduce
 执行程序：
 ```scale
 val a: DataSet[Int] = benv.fromElements(2,5,9,8,7,3)
@@ -160,9 +161,32 @@ b: org.apache.flink.api.scala.DataSet[Int] = org.apache.flink.api.scala.DataSet@
 //3.显示计算结果
 Scala-Flink> b.collect
 res6: Seq[Int] = Buffer(34)
-
 ```
 shell中的执行效果：
 ![](images/Snip20161118_89.png) 
 web ui中的执行效果：
 ![](images/Snip20161118_91.png) 
+
+######reduce示例二：String类型的DataSet做reduce
+执行程序：
+```scale
+val a: DataSet[String] = benv.fromElements("zhangsan boy", " lisi girl")
+val b:DataSet[String] = a.reduce { _ + _ }
+b.collect
+```
+程序解析：
+```scale
+//1.创建一个 DataSet其元素为String类型
+Scala-Flink> val a: DataSet[String] = benv.fromElements("zhangsan boy", " lisi girl")
+a: org.apache.flink.api.scala.DataSet[String] = org.apache.flink.api.scala.DataSet@67426220
+
+//2.将DataSet中的元素，reduce起来
+Scala-Flink> val b:DataSet[String] = a.reduce { _ + _ }
+b: org.apache.flink.api.scala.DataSet[String] = org.apache.flink.api.scala.DataSet@762d65de
+
+//3.显示计算结果
+Scala-Flink> b.collect
+res8: Seq[String] = Buffer(zhangsan boy lisi girl)
+
+```
+
