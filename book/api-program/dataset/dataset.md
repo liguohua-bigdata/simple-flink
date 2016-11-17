@@ -48,7 +48,7 @@ shell中的执行效果：
 web ui中的执行效果：
 ![](images/Snip20161114_92.png)    
     
-#####3.flatMap()方法    
+#####flatMap  
 ```
 The FlatMap transformation applies a user-defined flat-map function on each 
 element of a DataSet. This variant of a map function can return arbitrary 
@@ -77,7 +77,7 @@ web ui中的执行效果：
 ![](images/Snip20161114_89.png) 
 
 
-#####4.mapPartition()方法    
+#####mapPartition 
 ```
 MapPartition transforms a parallel partition in a single function call. The map-partition
 function gets the partition as Iterable and can produce an arbitrary number of result values.
@@ -108,7 +108,7 @@ web ui中的执行效果：
 
 
 ---
-#####5.filter()方法    
+#####filter()方法    
 ```
 The Filter transformation applies a user-defined filter function on each element of 
 a DataSet and retains only those elements for which the function returns true.
@@ -136,16 +136,21 @@ web ui中的执行效果：
 ![](images/Snip20161114_99.png) 
 
 ---
-#####5.reduce
+#####reduce
 ```
 Combines a group of elements into a single element by repeatedly combining two elements into one. 
 Reduce may be applied on a full data set, or on a grouped data set.
 ```
-######reduce示例一：Int类型的DataSet做reduce
 执行程序：
 ```scale
+//Int类型的DataSet做reduce
 val a: DataSet[Int] = benv.fromElements(2,5,9,8,7,3)
 val b: DataSet[Int] = a.reduce { _ + _ }
+b.collect
+
+//String类型的DataSet做reduce
+val a: DataSet[String] = benv.fromElements("zhangsan boy", " lisi girl")
+val b:DataSet[String] = a.reduce { _ + _ }
 b.collect
 ```
 程序解析：
@@ -161,21 +166,8 @@ b: org.apache.flink.api.scala.DataSet[Int] = org.apache.flink.api.scala.DataSet@
 //3.显示计算结果
 Scala-Flink> b.collect
 res6: Seq[Int] = Buffer(34)
-```
-shell中的执行效果：
-![](images/Snip20161118_89.png) 
-web ui中的执行效果：
-![](images/Snip20161118_91.png) 
 
-######reduce示例二：String类型的DataSet做reduce
-执行程序：
-```scale
-val a: DataSet[String] = benv.fromElements("zhangsan boy", " lisi girl")
-val b:DataSet[String] = a.reduce { _ + _ }
-b.collect
-```
-程序解析：
-```scale
+
 //1.创建一个 DataSet其元素为String类型
 Scala-Flink> val a: DataSet[String] = benv.fromElements("zhangsan boy", " lisi girl")
 a: org.apache.flink.api.scala.DataSet[String] = org.apache.flink.api.scala.DataSet@67426220
@@ -187,6 +179,46 @@ b: org.apache.flink.api.scala.DataSet[String] = org.apache.flink.api.scala.DataS
 //3.显示计算结果
 Scala-Flink> b.collect
 res8: Seq[String] = Buffer(zhangsan boy lisi girl)
-
 ```
+shell中的执行效果：
+![](images/Snip20161118_89.png) 
+web ui中的执行效果：
+![](images/Snip20161118_91.png) 
 
+
+---
+#####ReduceGroup???
+
+---
+#####Aggregate??
+
+---
+#####distinct
+```
+Returns the distinct elements of a data set. It removes the duplicate entries from the input DataSet,
+with respect to all fields of the elements, or a subset of fields.
+```
+执行程序：
+```scale
+val input: DataSet[String] = benv.fromElements("lisi","zhangsan", "lisi","wangwu")
+val result=input.distinct()
+result.collect
+```
+程序解析：
+```scale
+//1.创建一个 DataSet其元素为String类型
+Scala-Flink> val input: DataSet[String] = benv.fromElements("lisi","zhangsan", "lisi","wangwu")
+input: org.apache.flink.api.scala.DataSet[String] = org.apache.flink.api.scala.DataSet@5e76aabc
+
+//2.元素去重
+Scala-Flink> val result=input.distinct()
+result: org.apache.flink.api.scala.DataSet[String] = org.apache.flink.api.scala.DataSet@1f8e30a6
+
+//3.显示结果
+Scala-Flink> result.collect
+res15: Seq[String] = Buffer(lisi, wangwu, zhangsan)
+```
+shell中的执行效果：
+![](images/Snip20161118_98.png) 
+web ui中的执行效果：
+![](images/Snip20161118_97.png) 
