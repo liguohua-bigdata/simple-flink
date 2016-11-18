@@ -333,8 +333,12 @@ flume : 1
 4.4在本例中，flink的webUI效果像下面的样子：  
 ![](images/Snip20161113_76.png)          
               
-       
-       
-       
+             
+####五、flink在standalone模式主节点下有HA的部署实战 
+```
+当Flink程序运行时，如果jobmanager崩溃，那么整个程序都会失败。为了防止jobmanager的单点故障，借助于zookeeper的协调机制，
+可以实现jobmanager的HA配置—-1主（leader）多从（standby）。
+```
+
        
        
