@@ -138,24 +138,31 @@ Task Manager情况：
 7.flink的常用命令
 ```
 1.启动集群
-    ${FLINK_HOME}/bin/start-cluster.sh 
-2.关闭集群
-    ${FLINK_HOME}/bin/stop-cluster.sh
-3.启动web客户端
-    ${FLINK_HOME}/bin/webclient.sh start
-4.关闭web客户端
-    ${FLINK_HOME}/bin/webclient.sh stop
-5.启动Scala-shell
-    ${FLINK_HOME}/bin/start-scala-shell.sh remote qingcheng11 6123
-6.开启jobmanager   
-    ${FLINK_HOME}/bin/jobmanager.sh start
-7.关闭jobmanager
-    ${FLINK_HOME}/bin/jobmanager.sh stop
-8.开启taskmanager  
-    ${FLINK_HOME}/bin/taskmanager.sh start
-9.关闭taskmanager
-    ${FLINK_HOME}/bin/taskmanager.sh stop   
+${FLINK_HOME}/bin/start-cluster.sh 
 
+2.关闭集群
+${FLINK_HOME}/bin/stop-cluster.sh
+
+3.启动web客户端
+${FLINK_HOME}/bin/webclient.sh start
+
+4.关闭web客户端
+${FLINK_HOME}/bin/webclient.sh stop
+
+5.启动Scala-shell
+${FLINK_HOME}/bin/start-scala-shell.sh remote qingcheng11 6123
+
+6.开启jobmanager   
+${FLINK_HOME}/bin/jobmanager.sh start
+
+7.关闭jobmanager
+${FLINK_HOME}/bin/jobmanager.sh stop
+
+8.开启taskmanager  
+${FLINK_HOME}/bin/taskmanager.sh start
+
+9.关闭taskmanager
+${FLINK_HOME}/bin/taskmanager.sh stop   
 ```
        
   
