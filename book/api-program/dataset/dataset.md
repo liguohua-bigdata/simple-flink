@@ -331,9 +331,9 @@ pair of elements into arbitrarily many (including none) elements.
 
 执行程序：
 ```scale
-val input1: DataSet[(Int, String)] =  benv.fromElements((2,"zhagnsan"),(3,"lisi"),\
+val input1: DataSet[(Int, String)] =  benv.fromElements((2,"zhagnsan"),(3,"lisi"),
 (4,"wangwu"),(5,"zhaoliu"))
-val input2: DataSet[(Double, Int)] =  benv.fromElements((1850.98,4),(1950.98,5),\
+val input2: DataSet[(Double, Int)] =  benv.fromElements((1850.98,4),(1950.98,5),
 (2350.98,6),(3850.98,3))
 val result = input1.join(input2).where(0).equalTo(1)
 result.collect
