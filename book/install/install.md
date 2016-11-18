@@ -468,5 +468,6 @@ val e= b.union(c).union(d)
 val f= e.map(_%2==0)
 f.collect
 ```
+####8.3程序执行效果
 ![](images/Snip20161118_126.png)   
 
