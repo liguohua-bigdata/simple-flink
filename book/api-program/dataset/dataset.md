@@ -422,18 +422,21 @@ input: org.apache.flink.api.scala.DataSet[Student] = org.apache.flink.api.scala.
 //3.去掉age重复的元素
 Scala-Flink> val age_r = input.distinct("age")
 age_r: org.apache.flink.api.scala.DataSet[Student] = org.apache.flink.api.scala.DataSet@29393c36
+
 Scala-Flink> age_r.collect
 res38: Seq[Student] = Buffer(Student(zhangsan,24), Student(zhangsan,25))
 
 //4.去掉name重复的元素
 Scala-Flink> val name_r = input.distinct("name")
 name_r: org.apache.flink.api.scala.DataSet[Student]=org.apache.flink.api.scala.DataSet@473cf185
+
 Scala-Flink> name_r.collect
 res39: Seq[Student] = Buffer(Student(lisi,24), Student(wangwu,24), Student(zhangsan,24))
 
 //6.去掉name和age重复的元素
 Scala-Flink> val all_r = input.distinct("age","name")
 all_r: org.apache.flink.api.scala.DataSet[Student] = org.apache.flink.api.scala.DataSet@71b1165c
+
 Scala-Flink> all_r.collect
 res40: Seq[Student] = Buffer(Student(lisi,24), Student(lisi,25), Student(wangwu,24),
 Student(zhangsan,24), Student(zhangsan,25))
@@ -441,6 +444,7 @@ Student(zhangsan,24), Student(zhangsan,25))
 //7.去掉name和age重复的元素
 Scala-Flink> val all = input.distinct()
 all: org.apache.flink.api.scala.DataSet[Student] = org.apache.flink.api.scala.DataSet@2073f3b6
+
 Scala-Flink> all.collect
 res41: Seq[Student] = Buffer(Student(lisi,24), Student(lisi,25), Student(wangwu,24), 
 Student(zhangsan,24), Student(zhangsan,25))
