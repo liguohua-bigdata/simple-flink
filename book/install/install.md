@@ -147,6 +147,15 @@ Task Manager情况：
     ${FLINK_HOME}/bin/webclient.sh stop
 5.启动Scala-shell
     ${FLINK_HOME}/bin/start-scala-shell.sh remote qingcheng11 6123
+6.开启jobmanager   
+    ${FLINK_HOME}/bin/jobmanager.sh start
+7.关闭jobmanager
+    ${FLINK_HOME}/bin/jobmanager.sh stop
+8.开启taskmanager  
+    ${FLINK_HOME}/bin/taskmanager.sh start
+9.关闭taskmanager
+    ${FLINK_HOME}/bin/taskmanager.sh stop   
+
 ```
        
   

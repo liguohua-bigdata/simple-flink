@@ -94,5 +94,5 @@ scp -r ${FLINK_HOME}/conf/*  qingcheng13:${FLINK_HOME}/conf/
 ```
 停止qingcheng13上的jobmanager，来模拟jobmanager的crash。一会的时间，系统就选举出了另外的一个  
 active jobmanager，本次实验选举的是qingcheng12.
-![](images/Snip20161118_121.png)   
+![](images/Snip20161118_122.png)   
 
