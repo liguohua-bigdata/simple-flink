@@ -113,7 +113,8 @@ ${FLINK_HOME}/bin/start-cluster.sh
 ![](images/Snip20161113_57.png) 
 
 6.验证flink服务   
-6.1查看进程验证flink服务，在所有机器上执行，可以看到各自对应的进程名称。   
+6.1查看进程验证flink服  
+在所有机器上执行，可以看到各自对应的进程名称。   
 执行命令：
 ```
 jps
@@ -123,12 +124,10 @@ jps
 
 6.2查看flink的web界面验证服务  
 打开网址：  
-    在浏览器中打开如下网址
 ```
 http://qingcheng11:8081
 ```
-执行效果：  
-集群情况：
+flink cluster情况：
 ![](images/Snip20161113_59.png) 
 Job Manager情况：
 ![](images/Snip20161113_62.png) 
@@ -171,21 +170,21 @@ hadoop fs -put  ${FLINK_HOME}/README.txt  /input/flink/
 ![](images/Snip20161113_63.png)   
    
   
-2.打开start-scala-shell.sh
-${FLINK_HOME}/bin/start-scala-shell.sh是flink提供的交互式clinet,可以用于代码片段的测试，方便开发工作。
-它有两种启动方式，一种是工作在本地，另一种是工作到集群。本例中因为机器连接非常方便，就直接使用集群进行测试，在
-开发中，如果集群连接不是非常方便，可以连接到本地，在本地开发测试通过后，再连接到集群进行部署工作。如果程序有
-依赖的jar包，则可以使用 -a <path/to/jar.jar> 或 --addclasspath <path/to/jar.jar>参数来添加依赖。
+2.打开start-scala-shell.sh  
+${FLINK_HOME}/bin/start-scala-shell.sh是flink提供的交互式clinet,可以用于代码片段的测试，方便开发工作。  
+它有两种启动方式，一种是工作在本地，另一种是工作到集群。本例中因为机器连接非常方便，就直接使用集群进行测试，在  
+开发中，如果集群连接不是非常方便，可以连接到本地，在本地开发测试通过后，再连接到集群进行部署工作。如果程序有  
+依赖的jar包，则可以使用 -a <path/to/jar.jar> 或 --addclasspath <path/to/jar.jar>参数来添加依赖。  
 
 ```
 1.本地连接
-    ${FLINK_HOME}/bin/start-scala-shell.sh local
-    
+${FLINK_HOME}/bin/start-scala-shell.sh local
+
 2.集群连接    
-    ${FLINK_HOME}/bin/start-scala-shell.sh remote <hostname> <portnumber>
-    
+${FLINK_HOME}/bin/start-scala-shell.sh remote <hostname> <portnumber>
+
 3.带有依赖包的格式
-    ${FLINK_HOME}/bin/start-scala-shell.sh [local | remote <host> <port>] --addclasspath <path/to/jar.jar>
+${FLINK_HOME}/bin/start-scala-shell.sh [local | remote <host> <port>] --addclasspath <path/to/jar.jar>
 ```
 执行命令：
 ```
@@ -238,8 +237,6 @@ ${FLINK_HOME}/bin/flink run -p 8 ${FLINK_HOME}/examples/batch/WordCount.jar \
 
 其中：-p 8：是设置8个任务并发执行，也就是Job parallelism=8，每个任务输出一个结果到hdfs上hdfs上将生产8个结果文件。
 ```
-执行效果：  
-![](images/Snip20161113_81.png)   
 fink web ui中的效果：  
 ![](images/Snip20161113_82.png)  
 hadoop hdfs  web ui中的效果：  
