@@ -120,3 +120,21 @@ http://192.168.0.12:50070/explorer.html#/flink-metadata
 active jobmanager，本次实验选举的是qingcheng12.
 ![](images/Snip20161118_122.png)   
 
+###8.使用jobmanager的HA的flink集群
+8.1打开scala-shell  
+因为此时集群是HA,remote可以填写任意一个jobmanager，它都会被自动转发到active jobmanager上，
+本次使用的remote参数时qingcheng11,它就能被qingcheng13这个active jobmanager监控到。
+```
+   ${FLINK_HOME}/bin/start-scala-shell.sh remote qingcheng11 6123
+```
+8.2执行一个小程序
+```
+val a= benv.fromElements(1, 2, 3, 4)
+val b= a.map(_*2)
+val c= a.map(_+5)
+val d= a.map(_-1)
+val e=b.union(c).union(d)
+e.collect
+```
+![](images/Snip20161118_125.png)   
+
