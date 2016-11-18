@@ -212,12 +212,7 @@ web执行效果二：
 ##四、flink批处理测试       
        
 ###1.创建文件夹并上传flink的readme文件  
-```
-hadoop fs -mkdir -p  /input/flink
-hadoop fs -put  ${FLINK_HOME}/README.txt  /input/flink/
-```
-执行效果：  
-![](images/Snip20161113_63.png)     
+略，见上章节！ 
 ###2.运行wordcount程序  
 2.1检查安装包中是否存在WordCount.jar  
 ```
