@@ -79,6 +79,7 @@ scp -r ${FLINK_HOME}/conf/*  qingcheng13:${FLINK_HOME}/conf/
 3.启动web客户端
     ${FLINK_HOME}/bin/webclient.sh start
 ```
+![](images/Snip20161118_120.png)   
 执行效果：
   
 ```
@@ -90,9 +91,8 @@ http://192.168.0.11:8085
 Service temporarily unavailable due to an ongoing leader election. Please refresh.
 ```
 选举成功后的效果：
-![](images/Snip20161118_120.png)   
-重启后的flink集群会进行主节点选举，本次使用选举结果是qingcheng13作为active jobmanager
 ![](images/Snip20161118_121.png)   
+重启后的flink集群会进行主节点选举，本次使用选举结果是qingcheng13作为active jobmanager
 
 ###6.验证重启成功
 6.1zookeeper客户端验证
