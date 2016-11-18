@@ -1,3 +1,5 @@
+#<<flink DateSetAPI详解>>
+flink 
 ---
 ##print()方法    
 执行程序：
@@ -14,10 +16,8 @@ val input: DataSet[String] = benv.fromElements("A", "B", "C", "D", "E", "F", "G"
 //2.将DataSet的内容打印出来
 input.print()
 ```
-
 shell中的执行效果：
 ![](images/Snip20161114_86.png) 
-
 web ui中的执行效果：
 ![](images/Snip20161114_87.png) 
 
