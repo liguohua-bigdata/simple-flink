@@ -1,30 +1,30 @@
 ##一、flink软件包的下载与解压 
 ###1.下载并分发flink
-官方网站
+####官方网站
 ```
 http://flink.apache.org
 ```
-下载页面：   
+####下载页面：   
 ```
 http://flink.apache.org/downloads.html
 ```
-下载地址：
+####下载地址：
 ```
 http://mirrors.tuna.tsinghua.edu.cn/apache/flink/flink-1.1.3/flink-1.1.3-bin-hadoop27-scala_2.10.tgz 
 ```
-下载命令：
+####下载命令：
 ```
 wget 
 http://mirrors.tuna.tsinghua.edu.cn/apache/flink/flink-1.1.3/flink-1.1.3-bin-hadoop27-scala_2.10.tgz
 ```
 得到flink-1.1.3-bin-hadoop27-scala_2.10.tgz软件压缩包  
-解压命令：
+####解压命令：
 ```
 tar -zxvf flink-1.1.3-bin-hadoop27-scala_2.10.tgz
 ```
 解压得到flink-1.1.3文件夹，文件夹中的内容如下：   
 ![](images/Snip20161113_55.png)    
-分发命令：  
+####分发命令：  
 ```
 scp -r /bigdata/software/flink-1.1.3  qingcheng12:/bigdata/software/
 scp -r /bigdata/software/flink-1.1.3  qingcheng13:/bigdata/software/
@@ -57,12 +57,11 @@ scp -r /bigdata/software/flink-1.1.3  qingcheng13:/bigdata/software/
 ###1.部署规划：  
 ![](images/Snip20161113_56.png)   
 ###2.配置flink-conf.yaml文件  
-执行命令：
 ```
 vim ${FLINK_HOME}/conf/flink-conf.yaml
 ```
-添加内容：  
-    在flink-conf.yaml文件中进行一些基本的配置，本此要修改的内容如下。  
+####添加内容：  
+在flink-conf.yaml文件中进行一些基本的配置，本此要修改的内容如下。  
 ```
 # The TaskManagers will try to connect to the JobManager on that host.
 jobmanager.rpc.address: qingcheng11
@@ -86,44 +85,39 @@ parallelism.default: 12
 
 ###3.配置slaves文件  
 此文件用于指定从节点，一行一个节点.   
-执行命令：
 ```
 vim ${FLINK_HOME}/conf/slaves
 ```
-添加内容：  
-    在slaves文件中添加如下内容，表示集群的taskManager.
+####添加内容：  
+在slaves文件中添加如下内容，表示集群的taskManager.
 ```
 qingcheng11
 qingcheng12
 qingcheng13
 ```
 ###4.分发配置文件
-执行命令：
 ```
 scp -r ${FLINK_HOME}/conf/*  qingcheng12:${FLINK_HOME}/conf/
 scp -r ${FLINK_HOME}/conf/*  qingcheng13:${FLINK_HOME}/conf/
 ```
 
 ###5.启动flink服务
-执行命令：
 ```
 ${FLINK_HOME}/bin/start-cluster.sh
 ```
-执行效果：
+####执行效果：
 ![](images/Snip20161113_57.png) 
 
 ###6.验证flink服务   
-6.1查看进程验证flink服  
+####6.1查看进程验证flink服  
 在所有机器上执行，可以看到各自对应的进程名称。   
-执行命令：
 ```
 jps
 ```
-执行效果：
+#执行效果：
 ![](images/Snip20161113_58.png) 
 
-6.2查看flink的web界面验证服务  
-打开网址：  
+####6.2查看flink的web界面验证服务  
 ```
 http://qingcheng11:8081
 ```
@@ -168,7 +162,6 @@ ${FLINK_HOME}/bin/taskmanager.sh stop
   
 ##三、flink第一个程序      
 ###1.创建文件夹并上传flink的readme文件  
-执行命令：
 ```
 hadoop fs -mkdir -p  /input/flink
 hadoop fs -put  ${FLINK_HOME}/README.txt  /input/flink/
@@ -218,7 +211,6 @@ web执行效果二：
 ##四、flink批处理测试       
        
 ###1.创建文件夹并上传flink的readme文件  
-执行命令：
 ```
 hadoop fs -mkdir -p  /input/flink
 hadoop fs -put  ${FLINK_HOME}/README.txt  /input/flink/
@@ -227,7 +219,6 @@ hadoop fs -put  ${FLINK_HOME}/README.txt  /input/flink/
 ![](images/Snip20161113_63.png)     
 ###2.运行wordcount程序  
 2.1检查安装包中是否存在WordCount.jar  
-执行命令：
 ```
 cd ${FLINK_HOME}/examples/batch
 ll
@@ -301,7 +292,7 @@ ${FLINK_HOME}/bin/flink run  ${FLINK_HOME}/examples/streaming/SocketWindowWordCo
 ![](images/Snip20161113_74.png)          
        
 ###3.打开消息输出端  
-3.1找到输出文件  
+####3.1找到输出文件  
 找到有输出内容的flink-*-taskmanager-*-*.out文件，这里讲会有处理日志的输出。  
 ```
 cd ${FLINK_HOME}/log/
@@ -310,14 +301,14 @@ ll
 执行效果：  
 ![](images/Snip20161113_71.png)         
 本例中找的的文件名为flink-root-taskmanager-1-qingcheng11.out
-3.2查看输出文件内容
+####3.2查看输出文件内容
 ```
 tail -f flink-root-taskmanager-1-qingcheng11.out
 ```   
     
 ###4.输入数据 ，运行程序     
 在消息发送端不断的输入单词，则可以看到在消息输出端有新内容不断的输出。  
-4.1在本例中，像下面的样子发送数据：    
+####4.1在本例中，像下面的样子发送数据：    
 ```
 flink spark
 storm hadoop
@@ -328,7 +319,7 @@ spark flume
 ...........
 ...........
 ```         
-4.2在本例中，输出的数据像下面的样子：    
+####4.2在本例中，输出的数据像下面的样子：    
 ```
 hadoop : 4
 flume : 1
@@ -342,9 +333,9 @@ flume : 1
 ...........
 ........... 
 ```          
-4.3在本例中，执行效果像下面的样子：  
+####4.3在本例中，执行效果像下面的样子：  
 ![](images/Snip20161113_75.png)                
-4.4在本例中，flink的webUI效果像下面的样子：  
+####4.4在本例中，flink的webUI效果像下面的样子：  
 ![](images/Snip20161113_76.png)          
               
              
@@ -449,14 +440,14 @@ Service temporarily unavailable due to an ongoing leader election. Please refres
 重启后的flink集群会进行主节点选举，本次使用选举结果是qingcheng13作为active jobmanager
 
 ###6.验证重启成功
-6.1zookeeper客户端验证
+####6.1zookeeper客户端验证
 ```
  ls /
  ls /flink
  ls /flink/flink001
 ```
 ![](images/Snip20161118_124.png)   
-6.2hadoop hdfs上验证
+####6.2hadoop hdfs上验证
 ```
 http://192.168.0.12:50070/explorer.html#/flink-metadata
 ```
@@ -475,13 +466,13 @@ active jobmanager，本次实验选举的是qingcheng12.
 ![](images/Snip20161118_122.png)   
 
 ###8.使用jobmanager的HA的flink集群
-8.1打开scala-shell  
+####8.1打开scala-shell  
 因为此时集群是HA,remote可以填写任意一个jobmanager，它都会被自动转发到active jobmanager上，  
 本次使用的remote参数时qingcheng11,它就能被qingcheng13这个active jobmanager监控到。
 ```
 ${FLINK_HOME}/bin/start-scala-shell.sh remote qingcheng11 6123
 ```
-8.2执行一个小程序
+####8.2执行一个小程序
 ```
 val a= benv.fromElements(1, 2, 3, 4)
 val b= a.map(_*2)
