@@ -222,3 +222,48 @@ shell中的执行效果：
 ![](images/Snip20161118_98.png) 
 web ui中的执行效果：
 ![](images/Snip20161118_97.png) 
+
+
+---
+#####join
+```
+Joins two data sets by creating all pairs of elements that are equal on their keys. Optionally uses
+a JoinFunction to turn the pair of elements into a single element, or a FlatJoinFunction to turn the
+pair of elements into arbitrarily many (including none) elements. 
+```
+
+执行程序：
+```scale
+val input1: DataSet[(Int, String)] =  benv.fromElements((2,"zhagnsan"),(3,"lisi"),(4,"wangwu"),(5,"zhaoliu"))
+val input2: DataSet[(Double, Int)] =  benv.fromElements((1850.98,4),(1950.98,5),(2350.98,6),(3850.98,3))
+val result = input1.join(input2).where(0).equalTo(1)
+result.collect
+```
+程序解析：
+```scale
+//1.创建一个 DataSet其元素为[(Int,String)]类型
+Scala-Flink>val input1:DataSet[(Int,String)]=benv.fromElements((2,"zhagnsan"),(3,"lisi"),(4,"wangwu"),(5,"zhaoliu"))
+input1: org.apache.flink.api.scala.DataSet[(Int, String)] = org.apache.flink.api.scala.DataSet@1a7437d8
+
+//2.创建一个 DataSet其元素为[(Double, Int)]类型
+Scala-Flink> val input2: DataSet[(Double, Int)] =  benv.fromElements((1850.98,4),(1950.98,5),(2350.98,6),(3850.98,3))
+input2: org.apache.flink.api.scala.DataSet[(Double, Int)] = org.apache.flink.api.scala.DataSet@1ccce165
+
+//3.两个DataSet进行join操作，条件是input1(0)==input2(1)
+Scala-Flink> val result = input1.join(input2).where(0).equalTo(1)
+result: org.apache.flink.api.scala.JoinDataSet[(Int,String),(Double,Int)]=org.apache.flink.api.scala.JoinDataSet@3b3dc752
+
+//4.显示结果
+Scala-Flink> result.collect
+res0: Seq[((Int, String), (Double, Int))] = Buffer(
+((4,wangwu),(1850.98,4)),
+((5,zhaoliu),(1950.98,5)), 
+((3,lisi),(3850.98,3)))
+```
+shell中的执行效果：
+![](images/Snip20161118_99.png) 
+web ui中的执行效果：
+![](images/Snip20161118_100.png) 
+
+
+
