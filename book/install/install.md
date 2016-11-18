@@ -108,7 +108,6 @@ scp -r ${FLINK_HOME}/conf/*  qingcheng13:${FLINK_HOME}/conf/
 ```
 ${FLINK_HOME}/bin/start-cluster.sh
 ```
-####执行效果：
 ![](images/Snip20161113_57.png) 
 
 ###6.验证flink服务   
@@ -117,9 +116,6 @@ ${FLINK_HOME}/bin/start-cluster.sh
 ```
 jps
 ```
-#执行效果：
-![](images/Snip20161113_58.png) 
-
 ####6.2查看flink的web界面验证服务  
 ```
 http://qingcheng11:8081
@@ -248,7 +244,7 @@ hadoop hdfs  web ui中的效果：
  hadoop fs -text /output/flink/readme_result/7
  hadoop fs -text /output/flink/readme_result/8
 ```
-![](images/Snip20161113_85.png)             
+![](images/Snip20161119_132.png)             
       
 ##五、flink流处理测试        
 ###0.测试规划如下：  
