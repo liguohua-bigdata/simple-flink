@@ -340,7 +340,7 @@ flume : 1
 可以实现jobmanager的HA配置—-1主（leader）多从（standby）。这里的HA配置只涉及standalone模式，yarn模式暂不考虑。 
 ```
 >注意：
->1.由于jobmanager的HA配置依赖于zookeeper，因此，需要配置并启动zookeeper集群
+>1.由于flink jobmanager的HA配置依赖 zookeeper，因此要先配置并启动zookeeper集群
 >2.由于flink的HA模式下的state backend在要依赖hdfs，因此要先配置并启动Hadoop集群
        
        
