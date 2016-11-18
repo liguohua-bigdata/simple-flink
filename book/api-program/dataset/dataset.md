@@ -183,7 +183,7 @@ res8: Seq[String] = Buffer(zhangsan boy lisi girl)
 shell中的执行效果：
 ![](images/Snip20161118_89.png) 
 web ui中的执行效果：
-![](images/Snip20161118_91.png) 
+![](images/Snip20161118_94.png) 
 
 
 ---
