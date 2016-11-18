@@ -406,6 +406,9 @@ all_r.collect
 
 val all = input.distinct()
 all.collect
+
+val all0 = input.distinct("_")
+all0.collect
 ```
 程序解析：
 ```scale
@@ -447,6 +450,13 @@ all: org.apache.flink.api.scala.DataSet[Student] = org.apache.flink.api.scala.Da
 
 Scala-Flink> all.collect
 res41: Seq[Student] = Buffer(Student(lisi,24), Student(lisi,25), Student(wangwu,24), 
+Student(zhangsan,24), Student(zhangsan,25))
+
+//8.去掉name和age重复的元素
+Scala-Flink> val all0 = input.distinct("_")
+all0: org.apache.flink.api.scala.DataSet[Student] = org.apache.flink.api.scala.DataSet@66f3b11c
+Scala-Flink> all0.collect
+res47: Seq[Student] = Buffer(Student(lisi,24), Student(lisi,25), Student(wangwu,24),
 Student(zhangsan,24), Student(zhangsan,25))
 ```
 web ui中的执行效果：
