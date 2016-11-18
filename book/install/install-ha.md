@@ -86,7 +86,7 @@ scp -r ${FLINK_HOME}/conf/*  qingcheng13:${FLINK_HOME}/conf/
 http://192.168.0.11:8085
 ```
 
-选举过程效果：
+选举过程中的效果：
 ```
 Service temporarily unavailable due to an ongoing leader election. Please refresh.
 ```
@@ -122,10 +122,10 @@ active jobmanager，本次实验选举的是qingcheng12.
 
 ###8.使用jobmanager的HA的flink集群
 8.1打开scala-shell  
-因为此时集群是HA,remote可以填写任意一个jobmanager，它都会被自动转发到active jobmanager上，
+因为此时集群是HA,remote可以填写任意一个jobmanager，它都会被自动转发到active jobmanager上，  
 本次使用的remote参数时qingcheng11,它就能被qingcheng13这个active jobmanager监控到。
 ```
-   ${FLINK_HOME}/bin/start-scala-shell.sh remote qingcheng11 6123
+${FLINK_HOME}/bin/start-scala-shell.sh remote qingcheng11 6123
 ```
 8.2执行一个小程序
 ```
