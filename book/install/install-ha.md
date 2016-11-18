@@ -47,8 +47,6 @@ vim ${FLINK_HOME}/conf/flink-conf.yaml
     storageDir存储jobmanager的元数据信息，包括用于恢复的信息；
     recovery.zookeeper.path.root代表zookeeper中节点信息；
     recovery.zookeeper.path.namespace，如果Flink集群有不止一个，那么这个值需要指定，不能用默认的名字。
-
-
 ```
 ###3.配置masters文件  
 执行命令：
@@ -81,6 +79,16 @@ scp -r ${FLINK_HOME}/conf/*  qingcheng13:${FLINK_HOME}/conf/
     ${FLINK_HOME}/bin/webclient.sh start
 ```
 执行效果：
+  
+```
+http://192.168.0.11:8085
+```
+
+选举过程效果：
+```
+Service temporarily unavailable due to an ongoing leader election. Please refresh.
+```
+选举成功后的效果：
 ![](images/Snip20161118_120.png)   
 重启后的flink集群会进行主节点选举，本次使用选举结果是qingcheng13作为active jobmanager
 ![](images/Snip20161118_121.png)   
