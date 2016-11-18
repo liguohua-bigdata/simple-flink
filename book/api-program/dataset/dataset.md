@@ -295,6 +295,7 @@ web ui中的执行效果：
 Returns the distinct elements of a data set. It removes the duplicate entries from the input DataSet,
 with respect to all fields of the elements, or a subset of fields.
 ```
+###distinct示例一
 执行程序：
 ```scale
 val input: DataSet[String] = benv.fromElements("lisi","zhangsan", "lisi","wangwu")
@@ -319,6 +320,36 @@ shell中的执行效果：
 ![](images/Snip20161118_98.png) 
 web ui中的执行效果：
 ![](images/Snip20161118_97.png) 
+
+###distinct示例二
+
+执行程序：
+```scale
+val input: DataSet[(Int, String, Double)] =  benv.fromElements(
+(2,"zhagnsan",1654.5),(3,"lisi",2347.8),(2,"zhagnsan",1654.5),
+(4,"wangwu",1478.9),(5,"zhaoliu",987.3),(2,"zhagnsan",1654.0))
+val output = input.distinct()
+output.collect
+```
+程序解析：
+```scale
+//1.创建DataSet[(Int, String, Double)] 
+Scala-Flink> val input: DataSet[(Int, String, Double)] =  benv.fromElements(
+(2,"zhagnsan",1654.5),(3,"lisi",2347.8),(2,"zhagnsan",1654.5),
+(4,"wangwu",1478.9),(5,"zhaoliu",987.3),(2,"zhagnsan",1654.0))
+input: org.apache.flink.api.scala.DataSet[(Int, String, Double)] = org.apache.flink.api.scala.DataSet@5a5b2829
+
+//2.元素去重
+Scala-Flink> val output = input.distinct()
+output: org.apache.flink.api.scala.DataSet[(Int, String, Double)] = org.apache.flink.api.scala.DataSet@1f70c1b8
+
+//3.显示结果
+Scala-Flink> output.collect
+res12: Seq[(Int, String, Double)] = Buffer(
+(2,zhagnsan,1654.0), (2,zhagnsan,1654.5), 
+(3,lisi,2347.8), (4,wangwu,1478.9), (5,zhaoliu,987.3))
+```
+
 
 
 ---
