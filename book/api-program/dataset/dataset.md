@@ -52,8 +52,69 @@ shell中的执行效果：
 ![](images/Snip20161114_91.png) 
 web ui中的执行效果：
 ![](images/Snip20161114_92.png)    
+
+###map示例二
+执行程序：
+```scale
+val intPairs: DataSet[(Int, Int)] = benv.fromElements((18,4),(19,5),(23,6),(38,3))
+
+val intSums = intPairs.map { pair => pair._1 + pair._2 }
+intSums.collect
+```
+程序解析：
+```scale
+//1.创建一个DataSet[(Int, Int)] 
+Scala-Flink> val intPairs: DataSet[(Int, Int)] = benv.fromElements((18,4),(19,5),(23,6),(38,3))
+intPairs: org.apache.flink.api.scala.DataSet[(Int,Int)]=org.apache.flink.api.scala.DataSet@63f562b8
+
+//2.键值对的key+value之和生成新的dataset
+Scala-Flink> val intSums = intPairs.map { pair => pair._1 + pair._2 }
+intSums: org.apache.flink.api.scala.DataSet[Int] = org.apache.flink.api.scala.DataSet@5f0b3abb
+
+//3.显示结果
+Scala-Flink> intSums.collect
+res7: Seq[Int] = Buffer(22, 24, 29, 41)
+
+```
+shell中的执行效果：
+![](images/Snip20161118_105.png) 
+web ui中的执行效果：
+![](images/Snip20161118_106.png)      
+
+---
+##flatMap  
+```
+The FlatMap transformation applies a user-defined flat-map function on each 
+element of a DataSet. This variant of a map function can return arbitrary 
+many result elements(including none) for each input element.
+```
+
+###flatMap示例一
+执行程序：
+```scale
+val input: DataSet[String] = benv.fromElements("zhangsan boy", "lisi girl")
+
+val result=input.flatMap { _.split(" ") }
+result.print()
+```
+程序解析：
+```scale
+//1.创建一个 DataSet其元素为String类型
+val input: DataSet[String] = benv.fromElements("zhangsan boy", "lisi girl")
+
+//2.将DataSet中的每个元素用空格切割成一组单词
+val result=input.flatMap { _.split(" ") }
+
+//3.将这组单词显示出来
+result.print()
+```
+shell中的执行效果：
+![](images/Snip20161114_88.png) 
+web ui中的执行效果：
+![](images/Snip20161114_89.png) 
+
     
-###map示例二  
+###flatMap示例二  
 执行程序：
 ```scale
 val textLines: DataSet[String] =benv.fromElements(
@@ -90,63 +151,6 @@ shell中的执行效果：
 web ui中的执行效果：
 ![](images/Snip20161118_102.png)    
 
-
-###map示例三
-执行程序：
-```scale
-val intPairs: DataSet[(Int, Int)] = benv.fromElements((18,4),(19,5),(23,6),(38,3))
-val intSums = intPairs.map { pair => pair._1 + pair._2 }
-intSums.collect
-```
-程序解析：
-```scale
-//1.创建一个DataSet[(Int, Int)] 
-Scala-Flink> val intPairs: DataSet[(Int, Int)] = benv.fromElements((18,4),(19,5),(23,6),(38,3))
-intPairs: org.apache.flink.api.scala.DataSet[(Int,Int)]=org.apache.flink.api.scala.DataSet@63f562b8
-
-//2.键值对的key+value之和生成新的dataset
-Scala-Flink> val intSums = intPairs.map { pair => pair._1 + pair._2 }
-intSums: org.apache.flink.api.scala.DataSet[Int] = org.apache.flink.api.scala.DataSet@5f0b3abb
-
-//3.显示结果
-Scala-Flink> intSums.collect
-res7: Seq[Int] = Buffer(22, 24, 29, 41)
-
-```
-shell中的执行效果：
-![](images/Snip20161118_105.png) 
-web ui中的执行效果：
-![](images/Snip20161118_106.png)      
-
----
-##flatMap  
-```
-The FlatMap transformation applies a user-defined flat-map function on each 
-element of a DataSet. This variant of a map function can return arbitrary 
-many result elements(including none) for each input element.
-```
-执行程序：
-```scale
-val input: DataSet[String] = benv.fromElements("zhangsan boy", "lisi girl")
-
-val result=input.flatMap { _.split(" ") }
-result.print()
-```
-程序解析：
-```scale
-//1.创建一个 DataSet其元素为String类型
-val input: DataSet[String] = benv.fromElements("zhangsan boy", "lisi girl")
-
-//2.将DataSet中的每个元素用空格切割成一组单词
-val result=input.flatMap { _.split(" ") }
-
-//3.将这组单词显示出来
-result.print()
-```
-shell中的执行效果：
-![](images/Snip20161114_88.png) 
-web ui中的执行效果：
-![](images/Snip20161114_89.png) 
 
 ---
 ##mapPartition 
