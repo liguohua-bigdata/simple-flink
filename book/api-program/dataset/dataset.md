@@ -463,6 +463,36 @@ web ui中的执行效果：
 ![](images/Snip20161118_108.png) 
 
 
+###distinct示例五，根据表达式进行去重
+
+执行程序：
+```scale
+val input: DataSet[Int] = benv.fromElements(3,-3,4,-4,6,-5,7)
+val output = input.distinct {x => Math.abs(x)}
+output.collect
+```
+程序解析：
+```scale
+Scala-Flink> output.collect
+res15: Seq[(Int, String, Double)] = Buffer(
+(2,zhagnsan,1654.5), (3,lisi,2347.8), (4,wangwu,1478.9), (5,zhaoliu,987.3))
+
+//1.创建DataSet[Int]
+Scala-Flink> val input: DataSet[Int] = benv.fromElements(3,-3,4,-4,6,-5,7)
+input: org.apache.flink.api.scala.DataSet[Int] = org.apache.flink.api.scala.DataSet@55ed46a
+
+//2.根据表达式，进行元素去重
+Scala-Flink> val output = input.distinct {x => Math.abs(x)}
+output: org.apache.flink.api.scala.DataSet[Int] = org.apache.flink.api.scala.DataSet@187272b0
+
+//3.显示结果
+Scala-Flink> output.collect
+res48: Seq[Int] = Buffer(3, 4, -5, 6, 7)
+```
+
+
+
+
 
 
 ---
