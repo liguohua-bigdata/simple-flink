@@ -1,4 +1,4 @@
-#####1.print()方法    
+#####print()方法    
 执行程序：
 ```scale
 val input: DataSet[String] = benv.fromElements("A", "B", "C", "D", "E", "F", "G", "H")
@@ -20,13 +20,13 @@ shell中的执行效果：
 web ui中的执行效果：
 ![](images/Snip20161114_87.png) 
 
-#####2.map
+#####map
 ```
 The Map transformation applies a user-defined map function on each element of a DataSet. 
 It implements a one-to-one mapping, that is, exactly one element must be returned by the function.
 ```
 
-######示例一  
+######map示例一  
 执行程序：
 ```scale
 val input: DataSet[Int] = benv.fromElements(23, 67, 18, 29, 32, 56, 4, 27)
@@ -49,7 +49,7 @@ shell中的执行效果：
 web ui中的执行效果：
 ![](images/Snip20161114_92.png)    
     
-######示例一     
+######map示例二  
 执行程序：
 ```scale
 val textLines: DataSet[String] =benv.fromElements(
@@ -76,14 +76,42 @@ words: org.apache.flink.api.scala.DataSet[String] = org.apache.flink.api.scala.D
 
 //3.显示结果内容
 Scala-Flink> words.collect
-res1: Seq[String] = Buffer(this, is, a, good, job!, you, can, do, a, lot, of, things!, flink, is, a, framework, for, bigdata.)
+res1: Seq[String] = Buffer(
+this, is, a, good, job!, 
+you, can, do, a, lot, of, things!, 
+flink, is, a, framework, for, bigdata.)
 ```
 shell中的执行效果：
 ![](images/Snip20161118_101.png) 
 web ui中的执行效果：
 ![](images/Snip20161118_102.png)    
 
-    
+######map示例三
+执行程序：
+```scale
+val intPairs: DataSet[(Int, Int)] = benv.fromElements((18,4),(19,5),(23,6),(38,3))
+val intSums = intPairs.map { pair => pair._1 + pair._2 }
+intSums.collect
+```
+程序解析：
+```scale
+//1.创建一个DataSet[(Int, Int)] 
+Scala-Flink> val intPairs: DataSet[(Int, Int)] = benv.fromElements((18,4),(19,5),(23,6),(38,3))
+intPairs: org.apache.flink.api.scala.DataSet[(Int, Int)] = org.apache.flink.api.scala.DataSet@63f562b8
+
+//2.键值对的key+value之和生成新的dataset
+Scala-Flink> val intSums = intPairs.map { pair => pair._1 + pair._2 }
+intSums: org.apache.flink.api.scala.DataSet[Int] = org.apache.flink.api.scala.DataSet@5f0b3abb
+
+//3.显示结果
+Scala-Flink> intSums.collect
+res7: Seq[Int] = Buffer(22, 24, 29, 41)
+
+```
+shell中的执行效果：
+![](images/Snip20161118_105.png) 
+web ui中的执行效果：
+![](images/Snip20161118_106.png)      
 
 #####flatMap  
 ```
@@ -145,11 +173,12 @@ web ui中的执行效果：
 
 
 ---
-#####filter()方法    
+#####filter
 ```
 The Filter transformation applies a user-defined filter function on each element of 
 a DataSet and retains only those elements for which the function returns true.
 ```
+######filter示例一
 执行程序：
 ```scale
 val input: DataSet[String] = benv.fromElements("zhangsan boy", "lisi is a girl so sex","wangwu boy")
@@ -171,6 +200,33 @@ shell中的执行效果：
 ![](images/Snip20161114_97.png) 
 web ui中的执行效果：
 ![](images/Snip20161114_99.png) 
+
+######filter示例二
+执行程序：
+```scale
+val intNumbers: DataSet[Int] =  benv.fromElements(2,4,6,2,3,7)
+val naturalNumbers = intNumbers.filter { _ %2== 0 }
+naturalNumbers.collect
+```
+程序解析：
+```scale
+//1.创建一个DataSet[Int]
+Scala-Flink> val intNumbers: DataSet[Int] =  benv.fromElements(2,4,6,2,3,7)
+intNumbers: org.apache.flink.api.scala.DataSet[Int] = org.apache.flink.api.scala.DataSet@95e8df8
+
+//2.过滤偶数
+Scala-Flink> val naturalNumbers = intNumbers.filter { _ %2== 0 }
+naturalNumbers: org.apache.flink.api.scala.DataSet[Int] = org.apache.flink.api.scala.DataSet@51645204
+
+//3.显示结果
+Scala-Flink> naturalNumbers.collect
+res6: Seq[Int] = Buffer(2, 4, 6, 2)
+
+```
+shell中的执行效果：
+![](images/Snip20161118_103.png) 
+web ui中的执行效果：
+![](images/Snip20161118_104.png) 
 
 ---
 #####reduce
