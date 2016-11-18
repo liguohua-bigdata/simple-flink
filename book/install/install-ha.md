@@ -133,8 +133,8 @@ val a= benv.fromElements(1, 2, 3, 4)
 val b= a.map(_*2)
 val c= a.map(_+5)
 val d= a.map(_-1)
-val e=b.union(c).union(d)
-val f=e.map(_%2==0)
+val e= b.union(c).union(d)
+val f= e.map(_%2==0)
 f.collect
 ```
 ![](images/Snip20161118_126.png)   
