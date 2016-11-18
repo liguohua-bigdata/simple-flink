@@ -3,24 +3,30 @@
 ```
 1.官方网站
 http://flink.apache.org
-
+```
+```
 2.下载页面
 http://flink.apache.org/downloads.html
-
+```
+```
 3.下载地址
 http://mirrors.tuna.tsinghua.edu.cn/apache/flink/flink-1.1.3/flink-1.1.3-bin-hadoop27-scala_2.10.tgz 
-
+```
+```
 4.下载命令
 wget
 http://mirrors.tuna.tsinghua.edu.cn/apache/flink/flink-1.1.3/flink-1.1.3-bin-hadoop27-scala_2.10.tgz
-
+```
+```
 5.解压命令
 tar -zxvf flink-1.1.3-bin-hadoop27-scala_2.10.tgz
-
+```
+```
 6.分发命令
 scp -r /bigdata/software/flink-1.1.3  qingcheng12:/bigdata/software/
 scp -r /bigdata/software/flink-1.1.3  qingcheng13:/bigdata/software/
-
+```
+```
 7.查看命令
 tree -L 1 /bigdata/software/flink-1.1.3 
 ```
