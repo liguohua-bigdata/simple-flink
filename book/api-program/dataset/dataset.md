@@ -20,11 +20,13 @@ shell中的执行效果：
 web ui中的执行效果：
 ![](images/Snip20161114_87.png) 
 
-#####2.map()方法    
+#####2.map
 ```
 The Map transformation applies a user-defined map function on each element of a DataSet. 
 It implements a one-to-one mapping, that is, exactly one element must be returned by the function.
 ```
+
+######示例一  
 执行程序：
 ```scale
 val input: DataSet[Int] = benv.fromElements(23, 67, 18, 29, 32, 56, 4, 27)
@@ -42,12 +44,47 @@ val result=input.map(_*2)
 //3.将DataSet中的每个元素输出出来
 result.print()
 ```
-
 shell中的执行效果：
 ![](images/Snip20161114_91.png) 
 web ui中的执行效果：
 ![](images/Snip20161114_92.png)    
     
+######示例一     
+执行程序：
+```scale
+val textLines: DataSet[String] =benv.fromElements(
+"this is a good job!",
+"you can do a lot of things!",
+"flink is a framework for bigdata.")
+
+val words = textLines.flatMap { _.split(" ") }
+words.collect
+    
+```
+程序解析：
+```scale
+//1.创建一个DataSet其元素为String类型
+Scala-Flink> val textLines: DataSet[String] =benv.fromElements(
+"this is a good job!",
+"you can do a lot of things!",
+"flink is a framework for bigdata.")
+textLines: org.apache.flink.api.scala.DataSet[String] = org.apache.flink.api.scala.DataSet@7c48ea9e
+
+//2.对每句话进行单词切分
+Scala-Flink> val words = textLines.flatMap { _.split(" ") }
+words: org.apache.flink.api.scala.DataSet[String] = org.apache.flink.api.scala.DataSet@5876cd86
+
+//3.显示结果内容
+Scala-Flink> words.collect
+res1: Seq[String] = Buffer(this, is, a, good, job!, you, can, do, a, lot, of, things!, flink, is, a, framework, for, bigdata.)
+```
+shell中的执行效果：
+![](images/Snip20161118_101.png) 
+web ui中的执行效果：
+![](images/Snip20161118_102.png)    
+
+    
+
 #####flatMap  
 ```
 The FlatMap transformation applies a user-defined flat-map function on each 
@@ -267,3 +304,6 @@ web ui中的执行效果：
 
 
 
+参考链接：  
+https://ci.apache.org/projects/flink/flink-docs-release-1.1/apis/batch/index.html
+https://ci.apache.org/projects/flink/flink-docs-release-1.1/apis/batch/dataset_transformations.html#join
