@@ -1,36 +1,30 @@
 ##一、flink软件包的下载与解压 
 ###1.下载并分发flink
-####官方网站
 ```
+1.官方网站
 http://flink.apache.org
-```
-####下载页面：   
-```
+
+2.下载页面
 http://flink.apache.org/downloads.html
-```
-####下载地址：
-```
+
+3.下载地址
 http://mirrors.tuna.tsinghua.edu.cn/apache/flink/flink-1.1.3/flink-1.1.3-bin-hadoop27-scala_2.10.tgz 
-```
-####下载命令：
-```
-wget 
+
+4.下载命令
+wget
 http://mirrors.tuna.tsinghua.edu.cn/apache/flink/flink-1.1.3/flink-1.1.3-bin-hadoop27-scala_2.10.tgz
-```
-####解压命令：
-```
+
+5.解压命令
 tar -zxvf flink-1.1.3-bin-hadoop27-scala_2.10.tgz
-```
-####查看命令：
-```
-tree -L 1 flink-1.1.3
-```   
-![](images/Snip20161119_131.png)       
-####分发命令：  
-```
+
+6.分发命令
 scp -r /bigdata/software/flink-1.1.3  qingcheng12:/bigdata/software/
 scp -r /bigdata/software/flink-1.1.3  qingcheng13:/bigdata/software/
+
+7.查看命令
+tree -L 1 /bigdata/software/flink-1.1.3 
 ```
+![](images/Snip20161119_131.png)      
 ###2.配置并分发环境变量
 ```
 1.编辑环境变量文件
