@@ -290,9 +290,7 @@ ${FLINK_HOME}/bin/flink run  ${FLINK_HOME}/examples/streaming/SocketWindowWordCo
 ```
 cd ${FLINK_HOME}/log/
 ll
-```
-执行效果：  
-![](images/Snip20161113_71.png)         
+```       
 本例中找的的文件名为flink-root-taskmanager-1-qingcheng11.out
 ####3.2查看输出文件内容
 ```
