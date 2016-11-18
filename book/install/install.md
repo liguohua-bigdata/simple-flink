@@ -1,37 +1,34 @@
-####一、flink软件包的下载与解压   
-1.从flink官网获得下载链接
-1.1进入官网链接：  
+####一、flink软件包的下载与解压 
+1.下载并分发flink
+官方网站
+```
 http://flink.apache.org
-![](images/Snip20161113_50.png) 
-1.2进入下载页面：   
+```
+下载页面：   
+```
 http://flink.apache.org/downloads.html
-![](images/Snip20161113_68.png) 
-1.3获取下载地址：
-![](images/Snip20161113_54.png) 
-选择相应的版本，下载地址为http://mirrors.tuna.tsinghua.edu.cn/apache/flink/flink-1.1.3/flink-1.1.3-bin-hadoop27-scala_2.10.tgz   
-2.下载并解压flink
-2.1下载命令：
+```
+下载地址：
+```
+http://mirrors.tuna.tsinghua.edu.cn/apache/flink/flink-1.1.3/flink-1.1.3-bin-hadoop27-scala_2.10.tgz 
+```
+下载命令：
 ```
 wget http://mirrors.tuna.tsinghua.edu.cn/apache/flink/flink-1.1.3/flink-1.1.3-bin-hadoop27-scala_2.10.tgz
 ```
-得到flink-1.1.3-bin-hadoop27-scala_2.10.tgz软件压缩包
-
-2.2解压命令：
+得到flink-1.1.3-bin-hadoop27-scala_2.10.tgz软件压缩包  
+解压命令：
 ```
 tar -zxvf flink-1.1.3-bin-hadoop27-scala_2.10.tgz
 ```
 解压得到flink-1.1.3文件夹，文件夹中的内容如下：   
 ![](images/Snip20161113_55.png)    
-3.分发flink及其环境变量  
-3.1分发flink  
 分发命令：  
 ```
 scp -r /bigdata/software/flink-1.1.3  qingcheng12:/bigdata/software/
 scp -r /bigdata/software/flink-1.1.3  qingcheng13:/bigdata/software/
 ```
-
-3.2分发flink的环境变量  
-配置FLINK_HOME环境变量  
+2.配置并分发环境变量
 ```
 1.编辑环境变量文件
 执行命令：
