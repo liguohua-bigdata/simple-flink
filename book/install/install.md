@@ -24,6 +24,7 @@ tar -zxvf flink-1.1.3-bin-hadoop27-scala_2.10.tgz
 ```
 解压得到flink-1.1.3文件夹，文件夹中的内容如下：   
 ![](images/Snip20161113_55.png)    
+![](images/Snip20161119_129.png)       
 ####分发命令：  
 ```
 scp -r /bigdata/software/flink-1.1.3  qingcheng12:/bigdata/software/
