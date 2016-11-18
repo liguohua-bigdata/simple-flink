@@ -220,7 +220,7 @@ cd ${FLINK_HOME}/examples/batch
 ll
 ```
 执行效果：  
-![](images/Snip20161113_71.png)             
+![](images/Snip20161119_130.png)             
 2.2运行wordcount程序  
 计算hdfs://qingcheng11:9000/input/flink/README.txt中单词的个数      
 执行命令：
@@ -272,10 +272,7 @@ hadoop hdfs  web ui中的效果：
 执行命令：
 ```
 nc -l -p  9874
-```
-执行效果：  
-![](images/Snip20161113_72.png)     
-       
+```       
 ###2.打开消息处理端  
 打开flink流消息处理client程序  
 执行命令：
