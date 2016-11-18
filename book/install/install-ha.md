@@ -134,7 +134,8 @@ val b= a.map(_*2)
 val c= a.map(_+5)
 val d= a.map(_-1)
 val e=b.union(c).union(d)
-e.collect
+val f=e.map(_%2==0)
+f.collect
 ```
-![](images/Snip20161118_125.png)   
+![](images/Snip20161118_126.png)   
 
