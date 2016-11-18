@@ -7,7 +7,7 @@
 ```
 ![](images/20161031105508805.png)  
 
->注意：
+>注意：  
 >1.由于flink jobmanager的HA配置依赖 zookeeper，因此要先配置并启动zookeeper集群   
 >2.由于flink的HA模式下的state backend在要依赖hdfs，因此要先配置并启动Hadoop集群    
 
