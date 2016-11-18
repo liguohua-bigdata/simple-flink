@@ -295,7 +295,7 @@ web ui中的执行效果：
 Returns the distinct elements of a data set. It removes the duplicate entries from the input DataSet,
 with respect to all fields of the elements, or a subset of fields.
 ```
-###distinct示例一
+###distinct示例一，单一项目的去重
 执行程序：
 ```scale
 val input: DataSet[String] = benv.fromElements("lisi","zhangsan", "lisi","wangwu")
@@ -321,7 +321,7 @@ shell中的执行效果：
 web ui中的执行效果：
 ![](images/Snip20161118_97.png) 
 
-###distinct示例二
+###distinct示例二，多项目的去重，不指定比较项目，默认是全部比较
 
 执行程序：
 ```scale
@@ -352,7 +352,7 @@ res12: Seq[(Int, String, Double)] = Buffer(
 (3,lisi,2347.8), (4,wangwu,1478.9), (5,zhaoliu,987.3))
 ```
 
-###distinct示例三
+###distinct示例三，多项目的去重，指定比较项目
 
 执行程序：
 ```scale
@@ -381,6 +381,73 @@ Scala-Flink> output.collect
 res15: Seq[(Int, String, Double)] = Buffer(
 (2,zhagnsan,1654.5), (3,lisi,2347.8), (4,wangwu,1478.9), (5,zhaoliu,987.3))
 ```
+
+
+
+
+###distinct示例四，caseClass的去重，指定比较项目
+
+执行程序：
+```scale
+
+case class Student(name : String, age : Int) 
+val input: DataSet[Student] =  benv.fromElements(
+Student("zhangsan",24),Student("zhangsan",24),Student("zhangsan",25),
+Student("lisi",24),Student("wangwu",24),Student("lisi",25))
+
+val age_r = input.distinct("age")
+age_r.collect
+
+val name_r = input.distinct("name")
+name_r.collect
+
+val all_r = input.distinct("age","name")
+all_r.collect
+
+val all = input.distinct()
+all.collect
+```
+程序解析：
+```scale
+//1.创建case class Student
+Scala-Flink> case class Student(name : String, age : Int)
+defined class Student
+
+//2.创建DataSet[Student]
+Scala-Flink> val input: DataSet[Student] =  benv.fromElements(
+     | Student("zhangsan",24),Student("zhangsan",24),Student("zhangsan",25),
+     | Student("lisi",24),Student("wangwu",24),Student("lisi",25))
+input: org.apache.flink.api.scala.DataSet[Student] = org.apache.flink.api.scala.DataSet@69831eba
+
+//3.去掉age重复的元素
+Scala-Flink> val age_r = input.distinct("age")
+age_r: org.apache.flink.api.scala.DataSet[Student] = org.apache.flink.api.scala.DataSet@29393c36
+Scala-Flink> age_r.collect
+res38: Seq[Student] = Buffer(Student(zhangsan,24), Student(zhangsan,25))
+
+//4.去掉name重复的元素
+Scala-Flink> val name_r = input.distinct("name")
+name_r: org.apache.flink.api.scala.DataSet[Student]=org.apache.flink.api.scala.DataSet@473cf185
+Scala-Flink> name_r.collect
+res39: Seq[Student] = Buffer(Student(lisi,24), Student(wangwu,24), Student(zhangsan,24))
+
+//6.去掉name和age重复的元素
+Scala-Flink> val all_r = input.distinct("age","name")
+all_r: org.apache.flink.api.scala.DataSet[Student] = org.apache.flink.api.scala.DataSet@71b1165c
+Scala-Flink> all_r.collect
+res40: Seq[Student] = Buffer(Student(lisi,24), Student(lisi,25), Student(wangwu,24),
+Student(zhangsan,24), Student(zhangsan,25))
+
+//7.去掉name和age重复的元素
+Scala-Flink> val all = input.distinct()
+all: org.apache.flink.api.scala.DataSet[Student] = org.apache.flink.api.scala.DataSet@2073f3b6
+Scala-Flink> all.collect
+res41: Seq[Student] = Buffer(Student(lisi,24), Student(lisi,25), Student(wangwu,24), 
+Student(zhangsan,24), Student(zhangsan,25))
+```
+web ui中的执行效果：
+![](images/Snip20161118_108.png) 
+
 
 
 
