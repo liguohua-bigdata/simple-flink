@@ -70,7 +70,7 @@ Scala-Flink> val textLines: DataSet[String] =benv.fromElements(
 "this is a good job!",
 "you can do a lot of things!",
 "flink is a framework for bigdata.")
-textLines: org.apache.flink.api.scala.DataSet[String] = org.apache.flink.api.scala.DataSet@7c48ea9e
+textLines:org.apache.flink.api.scala.DataSet[String]=org.apache.flink.api.scala.DataSet@7c48ea9e
 
 //2.对每句话进行单词切分
 Scala-Flink> val words = textLines.flatMap { _.split(" ") }
@@ -100,7 +100,7 @@ intSums.collect
 ```scale
 //1.创建一个DataSet[(Int, Int)] 
 Scala-Flink> val intPairs: DataSet[(Int, Int)] = benv.fromElements((18,4),(19,5),(23,6),(38,3))
-intPairs: org.apache.flink.api.scala.DataSet[(Int, Int)] = org.apache.flink.api.scala.DataSet@63f562b8
+intPairs: org.apache.flink.api.scala.DataSet[(Int,Int)]=org.apache.flink.api.scala.DataSet@63f562b8
 
 //2.键值对的key+value之和生成新的dataset
 Scala-Flink> val intSums = intPairs.map { pair => pair._1 + pair._2 }
