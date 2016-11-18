@@ -69,6 +69,7 @@ scp -r ${FLINK_HOME}/conf/*  qingcheng12:${FLINK_HOME}/conf/
 scp -r ${FLINK_HOME}/conf/*  qingcheng13:${FLINK_HOME}/conf/
 ```
 ###5.重启flink集群
+
 执行命令：
 ```
 1.关闭集群
@@ -92,7 +93,22 @@ Service temporarily unavailable due to an ongoing leader election. Please refres
 ![](images/Snip20161118_120.png)   
 重启后的flink集群会进行主节点选举，本次使用选举结果是qingcheng13作为active jobmanager
 ![](images/Snip20161118_121.png)   
-###6.测试jobmanager的HA
+
+###6.验证重启成功
+6.1zookeeper客户端验证
+```
+ ls /
+ ls /flink
+ ls /flink/flink001
+```
+![](images/Snip20161118_124.png)   
+6.2hadoop hdfs上验证
+```
+http://192.168.0.12:50070/explorer.html#/flink-metadata
+```
+![](images/Snip20161118_123.png)   
+
+###7.测试jobmanager的HA
 
 ```
 1.关闭jobmanager
