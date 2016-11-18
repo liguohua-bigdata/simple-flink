@@ -1,5 +1,5 @@
-####一、flink软件包的下载与解压 
-1.下载并分发flink
+##一、flink软件包的下载与解压 
+###1.下载并分发flink
 官方网站
 ```
 http://flink.apache.org
@@ -29,7 +29,7 @@ tar -zxvf flink-1.1.3-bin-hadoop27-scala_2.10.tgz
 scp -r /bigdata/software/flink-1.1.3  qingcheng12:/bigdata/software/
 scp -r /bigdata/software/flink-1.1.3  qingcheng13:/bigdata/software/
 ```
-2.配置并分发环境变量
+###2.配置并分发环境变量
 ```
 1.编辑环境变量文件
 执行命令：
@@ -53,10 +53,10 @@ scp -r /bigdata/software/flink-1.1.3  qingcheng13:/bigdata/software/
    -bash: /bigdata/software/flink-1.1.3: Is a directory
 ```
 
-####二、flink在standalone模式主节点下无HA的部署实战
-1.部署规划：  
+##二、flink在standalone模式主节点下无HA的部署实战
+###1.部署规划：  
 ![](images/Snip20161113_56.png)   
-2.配置flink-conf.yaml文件  
+###2.配置flink-conf.yaml文件  
 执行命令：
 ```
 vim ${FLINK_HOME}/conf/flink-conf.yaml
@@ -84,7 +84,7 @@ parallelism.default: 12
  fs.hdfs.hadoopconf: /bigdata/software/hadoop-2.7.2
 ```
 
-3.配置slaves文件  
+###3.配置slaves文件  
 此文件用于指定从节点，一行一个节点.   
 执行命令：
 ```
@@ -97,14 +97,14 @@ qingcheng11
 qingcheng12
 qingcheng13
 ```
-4.分发配置文件
+###4.分发配置文件
 执行命令：
 ```
 scp -r ${FLINK_HOME}/conf/*  qingcheng12:${FLINK_HOME}/conf/
 scp -r ${FLINK_HOME}/conf/*  qingcheng13:${FLINK_HOME}/conf/
 ```
 
-5.启动flink服务
+###5.启动flink服务
 执行命令：
 ```
 ${FLINK_HOME}/bin/start-cluster.sh
@@ -112,7 +112,7 @@ ${FLINK_HOME}/bin/start-cluster.sh
 执行效果：
 ![](images/Snip20161113_57.png) 
 
-6.验证flink服务   
+###6.验证flink服务   
 6.1查看进程验证flink服  
 在所有机器上执行，可以看到各自对应的进程名称。   
 执行命令：
@@ -135,7 +135,7 @@ Task Manager情况：
 ![](images/Snip20161113_61.png) 
 可以看出flink集群的整体情况。说明flink在standalone模式下主节点无HA的部署实战是成功的。
 
-7.flink的常用命令
+###7.flink的常用命令
 ```
 1.启动集群
 ${FLINK_HOME}/bin/start-cluster.sh 
@@ -166,8 +166,8 @@ ${FLINK_HOME}/bin/taskmanager.sh stop
 ```
        
   
-####三、flink第一个程序      
-1.创建文件夹并上传flink的readme文件  
+##三、flink第一个程序      
+###1.创建文件夹并上传flink的readme文件  
 执行命令：
 ```
 hadoop fs -mkdir -p  /input/flink
@@ -177,7 +177,7 @@ hadoop fs -put  ${FLINK_HOME}/README.txt  /input/flink/
 ![](images/Snip20161113_63.png)   
    
   
-2.打开start-scala-shell.sh  
+###2.打开start-scala-shell.sh  
 ${FLINK_HOME}/bin/start-scala-shell.sh是flink提供的交互式clinet,可以用于代码片段的测试，方便开发工作。  
 它有两种启动方式，一种是工作在本地，另一种是工作到集群。本例中因为机器连接非常方便，就直接使用集群进行测试，在  
 开发中，如果集群连接不是非常方便，可以连接到本地，在本地开发测试通过后，再连接到集群进行部署工作。如果程序有  
@@ -200,7 +200,7 @@ ${FLINK_HOME}/bin/start-scala-shell.sh remote qingcheng11 6123
 执行效果：
 ![](images/Snip20161113_64.png)   
    
-3.执行第一个flink程序
+###3.执行第一个flink程序
 执行程序：
 ```
 val file=benv.readTextFile("hdfs://qingcheng11:9000/input/flink/README.txt")
@@ -215,9 +215,9 @@ web执行效果一：
 web执行效果二：
 ![](images/Snip20161113_67.png)             
        
-####四、flink批处理测试       
+##四、flink批处理测试       
        
-1.创建文件夹并上传flink的readme文件  
+###1.创建文件夹并上传flink的readme文件  
 执行命令：
 ```
 hadoop fs -mkdir -p  /input/flink
@@ -225,7 +225,7 @@ hadoop fs -put  ${FLINK_HOME}/README.txt  /input/flink/
 ```
 执行效果：  
 ![](images/Snip20161113_63.png)     
-2.运行wordcount程序  
+###2.运行wordcount程序  
 2.1检查安装包中是否存在WordCount.jar  
 执行命令：
 ```
@@ -261,8 +261,8 @@ hadoop hdfs  web ui中的效果：
 ```
 ![](images/Snip20161113_85.png)             
       
-####五、flink流处理测试        
-0.测试规划如下：  
+##五、flink流处理测试        
+###0.测试规划如下：  
 ![](images/Snip20161113_79.png)  
 ```
 1.消息发送者
@@ -281,7 +281,7 @@ hadoop hdfs  web ui中的效果：
     也就是本例中的${FLINK_HOME}/log/flink-root-taskmanager-1-qingcheng11.out
 ```
 
-1.打开消息发送端
+###1.打开消息发送端
 执行命令：
 ```
 nc -l -p  9874
@@ -289,7 +289,7 @@ nc -l -p  9874
 执行效果：  
 ![](images/Snip20161113_72.png)     
        
-2.打开消息处理端  
+###2.打开消息处理端  
 打开flink流消息处理client程序  
 执行命令：
 ```
@@ -300,7 +300,7 @@ ${FLINK_HOME}/bin/flink run  ${FLINK_HOME}/examples/streaming/SocketWindowWordCo
 执行效果：  
 ![](images/Snip20161113_74.png)          
        
-3.打开消息输出端  
+###3.打开消息输出端  
 3.1找到输出文件  
 找到有输出内容的flink-*-taskmanager-*-*.out文件，这里讲会有处理日志的输出。  
 ```
@@ -315,7 +315,7 @@ ll
 tail -f flink-root-taskmanager-1-qingcheng11.out
 ```   
     
-4.输入数据 ，运行程序     
+###4.输入数据 ，运行程序     
 在消息发送端不断的输入单词，则可以看到在消息输出端有新内容不断的输出。  
 4.1在本例中，像下面的样子发送数据：    
 ```
@@ -348,7 +348,7 @@ flume : 1
 ![](images/Snip20161113_76.png)          
               
              
-##五、flink在standalone模式主节点下有HA的部署实战 
+##六、flink在standalone模式主节点下有HA的部署实战 
 
 ```
 当Flink程序运行时，如果jobmanager崩溃，那么整个程序都会失败。为了防止jobmanager的单点故障，
