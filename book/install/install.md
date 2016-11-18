@@ -14,7 +14,8 @@ http://mirrors.tuna.tsinghua.edu.cn/apache/flink/flink-1.1.3/flink-1.1.3-bin-had
 ```
 下载命令：
 ```
-wget http://mirrors.tuna.tsinghua.edu.cn/apache/flink/flink-1.1.3/flink-1.1.3-bin-hadoop27-scala_2.10.tgz
+wget 
+http://mirrors.tuna.tsinghua.edu.cn/apache/flink/flink-1.1.3/flink-1.1.3-bin-hadoop27-scala_2.10.tgz
 ```
 得到flink-1.1.3-bin-hadoop27-scala_2.10.tgz软件压缩包  
 解压命令：
