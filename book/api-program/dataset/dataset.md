@@ -186,7 +186,7 @@ a DataSet and retains only those elements for which the function returns true.
 执行程序：
 ```scale
 val input: DataSet[String] = benv.fromElements("zhangsan boy", "lisi is a girl so sex","wangwu boy")
-val result=input.filter{_.contains("boy")}
+val result=input.filter{_.contains("boy")} //也可以写成filter(_.contains("boy"))
 result.print()
 ```
 程序解析：
