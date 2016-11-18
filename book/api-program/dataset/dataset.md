@@ -392,9 +392,6 @@ res15: Seq[(Int, String, Double)] = Buffer(
 (2,zhagnsan,1654.5), (3,lisi,2347.8), (4,wangwu,1478.9), (5,zhaoliu,987.3))
 ```
 
-
-
-
 ###distinct示例四，caseClass的去重，指定比较项目
 
 执行程序：
