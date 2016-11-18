@@ -442,9 +442,10 @@ http://192.168.0.12:50070/explorer.html#/flink-metadata
 
 ```
 1.关闭jobmanager
-    ${FLINK_HOME}/bin/jobmanager.sh stop
+${FLINK_HOME}/bin/jobmanager.sh stop
+
 2.开启jobmanager   
-    ${FLINK_HOME}/bin/jobmanager.sh start
+${FLINK_HOME}/bin/jobmanager.sh start
 ```
 停止qingcheng13上的jobmanager，来模拟jobmanager的crash。一会的时间，系统就选举出了另外的一个  
 active jobmanager，本次实验选举的是qingcheng12.
