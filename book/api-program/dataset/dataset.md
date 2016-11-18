@@ -1,4 +1,5 @@
-#####print()方法    
+---
+##print()方法    
 执行程序：
 ```scale
 val input: DataSet[String] = benv.fromElements("A", "B", "C", "D", "E", "F", "G", "H")
@@ -20,13 +21,14 @@ shell中的执行效果：
 web ui中的执行效果：
 ![](images/Snip20161114_87.png) 
 
-#####map
+---
+##map
 ```
 The Map transformation applies a user-defined map function on each element of a DataSet. 
 It implements a one-to-one mapping, that is, exactly one element must be returned by the function.
 ```
 
-######map示例一  
+###map示例一  
 执行程序：
 ```scale
 val input: DataSet[Int] = benv.fromElements(23, 67, 18, 29, 32, 56, 4, 27)
@@ -49,7 +51,7 @@ shell中的执行效果：
 web ui中的执行效果：
 ![](images/Snip20161114_92.png)    
     
-######map示例二  
+###map示例二  
 执行程序：
 ```scale
 val textLines: DataSet[String] =benv.fromElements(
@@ -86,7 +88,8 @@ shell中的执行效果：
 web ui中的执行效果：
 ![](images/Snip20161118_102.png)    
 
-######map示例三
+
+###map示例三
 执行程序：
 ```scale
 val intPairs: DataSet[(Int, Int)] = benv.fromElements((18,4),(19,5),(23,6),(38,3))
@@ -113,7 +116,8 @@ shell中的执行效果：
 web ui中的执行效果：
 ![](images/Snip20161118_106.png)      
 
-#####flatMap  
+---
+##flatMap  
 ```
 The FlatMap transformation applies a user-defined flat-map function on each 
 element of a DataSet. This variant of a map function can return arbitrary 
@@ -141,8 +145,8 @@ shell中的执行效果：
 web ui中的执行效果：
 ![](images/Snip20161114_89.png) 
 
-
-#####mapPartition 
+---
+##mapPartition 
 ```
 MapPartition transforms a parallel partition in a single function call. The map-partition
 function gets the partition as Iterable and can produce an arbitrary number of result values.
@@ -173,12 +177,12 @@ web ui中的执行效果：
 
 
 ---
-#####filter
+##filter
 ```
 The Filter transformation applies a user-defined filter function on each element of 
 a DataSet and retains only those elements for which the function returns true.
 ```
-######filter示例一
+###filter示例一
 执行程序：
 ```scale
 val input: DataSet[String] = benv.fromElements("zhangsan boy", "lisi is a girl so sex","wangwu boy")
@@ -201,7 +205,7 @@ shell中的执行效果：
 web ui中的执行效果：
 ![](images/Snip20161114_99.png) 
 
-######filter示例二
+###filter示例二
 执行程序：
 ```scale
 val intNumbers: DataSet[Int] =  benv.fromElements(2,4,6,2,3,7)
@@ -229,7 +233,7 @@ web ui中的执行效果：
 ![](images/Snip20161118_104.png) 
 
 ---
-#####reduce
+##reduce
 ```
 Combines a group of elements into a single element by repeatedly combining two elements into one. 
 Reduce may be applied on a full data set, or on a grouped data set.
@@ -280,13 +284,13 @@ web ui中的执行效果：
 
 
 ---
-#####ReduceGroup???
+##ReduceGroup???
 
 ---
-#####Aggregate??
+##Aggregate??
 
 ---
-#####distinct
+##distinct
 ```
 Returns the distinct elements of a data set. It removes the duplicate entries from the input DataSet,
 with respect to all fields of the elements, or a subset of fields.
@@ -318,7 +322,7 @@ web ui中的执行效果：
 
 
 ---
-#####join
+##join
 ```
 Joins two data sets by creating all pairs of elements that are equal on their keys. Optionally uses
 a JoinFunction to turn the pair of elements into a single element, or a FlatJoinFunction to turn the
