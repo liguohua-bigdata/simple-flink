@@ -34,25 +34,22 @@ tree -L 1 /bigdata/software/flink-1.1.3
 ###2.配置并分发环境变量
 ```
 1.编辑环境变量文件
-执行命令：
+1.1执行命令：
     vim ~/.bashrc
-编辑内容：
-    在环境办理文件中加入如下内容
+1.2添加内容：
     export FLINK_HOME=/bigdata/software/flink-1.1.3
     export PATH=$FLINK_HOME/bin:$PATH
 2.分发环境变量文件到其他机器
-执行命令：
     scp ~/.bashrc  qingcheng12:~/.bashrc
     scp ~/.bashrc  qingcheng13:~/.bashrc
 3.在每个机器上刷新环境变量
-执行命令：
     source   ~/.bashrc
 4.测试环境环境变量是否配置成功 
-执行命令：
+4.1执行命令：
     $FLINK_HOME
-执行效果：
+4.2执行效果：
     出现如下字样说明配置成功
-   -bash: /bigdata/software/flink-1.1.3: Is a directory
+    -bash: /bigdata/software/flink-1.1.3: Is a directory
 ```
 
 ##二、flink在standalone模式主节点下无HA的部署实战
