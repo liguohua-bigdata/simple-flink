@@ -5,6 +5,7 @@
 执行程序：
 ```scale
 val input: DataSet[String] = benv.fromElements("A", "B", "C", "D", "E", "F", "G", "H")
+
 input.print()
 ```
 
@@ -32,6 +33,7 @@ It implements a one-to-one mapping, that is, exactly one element must be returne
 执行程序：
 ```scale
 val input: DataSet[Int] = benv.fromElements(23, 67, 18, 29, 32, 56, 4, 27)
+
 val result=input.map(_*2)
 result.print()
 ```
@@ -126,6 +128,7 @@ many result elements(including none) for each input element.
 执行程序：
 ```scale
 val input: DataSet[String] = benv.fromElements("zhangsan boy", "lisi girl")
+
 val result=input.flatMap { _.split(" ") }
 result.print()
 ```
@@ -156,6 +159,7 @@ operations.
 执行程序：
 ```scale
 val input: DataSet[String] = benv.fromElements("zhangsan boy", "lisi is a girl so sex")
+
 val result=input.mapPartition{in => Some(in.size)}
 result.print()
 ```
@@ -328,6 +332,7 @@ web ui中的执行效果：
 val input: DataSet[(Int, String, Double)] =  benv.fromElements(
 (2,"zhagnsan",1654.5),(3,"lisi",2347.8),(2,"zhagnsan",1654.5),
 (4,"wangwu",1478.9),(5,"zhaoliu",987.3),(2,"zhagnsan",1654.0))
+
 val output = input.distinct()
 output.collect
 ```
@@ -359,6 +364,7 @@ res12: Seq[(Int, String, Double)] = Buffer(
 val input: DataSet[(Int, String, Double)] =  benv.fromElements(
 (2,"zhagnsan",1654.5),(3,"lisi",2347.8),(2,"zhagnsan",1654.5),
 (4,"wangwu",1478.9),(5,"zhaoliu",987.3),(2,"zhagnsan",1654.0))
+
 val output = input.distinct(0,1)
 output.collect
 ```
@@ -468,6 +474,7 @@ web ui中的执行效果：
 执行程序：
 ```scale
 val input: DataSet[Int] = benv.fromElements(3,-3,4,-4,6,-5,7)
+
 val output = input.distinct {x => Math.abs(x)}
 output.collect
 ```
