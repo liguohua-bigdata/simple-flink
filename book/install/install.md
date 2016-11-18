@@ -191,7 +191,7 @@ ${FLINK_HOME}/bin/start-scala-shell.sh local
 ${FLINK_HOME}/bin/start-scala-shell.sh remote <hostname> <portnumber>
 
 3.带有依赖包的格式
-${FLINK_HOME}/bin/start-scala-shell.sh [local | remote <host> <port>] --addclasspath <path/to/jar.jar>
+${FLINK_HOME}/bin/start-scala-shell.sh[local|remote<host><port>]--addclasspath<path/to/jar.jar>
 ```
 执行命令：
 ```
