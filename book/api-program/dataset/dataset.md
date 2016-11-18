@@ -337,11 +337,13 @@ output.collect
 Scala-Flink> val input: DataSet[(Int, String, Double)] =  benv.fromElements(
 (2,"zhagnsan",1654.5),(3,"lisi",2347.8),(2,"zhagnsan",1654.5),
 (4,"wangwu",1478.9),(5,"zhaoliu",987.3),(2,"zhagnsan",1654.0))
-input: org.apache.flink.api.scala.DataSet[(Int, String, Double)] = org.apache.flink.api.scala.DataSet@5a5b2829
+input: org.apache.flink.api.scala.DataSet[(Int, String, Double)] = 
+org.apache.flink.api.scala.DataSet@5a5b2829
 
 //2.元素去重
 Scala-Flink> val output = input.distinct()
-output: org.apache.flink.api.scala.DataSet[(Int, String, Double)] = org.apache.flink.api.scala.DataSet@1f70c1b8
+output: org.apache.flink.api.scala.DataSet[(Int, String, Double)] =
+org.apache.flink.api.scala.DataSet@1f70c1b8
 
 //3.显示结果
 Scala-Flink> output.collect
@@ -366,11 +368,13 @@ output.collect
 Scala-Flink> val input: DataSet[(Int, String, Double)] =  benv.fromElements(
      | (2,"zhagnsan",1654.5),(3,"lisi",2347.8),(2,"zhagnsan",1654.5),
      | (4,"wangwu",1478.9),(5,"zhaoliu",987.3),(2,"zhagnsan",1654.0))
-input: org.apache.flink.api.scala.DataSet[(Int, String, Double)] = org.apache.flink.api.scala.DataSet@2e139467
+input: org.apache.flink.api.scala.DataSet[(Int, String, Double)] = 
+org.apache.flink.api.scala.DataSet@2e139467
 
 //2.元素去重:指定比较第0和第1号元素
 Scala-Flink> val output = input.distinct(0,1)
-output: org.apache.flink.api.scala.DataSet[(Int, String, Double)] = org.apache.flink.api.scala.DataSet@344e665a
+output: org.apache.flink.api.scala.DataSet[(Int, String, Double)] = 
+org.apache.flink.api.scala.DataSet@344e665a
 
 //3.显示结果
 Scala-Flink> output.collect
