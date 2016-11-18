@@ -214,10 +214,10 @@ web执行效果二：
 2.1检查安装包中是否存在WordCount.jar  
 ```
 cd ${FLINK_HOME}/examples/batch
-ll
+tree -L 1 .
 ```
 执行效果：  
-![](images/Snip20161119_130.png)             
+![](images/Snip20161119_133.png)             
 2.2运行wordcount程序  
 计算hdfs://qingcheng11:9000/input/flink/README.txt中单词的个数      
 执行命令：
