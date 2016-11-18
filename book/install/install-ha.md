@@ -84,3 +84,15 @@ scp -r ${FLINK_HOME}/conf/*  qingcheng13:${FLINK_HOME}/conf/
 ![](images/Snip20161118_120.png)   
 重启后的flink集群会进行主节点选举，本次使用选举结果是qingcheng13作为active jobmanager
 ![](images/Snip20161118_121.png)   
+###6.测试jobmanager的HA
+
+```
+1.关闭jobmanager
+    ${FLINK_HOME}/bin/jobmanager.sh stop
+2.开启jobmanager   
+    ${FLINK_HOME}/bin/jobmanager.sh start
+```
+停止qingcheng13上的jobmanager，来模拟jobmanager的crash。一会的时间，系统就选举出了另外的一个  
+active jobmanager，本次实验选举的是qingcheng12.
+![](images/Snip20161118_121.png)   
+
