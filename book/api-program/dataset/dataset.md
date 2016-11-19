@@ -608,6 +608,93 @@ res5: Seq[(String, Double)] = Buffer((moon,7.3), (sun,11.2), (cat,10.0), (dog,6.
 web ui中的执行效果：
 ![](images/Snip20161119_1.png) 
 
+
+###join示例三：
+```
+A Join transformation can also call a user-defined join function to process joining tuples. 
+A join function receives one element of the first input DataSet and one element of the second 
+input DataSet and returns exactly one element.
+
+The following code performs a join of DataSet with custom java objects and a Tuple DataSet using 
+key-selector functions and shows how to use a user-defined join function:
+```
+
+
+执行程序：
+```scale
+import java.util. Collector
+case class Rating(name: String, category: String, points: Int)
+val ratings: DataSet[Rating] = benv.fromElements(
+Rating("moon","youny1",3),Rating("sun","youny2",4),
+Rating("cat","youny3",1),Rating("dog","youny4",5))
+
+val weights: DataSet[(String, Double)] = benv.fromElements(
+("youny1",4.3),("youny2",7.2),
+("youny3",9.0),("youny4",1.5))
+
+val weightedRatings = ratings.join(weights).where("category").equalTo(0) {
+  (rating, weight, out: Collector[(String, Double)]) =>
+    if (weight._2 > 0.1) out.collect(rating.name, rating.points * weight._2)
+}
+
+weightedRatings.collect
+```
+
+
+
+###join示例四：Join with DataSet Size Hint
+```
+In order to guide the optimizer to pick the right execution strategy, you can hint the size of a DataSet to join as shown here:
+```
+
+
+执行程序：
+```scale
+val input1: DataSet[(Int, String)] = 
+benv.fromElements((3,"zhangsan"),(2,"lisi"),(4,"wangwu"),(6,"zhaoliu"))
+
+val input2: DataSet[(Int, String)] = 
+benv.fromElements((4000,"zhangsan"),(70000,"lisi"),(4600,"wangwu"),(53000,"zhaoliu"))
+
+// hint that the second DataSet is very small
+val result1 = input1.joinWithTiny(input2).where(1).equalTo(1)
+result1.collect
+
+// hint that the second DataSet is very large
+val result2 = input1.joinWithHuge(input2).where(1).equalTo(1)
+result2.collect
+```
+
+```
+//1.定义两个 DataSet
+Scala-Flink> val input1: DataSet[(Int, String)] =
+     | benv.fromElements((3,"zhangsan"),(2,"lisi"),(4,"wangwu"),(6,"zhaoliu"))
+input1: org.apache.flink.api.scala.DataSet[(Int, String)] = org.apache.flink.api.scala.DataSet@5accd405
+
+Scala-Flink> val input2: DataSet[(Int, String)] =
+     | benv.fromElements((4000,"zhangsan"),(70000,"lisi"),(4600,"wangwu"),(53000,"zhaoliu"))
+input2: org.apache.flink.api.scala.DataSet[(Int, String)] = org.apache.flink.api.scala.DataSet@519a0a93
+
+//2.join 并提示input2比较小
+Scala-Flink> val result1 = input1.joinWithTiny(input2).where(1).equalTo(1)
+result1:org.apache.flink.api.scala.JoinDataSet[(Int,String),(Int,String)]=org.apache.flink.api.scala.JoinDataSet@40f3a46f
+
+Scala-Flink> result1.collect
+res12: Seq[((Int, String), (Int, String))] = Buffer(
+((3,zhangsan),(4000,zhangsan)), ((2,lisi),(70000,lisi)), 
+((4,wangwu),(4600,wangwu)), ((6,zhaoliu),(53000,zhaoliu)))
+
+//3.join 并提示input2比较大
+Scala-Flink> val result2 = input1.joinWithHuge(input2).where(1).equalTo(1)
+result2:org.apache.flink.api.scala.JoinDataSet[(Int,String),(Int,String)]=org.apache.flink.api.scala.JoinDataSet@2f51ce2a
+
+Scala-Flink> result2.collect
+res13: Seq[((Int, String), (Int, String))] = Buffer(
+((3,zhangsan),(4000,zhangsan)), ((2,lisi),(70000,lisi)), 
+((4,wangwu),(4600,wangwu)), ((6,zhaoliu),(53000,zhaoliu)))
+```
+
+
 参考链接：  
 https://ci.apache.org/projects/flink/flink-docs-release-1.1/apis/batch/index.html
 https://ci.apache.org/projects/flink/flink-docs-release-1.1/apis/batch/dataset_transformations.html#join
