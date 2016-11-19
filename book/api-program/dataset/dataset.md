@@ -693,7 +693,8 @@ res13: Seq[((Int, String), (Int, String))] = Buffer(
 ((3,zhangsan),(4000,zhangsan)), ((2,lisi),(70000,lisi)), 
 ((4,wangwu),(4600,wangwu)), ((6,zhaoliu),(53000,zhaoliu)))
 ```
-
+web ui中的执行效果：
+![](images/Snip20161119_2.png) 
 
 参考链接：  
 https://ci.apache.org/projects/flink/flink-docs-release-1.1/apis/batch/index.html
