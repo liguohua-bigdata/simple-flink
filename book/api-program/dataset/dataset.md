@@ -93,8 +93,6 @@ result.collect
 ```scale
 res46: Seq[String] = Buffer(zhangsan, boy, lisi, girl)
 ```
-shell中的执行效果：
-![](images/Snip20161114_88.png) 
 web ui中的执行效果：
 ![](images/Snip20161114_89.png) 
 
@@ -102,37 +100,25 @@ web ui中的执行效果：
 ###flatMap示例二  
 执行程序：
 ```scale
+//1.创建一个DataSet其元素为String类型
 val textLines: DataSet[String] =benv.fromElements(
 "this is a good job!",
 "you can do a lot of things!",
 "flink is a framework for bigdata.")
 
-val words = textLines.flatMap { _.split(" ") }
-words.collect
-    
-```
-程序解析：
-```scale
-//1.创建一个DataSet其元素为String类型
-Scala-Flink> val textLines: DataSet[String] =benv.fromElements(
-"this is a good job!",
-"you can do a lot of things!",
-"flink is a framework for bigdata.")
-textLines:org.apache.flink.api.scala.DataSet[String]=org.apache.flink.api.scala.DataSet@7c48ea9e
-
 //2.对每句话进行单词切分
-Scala-Flink> val words = textLines.flatMap { _.split(" ") }
-words: org.apache.flink.api.scala.DataSet[String] = org.apache.flink.api.scala.DataSet@5876cd86
+val words = textLines.flatMap { _.split(" ") }
 
 //3.显示结果内容
-Scala-Flink> words.collect
-res1: Seq[String] = Buffer(
-this, is, a, good, job!, 
-you, can, do, a, lot, of, things!, 
+words.collect 
+```
+执行结果：
+```scale
+res48: Seq[String] = Buffer
+(this, is, a, good, job!, 
+you, can, do, a, lot, of, things!,
 flink, is, a, framework, for, bigdata.)
 ```
-shell中的执行效果：
-![](images/Snip20161118_101.png) 
 web ui中的执行效果：
 ![](images/Snip20161118_102.png)    
 
@@ -147,13 +133,6 @@ operations.
 ```
 执行程序：
 ```scale
-val input: DataSet[String] = benv.fromElements("zhangsan boy", "lisi is a girl so sex")
-
-val result=input.mapPartition{in => Some(in.size)}
-result.print()
-```
-程序解析：
-```scale
 //1.创建一个 DataSet其元素为String类型
 val input: DataSet[String] = benv.fromElements("zhangsan boy", "lisi is a girl so sex")
 
@@ -161,10 +140,12 @@ val input: DataSet[String] = benv.fromElements("zhangsan boy", "lisi is a girl s
 val result=input.mapPartition{in => Some(in.size)}
 
 //3.将结果显示出来
-result.print()
+result.collect
 ```
-shell中的执行效果：
-![](images/Snip20161114_95.png) 
+执行结果：
+```scale
+res49: Seq[Int] = Buffer(2)
+```
 web ui中的执行效果：
 ![](images/Snip20161114_96.png) 
 
@@ -178,50 +159,38 @@ a DataSet and retains only those elements for which the function returns true.
 ###filter示例一
 执行程序：
 ```scale
-val input: DataSet[String] = benv.fromElements("zhangsan boy", "lisi is a girl so sex","wangwu boy")
-val result=input.filter{_.contains("boy")} //也可以写成filter(_.contains("boy"))
-result.print()
-```
-程序解析：
-```scale
 //1.创建一个 DataSet其元素为String类型
 val input: DataSet[String] = benv.fromElements("zhangsan boy", "lisi is a girl so sex","wangwu boy")
 
 //2.过滤出包含'boy'字样的元素
-val result=input.filter{_.contains("boy")}
+val result=input.filter{_.contains("boy")} //也可以写成filter(_.contains("boy"))
 
 //3.将结果显示出来
-result.print()
+result.collect
 ```
-shell中的执行效果：
-![](images/Snip20161114_97.png) 
+执行结果：
+```scale
+res50: Seq[String] = Buffer(zhangsan boy, wangwu boy)
+``` 
 web ui中的执行效果：
 ![](images/Snip20161114_99.png) 
 
 ###filter示例二
 执行程序：
 ```scale
+//1.创建一个DataSet[Int]
 val intNumbers: DataSet[Int] =  benv.fromElements(2,4,6,2,3,7)
+
+//2.过滤偶数
 val naturalNumbers = intNumbers.filter { _ %2== 0 }
+
+//3.显示结果
 naturalNumbers.collect
 ```
 程序解析：
 ```scale
-//1.创建一个DataSet[Int]
-Scala-Flink> val intNumbers: DataSet[Int] =  benv.fromElements(2,4,6,2,3,7)
-intNumbers: org.apache.flink.api.scala.DataSet[Int] = org.apache.flink.api.scala.DataSet@95e8df8
-
-//2.过滤偶数
-Scala-Flink> val naturalNumbers = intNumbers.filter { _ %2== 0 }
-naturalNumbers: org.apache.flink.api.scala.DataSet[Int] = org.apache.flink.api.scala.DataSet@51645204
-
-//3.显示结果
-Scala-Flink> naturalNumbers.collect
-res6: Seq[Int] = Buffer(2, 4, 6, 2)
-
+res51: Seq[Int] = Buffer(2, 4, 6, 2)
 ```
-shell中的执行效果：
-![](images/Snip20161118_103.png) 
 web ui中的执行效果：
 ![](images/Snip20161118_104.png) 
 
@@ -270,8 +239,6 @@ b: org.apache.flink.api.scala.DataSet[String] = org.apache.flink.api.scala.DataS
 Scala-Flink> b.collect
 res8: Seq[String] = Buffer(zhangsan boy lisi girl)
 ```
-shell中的执行效果：
-![](images/Snip20161118_89.png) 
 web ui中的执行效果：
 ![](images/Snip20161118_94.png) 
 
@@ -291,26 +258,19 @@ with respect to all fields of the elements, or a subset of fields.
 ###distinct示例一，单一项目的去重
 执行程序：
 ```scale
-val input: DataSet[String] = benv.fromElements("lisi","zhangsan", "lisi","wangwu")
-val result=input.distinct()
-result.collect
-```
-程序解析：
-```scale
 //1.创建一个 DataSet其元素为String类型
-Scala-Flink> val input: DataSet[String] = benv.fromElements("lisi","zhangsan", "lisi","wangwu")
-input: org.apache.flink.api.scala.DataSet[String] = org.apache.flink.api.scala.DataSet@5e76aabc
+val input: DataSet[String] = benv.fromElements("lisi","zhangsan", "lisi","wangwu")
 
 //2.元素去重
-Scala-Flink> val result=input.distinct()
-result: org.apache.flink.api.scala.DataSet[String] = org.apache.flink.api.scala.DataSet@1f8e30a6
+val result=input.distinct()
 
 //3.显示结果
-Scala-Flink> result.collect
-res15: Seq[String] = Buffer(lisi, wangwu, zhangsan)
+result.collect
 ```
-shell中的执行效果：
-![](images/Snip20161118_98.png) 
+执行结果：
+```scale
+res52: Seq[String] = Buffer(lisi, wangwu, zhangsan)
+```
 web ui中的执行效果：
 ![](images/Snip20161118_97.png) 
 
@@ -318,63 +278,49 @@ web ui中的执行效果：
 
 执行程序：
 ```scale
+//1.创建DataSet[(Int, String, Double)] 
 val input: DataSet[(Int, String, Double)] =  benv.fromElements(
 (2,"zhagnsan",1654.5),(3,"lisi",2347.8),(2,"zhagnsan",1654.5),
 (4,"wangwu",1478.9),(5,"zhaoliu",987.3),(2,"zhagnsan",1654.0))
 
-val output = input.distinct()
-output.collect
-```
-程序解析：
-```scale
-//1.创建DataSet[(Int, String, Double)] 
-Scala-Flink> val input: DataSet[(Int, String, Double)] =  benv.fromElements(
-(2,"zhagnsan",1654.5),(3,"lisi",2347.8),(2,"zhagnsan",1654.5),
-(4,"wangwu",1478.9),(5,"zhaoliu",987.3),(2,"zhagnsan",1654.0))
-input: org.apache.flink.api.scala.DataSet[(Int, String, Double)] = 
-org.apache.flink.api.scala.DataSet@5a5b2829
-
 //2.元素去重
-Scala-Flink> val output = input.distinct()
-output: org.apache.flink.api.scala.DataSet[(Int, String, Double)] =
-org.apache.flink.api.scala.DataSet@1f70c1b8
+val output = input.distinct()
 
 //3.显示结果
-Scala-Flink> output.collect
-res12: Seq[(Int, String, Double)] = Buffer(
-(2,zhagnsan,1654.0), (2,zhagnsan,1654.5), 
-(3,lisi,2347.8), (4,wangwu,1478.9), (5,zhaoliu,987.3))
+output.collect
+```
+执行结果：
+```scale
+res53: Seq[(Int, String, Double)] = Buffer(
+(2,zhagnsan,1654.0), 
+(2,zhagnsan,1654.5), 
+(3,lisi,2347.8), 
+(4,wangwu,1478.9), 
+(5,zhaoliu,987.3))
 ```
 
 ###distinct示例三，多项目的去重，指定比较项目
 
 执行程序：
 ```scale
+//1.创建DataSet[(Int, String, Double)] 
 val input: DataSet[(Int, String, Double)] =  benv.fromElements(
 (2,"zhagnsan",1654.5),(3,"lisi",2347.8),(2,"zhagnsan",1654.5),
 (4,"wangwu",1478.9),(5,"zhaoliu",987.3),(2,"zhagnsan",1654.0))
 
-val output = input.distinct(0,1)
-output.collect
-```
-程序解析：
-```scale
-//1.创建DataSet[(Int, String, Double)] 
-Scala-Flink> val input: DataSet[(Int, String, Double)] =  benv.fromElements(
-     | (2,"zhagnsan",1654.5),(3,"lisi",2347.8),(2,"zhagnsan",1654.5),
-     | (4,"wangwu",1478.9),(5,"zhaoliu",987.3),(2,"zhagnsan",1654.0))
-input: org.apache.flink.api.scala.DataSet[(Int, String, Double)] = 
-org.apache.flink.api.scala.DataSet@2e139467
-
 //2.元素去重:指定比较第0和第1号元素
-Scala-Flink> val output = input.distinct(0,1)
-output: org.apache.flink.api.scala.DataSet[(Int, String, Double)] = 
-org.apache.flink.api.scala.DataSet@344e665a
+val output = input.distinct(0,1)
 
 //3.显示结果
-Scala-Flink> output.collect
-res15: Seq[(Int, String, Double)] = Buffer(
-(2,zhagnsan,1654.5), (3,lisi,2347.8), (4,wangwu,1478.9), (5,zhaoliu,987.3))
+output.collect
+```
+执行结果：
+```scale
+res54: Seq[(Int, String, Double)] = Buffer(
+(2,zhagnsan,1654.5),
+(3,lisi,2347.8), 
+(4,wangwu,1478.9), 
+(5,zhaoliu,987.3))
 ```
 
 ###distinct示例四，caseClass的去重，指定比较项目
@@ -459,28 +405,18 @@ web ui中的执行效果：
 
 执行程序：
 ```scale
+//1.创建DataSet[Int]
 val input: DataSet[Int] = benv.fromElements(3,-3,4,-4,6,-5,7)
 
+//2.根据表达式，本例中是根据元素的绝对值进行元素去重
 val output = input.distinct {x => Math.abs(x)}
-output.collect
-```
-程序解析：
-```scale
-Scala-Flink> output.collect
-res15: Seq[(Int, String, Double)] = Buffer(
-(2,zhagnsan,1654.5), (3,lisi,2347.8), (4,wangwu,1478.9), (5,zhaoliu,987.3))
-
-//1.创建DataSet[Int]
-Scala-Flink> val input: DataSet[Int] = benv.fromElements(3,-3,4,-4,6,-5,7)
-input: org.apache.flink.api.scala.DataSet[Int] = org.apache.flink.api.scala.DataSet@55ed46a
-
-//2.根据表达式，进行元素去重
-Scala-Flink> val output = input.distinct {x => Math.abs(x)}
-output: org.apache.flink.api.scala.DataSet[Int] = org.apache.flink.api.scala.DataSet@187272b0
 
 //3.显示结果
-Scala-Flink> output.collect
-res48: Seq[Int] = Buffer(3, 4, -5, 6, 7)
+output.collect
+```
+执行结果：
+```scale
+res55: Seq[Int] = Buffer(3, 4, -5, 6, 7)
 ```
 
 ---
@@ -493,42 +429,27 @@ pair of elements into arbitrarily many (including none) elements.
 ###join示例一：
 执行程序：
 ```scale
+//1.创建一个 DataSet其元素为[(Int,String)]类型
 val input1: DataSet[(Int, String)] =  benv.fromElements(
 (2,"zhagnsan"),(3,"lisi"),(4,"wangwu"),(5,"zhaoliu"))
 
+//2.创建一个 DataSet其元素为[(Double, Int)]类型
 val input2: DataSet[(Double, Int)] =  benv.fromElements(
 (1850.98,4),(1950.98,5),(2350.98,6),(3850.98,3))
 
-val result = input1.join(input2).where(0).equalTo(1)
-result.collect
-```
-程序解析：
-```scale
-//1.创建一个 DataSet其元素为[(Int,String)]类型
-Scala-Flink>val input1:DataSet[(Int,String)]=benv.fromElements(
-(2,"zhagnsan"),(3,"lisi"),(4,"wangwu"),(5,"zhaoliu"))
-input1: org.apache.flink.api.scala.DataSet[(Int, String)] = 
-org.apache.flink.api.scala.DataSet@1a7437d8
-
-//2.创建一个 DataSet其元素为[(Double, Int)]类型
-Scala-Flink> val input2: DataSet[(Double, Int)] = benv.fromElements(
-(1850.98,4),(1950.98,5),(2350.98,6),(3850.98,3))
-input2: org.apache.flink.api.scala.DataSet[(Double,Int)]=org.apache.flink.api.scala.DataSet@1ccce165
-
 //3.两个DataSet进行join操作，条件是input1(0)==input2(1)
-Scala-Flink> val result = input1.join(input2).where(0).equalTo(1)
-result: org.apache.flink.api.scala.JoinDataSet[(Int,String),(Double,Int)]=
-org.apache.flink.api.scala.JoinDataSet@3b3dc752
+val result = input1.join(input2).where(0).equalTo(1)
 
 //4.显示结果
-Scala-Flink> result.collect
-res0: Seq[((Int, String), (Double, Int))] = Buffer(
-((4,wangwu),(1850.98,4)),
+result.collect
+```
+执行结果：
+```scale
+res56: Seq[((Int, String), (Double, Int))] = Buffer(
+((4,wangwu),(1850.98,4)), 
 ((5,zhaoliu),(1950.98,5)), 
 ((3,lisi),(3850.98,3)))
 ```
-shell中的执行效果：
-![](images/Snip20161118_99.png) 
 web ui中的执行效果：
 ![](images/Snip20161118_100.png) 
 
@@ -546,49 +467,30 @@ key-selector functions and shows how to use a user-defined join function:
 
 执行程序：
 ```scale
+//1.定义case class
 case class Rating(name: String, category: String, points: Int)
+
+//2.定义DataSet[Rating]
 val ratings: DataSet[Rating] = benv.fromElements(
 Rating("moon","youny1",3),Rating("sun","youny2",4),
 Rating("cat","youny3",1),Rating("dog","youny4",5))
 
+//3.创建DataSet[(String, Double)] 
 val weights: DataSet[(String, Double)] = benv.fromElements(
 ("youny1",4.3),("youny2",7.2),
 ("youny3",9.0),("youny4",1.5))
 
+//4.使用方法进行join
 val weightedRatings = ratings.join(weights).where("category").equalTo(0) {
   (rating, weight) => (rating.name, rating.points + weight._2)
 }
 
+//5.显示结果
 weightedRatings.collect
 ```
 程序解析：
 ```scale
-//1.定义case class
-Scala-Flink> case class Rating(name: String, category: String, points: Int)
-defined class Rating
-
-//2.创建 DataSet[Rating]
-Scala-Flink> val ratings: DataSet[Rating] = benv.fromElements(
-     | Rating("moon","youny1",3),Rating("sun","youny2",4),
-     | Rating("cat","youny3",1),Rating("dog","youny4",5))
-ratings: org.apache.flink.api.scala.DataSet[Rating] = org.apache.flink.api.scala.DataSet@2fbd9785
-
-//3.创建DataSet[(String, Double)] 
-Scala-Flink> val weights: DataSet[(String, Double)] = benv.fromElements(
-     | ("youny1",4.3),("youny2",7.2),
-     | ("youny3",9.0),("youny4",1.5))
-weights: org.apache.flink.api.scala.DataSet[(String, Double)] = org.apache.flink.api.scala.DataSet@2a59c706
-
-//4.使用方法进行join
-Scala-Flink> val weightedRatings = ratings.join(weights).where("category").equalTo(0) {
-     |   (rating, weight) => (rating.name, rating.points + weight._2)
-     | }
-weightedRatings: org.apache.flink.api.scala.DataSet[(String, Double)] = org.apache.flink.api.scala.DataSet@7049e176
-
-//5.显示结果
-Scala-Flink> weightedRatings.collect
-res5: Seq[(String, Double)] = Buffer((moon,7.3), (sun,11.2), (cat,10.0), (dog,6.5))
-
+res57: Seq[(String, Double)] = Buffer((moon,7.3), (sun,11.2), (cat,10.0), (dog,6.5))
 ```
 web ui中的执行效果：
 ![](images/Snip20161119_1.png) 
