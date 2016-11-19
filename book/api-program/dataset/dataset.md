@@ -821,6 +821,33 @@ res41: Seq[(String, Int)] = Buffer((cat,1), (dog,5), (moon,3), (sun,4))
 3.拿第一个输入的第二个元素和第二个输入的每一个元素进行操作。
 3.直到遍历完第一个输入为止。
 ```
+###cross实例一：基本操作
+执行程序：
+```scale
+//1.定义 case class
+case class Coord(id: Int, x: Int, y: Int)
+
+//2.定义两个DataSet[Coord]
+val coords1: DataSet[Coord] = benv.fromElements(Coord(1,4,7),Coord(2,5,8),Coord(3,6,9))
+val coords2: DataSet[Coord] = benv.fromElements(Coord(10,40,70),Coord(20,50,80),Coord(30,60,90))
+
+//3.交叉两个DataSet[Coord]
+val result1 = coords1.cross(coords2)
+
+//4.显示结果
+result1.collect
+```
+执行结果：
+```
+res69: Seq[(Coord, Coord)] = Buffer(
+(Coord(1,4,7),Coord(10,40,70)), (Coord(2,5,8),Coord(10,40,70)), (Coord(3,6,9),Coord(10,40,70)), 
+(Coord(1,4,7),Coord(20,50,80)), (Coord(2,5,8),Coord(20,50,80)), (Coord(3,6,9),Coord(20,50,80)), 
+(Coord(1,4,7),Coord(30,60,90)), (Coord(2,5,8),Coord(30,60,90)), (Coord(3,6,9),Coord(30,60,90)))
+```
+web ui中的执行效果：
+![](images/Snip20161119_6.png) 
+
+###cross实例二：自定义操作
 执行程序：
 ```scale
 //1.定义 case class
@@ -847,12 +874,9 @@ res65: Seq[(Int, Int, Int)] = Buffer(
 (1,2,24), (2,2,26), (3,2,28), 
 (1,3,26), (2,3,28), (3,3,30))
 ```
-web ui中的执行效果：
-![](images/Snip20161119_6.png) 
 
 
 ##crossWithTiny
-
 ```
 暗示第二个输入较小的交叉。
 1.拿第一个输入的第一个元素和第二个输入的每一个元素进行操作。
@@ -888,7 +912,7 @@ web ui中的执行效果：
 
 ##crossWithHuge
 ```
-暗示第二个输入较小的交叉。
+暗示第二个输入较大的交叉。
 1.拿第一个输入的第一个元素和第二个输入的每一个元素进行操作。
 3.拿第一个输入的第二个元素和第二个输入的每一个元素进行操作。
 3.直到遍历完第一个输入为止。
@@ -902,7 +926,7 @@ case class Coord(id: Int, x: Int, y: Int)
 val coords1: DataSet[Coord] = benv.fromElements(Coord(1,4,7),Coord(2,5,8),Coord(3,6,9))
 val coords2: DataSet[Coord] = benv.fromElements(Coord(10,40,70),Coord(20,50,80),Coord(30,60,90))
 
-//3.交叉两个DataSet[Coord]，暗示第二个输入较小
+//3.交叉两个DataSet[Coord]，暗示第二个输入较大
 val result1 = coords1.crossWithHuge(coords2)
 
 //4.显示结果
