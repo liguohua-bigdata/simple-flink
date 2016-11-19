@@ -851,10 +851,75 @@ web ui中的执行效果：
 ![](images/Snip20161119_6.png) 
 
 
+##crossWithTiny
+
+```
+暗示第二个输入较小的交叉。
+1.拿第一个输入的第一个元素和第二个输入的每一个元素进行操作。
+3.拿第一个输入的第二个元素和第二个输入的每一个元素进行操作。
+3.直到遍历完第一个输入为止。
+```
+执行程序：
+```scale
+//1.定义 case class
+case class Coord(id: Int, x: Int, y: Int)
+
+//2.定义两个DataSet[Coord]
+val coords1: DataSet[Coord] = benv.fromElements(Coord(1,4,7),Coord(2,5,8),Coord(3,6,9))
+val coords2: DataSet[Coord] = benv.fromElements(Coord(10,40,70),Coord(20,50,80),Coord(30,60,90))
+
+//3.交叉两个DataSet[Coord]，暗示第二个输入较小
+val result1 = coords1.crossWithTiny(coords2)
+
+//4.显示结果
+result1.collect
+```
+执行结果：
+```
+res67: Seq[(Coord, Coord)] = Buffer(
+(Coord(1,4,7),Coord(10,40,70)), (Coord(1,4,7),Coord(20,50,80)), (Coord(1,4,7),Coord(30,60,90)),
+(Coord(2,5,8),Coord(10,40,70)), (Coord(2,5,8),Coord(20,50,80)), (Coord(2,5,8),Coord(30,60,90)), 
+(Coord(3,6,9),Coord(10,40,70)), (Coord(3,6,9),Coord(20,50,80)), (Coord(3,6,9),Coord(30,60,90)))
+```
+web ui中的执行效果：
+![](images/Snip20161119_8.png) 
+
+
+
+##crossWithHuge
+```
+暗示第二个输入较小的交叉。
+1.拿第一个输入的第一个元素和第二个输入的每一个元素进行操作。
+3.拿第一个输入的第二个元素和第二个输入的每一个元素进行操作。
+3.直到遍历完第一个输入为止。
+```
+执行程序：
+```scale
+//1.定义 case class
+case class Coord(id: Int, x: Int, y: Int)
+
+//2.定义两个DataSet[Coord]
+val coords1: DataSet[Coord] = benv.fromElements(Coord(1,4,7),Coord(2,5,8),Coord(3,6,9))
+val coords2: DataSet[Coord] = benv.fromElements(Coord(10,40,70),Coord(20,50,80),Coord(30,60,90))
+
+//3.交叉两个DataSet[Coord]，暗示第二个输入较小
+val result1 = coords1.crossWithHuge(coords2)
+
+//4.显示结果
+result1.collect
+```
+执行结果：
+```
+res68: Seq[(Coord, Coord)] = Buffer(
+(Coord(1,4,7),Coord(10,40,70)), (Coord(2,5,8),Coord(10,40,70)), (Coord(3,6,9),Coord(10,40,70)), 
+(Coord(1,4,7),Coord(20,50,80)), (Coord(2,5,8),Coord(20,50,80)), (Coord(3,6,9),Coord(20,50,80)), 
+(Coord(1,4,7),Coord(30,60,90)), (Coord(2,5,8),Coord(30,60,90)), (Coord(3,6,9),Coord(30,60,90)))
+```
+web ui中的执行效果：
+![](images/Snip20161119_9.png) 
+
 
 
 参考链接：  
 https://ci.apache.org/projects/flink/flink-docs-release-1.1/apis/batch/index.html
-https://ci.apache.org/projects/flink/flink-docs-release-1.1/apis/batch/dataset_transformations.html#join
-
 https://ci.apache.org/projects/flink/flink-docs-release-1.1/apis/batch/dataset_transformations.html#join
