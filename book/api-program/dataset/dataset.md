@@ -812,6 +812,49 @@ res41: Seq[(String, Int)] = Buffer((cat,1), (dog,5), (moon,3), (sun,4))
 ```
 
 
+
+##cross
+
+```
+交叉。
+1.拿第一个输入的第一个元素和第二个输入的每一个元素进行操作。
+3.拿第一个输入的第二个元素和第二个输入的每一个元素进行操作。
+3.直到遍历完第一个输入为止。
+```
+执行程序：
+```scale
+//1.定义 case class
+case class Coord(id: Int, x: Int, y: Int)
+
+//2.定义两个DataSet[Coord]
+val coords1: DataSet[Coord] = benv.fromElements(Coord(1,4,7),Coord(2,5,8),Coord(3,6,9))
+val coords2: DataSet[Coord] = benv.fromElements(Coord(1,4,7),Coord(2,5,8),Coord(3,6,9))
+
+//3.交叉两个DataSet[Coord]，使用自定义方法
+val r = coords1.cross(coords2) {
+  (c1, c2) =>{
+        val dist =(c1.x + c2.x) +(c1.y + c2.y)
+        (c1.id, c2.id, dist)
+    }
+}
+//4.显示结果
+r.collect
+```
+执行结果：
+```
+res65: Seq[(Int, Int, Int)] = Buffer(
+(1,1,22), (2,1,24), (3,1,26),
+(1,2,24), (2,2,26), (3,2,28), 
+(1,3,26), (2,3,28), (3,3,30))
+```
+web ui中的执行效果：
+![](images/Snip20161119_6.png) 
+
+
+
+
 参考链接：  
 https://ci.apache.org/projects/flink/flink-docs-release-1.1/apis/batch/index.html
+https://ci.apache.org/projects/flink/flink-docs-release-1.1/apis/batch/dataset_transformations.html#join
+
 https://ci.apache.org/projects/flink/flink-docs-release-1.1/apis/batch/dataset_transformations.html#join
