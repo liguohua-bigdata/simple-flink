@@ -8,7 +8,7 @@
 ###groupBy示例一：使用key-expressions 
 执行程序：
 ```scale
-//1.定义 case class
+//1.定义 class
 case class WC(val word: String, val count: Int) 
 
 //2.定义DataSet[WC]
@@ -50,6 +50,63 @@ wordCounts.collect
 ```
 res86: Seq[WC] = Buffer(WC(LISI,10), WC(WANGWU,3), WC(ZHAOLIU,7))
 ```
+
+
+###groupBy示例三：使用多个Case Class Fields
+执行程序：
+```scale
+//1.定义 case class
+case class Student(val name: String, addr: String, salary: Double)
+
+//2.定义DataSet[Student]
+val tuples:DataSet[Student] = benv.fromElements(
+Student("lisi","shandong",2400.00),Student("zhangsan","henan",2600.00),
+Student("lisi","shandong",2700.00),Student("lisi","guangdong",2800.00))
+
+//3.使用自定义的reduce方法,使用多个Case Class Fields name
+val reducedTuples1 = tuples.groupBy("name", "addr").reduce {
+  (s1, s2) => Student(s1.name+"-"+s2.name,s1.addr+"-"+s2.addr,s1.salary+s2.salary)
+}
+
+//4.使用自定义的reduce方法,使用多个Case Class Fields index
+val reducedTuples2 = tuples.groupBy(0, 1).reduce {
+  (s1, s2) => Student(s1.name+"-"+s2.name,s1.addr+"-"+s2.addr,s1.salary+s2.salary)
+}
+
+//5.使用自定义的reduce方法,name和index混用
+val reducedTuples3 = tuples.groupBy(0, 1).reduce {
+  (s1, s2) => Student(s1.name+"-"+s2.name,s1.addr+"-"+s2.addr,s1.salary+s2.salary)
+}
+
+
+//6.显示结果
+reducedTuples1.collect
+reducedTuples2.collect
+reducedTuples3.collect
+```
+执行结果：
+```
+Scala-Flink> reducedTuples1.collect
+res96: Seq[Student] = Buffer(
+Student(lisi,guangdong,2800.0),
+Student(lisi-lisi,shandong-shandong,5100.0), 
+Student(zhangsan,henan,2600.0))
+
+Scala-Flink> reducedTuples2.collect
+res97: Seq[Student] = Buffer(
+Student(lisi,guangdong,2800.0),
+Student(lisi-lisi,shandong-shandong,5100.0), 
+Student(zhangsan,henan,2600.0))
+
+Scala-Flink> reducedTuples3.collect
+res98: Seq[Student] = Buffer(
+Student(lisi,guangdong,2800.0),
+Student(lisi-lisi,shandong-shandong,5100.0), 
+Student(zhangsan,henan,2600.0))
+```
+web ui中的执行效果：
+![](images/Snip20161119_12.png) 
+
 
 
 
