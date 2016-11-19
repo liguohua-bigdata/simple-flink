@@ -955,7 +955,7 @@ res68: Seq[(Coord, Coord)] = Buffer(
 (Coord(1,4,7),Coord(30,60,90)), (Coord(2,5,8),Coord(30,60,90)), (Coord(3,6,9),Coord(30,60,90)))
 ```
 web ui中的执行效果：
-![](images/Snip20161119_9.png) 
+![](images/Snip20161119_10.png) 
 
 
 
