@@ -4,21 +4,23 @@
 ##print()方法    
 执行程序：
 ```scale
-val input: DataSet[String] = benv.fromElements("A", "B", "C", "D", "E", "F", "G", "H")
-
-input.print()
-```
-
-程序解析：
-```scale
 //1.创建一个 DataSet其元素为String类型
 val input: DataSet[String] = benv.fromElements("A", "B", "C", "D", "E", "F", "G", "H")
 
 //2.将DataSet的内容打印出来
 input.print()
 ```
-shell中的执行效果：
-![](images/Snip20161114_86.png) 
+执行结果：
+```scale
+A
+B
+C
+D
+E
+F
+G
+H
+```
 web ui中的执行效果：
 ![](images/Snip20161114_87.png) 
 
@@ -32,13 +34,6 @@ It implements a one-to-one mapping, that is, exactly one element must be returne
 ###map示例一  
 执行程序：
 ```scale
-val input: DataSet[Int] = benv.fromElements(23, 67, 18, 29, 32, 56, 4, 27)
-
-val result=input.map(_*2)
-result.print()
-```
-程序解析：
-```scale
 //1.创建一个DataSet其元素为Int类型
 val input: DataSet[Int] = benv.fromElements(23, 67, 18, 29, 32, 56, 4, 27)
 
@@ -46,38 +41,31 @@ val input: DataSet[Int] = benv.fromElements(23, 67, 18, 29, 32, 56, 4, 27)
 val result=input.map(_*2)
 
 //3.将DataSet中的每个元素输出出来
-result.print()
+result.collect
 ```
-shell中的执行效果：
-![](images/Snip20161114_91.png) 
+执行结果：
+```scale
+res47: Seq[Int] = Buffer(46, 134, 36, 58, 64, 112, 8, 54)
+```
 web ui中的执行效果：
 ![](images/Snip20161114_92.png)    
 
 ###map示例二
 执行程序：
 ```scale
+//1.创建一个DataSet[(Int, Int)] 
 val intPairs: DataSet[(Int, Int)] = benv.fromElements((18,4),(19,5),(23,6),(38,3))
 
-val intSums = intPairs.map { pair => pair._1 + pair._2 }
-intSums.collect
-```
-程序解析：
-```scale
-//1.创建一个DataSet[(Int, Int)] 
-Scala-Flink> val intPairs: DataSet[(Int, Int)] = benv.fromElements((18,4),(19,5),(23,6),(38,3))
-intPairs: org.apache.flink.api.scala.DataSet[(Int,Int)]=org.apache.flink.api.scala.DataSet@63f562b8
-
 //2.键值对的key+value之和生成新的dataset
-Scala-Flink> val intSums = intPairs.map { pair => pair._1 + pair._2 }
-intSums: org.apache.flink.api.scala.DataSet[Int] = org.apache.flink.api.scala.DataSet@5f0b3abb
+val intSums = intPairs.map { pair => pair._1 + pair._2 }
 
 //3.显示结果
-Scala-Flink> intSums.collect
-res7: Seq[Int] = Buffer(22, 24, 29, 41)
-
+intSums.collect
 ```
-shell中的执行效果：
-![](images/Snip20161118_105.png) 
+执行结果：
+```scale
+res44: Seq[Int] = Buffer(22, 24, 29, 41)
+```
 web ui中的执行效果：
 ![](images/Snip20161118_106.png)      
 
@@ -92,13 +80,6 @@ many result elements(including none) for each input element.
 ###flatMap示例一
 执行程序：
 ```scale
-val input: DataSet[String] = benv.fromElements("zhangsan boy", "lisi girl")
-
-val result=input.flatMap { _.split(" ") }
-result.print()
-```
-程序解析：
-```scale
 //1.创建一个 DataSet其元素为String类型
 val input: DataSet[String] = benv.fromElements("zhangsan boy", "lisi girl")
 
@@ -106,7 +87,11 @@ val input: DataSet[String] = benv.fromElements("zhangsan boy", "lisi girl")
 val result=input.flatMap { _.split(" ") }
 
 //3.将这组单词显示出来
-result.print()
+result.collect
+```
+执行结果：
+```scale
+res46: Seq[String] = Buffer(zhangsan, boy, lisi, girl)
 ```
 shell中的执行效果：
 ![](images/Snip20161114_88.png) 
