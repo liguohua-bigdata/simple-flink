@@ -724,32 +724,247 @@ res15: Seq[((Int, String), (Int, String))] = Buffer(
 暗示项说明：
 ```
 暗示有如下选项：
-1.OPTIMIZER_CHOOSES:
+1.JoinHint.OPTIMIZER_CHOOSES:
     没有明确暗示，让系统自行选择。
-2.BROADCAST_HASH_FIRST
+2.JoinHint.BROADCAST_HASH_FIRST
     把第一个输入转化成一个哈希表，并广播出去。适用于第一个输入数据较小的情况。
-3.BROADCAST_HASH_SECOND:
+3.JoinHint.BROADCAST_HASH_SECOND:
     把第二个输入转化成一个哈希表，并广播出去。适用于第二个输入数据较小的情况。
-4.REPARTITION_HASH_FIRST:（defalut）
+4.JoinHint.REPARTITION_HASH_FIRST:（defalut）
     1.如果输入没有分区，系统将把输入重分区。
     2.系统将把第一个输入转化成一个哈希表广播出去。
     3.两个输入依然比较大。
     4.适用于第一个输入小于第二个输入的情况。
-5.REPARTITION_HASH_SECOND:
+5.JoinHint.REPARTITION_HASH_SECOND:
     1.如果输入没有分区，系统将把输入重分区。
     2.系统将把第二个输入转化成一个哈希表广播出去。
     3.两个输入依然比较大。
     4.适用于第二个输入小于第一个输入的情况。
-6.REPARTITION_SORT_MERGE:
+6.JoinHint.REPARTITION_SORT_MERGE:
     1.如果输入没有分区，系统将把输入重分区。
     2.如果输入没有排序，系统将吧输入重排序。
     3.系统将合并两个排序好的输入。
     4.适用于一个或两个分区已经排序好的情况。
-    
- 
 ```
 
 
+
+##leftOuterJoin
+
+```
+左外连接。
+```
+###leftOuterJoin示例一
+执行程序：
+```scale
+//1.定义case class
+case class Rating(name: String, category: String, points: Int)
+
+//2.定义 DataSet[Rating]
+val ratings: DataSet[Rating] = benv.fromElements(
+Rating("moon","youny1",3),Rating("sun","youny2",4),
+Rating("cat","youny3",1),Rating("dog","youny4",5),Rating("tiger","youny4",5))
+
+//3.定义DataSet[(String, String)] 
+val movies: DataSet[(String, String)]  = benv.fromElements(
+("moon","ok"),("dog","good"),
+("cat","notbad"),("sun","nice"),("water","nice"))
+
+//4.两个dataset进行左外连接，指定方法
+val result1 = movies.leftOuterJoin(ratings).where(0).equalTo("name"){
+	(m, r) => (m._1, if (r == null) -1 else r.points)
+}
+
+//5.显示结果
+result1.collect
+```
+执行结果：
+```
+res26: Seq[(String, Int)] = Buffer((moon,3), (dog,5), (cat,1), (sun,4), (water,-1))
+```
+web ui中的执行效果：
+![](images/Snip20161119_3.png) 
+
+###leftOuterJoin示例二
+执行程序：
+```scale
+//1.定义case class
+case class Rating(name: String, category: String, points: Int)
+
+//2.定义 DataSet[Rating]
+val ratings: DataSet[Rating] = benv.fromElements(
+Rating("moon","youny1",3),Rating("sun","youny2",4),
+Rating("cat","youny3",1),Rating("dog","youny4",5),Rating("tiger","youny4",5))
+
+//3.定义DataSet[(String, String)] 
+val movies: DataSet[(String, String)]  = benv.fromElements(
+("moon","ok"),("dog","good"),
+("cat","notbad"),("sun","nice"),("water","nice"))
+
+//4.两个dataset进行左外连接，指定连接暗示，并指定连接方法
+val result1 = movies.leftOuterJoin(ratings, JoinHint.REPARTITION_SORT_MERGE).where(0).equalTo("name"){
+    (m, r) => (m._1, if (r == null) -1 else r.points)
+}
+
+//5.显示结果
+result1 .collect
+```
+执行结果：
+```
+res26: Seq[(String, Int)] = Buffer((cat,1), (dog,5), (moon,3), (sun,4), (water,-1))
+```
+暗示项目说明：
+```
+左外连接支持以下项目：
+    JoinHint.OPTIMIZER_CHOOSES
+    JoinHint.BROADCAST_HASH_SECOND
+    JoinHint.REPARTITION_HASH_SECOND
+    JoinHint.REPARTITION_SORT_MERGE
+```
+
+
+
+
+##rightOuterJoin
+
+```
+右外连接
+```
+###rightOuterJoin示例一
+执行程序：
+```scale
+//1.定义DataSet[(String, String)] 
+val movies: DataSet[(String, String)]  = benv.fromElements(
+("moon","ok"),("dog","good"),
+("cat","notbad"),("sun","nice"))
+
+//2.定义 DataSet[Rating]
+case class Rating(name: String, category: String, points: Int)
+val ratings: DataSet[Rating] = benv.fromElements(
+Rating("moon","youny1",3),Rating("sun","youny2",4),
+Rating("cat","youny3",1),Rating("dog","youny4",5))
+
+//3.两个dataset进行左外连接，指定连接方法
+val result1 = movies.rightOuterJoin(ratings).where(0).equalTo("name"){
+	(m, r) => (m._1, if (r == null) -1 else r.points)
+}
+
+//5.显示结果
+result1.collect
+```
+执行结果：
+```
+res33: Seq[(String, Int)] = Buffer((moon,3), (sun,4), (cat,1), (dog,5))
+```
+web ui中的执行效果：
+![](images/Snip20161119_4.png) 
+###rightOuterJoin示例二
+
+执行程序：
+```scale
+//1.定义DataSet[(String, String)] 
+val movies: DataSet[(String, String)]  = benv.fromElements(
+("moon","ok"),("dog","good"),
+("cat","notbad"),("sun","nice"))
+
+//2.定义 DataSet[Rating]
+case class Rating(name: String, category: String, points: Int)
+val ratings: DataSet[Rating] = benv.fromElements(
+Rating("moon","youny1",3),Rating("sun","youny2",4),
+Rating("cat","youny3",1),Rating("dog","youny4",5))
+
+//3.两个dataset进行左外连接，暗示连接方式，指定连接方法
+val result1 = movies.rightOuterJoin(ratings,JoinHint.BROADCAST_HASH_FIRST).where(0).equalTo("name"){
+	(m, r) => (m._1, if (r == null) -1 else r.points)
+}
+
+//5.显示结果
+result1.collect
+```
+执行结果：
+```
+res34: Seq[(String, Int)] = Buffer((moon,3), (sun,4), (cat,1), (dog,5))
+```
+暗示项目说明：
+```
+左外连接支持以下项目：
+    JoinHint.OPTIMIZER_CHOOSES
+    JoinHint.BROADCAST_HASH_FIRST
+    JoinHint.REPARTITION_HASH_FIRST
+    JoinHint.REPARTITION_SORT_MERGE
+```
+
+
+
+
+##fullOuterJoin
+
+```
+全外连接
+```
+###fullOuterJoin示例一
+执行程序：
+```scale
+//1.定义DataSet[(String, String)] 
+val movies: DataSet[(String, String)]  = benv.fromElements(
+("moon","ok"),("dog","good"),
+("cat","notbad"),("sun","nice"))
+
+//2.定义 DataSet[Rating]
+case class Rating(name: String, category: String, points: Int)
+val ratings: DataSet[Rating] = benv.fromElements(
+Rating("moon","youny1",3),Rating("sun","youny2",4),
+Rating("cat","youny3",1),Rating("dog","youny4",5))
+
+//3.两个dataset进行全外连接，指定连接方法
+val result1 = movies.fullOuterJoin(ratings).where(0).equalTo("name"){
+	(m, r) => (m._1, if (r == null) -1 else r.points)
+}
+
+//5.显示结果
+result1.collect
+```
+执行结果：
+```
+res33: Seq[(String, Int)] = Buffer((moon,3), (sun,4), (cat,1), (dog,5))
+```
+web ui中的执行效果：
+![](images/Snip20161119_5.png) 
+###rightOuterJoin示例二
+
+执行程序：
+```scale
+//1.定义DataSet[(String, String)] 
+val movies: DataSet[(String, String)]  = benv.fromElements(
+("moon","ok"),("dog","good"),
+("cat","notbad"),("sun","nice"))
+
+//2.定义 DataSet[Rating]
+case class Rating(name: String, category: String, points: Int)
+val ratings: DataSet[Rating] = benv.fromElements(
+Rating("moon","youny1",3),Rating("sun","youny2",4),
+Rating("cat","youny3",1),Rating("dog","youny4",5))
+
+//3.两个dataset进行全外连接，指定连接方法
+val result1 = movies.fullOuterJoin(ratings,JoinHint.REPARTITION_SORT_MERGE).where(0).equalTo("name"){
+	(m, r) => (m._1, if (r == null) -1 else r.points)
+}
+
+//5.显示结果
+result1.collect
+```
+执行结果：
+```
+res41: Seq[(String, Int)] = Buffer((cat,1), (dog,5), (moon,3), (sun,4))
+```
+暗示项目说明：
+```
+左外连接支持以下项目：
+    JoinHint.OPTIMIZER_CHOOSES
+    JoinHint.BROADCAST_HASH_FIRST
+    JoinHint.REPARTITION_HASH_FIRST
+    JoinHint.REPARTITION_SORT_MERGE
+```
 
 
 参考链接：  
