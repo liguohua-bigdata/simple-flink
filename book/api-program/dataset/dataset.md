@@ -498,11 +498,6 @@ Scala-Flink> output.collect
 res48: Seq[Int] = Buffer(3, 4, -5, 6, 7)
 ```
 
-
-
-
-
-
 ---
 ##join
 ```
@@ -510,7 +505,7 @@ Joins two data sets by creating all pairs of elements that are equal on their ke
 a JoinFunction to turn the pair of elements into a single element, or a FlatJoinFunction to turn the
 pair of elements into arbitrarily many (including none) elements. 
 ```
-
+###join示例一：
 执行程序：
 ```scale
 val input1: DataSet[(Int, String)] =  benv.fromElements(
@@ -553,6 +548,65 @@ web ui中的执行效果：
 ![](images/Snip20161118_100.png) 
 
 
+###join示例二：
+```
+A Join transformation can also call a user-defined join function to process joining tuples. 
+A join function receives one element of the first input DataSet and one element of the second 
+input DataSet and returns exactly one element.
+
+The following code performs a join of DataSet with custom java objects and a Tuple DataSet using 
+key-selector functions and shows how to use a user-defined join function:
+```
+
+
+执行程序：
+```scale
+case class Rating(name: String, category: String, points: Int)
+val ratings: DataSet[Rating] = benv.fromElements(
+Rating("moon","youny1",3),Rating("sun","youny2",4),
+Rating("cat","youny3",1),Rating("dog","youny4",5))
+
+val weights: DataSet[(String, Double)] = benv.fromElements(
+("youny1",4.3),("youny2",7.2),
+("youny3",9.0),("youny4",1.5))
+
+val weightedRatings = ratings.join(weights).where("category").equalTo(0) {
+  (rating, weight) => (rating.name, rating.points + weight._2)
+}
+
+weightedRatings.collect
+```
+程序解析：
+```scale
+//1.定义case class
+Scala-Flink> case class Rating(name: String, category: String, points: Int)
+defined class Rating
+
+//2.创建 DataSet[Rating]
+Scala-Flink> val ratings: DataSet[Rating] = benv.fromElements(
+     | Rating("moon","youny1",3),Rating("sun","youny2",4),
+     | Rating("cat","youny3",1),Rating("dog","youny4",5))
+ratings: org.apache.flink.api.scala.DataSet[Rating] = org.apache.flink.api.scala.DataSet@2fbd9785
+
+//3.创建DataSet[(String, Double)] 
+Scala-Flink> val weights: DataSet[(String, Double)] = benv.fromElements(
+     | ("youny1",4.3),("youny2",7.2),
+     | ("youny3",9.0),("youny4",1.5))
+weights: org.apache.flink.api.scala.DataSet[(String, Double)] = org.apache.flink.api.scala.DataSet@2a59c706
+
+//4.使用方法进行join
+Scala-Flink> val weightedRatings = ratings.join(weights).where("category").equalTo(0) {
+     |   (rating, weight) => (rating.name, rating.points + weight._2)
+     | }
+weightedRatings: org.apache.flink.api.scala.DataSet[(String, Double)] = org.apache.flink.api.scala.DataSet@7049e176
+
+//5.显示结果
+Scala-Flink> weightedRatings.collect
+res5: Seq[(String, Double)] = Buffer((moon,7.3), (sun,11.2), (cat,10.0), (dog,6.5))
+
+```
+web ui中的执行效果：
+![](images/Snip20161119_1.png) 
 
 参考链接：  
 https://ci.apache.org/projects/flink/flink-docs-release-1.1/apis/batch/index.html
