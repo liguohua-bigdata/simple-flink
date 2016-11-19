@@ -959,6 +959,94 @@ web ui中的执行效果：
 
 
 
+##CoGroup？？？
+ 
+ 
+
+##Union
+```
+合并多个DataSet。
+```
+执行程序：
+```scale
+//1.定义 case class
+case class Student(val name: String, addr: String, salary: Double)
+
+//2.定义三个DataSet[Student]
+val tuples1 = benv.fromElements(
+Student("lisi-1","shandong",2400.00),Student("zhangsan-1","henan",2600.00))
+
+val tuples2 = benv.fromElements(
+Student("lisi-2","shandong",2400.00),Student("zhangsan-2","henan",2600.00))
+
+val tuples3 = benv.fromElements(
+Student("lisi-3","shandong",2400.00),Student("zhangsan-3","henan",2600.00))
+
+//3.将三个DataSet合并起来
+val unioned = tuples1.union(tuples2).union(tuples3)
+
+//4.显示结果
+unioned.collect
+
+```
+执行结果：
+```
+res113: Seq[Student] = Buffer(
+Student(lisi-1,shandong,2400.0), Student(zhangsan-1,henan,2600.0), 
+Student(lisi-2,shandong,2400.0), Student(zhangsan-2,henan,2600.0), 
+Student(lisi-3,shandong,2400.0), Student(zhangsan-3,henan,2600.0))
+```
+web ui中的执行效果：
+![](images/Snip20161119_14.png) 
+
+
+
+##First-n
+```
+取前n个元素
+```
+执行程序：
+```scale
+//1.定义 case class
+case class Student(val name: String, addr: String, salary: Double)
+
+//2.定义DataSet[Student]
+val in: DataSet[Student] = benv.fromElements(
+Student("lisi","shandong",2400.00),Student("zhangsan","hainan",2600.00),
+Student("wangwu","shandong",2400.00),Student("zhaoliu","hainan",2600.00),
+Student("xiaoqi","guangdong",2400.00),Student("xiaoba","henan",2600.00))
+
+//3.取前2个元素
+val out1 = in.first(2)
+out1.collect
+
+val out2 = in.groupBy(0).first(2)
+out2.collect
+
+val out3 = in.groupBy(0).sortGroup(1, Order.ASCENDING).first(3)
+out3.collect
+```
+执行结果：
+```
+Scala-Flink> out1.collect
+res126: Seq[Student] = Buffer(
+Student(lisi,shandong,2400.0), Student(zhangsan,hainan,2600.0))
+
+Scala-Flink> out2.collect
+res127: Seq[Student] = Buffer(
+Student(lisi,shandong,2400.0), Student(wangwu,shandong,2400.0), Student(xiaoba,henan,2600.0),
+Student(xiaoqi,guangdong,2400.0), Student(zhangsan,hainan,2600.0), Student(zhaoliu,hainan,2600.0))
+
+Scala-Flink> out3.collect
+res128: Seq[Student] = Buffer(
+Student(lisi,shandong,2400.0), Student(wangwu,shandong,2400.0), Student(xiaoba,henan,2600.0),
+Student(xiaoqi,guangdong,2400.0), Student(zhangsan,hainan,2600.0), Student(zhaoliu,hainan,2600.0))
+
+```
+
+
+
+
 
 
 参考链接：  
