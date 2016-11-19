@@ -696,6 +696,9 @@ res13: Seq[((Int, String), (Int, String))] = Buffer(
 web ui中的执行效果：
 ![](images/Snip20161119_2.png) 
 
+
+
+
 参考链接：  
 https://ci.apache.org/projects/flink/flink-docs-release-1.1/apis/batch/index.html
 https://ci.apache.org/projects/flink/flink-docs-release-1.1/apis/batch/dataset_transformations.html#join
