@@ -642,12 +642,10 @@ weightedRatings.collect
 
 
 
-###join示例四：Join with DataSet Size Hint
+###join示例四：执行join操作时暗示数据大小
 ```
-In order to guide the optimizer to pick the right execution strategy, you can hint the size of a DataSet to join as shown here:
+在执行join操作时暗示数据大小，可以帮助flink优化它的执行策略，提高执行效率。
 ```
-
-
 执行程序：
 ```scale
 val input1: DataSet[(Int, String)] = 
@@ -695,6 +693,61 @@ res13: Seq[((Int, String), (Int, String))] = Buffer(
 ```
 web ui中的执行效果：
 ![](images/Snip20161119_2.png) 
+
+
+###join示例五：执行join操作时暗示数据大小
+```
+flink有很多种执行join的策略，你可以指定一个执行策略，以便提高执行效率。
+```
+执行程序：
+```scale
+//1.定义两个 DataSet
+val input1: DataSet[(Int, String)] = 
+benv.fromElements((3,"zhangsan"),(2,"lisi"),(4,"wangwu"),(6,"zhaoliu"))
+val input2: DataSet[(Int, String)] = 
+benv.fromElements((4000,"zhangsan"),(70000,"lisi"),(4600,"wangwu"),(53000,"zhaoliu"))
+
+//2.暗示input2很小
+val result1 = input1.join(input2, JoinHint.BROADCAST_HASH_FIRST).where(1).equalTo(1)
+
+//3.显示结果
+result1.collect
+```
+执行结果：
+```
+res15: Seq[((Int, String), (Int, String))] = Buffer(
+((3,zhangsan),(4000,zhangsan)),
+((2,lisi),(70000,lisi)), 
+((4,wangwu),(4600,wangwu)),
+((6,zhaoliu),(53000,zhaoliu)))
+```
+暗示项说明：
+```
+暗示有如下选项：
+1.OPTIMIZER_CHOOSES:
+    没有明确暗示，让系统自行选择。
+2.BROADCAST_HASH_FIRST
+    把第一个输入转化成一个哈希表，并广播出去。适用于第一个输入数据较小的情况。
+3.BROADCAST_HASH_SECOND:
+    把第二个输入转化成一个哈希表，并广播出去。适用于第二个输入数据较小的情况。
+4.REPARTITION_HASH_FIRST:（defalut）
+    1.如果输入没有分区，系统将把输入重分区。
+    2.系统将把第一个输入转化成一个哈希表广播出去。
+    3.两个输入依然比较大。
+    4.适用于第一个输入小于第二个输入的情况。
+5.REPARTITION_HASH_SECOND:
+    1.如果输入没有分区，系统将把输入重分区。
+    2.系统将把第二个输入转化成一个哈希表广播出去。
+    3.两个输入依然比较大。
+    4.适用于第二个输入小于第一个输入的情况。
+6.REPARTITION_SORT_MERGE:
+    1.如果输入没有分区，系统将把输入重分区。
+    2.如果输入没有排序，系统将吧输入重排序。
+    3.系统将合并两个排序好的输入。
+    4.适用于一个或两个分区已经排序好的情况。
+    
+ 
+```
 
 
 
