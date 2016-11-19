@@ -535,43 +535,29 @@ weightedRatings.collect
 ```
 执行程序：
 ```scale
+//1.定义DataSet[(Int, String)]
 val input1: DataSet[(Int, String)] = 
 benv.fromElements((3,"zhangsan"),(2,"lisi"),(4,"wangwu"),(6,"zhaoliu"))
 
+//2.定义 DataSet[(Int, String)]
 val input2: DataSet[(Int, String)] = 
 benv.fromElements((4000,"zhangsan"),(70000,"lisi"),(4600,"wangwu"),(53000,"zhaoliu"))
 
-// hint that the second DataSet is very small
+// 3.暗示第二个输入很小
 val result1 = input1.joinWithTiny(input2).where(1).equalTo(1)
 result1.collect
 
-// hint that the second DataSet is very large
+// 4.暗示第二个输入很大
 val result2 = input1.joinWithHuge(input2).where(1).equalTo(1)
 result2.collect
 ```
-
+执行结果：
 ```
-//1.定义两个 DataSet
-Scala-Flink> val input1: DataSet[(Int, String)] =
-     | benv.fromElements((3,"zhangsan"),(2,"lisi"),(4,"wangwu"),(6,"zhaoliu"))
-input1: org.apache.flink.api.scala.DataSet[(Int, String)] = org.apache.flink.api.scala.DataSet@5accd405
-
-Scala-Flink> val input2: DataSet[(Int, String)] =
-     | benv.fromElements((4000,"zhangsan"),(70000,"lisi"),(4600,"wangwu"),(53000,"zhaoliu"))
-input2: org.apache.flink.api.scala.DataSet[(Int, String)] = org.apache.flink.api.scala.DataSet@519a0a93
-
-//2.join 并提示input2比较小
-Scala-Flink> val result1 = input1.joinWithTiny(input2).where(1).equalTo(1)
-result1:org.apache.flink.api.scala.JoinDataSet[(Int,String),(Int,String)]=org.apache.flink.api.scala.JoinDataSet@40f3a46f
-
 Scala-Flink> result1.collect
 res12: Seq[((Int, String), (Int, String))] = Buffer(
 ((3,zhangsan),(4000,zhangsan)), ((2,lisi),(70000,lisi)), 
 ((4,wangwu),(4600,wangwu)), ((6,zhaoliu),(53000,zhaoliu)))
 
-//3.join 并提示input2比较大
-Scala-Flink> val result2 = input1.joinWithHuge(input2).where(1).equalTo(1)
-result2:org.apache.flink.api.scala.JoinDataSet[(Int,String),(Int,String)]=org.apache.flink.api.scala.JoinDataSet@2f51ce2a
 
 Scala-Flink> result2.collect
 res13: Seq[((Int, String), (Int, String))] = Buffer(
@@ -709,9 +695,6 @@ res26: Seq[(String, Int)] = Buffer((cat,1), (dog,5), (moon,3), (sun,4), (water,-
     JoinHint.REPARTITION_SORT_MERGE
 ```
 
-
-
-
 ##rightOuterJoin
 
 ```
@@ -781,9 +764,6 @@ res34: Seq[(String, Int)] = Buffer((moon,3), (sun,4), (cat,1), (dog,5))
     JoinHint.REPARTITION_SORT_MERGE
 ```
 
-
-
-
 ##fullOuterJoin
 
 ```
@@ -817,8 +797,8 @@ res33: Seq[(String, Int)] = Buffer((moon,3), (sun,4), (cat,1), (dog,5))
 ```
 web ui中的执行效果：
 ![](images/Snip20161119_5.png) 
-###rightOuterJoin示例二
 
+###rightOuterJoin示例二
 执行程序：
 ```scale
 //1.定义DataSet[(String, String)] 
