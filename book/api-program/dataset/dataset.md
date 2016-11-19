@@ -653,7 +653,8 @@ val movies: DataSet[(String, String)]  = benv.fromElements(
 ("cat","notbad"),("sun","nice"),("water","nice"))
 
 //4.两个dataset进行左外连接，指定连接暗示，并指定连接方法
-val result1 = movies.leftOuterJoin(ratings, JoinHint.REPARTITION_SORT_MERGE).where(0).equalTo("name"){
+val result1 = movies.leftOuterJoin(ratings, JoinHint.REPARTITION_SORT_MERGE)
+.where(0).equalTo("name"){
     (m, r) => (m._1, if (r == null) -1 else r.points)
 }
 
