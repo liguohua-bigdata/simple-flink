@@ -1020,11 +1020,11 @@ Student("xiaoqi","guangdong",2400.00),Student("xiaoba","henan",2600.00))
 val out1 = in.first(2)
 out1.collect
 
-//3.取前2个元素
+//3.取前2个元素 ???
 val out2 = in.groupBy(0).first(2)
 out2.collect
 
-//3.取前3个元素
+//3.取前3个元素 ???
 val out3 = in.groupBy(0).sortGroup(1, Order.ASCENDING).first(3)
 out3.collect
 ```
