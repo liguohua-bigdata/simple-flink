@@ -1,7 +1,7 @@
 ##《flink简介》
 ```
 flink早在2008年就是德国柏林理工大学一个研究性项目，在2014被Apache孵化器所接受，
-然后迅速地成为了ASFApache Software Foundation的顶级项目。
+然后迅速地成为了ASF(Apache Software Foundation)的顶级项目。
 ```
 ###1.官方网站
 ```
