@@ -1,6 +1,6 @@
 ##一、基于JVM的大数据生态圈
 ###1.bigdata on jvm
-![](images/Snip20161120_2.png) 
+![](images/Snip20161120_3.png) 
 ```
 1.现在大多数开源大数据处理框架都是基于jvm的，像 Apache Hadoop,Apache Spark,Apache Hbase,
   Apache Kafka,Apache Flink等。
