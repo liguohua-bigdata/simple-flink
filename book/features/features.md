@@ -9,3 +9,10 @@
 ```
 
 
+2.支持Event-Time 和乱序-Event
+![](images/out_of_order_stream.png) 
+```
+1.flink支持流处理
+2.flink支持在Event-Time上的窗口处理
+3.因为有Event-Time做保障，即使消息乱序或延时也能轻松应对。
+```
