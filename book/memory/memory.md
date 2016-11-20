@@ -1,4 +1,3 @@
-#flink的内存管理机制
 ##一、基于JVM的大数据生态圈
 ###1.bigdata on jvm
 ```
