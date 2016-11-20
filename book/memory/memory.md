@@ -109,7 +109,7 @@ GenericTypeInfo: 任意无法匹配之前几种类型的类。
 2.这些操作都是基于flink的数据内存和引用内存分开存储的方式进行操作的。
 ```
 以sort为例：  
-![](images/data-serialization.china.png) 
+![](images/sort-demo.png) 
 
 ```
 1.Flink从MemoryManager申请一批MemorySegment，作为sort-buffer，用来存放排序的数据。
