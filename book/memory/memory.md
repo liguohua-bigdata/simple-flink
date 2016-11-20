@@ -68,7 +68,7 @@ public class Person {
 }
 ```
 它将被序列化为下面的形式:  
-![](images/data-serialization.png) 
+![](images/data-serialization.china.png) 
 ```
 可见这种序列化方式存储密度是相当紧凑的。其中int占4字节，double占8字节，POJO多个一个字节的header，
 PojoSerializer只负责将header序列化进去，并委托每个字段对应的serializer对字段进行序列化。
@@ -99,6 +99,37 @@ GenericTypeInfo: 任意无法匹配之前几种类型的类。
 3.对于 Tuple、CaseClass、POJO 等组合类型，其TypeSerializer和TypeComparator也是组合的，
   序列化和比较时会委托给对应的serializers和comparators
 ```
+
+
+
+###5.flink采用数据和引用分开存储的方式操作数据
+
+```
+1.flink提供大量的api,有些sql-api或sort，group，join等操作牵涉到大量的数据，使用大量内存。
+2.这些操作都是基于flink的数据内存和引用内存分开存储的方式进行操作的。
+```
+以sort为例：  
+![](images/data-serialization.china.png) 
+
+```
+1.Flink从MemoryManager申请一批MemorySegment，作为sort-buffer，用来存放排序的数据。
+2.sort-buffer分成两块
+  一块用来存放所有对象完整的二进制数据。
+  一块用来存放指向完整二进制数据的引用。
+  引用由指针(pointer)定长的序列化后的键（key）组成，ref=point+key
+3.当一个对象要加到 sort-buffer时，它的binary-data会被加到第一个区域，ref=(piont+key)会被加到第二个区域。
+4.执行比较时，如果有binary-key直接通过偏移量操作binary-key.如果没有binary-key那只能序列化整个对象再进行比较。
+5.执行交互时，只需交互ref,不需要交互binary-data.
+6.访问数据时，只需沿着排好序的ref=key+pointer区域顺序访问，通过pointer找到对应的真实数据.
+```
+
+```
+ref=point+key，将key和point分开存储的动机是：
+1.point指向真实数据块，
+2.key用来做基于key的诸如compare等操作，
+3.key是连续存储的，这样能提高cpu的缓存命中率，加快CPU访问数据。
+```
+
 
 
 
