@@ -177,12 +177,17 @@ flinK为支持各种计算场景提供了相应的高层api
     6.提供FlinkML API来支持机器学习场景
     
 ```
-![](images/flink-stack-frontpage.png) 
+flink的软件栈  
+![](images/flink-stack-frontpage.png)   
+
+spark的软件栈  
+![](images/spark-stack.png)   
 ```
 注意：
     1.在高层api方面，flink和spark几乎一样都覆盖了大多数的大数据处理场景。
     2.由于发展的原因spark在API方面要超出flink，这方面flink也在大力发展。
 ```
+
 
 ##四、flink的生态系统
 ![](images/ecosystem_logos.png) 
