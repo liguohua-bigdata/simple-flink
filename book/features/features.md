@@ -22,3 +22,11 @@
 1.flink支持自定义状态
 2.flink的checkpoint机制保障即便在failure的情况下Stateful-data的Exactly-once处理方式。
 ```
+  
+  
+4.支持高度灵活的窗口操作
+![](images/windows-2.png) 
+```
+1.flink支持time-Window，count-window, session-window,data-window等多种窗口操作。
+2.flink支持多种触发窗口操作的条件，以便应对各种流处理的情况。
+```
