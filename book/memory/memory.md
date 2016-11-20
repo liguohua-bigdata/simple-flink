@@ -61,9 +61,13 @@ Java对象的存储密度叫低，现在大量数据都是二进制的表示形�
 ###4.flink量身打造序列化方案
 ```
 假设有一个Tuple3<Integer, Double, Person> 类型POJO它将被序列化为下面的形式。
+可见这种序列化方式存储密度是相当紧凑的。其中int占4字节，double占8字节，POJO多个一个字节的header，
+PojoSerializer只负责将header序列化进去，并委托每个字段对应的serializer对字段进行序列化。
 ```
 ![](images/data-serialization.png) 
 ```
+
+
 1.Java生态圈提供了许多序列化框架诸如Java serialization, Kryo, Apache Avro等等。
 2.flink中处理的数据流通常是同一类型,对象的类型是固定，可以对整个数据流只保存一份对象Schema信息，这将大大节省存储空间
 3.由于类型固定，当我们需要访问某个对象成员变量的时候，可以通过偏移量直接存取，并不需要反序列化整个Java对象。
