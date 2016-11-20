@@ -72,8 +72,8 @@ Java对象的存储密度叫低，现在大量数据都是二进制的表示形�
   如果是Java程序，通过Java Reflection分析UDF (User Define Function)的返回值类型确定数据类型。
   如果是Scala程序，通过Scala Compiler分析UDF (User Define Function)的返回值类型确定数据类型。
 ```
-```
 类型信息由 TypeInformation 类表示，TypeInformation 支持以下几种类型：
+```
 BasicTypeInfo: 任意Java 基本类型（装箱的）或 String 类型。
 BasicArrayTypeInfo: 任意Java基本类型数组（装箱的）或 String 数组。
 WritableTypeInfo: 任意 Hadoop Writable 接口的实现类。
