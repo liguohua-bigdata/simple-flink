@@ -62,10 +62,14 @@ Java对象的存储密度叫低，现在大量数据都是二进制的表示形�
 ###4.flink量身打造序列化方案   
 假设有一个Tuple3<Integer, Double, Person> 类型POJO
 ```
+
+//1.Person类型
 public class Person {
     public int id;
     public String name;
 }
+//Tuple3<age:Integer, height:Double, Person>对象
+(25,175.5,Person(1,"zhangsan"))
 ```
 它将被序列化为下面的形式:  
 ![](images/data-serialization.china.png) 
