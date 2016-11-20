@@ -48,7 +48,7 @@
 ##二、流处理，批处理合二为一
 
 ###1.同一个运行时环境，同时支持流处理，批处理
-![](images/streaming_performance.png) 
+![](images/one_runtime.png) 
 ```
 1.flink的一套runtime环境，统一了流处理，批处理，两大业务场景
 2.flink本质是一个流处理系统，同时它将批处理看出特殊的流处理，因此也能应付批处理的场景
