@@ -93,15 +93,30 @@ spark和Hadoop的迭代计算都是在driver端由用户自己实现的，flink�
 
 ##三、类库和API
 
-###1.同一个运行时环境，同时支持流处理，批处理
-![](images/streaming_performance.png) 
-```
-1.flink的一套runtime环境，统一了流处理，批处理，两大业务场景
-2.flink本质是一个流处理系统，同时它将批处理看出特殊的流处理，因此也能应付批处理的场景
+###1.流处理程序
 
-注意：
-1.这与spark相反，spark本质是一个批处理系统，它将流处理看成特殊的批处理的。
-2.spark-streaming本质是mirc-batch，无论多么mirc依然是batch,因此延时较大。
-3.spark的本质是批处理，它将流处理看出无边界的批处理
-4.flink的本质是流处理，它将批处理看出有边界的流处理。
+```
+flink的 DataStream API在流处理的业务场景下，支持多种数据转换，支持用户自定义状态的操作，支持灵活的窗口操作！
+```
+
+示例程序：  
+```scala
+
+//1.定义case class
+case class Word(word: String, freq: Long)
+
+//2.定义数据源
+val texts: DataStream[String] = ...
+
+//3.支持数据的流操作
+val counts = text
+  .flatMap { line => line.split("\\W+") }
+  .map { token => Word(token, 1) }
+  .keyBy("word")
+  .timeWindow(Time.seconds(5), Time.seconds(1))
+  .sum("freq")
+```
+程序说明：
+```
+以上程序演示了如何在一个数据流上，对源源不断流入的消息进行一个word-count操作！
 ```
