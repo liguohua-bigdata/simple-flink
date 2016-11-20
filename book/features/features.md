@@ -36,3 +36,10 @@
 1.flink支持long-live流处理。
 2.flink支持slow-sinks背压fast-sources,以保障流处理的不间断
 ```
+
+###6.通过轻量级分布式Snapshot机制支持Fault-tolerance
+![](images/distributed_snapshots.png) 
+```
+1.flink支持Chandy-Lamport轻量级分布式快照来保障容错处理
+2.Chandy-Lamport快照是轻量级的，在保障强一致性的同时，不影响其高吞吐。
+```
