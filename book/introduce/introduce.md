@@ -223,12 +223,12 @@ flink API:
     2.批处理API，批处理主要是基于dataSet
 flink liberaries:    
     Flink还针对特定的应用领域提供了相应的软件库，方便适应特定领域的操作。主要包括
-    1.flink table：主要用于处理关系型的结构化数据，对结构化数据进行查询操作，将结构化数据抽象成关系表，并通过类SQL的
-       DSL对关系表进行各种查询操作。提供SQL on bigdata的功能,flink table既可以在流处理中使用SQL,也可以在批处理中
-       使用SQL,对应sparkSQL.
+    1.flink table：主要用于处理关系型的结构化数据，对结构化数据进行查询操作，将结构化数据抽象成关系表，
+       并通过类SQL的DSL对关系表进行各种查询操作。提供SQL on bigdata的功能,flink table既可以在流处
+       理中使用SQL,也可以在批处理中使用SQL,对应sparkSQL.
     2.flink gelly：主要用于图计算领域，提供相关的图计算API和图计算算法的实现,对应spark graph。
-    3.flink ML（machine leaning）：主要用于机器学习领域，提供了机器学习Pipelines APIh和多种机器学习算法的实现，
-      对应sparkML
+    3.flink ML（machine leaning）：主要用于机器学习领域，提供了机器学习Pipelines APIh和多种机器学
+      习算法的实现,对应sparkML
     4.flink CEP（Complex event processing）：主要用于复杂事件处理领域。
 总结：
     flinK为支持各种计算场景提供了相应的高层api
