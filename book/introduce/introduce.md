@@ -216,6 +216,7 @@ flinK为支持各种计算场景提供了相应的高层api
 ```
 ###flink的软件栈  
 ![](images/flink-stack-frontpage.png)   
+![](images/Snip20161103_10.png)     
 ```
 flink deploy:
     有三种部署方式
