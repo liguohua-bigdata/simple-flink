@@ -203,20 +203,8 @@ val result = initialRanks.iterate(30) { pages =>
 
 
 ###3.类库和软件栈
-
-```
-flinK为支持各种计算场景提供了相应的高层api
-    1.提供DataSet API来支持批处理场景
-    2.提供DataSream API来支持批流理场景
-    3.提供CEP API来支持F复杂事件处理（Complex Event Processing）的场景
-    4.提供Gelly API来支持图分析场景
-    5.提供Table API来支持SQL-ON-BIGDATA场景
-    6.提供FlinkML API来支持机器学习场景
-    
-```
 ###flink的软件栈  
-![](images/flink-stack-frontpage.png)   
-![](images/Snip20161103_10.png)     
+![](images/flink-stack-frontpage.png)    
 ```
 flink deploy:
     有三种部署方式
@@ -242,8 +230,15 @@ flink liberaries:
     3.flink ML（machine leaning）：主要用于机器学习领域，提供了机器学习Pipelines APIh和多种机器学习算法的实现，
       对应sparkML
     4.flink CEP（Complex event processing）：主要用于复杂事件处理领域。
+总结：
+    flinK为支持各种计算场景提供了相应的高层api
+    1.提供DataSet API来支持批处理场景
+    2.提供DataSream API来支持批流理场景
+    3.提供CEP API来支持F复杂事件处理（Complex Event Processing）的场景
+    4.提供Gelly API来支持图分析场景
+    5.提供Table API来支持SQL-ON-BIGDATA场景
+    6.提供FlinkML API来支持机器学习场景
 ```
-
 
 ###spark的软件栈  
 ![](images/spark-stack.png)   
