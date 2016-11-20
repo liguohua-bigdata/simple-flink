@@ -82,7 +82,7 @@ https://github.com/apache/flink
 ```
 
 
-##二、流处理，批处理合二为一
+##二、流处理，批处理珠联璧合
 
 ###1.同一个运行时环境，同时支持流处理，批处理
 ![](images/one_runtime.png) 
