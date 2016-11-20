@@ -1043,12 +1043,3 @@ Student(xiaoqi,guangdong,2400.0), Student(zhangsan,hainan,2600.0), Student(zhaol
 
 
 
-
-
-
-参考链接：  
-```
-https://ci.apache.org/projects/flink/flink-docs-release-1.1/apis/batch/index.html
-https://ci.apache.org/projects/flink/flink-docs-release-1.1/apis/batch/dataset_transformations.html
-```
-
