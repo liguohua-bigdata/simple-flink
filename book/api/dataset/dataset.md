@@ -5,7 +5,7 @@
 执行程序：
 ```scale
 //1.创建一个 DataSet其元素为String类型
-val input: DataSet[String] = benv.fromElements("A", "B", "C", "D", "E", "F", "G", "H")
+val input: DataSet[String] = benv.fromElements("A", "B", "C")
 
 //2.将DataSet的内容打印出来
 input.print()
@@ -15,11 +15,6 @@ input.print()
 A
 B
 C
-D
-E
-F
-G
-H
 ```
 web ui中的执行效果：
 ![](images/Snip20161114_87.png) 
