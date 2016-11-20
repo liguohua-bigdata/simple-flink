@@ -180,7 +180,49 @@ ${FLINK_HOME}/bin/start-scala-shell.sh remote <hostname> <portnumber>
 
 3.带有依赖包的格式
 ${FLINK_HOME}/bin/start-scala-shell.sh[local|remote<host><port>]--addclasspath<path/to/jar.jar>
+
+4.查看帮助
+${FLINK_HOME}/bin/start-scala-shell.sh --help
 ```
+start-scala-shell.sh的帮助查询：
+```
+Flink Scala Shell
+Usage: start-scala-shell.sh [local|remote|yarn] [options] <args>...
+
+Command: local [options]
+Starts Flink scala shell with a local Flink cluster
+  -a <path/to/jar> | --addclasspath <path/to/jar>
+        Specifies additional jars to be used in Flink
+Command: remote [options] <host> <port>
+Starts Flink scala shell connecting to a remote cluster
+  <host>
+        Remote host name as string
+  <port>
+        Remote port as integer
+
+  -a <path/to/jar> | --addclasspath <path/to/jar>
+        Specifies additional jars to be used in Flink
+Command: yarn [options]
+Starts Flink scala shell connecting to a yarn cluster
+  -n arg | --container arg
+        Number of YARN container to allocate (= Number of TaskManagers)
+  -jm arg | --jobManagerMemory arg
+        Memory for JobManager container [in MB]
+  -nm <value> | --name <value>
+        Set a custom name for the application on YARN
+  -qu <arg> | --queue <arg>
+        Specifies YARN queue
+  -s <arg> | --slots <arg>
+        Number of slots per TaskManager
+  -tm <arg> | --taskManagerMemory <arg>
+        Memory per TaskManager container [in MB]
+  -a <path/to/jar> | --addclasspath <path/to/jar>
+        Specifies additional jars to be used in Flink
+  --configDir <value>
+        The configuration directory.
+  -h | --help
+        Prints this usage text
+``
 执行命令：
 ```
 ${FLINK_HOME}/bin/start-scala-shell.sh remote qingcheng11 6123
