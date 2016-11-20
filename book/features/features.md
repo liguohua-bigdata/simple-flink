@@ -29,3 +29,10 @@
 1.flink支持time-Window，count-window, session-window,data-window等多种窗口操作。
 2.flink支持多种触发窗口操作的条件，以便应对各种流处理的情况。
 ```
+
+###5.通过Backpressure机制支持不间断的流处理
+![](images/continuous_streams.png) 
+```
+1.flink支持long-live流处理。
+2.flink支持slow-sinks背压fast-sources,以保障流处理的不间断
+```
