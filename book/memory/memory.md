@@ -150,7 +150,7 @@ GenericTypeInfo: 任意无法匹配之前几种类型的类。
 
 
 
-##四、堆外内存的发展方向
+##四、堆外内存的发展方向  
 http://wuchong.me/blog/2016/04/29/flink-internals-memory-manage/
 
 
