@@ -185,4 +185,6 @@ flinK为支持各种计算场景提供了相应的高层api
 
 ```
 flink和开源大数据处理的各种框架有很好的集成,这样它就能和其他框架密切合作形成大数据的统一的解决方案。
+flink支持YARN,HDFS,Kafka,hbase,alluxio等其他大数据系统的集成。
 ```
+![](images/middle.jpg.png) 
