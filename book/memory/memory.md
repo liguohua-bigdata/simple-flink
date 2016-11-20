@@ -32,7 +32,15 @@ JVM的GC机制一直都是让人又爱又恨的东西。一方面，JVM自己管
 现在很多大数据处理引擎，开始自动动手管理内存。比如 Apache Drill,Apache Ignite,Apache Geode,Apache Spark等。 
 ```
 
-###3.flink的
+###3.使用堆外内存
+![](images/memory-mgmt.png) 
+```
+1.为了解决大量对象在JVM的heap上创建会带来OOM和GC的问题，flink将大量使用的内存存放到堆外.
+2.flink在堆外有一块预分配的固定大小的内存块MemorySegment，flink会将对象高效的序列化到这块内存中。
+  MemorySegment由许多小的内存cell组成，每个cell大小32kb，这也是flink分配内存的最小单位。
+3.如果MemorySegment中依然放不小所有的数据，flink会将数据写入磁盘，需要的时候再冲磁盘读出来。
+```
+
 
 
 
