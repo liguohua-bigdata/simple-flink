@@ -202,6 +202,6 @@ flink支持YARN,HDFS,Kafka,hbase,alluxio等其他大数据系统的集成。
 ![](images/spark-ecosystem.jpeg) 
 
 ```
-flink和spark都在努力的打造以自己为中心的大数据生态系统。在现阶段spark是具有一定优势的，但是flink凭借着
-其优秀的架构，先进的设计，良好的势头，在大数据领域中也能占据一席之地。
+flink和spark都在努力的打造以自己为中心的大数据生态系统。在现阶段spark是具有一定优势
+，但是flink凭借着其优秀的架构，先进的设计，良好的势头，在大数据领域中也能占据一席之地。
 ```
