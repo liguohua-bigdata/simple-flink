@@ -210,13 +210,14 @@ flink deploy:
     有三种部署方式
     1.本地部署：在本地启动基于单个jvm的flink实例。
     2.集群部署：在集群中可以单独部署成standalone模式，也可以采用hadoop的YARN进行部署成yarn模式
-    3.云部署：兼容Google的云服务GCE(Google Compute Engine)，也兼容amazon的云服务AWS(Amazon Web Services)。
+    3.云部署：兼容Google的云服务GCE(Google Compute Engine)，也兼容amazon的云服务AWS(Amazon
+      Web Services)。
 flink core:
     flink的核心是一个分布式基于流的数据处理引擎,将一切处理都认为是流处理，将批处理看成流处理的一个特例。
-    这与spark正好相反，spark是将一切处理都认为是批处理，将流处理看成批处理的一个特例。spark的流处理不是真正的流处理
-    它是一种微型批处理（micro batch），因此spark的流处理实的时性不是很高，spark streaming定位是准实时流处理引擎。
-    而flink是真正的流处理系统，它的实时性要比spark高出不少，它对标是Twitter开源的storm和heron,他是一个真正的大数据
-    实时分析系统。
+    这与spark正好相反，spark是将一切处理都认为是批处理，将流处理看成批处理的一个特例。spark的流处理不
+    是真正的流处理它是一种微型批处理（micro batch），因此spark的流处理实的时性不是很高，spark streaming
+    定位是准实时流处理引擎。而flink是真正的流处理系统，它的实时性要比spark高出不少，它对标是Twitter开源的
+    storm和heron,他是一个真正的大数据实时分析系统。
 flink API: 
     flink的API分为两个部分
     1.流处理API，流处理主要是基于dataStream
