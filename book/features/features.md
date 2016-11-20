@@ -162,7 +162,7 @@ val result = initialRanks.iterate(30) { pages =>
 
 
 ###3.类库和软件栈
-![](images/flink-stack-frontpage.png) 
+
 ```
 flinK为支持各种计算场景提供了相应的高层api
     1.提供DataSet API来支持批处理场景
@@ -172,6 +172,9 @@ flinK为支持各种计算场景提供了相应的高层api
     5.提供Table API来支持SQL-ON-BIGDATA场景
     6.提供FlinkML API来支持机器学习场景
     
+```
+![](images/flink-stack-frontpage.png) 
+```
 注意：
     1.在高层api方面，flink和spark几乎一样都覆盖了大多数的大数据处理场景。
     2.由于发展的原因spark在API方面要超出flink，这方面flink也在大力发展。
