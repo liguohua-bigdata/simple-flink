@@ -23,6 +23,15 @@ https://github.com/apache/flink
 5.从节点的：负责执行计算任务，负责报告计算任务的执行情况。
 6.flinK使用一个client来提交计算任务。
 ```
+###4.flink和hdfs结合
+![](images/Picture1.png) 
+```
+1.flink作为大数据生态圈的一员，它和Hadoop的hdfs是兼容的。
+2.一般将namenode和jobmanager部署到一起，将datanode和taskmanager部署到一起。
+3.flink也能照顾到数据的本地行，移动计算而不是移动数据。
+```
+
+
 
 
 
@@ -31,7 +40,6 @@ https://github.com/apache/flink
 ######flink物理部署架构图
 ![](images/Snip20161105_4.png) 
 ######flink和HDFS结合后的架构
-![](images/Picture1.png) 
 ![](images/Snip20161105_5.png) 
 ```
 Flink运行时包含了两种类型的处理器：
