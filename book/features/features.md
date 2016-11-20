@@ -120,3 +120,42 @@ val counts = text
 ```
 以上程序演示了如何在一个数据流上，对源源不断流入的消息进行一个word-count操作！
 ```
+
+###2.批处理程序
+
+```
+flink的 DataSet API具有以下特性：
+    1.支持Java和scale开发语言
+    2.支持编写类型安全的程序
+    3.能够编写漂亮的易于维护的程序
+    4.支持丰富的数据类型
+    5.支持键值对数据类型
+    6.支持丰富的算子
+```
+
+示例程序：  
+```scala
+//1.定义case class 
+case class Page(pageId: Long, rank: Double)
+case class Adjacency(id: Long, neighbors: Array[Long])
+
+//2.执行运算
+val result = initialRanks.iterate(30) { pages =>
+  pages.join(adjacency).where("pageId").equalTo("id") {
+
+    (page, adj, out: Collector[Page]) => {
+      out.collect(Page(page.pageId, 0.15 / numPages))
+
+      val nLen = adj.neighbors.length
+      for (n <- adj.neighbors) {
+        out.collect(Page(n, 0.85 * page.rank / nLen))
+      }
+    }
+  }
+  .groupBy("pageId").sum("rank")
+}
+```
+程序说明：
+```
+以上程序演示了一个在图计算中PageRank算法的核心代码！
+```
