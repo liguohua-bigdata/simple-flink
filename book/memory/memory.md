@@ -81,6 +81,12 @@ TupleTypeInfo: 任意的 Flink Tuple 类型(支持Tuple1 to Tuple25)。Flink tup
 CaseClassTypeInfo: 任意的 Scala CaseClass(包括 Scala tuples)。
 PojoTypeInfo: 任意的 POJO (Java or Scala)，如，Java对象的所有成员变量，或public修饰符定义，或有getter/setter方法。
 GenericTypeInfo: 任意无法匹配之前几种类型的类。
+
+注意：
+1.前六种类型数据集，Flink皆可以自动生成对应的TypeSerializer，能非常高效地对数据集进行序列化和反序列化。
+2.最后一种数据类型，Flink会使用Kryo进行序列化和反序列化。
+3.对于 Tuple、CaseClass、POJO 等组合类型，其TypeSerializer和TypeComparator也是组合的，
+  序列化和比较时会委托给对应的serializers和comparators
 ```
 
 
