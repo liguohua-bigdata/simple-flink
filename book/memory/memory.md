@@ -121,19 +121,19 @@ GenericTypeInfo: 任意无法匹配之前几种类型的类。
   一块用来存放所有对象完整的二进制数据。
   一块用来存放指向完整二进制数据的引用。
   引用由指针(pointer)定长的序列化后的键（key）组成，ref=point+key
+      将key和point分开存储的动机是：
+      a.ref.point指向真实数据块，
+      b.ref.key用来做基于key的诸如compare等操作，
+      c.ref.key是连续存储的，这样能提高cpu的缓存命中率，加快CPU访问数据。
 3.当一个对象要加到 sort-buffer时，它的binary-data会被加到第一个区域，ref=(piont+key)会被加到第二个区域。
 4.执行比较时，如果有binary-key直接通过偏移量操作binary-key.如果没有binary-key那只能序列化整个对象再进行比较。
 5.执行交互时，只需交互ref,不需要交互binary-data.
+
+```
+![](images/sort-demo-read.png) 
+```
 6.访问数据时，只需沿着排好序的ref区域顺序访问，通过ref.pointer找到对应的真实数据.
 ```
-
-```
-ref=point+key，将key和point分开存储的动机是：
-1.ref.point指向真实数据块，
-2.ref.key用来做基于key的诸如compare等操作，
-3.ref.key是连续存储的，这样能提高cpu的缓存命中率，加快CPU访问数据。
-```
-
 
 ##三、测试flink内存管理的表现
 ```
