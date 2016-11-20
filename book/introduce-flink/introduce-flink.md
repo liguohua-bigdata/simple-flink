@@ -1,14 +1,20 @@
 ##《flink简介》
-flink早在2008年就是德国柏林理工大学一个研究性项目，在2014被Apache孵化器所接受，然后迅速地成为了ASFApache Software Foundation的顶级项目。
-截止到2016.11.3最新的稳定版本是Latest stable release (v1.1.3)。
+```
+flink早在2008年就是德国柏林理工大学一个研究性项目，在2014被Apache孵化器所接受，
+然后迅速地成为了ASFApache Software Foundation的顶级项目。
+```
+###1.官方网站
+```
+https://flink.apache.org
+```
 
-####flink官网&github
+###2.github地址
+```
+https://github.com/apache/flink
+```
 
-官方网站：https://flink.apache.org
-![](images/Snip20161103_6.png) 
+###3.github地址
 
-github地址：https://github.com/apache/flink
-![](images/Snip20161103_8.png) 
 
 ####flink基本架构
 ######flink基本架构
