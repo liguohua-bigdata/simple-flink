@@ -80,8 +80,12 @@
 注意：
 spark和Hadoop的迭代计算都是在driver端由用户自己实现的，flink是原生支持迭代计算。这一点上做的比较优秀。
 ```
-
-
+hadoop MR的迭代计算
+![](images/img5.wtoutiao.com.jpeg) 
+spark的迭代计算
+![](images/55a75f7c5c033_middle.jpg.png) 
+flink的迭代计算
+![](images/img5.wtoutiao.com-2.jpeg) 
 
 ###4.支持程序优化
 ![](images/optimizer_choice.png) 
