@@ -81,7 +81,7 @@ PojoSerializer只负责将header序列化进去，并委托每个字段对应的
 BasicTypeInfo: 任意Java基本类型(装箱的)或String类型。
 BasicArrayTypeInfo: 任意Java基本类型数组(装箱的)或String类型。
 WritableTypeInfo: 任意Hadoop Writable接口的实现类。
-TupleTypeInfo: 任意的Flink Tuple 类型(支持Tuple1到 Tuple25)。Flink tuples是固定长度固定类型的Java Tuple
+TupleTypeInfo: 任意的Flink Tuple 类型(支持Tuple1到Tuple25)。Flink tuples是固定长度固定类型的Java Tuple
 CaseClassTypeInfo: 任意的 Scala CaseClass(包括 Scala tuples)。
 PojoTypeInfo: 任意的POJO(Java或Scala)Java对象的所有成员变量，或public修饰符定义，或有getter/setter方法。
 GenericTypeInfo: 任意无法匹配之前几种类型的类。
