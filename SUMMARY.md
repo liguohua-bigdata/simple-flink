@@ -1,6 +1,6 @@
 # Summary
 
 * [Introduction](README.md)
-* [flin](introduce-flink/introduce-flinkmd.md)
+* [flin](book/introduce-flink/introduce-flinkmd.md)
 
   
