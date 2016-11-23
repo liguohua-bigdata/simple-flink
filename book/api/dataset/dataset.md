@@ -1699,22 +1699,6 @@ hadoop web ui中的执行效果：
 terminal中查看文件效果：
 ![](images/Snip20161123_16.png) 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 ##getExecutionEnvironment
 ```
@@ -1755,8 +1739,6 @@ res97: Boolean = false
 ```
 
 
-
-
 ---
 ##Aggregate???
 ```
@@ -1793,8 +1775,9 @@ $#####################
 
 
 
-
-
+def
+rebalance(): DataSet[T]
+Enforces a re-balancing of the DataSet, i.
 
 def
 withBroadcastSet(data: DataSet[_], name: String): DataSet[T]
@@ -1807,3 +1790,53 @@ def
 withForwardedFieldsSecond(forwardedFields: String*): DataSet[T]
 def
 withParameters(parameters: Configuration): DataSet[T]
+
+
+
+
+def
+partitionByHash[K](fun: (T) ⇒ K)(implicit arg0: TypeInformation[K]): DataSet[T]
+Partitions a DataSet using the specified key selector function.
+def
+partitionByHash(firstField: String, otherFields: String*): DataSet[T]
+Hash-partitions a DataSet on the specified fields.
+def
+partitionByHash(fields: Int*): DataSet[T]
+Hash-partitions a DataSet on the specified tuple field positions.
+def
+partitionByRange[K](fun: (T) ⇒ K)(implicit arg0: TypeInformation[K]): DataSet[T]
+Range-partitions a DataSet using the specified key selector function.
+def
+partitionByRange(firstField: String, otherFields: String*): DataSet[T]
+Range-partitions a DataSet on the specified fields.
+def
+partitionByRange(fields: Int*): DataSet[T]
+Range-partitions a DataSet on the specified tuple field positions.
+def
+partitionCustom[K](partitioner: Partitioner[K], fun: (T) ⇒ K)(implicit arg0: TypeInformation[K]): DataSet[T]
+Partitions a DataSet on the key returned by the selector, using a custom partitioner.
+def
+partitionCustom[K](partitioner: Partitioner[K], field: String)(implicit arg0: TypeInformation[K]): DataSet[T]
+Partitions a POJO DataSet on the specified key fields using a custom partitioner.
+def
+partitionCustom[K](partitioner: Partitioner[K], field: Int)(implicit arg0: TypeInformation[K]): DataSet[T]
+
+
+def
+iterate(maxIterations: Int)(stepFunction: (DataSet[T]) ⇒ DataSet[T]): DataSet[T]
+Creates a new DataSet by performing bulk iterations using the given step function.
+def
+iterateDelta[R](workset: DataSet[R], maxIterations: Int, keyFields: Array[String], solutionSetUnManaged: Boolean)(stepFunction: (DataSet[T], DataSet[R]) ⇒ (DataSet[T], DataSet[R]))(implicit arg0: ClassTag[R]): DataSet[T]
+Creates a new DataSet by performing delta (or workset) iterations using the given step function.
+def
+iterateDelta[R](workset: DataSet[R], maxIterations: Int, keyFields: Array[String])(stepFunction: (DataSet[T], DataSet[R]) ⇒ (DataSet[T], DataSet[R]))(implicit arg0: ClassTag[R]): DataSet[T]
+Creates a new DataSet by performing delta (or workset) iterations using the given step function.
+def
+iterateDelta[R](workset: DataSet[R], maxIterations: Int, keyFields: Array[Int], solutionSetUnManaged: Boolean)(stepFunction: (DataSet[T], DataSet[R]) ⇒ (DataSet[T], DataSet[R]))(implicit arg0: ClassTag[R]): DataSet[T]
+Creates a new DataSet by performing delta (or workset) iterations using the given step function.
+def
+iterateDelta[R](workset: DataSet[R], maxIterations: Int, keyFields: Array[Int])(stepFunction: (DataSet[T], DataSet[R]) ⇒ (DataSet[T], DataSet[R]))(implicit arg0: ClassTag[R]): DataSet[T]
+Creates a new DataSet by performing delta (or workset) iterations using the given step function.
+def
+iterateWithTermination(maxIterations: Int)(stepFunction: (DataSet[T]) ⇒ (DataSet[T], DataSet[_])): DataSet[T]
+Creates a new DataSet by performing bulk iterations using the given step function.
