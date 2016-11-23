@@ -1,4 +1,4 @@
-package scala
+package main.scala
 
 /**
   * Created by liguohua on 21/11/2016.

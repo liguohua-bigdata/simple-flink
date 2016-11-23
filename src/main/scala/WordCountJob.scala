@@ -1,4 +1,4 @@
-package scala
+package main.scala
 
 import org.apache.flink.api.scala._
 /**
