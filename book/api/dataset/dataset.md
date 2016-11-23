@@ -1,7 +1,7 @@
 
 #二、Flink DateSet的API详解
 
----
+
 ##print
 ```
 def print(): Unit
@@ -26,7 +26,7 @@ C
 web ui中的执行效果：
 ![](images/Snip20161114_87.png) 
 
----
+
 ##printToErr 
 ```
 def printToErr(): Unit
@@ -50,7 +50,6 @@ C
 ```
 
 
----
 ##count
 ```
 def count(): Long
@@ -207,7 +206,7 @@ res89: org.apache.flink.api.common.typeinfo.TypeInformation[String] = String
 
 
 
----
+
 ##map
 ```
 def map[R](fun: (T) ⇒ R)(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
@@ -254,7 +253,7 @@ res44: Seq[Int] = Buffer(22, 24, 29, 41)
 web ui中的执行效果：
 ![](images/Snip20161118_106.png)      
 
----
+
 ##flatMap  
 ```
 def flatMap[R](fun: (T) ⇒ TraversableOnce[R])(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
@@ -310,7 +309,7 @@ web ui中的执行效果：
 ![](images/Snip20161118_102.png)    
 
 
----
+
 ##mapPartition 
 ```
 def mapPartition[R](fun: (Iterator[T]) ⇒ TraversableOnce[R])(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
@@ -340,7 +339,7 @@ web ui中的执行效果：
 ![](images/Snip20161114_96.png) 
 
 
----
+
 ##filter
 ```
 def filter(fun: (T) ⇒ Boolean): DataSet[T]
@@ -390,7 +389,7 @@ web ui中的执行效果：
 
 
 
----
+
 ##reduce
 ```
 def reduce(fun: (T, T) ⇒ T): DataSet[T]
@@ -442,7 +441,7 @@ res8: Seq[String] = Buffer(zhangsan boy lisi girl)
 web ui中的执行效果：
 ![](images/Snip20161118_94.png) 
 
----
+
 ##groupBy
 ```
 def groupBy(firstField: String, otherFields: String*): GroupedDataSet[T]
@@ -547,7 +546,7 @@ Student(zhangsan,henan,2600.0))
 web ui中的执行效果：
 ![](images/Snip20161119_12.png) 
 
----
+
 ##ReduceGroup
 ```
 def reduceGroup[R](fun: (Iterator[T]) ⇒ R)(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
@@ -609,7 +608,7 @@ output.collect
 res16: Seq[Student] = Buffer(Student(20,zhangsan), Student(22,zhangsan), Student(22,lisi))
 ```
 
----
+
 ##sortGroup
 ```
 Adds a secondary sort key to this GroupedDataSet. This will only have an effect if you use one
@@ -646,7 +645,7 @@ res25: Seq[(Int, String)] = Buffer((18,zhangsan), (20,zhangsan), (22,zhangsan), 
 web ui中的执行效果：
 ![](images/Snip20161123_10.png) 
 
----
+
 ##minBy
 ```
 def minBy(fields: Int*): DataSet[T]
@@ -689,7 +688,7 @@ web ui中的执行效果：
 ![](images/Snip20161123_11.png) 
 
 
----
+
 ##maxBy
 ```
 def maxBy(fields: Int*): DataSet[T]
@@ -731,7 +730,7 @@ res76: Seq[Student] = Buffer(Student(16,lisi,194.5), Student(16,zhangasn,194.5))
 web ui中的执行效果：
 ![](images/Snip20161123_12.png) 
 
----
+
 ##distinct
 ```
 
@@ -886,7 +885,7 @@ output.collect
 res55: Seq[Int] = Buffer(3, 4, -5, 6, 7)
 ```
 
----
+
 ##join
 ```
 def join[O](other: DataSet[O], strategy: JoinHint): UnfinishedJoinOperation[T, O]
@@ -1573,7 +1572,7 @@ Student(xiaoqi,guangdong,2400.0), Student(zhangsan,hainan,2600.0), Student(zhaol
 
 
 
----
+
 ##getParallelism
 ```
 def getParallelism: Int
@@ -1596,7 +1595,7 @@ res98: Int = 1
 ```
 
 
----
+
 ##setParallelism
 ```
 def setParallelism(parallelism: Int): DataSet[T]
@@ -1622,7 +1621,7 @@ res102: Int = 2
 ```
 
 
----
+
 ##writeAsText
 ```
 def writeAsText(filePath: String, writeMode: WriteMode = null): DataSink[T]
@@ -1661,7 +1660,7 @@ terminal中查看文件效果：
 ![](images/Snip20161123_14.png) 
 
 
----
+
 ##writeAsCsv
 ```
 def writeAsCsv(filePath: String, rowDelimiter: String = ..., fieldDelimiter: String = ..., writeMode: WriteMode = null): DataSink[T]
@@ -1699,7 +1698,7 @@ hadoop web ui中的执行效果：
 terminal中查看文件效果：
 ![](images/Snip20161123_16.png) 
 
----
+
 ##getExecutionEnvironment
 ```
 def getExecutionEnvironment: ExecutionEnvironment
@@ -1739,7 +1738,7 @@ res97: Boolean = false
 ```
 
 
----
+
 ##Aggregate???
 ```
 def aggregate(agg: Aggregations, field: String): AggregateDataSet[T]
@@ -1749,7 +1748,7 @@ Creates a new DataSet by aggregating the specified tuple field using the given a
 ```
 
 
----
+
 ##CoGroup？？？
 ```
 def
@@ -1758,7 +1757,7 @@ coGroup[O](other: DataSet[O])(implicit arg0: ClassTag[O]): UnfinishedCoGroupOper
 For each key in this DataSet and the other DataSet, create a tuple containing a list of elements for that key from both DataSets.
 ```
 
----
+
 ##combineGroup???
 
 ```
