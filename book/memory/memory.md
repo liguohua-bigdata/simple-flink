@@ -33,8 +33,18 @@ JVM的GC机制一直都是让人又爱又恨的东西。一方面，JVM自己管
 现在很多大数据处理引擎，开始自动动手管理内存。比如 Apache Drill,Apache Ignite,Apache Geode,Apache Spark等。 
 ```
 ##二、flink的内存管理机制
+###0.flink的内存划分
+![](images/Snip20161123_5.png) 
+```
+1.flink在JVM的heap内有自己的内存管理空间。
+2.在flink中内存被分为三个部分，分别是Unmanaged区域，Managed区域，Network-Buffer区域
+3.Unmanaged区域是指flink不管理这部分区域，它的管理由JVM管理，用于存放User Code
+4.Managed区域是指flink管理这部分区域，它不受jvm管理不存在GC问题，用于存放Hashing,Sorting,Caching等数据
+5.Network-Buffer区域是指flink在进行计算时需要通过网络进行交换数据的区域。用于存放Shuffles，Broadcasts数据。
+```
 ###1.flink使用堆外内存
 ![](images/memory-mgmt.png) 
+
 ```
 1.为了解决大量对象在JVM的heap上创建会带来OOM和GC的问题，flink将大量使用的内存存放到堆外.
 2.flink在堆外有一块预分配的固定大小的内存块MemorySegment，flink会将对象高效的序列化到这块内存中。
