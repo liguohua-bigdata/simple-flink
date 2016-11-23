@@ -2077,3 +2077,35 @@ res159: Seq[Point] = Buffer(Point(9.0,12.0))
 ```
 
 
+
+##flatMapWith
+```
+def flatMapWith[R](fun: (T) ⇒ TraversableOnce[R])(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+
+Applies a function fun to each item of the dataset, producing a collection of items that will be flattened in the resulting data set
+
+可以使用偏函数进行flatMap操作。
+```
+执行程序：
+```
+//1.引入增强依赖
+import org.apache.flink.api.scala.extensions._
+
+//2.创建DataSet[Point]
+case class Point(x: Double, y: Double)
+val ds = benv.fromElements(Point(1, 2), Point(3, 4), Point(5, 6))
+
+//3.使用reduceWith进行元素的merger
+val r0=ds.flatMapWith {
+  case Point(x, y) => Seq("x" -> x, "y" -> y)
+}
+
+//4.显示结果
+r0.collect
+```
+执行结果：
+```
+res1: Seq[(String, Double)] = Buffer((x,1.0), (y,2.0), (x,3.0), (y,4.0), (x,5.0), (y,6.0))
+```
+
+
