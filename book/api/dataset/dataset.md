@@ -1,6 +1,5 @@
 
-#二、Flink DateSet的API详解
-
+#一、Flink DateSet的API详解
 
 ##print
 ```
@@ -136,9 +135,17 @@ Student(18,"lisi",174.5))
 //2.获取age最小的元素
 val output0: DataSet[Student] = input.max(0)
 output0.collect
+
+//3.获取age最小的元素
+val output1: DataSet[Student] = input.max("age")
+output1.collect
 ```
 执行结果：
 ```
+Scala-Flink> output0.collect
+res79: Seq[Student] = Buffer(Student(18,lisi,174.5))
+
+Scala-Flink> output1.collect
 res79: Seq[Student] = Buffer(Student(18,lisi,174.5))
 ```
 
@@ -221,6 +228,8 @@ def map[R](fun: (T) ⇒ R)(implicit arg0: TypeInformation[R], arg1: ClassTag[R])
 def map[R](mapper: MapFunction[T, R])(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
 
 Creates a new DataSet by applying the given function to every element of this DataSet.
+
+将一个DataSet转化成另一个DataSet。转化操作对每一个元素执行一次。
 ```
 
 ###map示例一  
@@ -1776,74 +1785,145 @@ Applies a GroupCombineFunction on a grouped DataSet.
 
 
 
-$#####################
-$#####################
+
+#二、Flink DataSetUtils常用API
+##self
+```
+val self: DataSet[T]
+
+Data Set
+
+获取DataSet本身。
+```
+执行程序：
+```scale
+//1.创建一个 DataSet其元素为String类型
+val input: DataSet[String] = benv.fromElements("A", "B", "C", "D", "E", "F")
+
+//2.获取input本身
+val s=input.self
+
+//3.比较对象引用
+s==input
+```
+执行结果：
+```
+res133: Boolean = true
+```
 
 
+##countElementsPerPartition
+```
+def countElementsPerPartition: DataSet[(Int, Long)]
+
+Method that goes over all the elements in each partition in order to 
+retrieve the total number of elements.
+
+获取DataSet的每个分片中元素的个数。
+```
+执行程序：
+```scale
+//1.创建一个 DataSet其元素为String类型
+val input: DataSet[String] = benv.fromElements("A", "B", "C", "D", "E", "F")
+
+//2.设置分片前
+val p0=input.getParallelism
+val c0=input.countElementsPerPartition
+c0.collect
+
+//2.设置分片后
+//设置并行度为3，实际上是将数据分片为3
+input.setParallelism(3)
+val p1=input.getParallelism
+val c1=input.countElementsPerPartition
+c1.collect
+```
+执行结果：
+```
+//设置分片前
+p0: Int = 1
+c0: Seq[(Int, Long)] = Buffer((0,6))
+
+//设置分片后
+p1: Int = 3
+c1: Seq[(Int, Long)] = Buffer((0,2), (1,2), (2,2))
+```
 
 
-def
-rebalance(): DataSet[T]
-Enforces a re-balancing of the DataSet, i.
+##checksumHashCode
+```
+def checksumHashCode(): ChecksumHashCode
 
-def
-withBroadcastSet(data: DataSet[_], name: String): DataSet[T]
-Adds a certain data set as a broadcast set to this operator.
-def
-withForwardedFields(forwardedFields: String*): DataSet[T]
-def
-withForwardedFieldsFirst(forwardedFields: String*): DataSet[T]
-def
-withForwardedFieldsSecond(forwardedFields: String*): DataSet[T]
-def
-withParameters(parameters: Configuration): DataSet[T]
+Convenience method to get the count (number of elements) of a DataSet
+as well as the checksum (sum over element hashes).
+
+获取DataSet的hashcode和元素的个数
+```
+执行程序：
+```scale
+//1.创建一个 DataSet其元素为String类型
+val input: DataSet[String] = benv.fromElements("A", "B", "C", "D", "E", "F")
+
+//2.获取DataSet的hashcode和元素的个数
+input.checksumHashCode
+```
+执行结果：
+```
+res140: org.apache.flink.api.java.Utils.ChecksumHashCode = 
+ChecksumHashCode 0x0000000000000195, count 6
+```
+
+##zipWithIndex
+```
+defzipWithIndex: DataSet[(Long, T)]
+
+Method that takes a set of subtask index, total number of elements mappings
+and assigns ids to all the elements from the input data set.
+
+元素和元素的下标进行zip操作。
+```
+执行程序：
+```scale
+//1.创建一个 DataSet其元素为String类型
+val input: DataSet[String] = benv.fromElements("A", "B", "C", "D", "E", "F")
+
+//2.元素和元素的下标进行zip操作。
+val result: DataSet[(Long, String)] = input.zipWithIndex
+
+//3.显示结果
+result.collect
+```
+执行结果：
+```
+res134: Seq[(Long, String)] = Buffer((0,A), (1,B), (2,C), (3,D), (4,E), (5,F))
+```
+flink web ui中的执行效果：
+![](images/Snip20161123_17.png) 
 
 
+##zipWithIndex
+```
+def zipWithUniqueId: DataSet[(Long, T)]
 
+Method that assigns a unique id to all the elements of the input data set.
 
-def
-partitionByHash[K](fun: (T) ⇒ K)(implicit arg0: TypeInformation[K]): DataSet[T]
-Partitions a DataSet using the specified key selector function.
-def
-partitionByHash(firstField: String, otherFields: String*): DataSet[T]
-Hash-partitions a DataSet on the specified fields.
-def
-partitionByHash(fields: Int*): DataSet[T]
-Hash-partitions a DataSet on the specified tuple field positions.
-def
-partitionByRange[K](fun: (T) ⇒ K)(implicit arg0: TypeInformation[K]): DataSet[T]
-Range-partitions a DataSet using the specified key selector function.
-def
-partitionByRange(firstField: String, otherFields: String*): DataSet[T]
-Range-partitions a DataSet on the specified fields.
-def
-partitionByRange(fields: Int*): DataSet[T]
-Range-partitions a DataSet on the specified tuple field positions.
-def
-partitionCustom[K](partitioner: Partitioner[K], fun: (T) ⇒ K)(implicit arg0: TypeInformation[K]): DataSet[T]
-Partitions a DataSet on the key returned by the selector, using a custom partitioner.
-def
-partitionCustom[K](partitioner: Partitioner[K], field: String)(implicit arg0: TypeInformation[K]): DataSet[T]
-Partitions a POJO DataSet on the specified key fields using a custom partitioner.
-def
-partitionCustom[K](partitioner: Partitioner[K], field: Int)(implicit arg0: TypeInformation[K]): DataSet[T]
+元素和随机唯一的ID进行zip操作。
+```
+执行程序：
+```scale
+//1.创建一个 DataSet其元素为String类型
+val input: DataSet[String] = benv.fromElements("A", "B", "C", "D", "E", "F")
 
+//2.元素和随机唯一的ID进行zip操作。
+val result: DataSet[(Long, String)] = input.zipWithUniqueId
 
-def
-iterate(maxIterations: Int)(stepFunction: (DataSet[T]) ⇒ DataSet[T]): DataSet[T]
-Creates a new DataSet by performing bulk iterations using the given step function.
-def
-iterateDelta[R](workset: DataSet[R], maxIterations: Int, keyFields: Array[String], solutionSetUnManaged: Boolean)(stepFunction: (DataSet[T], DataSet[R]) ⇒ (DataSet[T], DataSet[R]))(implicit arg0: ClassTag[R]): DataSet[T]
-Creates a new DataSet by performing delta (or workset) iterations using the given step function.
-def
-iterateDelta[R](workset: DataSet[R], maxIterations: Int, keyFields: Array[String])(stepFunction: (DataSet[T], DataSet[R]) ⇒ (DataSet[T], DataSet[R]))(implicit arg0: ClassTag[R]): DataSet[T]
-Creates a new DataSet by performing delta (or workset) iterations using the given step function.
-def
-iterateDelta[R](workset: DataSet[R], maxIterations: Int, keyFields: Array[Int], solutionSetUnManaged: Boolean)(stepFunction: (DataSet[T], DataSet[R]) ⇒ (DataSet[T], DataSet[R]))(implicit arg0: ClassTag[R]): DataSet[T]
-Creates a new DataSet by performing delta (or workset) iterations using the given step function.
-def
-iterateDelta[R](workset: DataSet[R], maxIterations: Int, keyFields: Array[Int])(stepFunction: (DataSet[T], DataSet[R]) ⇒ (DataSet[T], DataSet[R]))(implicit arg0: ClassTag[R]): DataSet[T]
-Creates a new DataSet by performing delta (or workset) iterations using the given step function.
-def
-iterateWithTermination(maxIterations: Int)(stepFunction: (DataSet[T]) ⇒ (DataSet[T], DataSet[_])): DataSet[T]
-Creates a new DataSet by performing bulk iterations using the given step function.
+//3.显示结果
+result.collect
+```
+执行结果：
+```
+res137: Seq[(Long, String)] = Buffer((0,A), (1,B), (2,C), (3,D), (4,E), (5,F))
+```
+flink web ui中的执行效果：
+![](images/Snip20161123_18.png) 
+
