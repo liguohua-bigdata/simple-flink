@@ -115,11 +115,13 @@ https://github.com/apache/flink
 2.增量迭代可以根据计算的依赖关系，优化计算环境，获得最好的计算效率
 ```
 ###hadoop MR的迭代计算   
-![](images/img10.wtoutiao.com.jpeg)     
+![](images/Snip20161123_1.pngg)     
 ###spark的迭代计算   
-![](images/55a75f7c5c033_middle.jpg.png)    
+![](images/Snip20161123_2.png)    
 ###flink的迭代计算   
-![](images/55a75f89b2d7a_middle.jpg.png)    
+![](images/Snip20161123_3.png)    
+###flink在迭代计算过程中自动优化   
+![](images/Snip20161123_4.png)    
 ```
 spark和Hadoop的迭代计算都是在driver端由用户自己实现的，flink是原生支持迭代计算。这一点上做的比较优秀。
 ```

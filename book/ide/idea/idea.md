@@ -12,26 +12,26 @@
 ![](images/Snip20161121_10.png) 
 7.寻找项目依赖
 ```
-https://ci.apache.org/projects/flink/flink-docs-release-1.2/dev/api_concepts.html
+https://ci.apache.org/projects/flink/flink-docs-release-1.1/apis/common/index.html
 ```
 8.添加到pom.xml中的内容
 ```
 <!-- Use this dependency if you are using the DataStream API -->
 <dependency>
   <groupId>org.apache.flink</groupId>
-  <artifactId>flink-streaming-scala_2.10</artifactId>
-  <version>1.2-SNAPSHOT</version>
+  <artifactId>flink-streaming-java_2.10</artifactId>
+  <version>1.1.3</version>
 </dependency>
 <!-- Use this dependency if you are using the DataSet API -->
 <dependency>
   <groupId>org.apache.flink</groupId>
-  <artifactId>flink-scala_2.10</artifactId>
-  <version>1.2-SNAPSHOT</version>
+  <artifactId>flink-java</artifactId>
+  <version>1.1.3</version>
 </dependency>
 <dependency>
   <groupId>org.apache.flink</groupId>
   <artifactId>flink-clients_2.10</artifactId>
-  <version>1.2-SNAPSHOT</version>
+  <version>1.1.3</version>
 </dependency>
 ```
 

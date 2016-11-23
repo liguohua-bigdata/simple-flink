@@ -1,0 +1,24 @@
+<component name="libraryTable">
+  <library name="scala-sdk-2.11.8" type="Scala">
+    <properties>
+      <compiler-classpath>
+        <root url="file:///Applications/scala-2.11.8/lib/scala-compiler.jar" />
+        <root url="file:///Applications/scala-2.11.8/lib/scala-library.jar" />
+        <root url="file:///Applications/scala-2.11.8/lib/scala-reflect.jar" />
+      </compiler-classpath>
+    </properties>
+    <CLASSES>
+      <root url="jar:///Applications/scala-2.11.8/lib/scala-actors-2.11.0.jar!/" />
+      <root url="jar:///Applications/scala-2.11.8/lib/scala-actors-migration_2.11-1.1.0.jar!/" />
+      <root url="jar:///Applications/scala-2.11.8/lib/scala-library.jar!/" />
+      <root url="jar:///Applications/scala-2.11.8/lib/scala-parser-combinators_2.11-1.0.4.jar!/" />
+      <root url="jar:///Applications/scala-2.11.8/lib/scala-reflect.jar!/" />
+      <root url="jar:///Applications/scala-2.11.8/lib/scala-swing_2.11-1.0.2.jar!/" />
+      <root url="jar:///Applications/scala-2.11.8/lib/scala-xml_2.11-1.0.4.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="http://www.scala-lang.org/api/2.11.8/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>
