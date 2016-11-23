@@ -1574,8 +1574,6 @@ res102: Int = 2
 ```
 
 
-
-
 ---
 ##writeAsText
 ```
@@ -1604,12 +1602,56 @@ Student(18,"lisi",174.5))
 
 //2.将DataSet写出到存储系统
 input.writeAsText("hdfs:///output/flink/dataset/testdata/students.txt")
+
+//3.执行程序
+benv.execute()
 ```
 
 hadoop web ui中的执行效果：
 ![](images/Snip20161123_13.png) 
 terminal中查看文件效果：
 ![](images/Snip20161123_14.png) 
+
+
+---
+##writeAsText
+```
+def writeAsCsv(filePath: String, rowDelimiter: String = ..., fieldDelimiter: String = ..., writeMode: WriteMode = null): DataSink[T]
+参数说明：
+rowDelimiter：行分隔符
+fieldDelimiter：列分隔符
+
+Writes this DataSet to the specified location as CSV file(s).
+
+将DataSet以CSV格式写出到存储系统。路径写法参考writeAsText。
+
+
+```
+执行程序：
+```scale
+//1.创建 DataSet[Student]
+case class Student(age: Int, name: String,height:Double)
+val input: DataSet[Student] = benv.fromElements(
+Student(16,"zhangasn",194.5),
+Student(17,"zhangasn",184.5),
+Student(18,"zhangasn",174.5),
+Student(16,"lisi",194.5),
+Student(17,"lisi",184.5),
+Student(18,"lisi",174.5))
+
+//2.将DataSet写出到存储系统
+input. writeAsCsv("hdfs:///output/flink/dataset/testdata/students.csv","#","|")
+
+//3.执行程序
+benv.execute()
+```
+
+hadoop web ui中的执行效果：
+![](images/Snip20161123_15.png) 
+terminal中查看文件效果：
+![](images/Snip20161123_16.png) 
+
+
 
 
 
@@ -1703,30 +1745,6 @@ $#####################
 
 
 
-
-
-
-
-val input1: DataSet[String] = benv.fromElements("A", "B")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def
 write(outputFormat: FileOutputFormat[T], filePath: String, writeMode: WriteMode = null): DataSink[T]
 Writes this DataSet to the specified location using a custom org.apache.flink.api.common.io.FileOutputFormat.
@@ -1738,10 +1756,6 @@ writeAsCsv(filePath: String, rowDelimiter: String = ..., fieldDelimiter: String 
 Writes this DataSet to the specified location as CSV file(s).
 
 
-
-def
-writeAsText(filePath: String, writeMode: WriteMode = null): DataSink[T]
-Writes this DataSet to the specified location.
 
 
 
