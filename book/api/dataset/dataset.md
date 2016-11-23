@@ -337,29 +337,11 @@ Student(zhangsan,henan,2600.0))
 web ui中的执行效果：
 ![](images/Snip20161119_12.png) 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
-##ReduceGroup???
+##ReduceGroup
 ```
 Creates a new DataSet by passing all elements in this DataSet to the group reduce function.
-
 此函数和reduce函数类似，不过它每次处理一个grop而非一个元素。
-
-这个函数对grouped DataSet上每一个group进行操作。 它和Reduce的区别在于， group－reduce函数是一次拿到一个完整的group。
 ```
 ###ReduceGroup示例一，操作tuple
 执行程序：
@@ -414,10 +396,81 @@ res16: Seq[Student] = Buffer(Student(20,zhangsan), Student(22,zhangsan), Student
 
 
 
+---
+##sortGroup
+```
+Adds a secondary sort key to this GroupedDataSet. This will only have an effect if you use one
+of the group-at-a-time, i.e. reduceGroup.
+```
+执行程序：
+```scale
+//1.创建 DataSet[(Int, String)]
+val input: DataSet[(Int, String)] = benv.fromElements(
+(20,"zhangsan"),
+(22,"zhangsan"),
+(22,"lisi"),
+(22,"lisi"),
+(22,"lisi"),
+(18,"zhangsan"),
+(18,"zhangsan"))
 
+//2.用int分组，用int对分组进行排序
+val sortdata = input.groupBy(0).sortGroup(0, Order.ASCENDING)
 
+//3.对排序好的分组进行reduceGroup
+val outputdata =sortdata.reduceGroup {
+      //将相同的元素用set去重
+      (in, out: Collector[(Int, String)]) =>
+        in.toSet foreach (out.collect)
+}
+//4.显示结果
+outputdata.collect
+```
+执行结果：
+```scale
+res25: Seq[(Int, String)] = Buffer((18,zhangsan), (20,zhangsan), (22,zhangsan), (22,lisi))
+```
+web ui中的执行效果：
+![](images/Snip20161123_10.png) 
 
+---
+##MinBy
+```
+Applies a special case of a reduce transformation minBy on a grouped DataSet. 
+```
+执行程序：
+```scale
+//1.定义case class
+case class Student(age: Int, name: String,height:Double)
 
+//2.创建DataSet[Student]
+val input: DataSet[Student] = benv.fromElements(
+Student(16,"zhangasn",194.5),
+Student(17,"zhangasn",184.5),
+Student(18,"zhangasn",174.5),
+Student(16,"lisi",194.5),
+Student(17,"lisi",184.5),
+Student(18,"lisi",174.5))
+
+//3.以name进行分组，获取age最小的元素
+val output0: DataSet[Student] = input.groupBy(_.name).minBy(0)
+output0.collect
+
+//3.以name进行分组，获取height和age最小的元素
+val output1: DataSet[Student] = input.groupBy(_.name).minBy(2,0)
+output1.collect
+
+```
+执行结果：
+```scale
+Scala-Flink> output0.collect
+res73: Seq[Student] = Buffer(Student(16,lisi,194.5), Student(16,zhangasn,194.5))
+
+Scala-Flink> output1.collect
+res74: Seq[Student] = Buffer(Student(18,lisi,174.5), Student(18,zhangasn,174.5))
+```
+web ui中的执行效果：
+![](images/Snip20161123_11.png) 
 
 
 
