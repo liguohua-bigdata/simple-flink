@@ -225,7 +225,7 @@ res89: org.apache.flink.api.common.typeinfo.TypeInformation[String] = String
 ##map
 ```
 def map[R](fun: (T) ⇒ R)(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
-def map[R](mapper: MapFunction[T, R])(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+def map[R](mapper:MapFunction[T,R])(implicit arg0:TypeInformation[R],arg1:ClassTag[R]):DataSet[R]
 
 Creates a new DataSet by applying the given function to every element of this DataSet.
 
