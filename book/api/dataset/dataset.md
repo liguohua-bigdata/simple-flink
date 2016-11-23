@@ -2,7 +2,13 @@
 #二、Flink DateSet的API详解
 
 ---
-##print()方法    
+##print
+```
+def print(): Unit
+Prints the elements in a DataSet to the standard output stream System.
+将信息输出到标准输出设备。
+```
+
 执行程序：
 ```scale
 //1.创建一个 DataSet其元素为String类型
@@ -21,10 +27,122 @@ web ui中的执行效果：
 ![](images/Snip20161114_87.png) 
 
 ---
+##printToErr 
+```
+def printToErr(): Unit
+Prints the elements in a DataSet to the standard error stream System.
+将信息输出到标准错误输出。
+```
+
+执行程序：
+```scale
+//1.创建一个 DataSet其元素为String类型
+val input: DataSet[String] = benv.fromElements("A", "B", "C")
+
+//2.将DataSet的内容打印出来
+input.printToErr()
+```
+执行结果：
+```scale
+A
+B
+C
+```
+
+
+---
+##count
+```
+def count(): Long
+
+Convenience method to get the count (number of elements) of a DataSet
+
+计算DataSet中元素的个数。
+```
+
+执行程序：
+```scale
+//1.创建一个 DataSet其元素为String类型
+val input: DataSet[String] = benv.fromElements("A", "B", "C")
+
+//2.计算DataSet中元素的个数。
+input.count
+```
+执行结果：
+```scale
+res83: Long = 3
+```
+
+
+##min
+```
+def min(field: Int): AggregateDataSet[T]
+def min(field: String): AggregateDataSet[T]
+
+Syntactic sugar for aggregate with MIN
+
+获取最小的元素
+```
+执行程序：
+```scale
+//1.创建DataSet[Student]
+case class Student(age: Int, name: String,height:Double)
+val input: DataSet[Student] = benv.fromElements(
+Student(16,"zhangasn",194.5),
+Student(17,"zhangasn",184.5),
+Student(18,"zhangasn",174.5),
+Student(16,"lisi",194.5),
+Student(17,"lisi",184.5),
+Student(18,"lisi",174.5))
+
+//2.获取age最小的元素
+val output0: DataSet[Student] = input.min(0)
+output0.collect
+
+```
+执行结果：
+```
+res78: Seq[Student] = Buffer(Student(16,lisi,174.5))
+```
+
+##max
+```
+def max(field: String): AggregateDataSet[T]
+def max(field: Int): AggregateDataSet[T]
+
+Syntactic sugar for aggregate with MAX
+
+获取最大的元素
+```
+执行程序：
+```scale
+//1.创建DataSet[Student]
+case class Student(age: Int, name: String,height:Double)
+val input: DataSet[Student] = benv.fromElements(
+Student(16,"zhangasn",194.5),
+Student(17,"zhangasn",184.5),
+Student(18,"zhangasn",174.5),
+Student(16,"lisi",194.5),
+Student(17,"lisi",184.5),
+Student(18,"lisi",174.5))
+
+//2.获取age最小的元素
+val output0: DataSet[Student] = input.max(0)
+output0.collect
+```
+执行结果：
+```
+res79: Seq[Student] = Buffer(Student(18,lisi,174.5))
+```
+
+
+---
 ##map
 ```
-The Map transformation applies a user-defined map function on each element of a DataSet. 
-It implements a one-to-one mapping, that is, exactly one element must be returned by the function.
+def map[R](fun: (T) ⇒ R)(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+def map[R](mapper: MapFunction[T, R])(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+
+Creates a new DataSet by applying the given function to every element of this DataSet.
 ```
 
 ###map示例一  
@@ -68,9 +186,11 @@ web ui中的执行效果：
 ---
 ##flatMap  
 ```
-The FlatMap transformation applies a user-defined flat-map function on each 
-element of a DataSet. This variant of a map function can return arbitrary 
-many result elements(including none) for each input element.
+def flatMap[R](fun: (T) ⇒ TraversableOnce[R])(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+def flatMap[R](fun: (T, Collector[R]) ⇒ Unit)(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+def flatMap[R](flatMapper: FlatMapFunction[T, R])(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+
+Creates a new DataSet by applying the given function to every element and flattening the results.
 ```
 
 ###flatMap示例一
@@ -122,10 +242,13 @@ web ui中的执行效果：
 ---
 ##mapPartition 
 ```
-MapPartition transforms a parallel partition in a single function call. The map-partition
-function gets the partition as Iterable and can produce an arbitrary number of result values.
-The number of elements in each partition depends on the degree-of-parallelism and previous 
-operations.
+def mapPartition[R](fun: (Iterator[T]) ⇒ TraversableOnce[R])(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+def mapPartition[R](fun: (Iterator[T], Collector[R]) ⇒ Unit)(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+def mapPartition[R](partitionMapper: MapPartitionFunction[T, R])(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+
+Creates a new DataSet by applying the given function to each parallel partition of the DataSet.
+
+和map类似，不同它的处理单位是partition，而非element。
 ```
 执行程序：
 ```scale
@@ -149,8 +272,12 @@ web ui中的执行效果：
 ---
 ##filter
 ```
-The Filter transformation applies a user-defined filter function on each element of 
-a DataSet and retains only those elements for which the function returns true.
+def filter(fun: (T) ⇒ Boolean): DataSet[T]
+def filter(filter: FilterFunction[T]): DataSet[T]
+
+Creates a new DataSet that contains only the elements satisfying the given filter predicate.
+
+过滤满足添加的元素，不满足条件的元素将被丢弃！
 ```
 ###filter示例一
 执行程序：
@@ -190,11 +317,17 @@ res51: Seq[Int] = Buffer(2, 4, 6, 2)
 web ui中的执行效果：
 ![](images/Snip20161118_104.png) 
 
+
+
 ---
 ##reduce
 ```
-Combines a group of elements into a single element by repeatedly combining two elements into one. 
-Reduce may be applied on a full data set, or on a grouped data set.
+def reduce(fun: (T, T) ⇒ T): DataSet[T]
+def reduce(reducer: ReduceFunction[T]): DataSet[T]
+
+Creates a new DataSet by merging the elements of this DataSet using an associative reduce function.
+
+根据一定的条件和方式来合并DataSet。
 ```
 执行程序：
 ```scale
@@ -340,7 +473,12 @@ web ui中的执行效果：
 ---
 ##ReduceGroup
 ```
+def reduceGroup[R](fun: (Iterator[T]) ⇒ R)(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+def reduceGroup[R](fun: (Iterator[T], Collector[R]) ⇒ Unit)(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+def reduceGroup[R](reducer: GroupReduceFunction[T, R])(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+
 Creates a new DataSet by passing all elements in this DataSet to the group reduce function.
+
 此函数和reduce函数类似，不过它每次处理一个grop而非一个元素。
 ```
 ###ReduceGroup示例一，操作tuple
@@ -434,9 +572,12 @@ web ui中的执行效果：
 ![](images/Snip20161123_10.png) 
 
 ---
-##MinBy
+##minBy
 ```
+def minBy(fields: Int*): DataSet[T]
 Applies a special case of a reduce transformation minBy on a grouped DataSet. 
+
+在分组后的数据中，获取每组最小的元素。
 ```
 执行程序：
 ```scale
@@ -456,7 +597,7 @@ Student(18,"lisi",174.5))
 val output0: DataSet[Student] = input.groupBy(_.name).minBy(0)
 output0.collect
 
-//3.以name进行分组，获取height和age最小的元素
+//4.以name进行分组，获取height和age最小的元素
 val output1: DataSet[Student] = input.groupBy(_.name).minBy(2,0)
 output1.collect
 
@@ -471,6 +612,54 @@ res74: Seq[Student] = Buffer(Student(18,lisi,174.5), Student(18,zhangasn,174.5))
 ```
 web ui中的执行效果：
 ![](images/Snip20161123_11.png) 
+
+
+
+
+
+---
+##maxBy
+```
+def maxBy(fields: Int*): DataSet[T]
+def max(field: Int): AggregateDataSet[T]
+
+Applies a special case of a reduce transformation maxBy on a grouped DataSet 
+在分组后的数据中，获取每组最大的元素。
+```
+执行程序：
+```scale
+//1.定义case class
+case class Student(age: Int, name: String,height:Double)
+
+//2.创建DataSet[Student]
+val input: DataSet[Student] = benv.fromElements(
+Student(16,"zhangasn",194.5),
+Student(17,"zhangasn",184.5),
+Student(18,"zhangasn",174.5),
+Student(16,"lisi",194.5),
+Student(17,"lisi",184.5),
+Student(18,"lisi",174.5))
+
+//3.以name进行分组，获取age最大的元素
+val output0: DataSet[Student] = input.groupBy(_.name).maxBy(0)
+output0.collect
+
+//4.以name进行分组，获取height和age最大的元素
+val output1: DataSet[Student] = input.groupBy(_.name).maxBy(2,0)
+output1.collect
+```
+执行结果：
+```scale
+Scala-Flink> output0.collect
+res75: Seq[Student] = Buffer(Student(18,lisi,174.5), Student(18,zhangasn,174.5))
+
+Scala-Flink> output1.collect
+res76: Seq[Student] = Buffer(Student(16,lisi,194.5), Student(16,zhangasn,194.5))
+```
+web ui中的执行效果：
+![](images/Snip20161123_12.png) 
+
+
 
 
 
@@ -1226,6 +1415,14 @@ Student(lisi-3,shandong,2400.0), Student(zhangsan-3,henan,2600.0))
 ```
 web ui中的执行效果：
 ![](images/Snip20161119_14.png) 
+
+
+
+
+
+
+
+
 
 
 
