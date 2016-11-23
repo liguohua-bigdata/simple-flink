@@ -136,6 +136,29 @@ res79: Seq[Student] = Buffer(Student(18,lisi,174.5))
 ```
 
 
+##getType
+```
+def getType(): TypeInformation[T]
+
+Returns the TypeInformation for the elements of this DataSet.
+
+获取DataSet的元素的类型信息
+```
+执行程序：
+```scale
+//1.创建一个 DataSet其元素为String类型
+val input: DataSet[String] = benv.fromElements("A", "B", "C")
+
+//2.获取DataSet的元素的类型信息
+input.getType
+```
+执行结果：
+```
+res89: org.apache.flink.api.common.typeinfo.TypeInformation[String] = String
+```
+
+
+
 ---
 ##map
 ```
@@ -374,6 +397,12 @@ web ui中的执行效果：
 ---
 ##groupBy
 ```
+def groupBy(firstField: String, otherFields: String*): GroupedDataSet[T]
+def groupBy(fields: Int*): GroupedDataSet[T]
+def groupBy[K](fun: (T) ⇒ K)(implicit arg0: TypeInformation[K]): GroupedDataSet[T]
+
+Creates a GroupedDataSet which provides operations on groups of elements.
+
 暗示第二个输入较小的交叉。
 拿第一个输入的每一个元素和第二个输入的每一个元素进行交叉操作。
 ```
@@ -532,8 +561,6 @@ output.collect
 res16: Seq[Student] = Buffer(Student(20,zhangsan), Student(22,zhangsan), Student(22,lisi))
 ```
 
-
-
 ---
 ##sortGroup
 ```
@@ -614,9 +641,6 @@ web ui中的执行效果：
 ![](images/Snip20161123_11.png) 
 
 
-
-
-
 ---
 ##maxBy
 ```
@@ -659,18 +683,18 @@ res76: Seq[Student] = Buffer(Student(16,lisi,194.5), Student(16,zhangasn,194.5))
 web ui中的执行效果：
 ![](images/Snip20161123_12.png) 
 
-
-
-
-
----
-##Aggregate??
-
 ---
 ##distinct
 ```
-Returns the distinct elements of a data set. It removes the duplicate entries from the input DataSet,
-with respect to all fields of the elements, or a subset of fields.
+
+def distinct(firstField: String, otherFields: String*): DataSet[T]
+def distinct(fields: Int*): DataSet[T]
+def distinct(): DataSet[T]
+def distinct[K](fun: (T) ⇒ K)(implicit arg0: TypeInformation[K]): DataSet[T]
+
+Creates a new DataSet containing the distinct elements of this DataSet.
+
+对DataSet中的元素进行去重。
 ```
 ###distinct示例一，单一项目的去重
 执行程序：
@@ -817,9 +841,12 @@ res55: Seq[Int] = Buffer(3, 4, -5, 6, 7)
 ---
 ##join
 ```
-Joins two data sets by creating all pairs of elements that are equal on their keys. Optionally uses
-a JoinFunction to turn the pair of elements into a single element, or a FlatJoinFunction to turn the
-pair of elements into arbitrarily many (including none) elements. 
+def join[O](other: DataSet[O], strategy: JoinHint): UnfinishedJoinOperation[T, O]
+def join[O](other: DataSet[O]): UnfinishedJoinOperation[T, O]
+
+Creates a new DataSet by joining this DataSet with the other DataSet.
+
+将两个DataSet进行join操作
 ```
 ###join示例一：
 执行程序：
@@ -891,7 +918,7 @@ web ui中的执行效果：
 ![](images/Snip20161119_1.png) 
 
 
-###join示例三：？？？？？？？？
+###join示例三：？？？
 ```
 A Join transformation can also call a user-defined join function to process joining tuples. 
 A join function receives one element of the first input DataSet and one element of the second 
@@ -904,7 +931,7 @@ key-selector functions and shows how to use a user-defined join function:
 
 执行程序：
 ```scale
-import java.util. Collector
+
 case class Rating(name: String, category: String, points: Int)
 val ratings: DataSet[Rating] = benv.fromElements(
 Rating("moon","youny1",3),Rating("sun","youny2",4),
@@ -1020,6 +1047,11 @@ res15: Seq[((Int, String), (Int, String))] = Buffer(
 ##leftOuterJoin
 
 ```
+def leftOuterJoin[O](other: DataSet[O], strategy: JoinHint): UnfinishedOuterJoinOperation[T, O]
+def leftOuterJoin[O](other: DataSet[O]): UnfinishedOuterJoinOperation[T, O]
+
+An outer join on the left side.
+
 左外连接。
 ```
 ###leftOuterJoin示例一
@@ -1094,6 +1126,11 @@ res26: Seq[(String, Int)] = Buffer((cat,1), (dog,5), (moon,3), (sun,4), (water,-
 ##rightOuterJoin
 
 ```
+def rightOuterJoin[O](other: DataSet[O], strategy: JoinHint): UnfinishedOuterJoinOperation[T, O]
+def rightOuterJoin[O](other: DataSet[O]): UnfinishedOuterJoinOperation[T, O]
+
+An outer join on the right side.
+
 右外连接
 ```
 ###rightOuterJoin示例一
@@ -1163,6 +1200,11 @@ res34: Seq[(String, Int)] = Buffer((moon,3), (sun,4), (cat,1), (dog,5))
 ##fullOuterJoin
 
 ```
+def fullOuterJoin[O](other: DataSet[O], strategy: JoinHint): UnfinishedOuterJoinOperation[T, O]
+deffullOuterJoin[O](other: DataSet[O]): UnfinishedOuterJoinOperation[T, O]
+
+Special fullOuterJoin operation for explicitly telling the system what join strategy to use.
+
 全外连接
 ```
 ###fullOuterJoin示例一
@@ -1376,7 +1418,7 @@ web ui中的执行效果：
 
 
 
-##CoGroup？？？
+
  
  
 
@@ -1426,7 +1468,11 @@ web ui中的执行效果：
 
 
 
+
+
 ##First-n
+
+
 ```
 取前n个元素
 ```
@@ -1473,3 +1519,30 @@ Student(xiaoqi,guangdong,2400.0), Student(zhangsan,hainan,2600.0), Student(zhaol
 
 
 
+---
+##Aggregate???
+```
+def aggregate(agg: Aggregations, field: String): AggregateDataSet[T]
+def aggregate(agg: Aggregations, field: Int): AggregateDataSet[T]
+
+Creates a new DataSet by aggregating the specified tuple field using the given aggregation function.
+```
+
+
+---
+##CoGroup？？？
+```
+def
+coGroup[O](other: DataSet[O])(implicit arg0: ClassTag[O]): UnfinishedCoGroupOperation[T, O]
+
+For each key in this DataSet and the other DataSet, create a tuple containing a list of elements for that key from both DataSets.
+```
+
+---
+##combineGroup???
+
+```
+def combineGroup[R](fun: (Iterator[T], Collector[R]) ⇒ Unit)(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+def combineGroup[R](combiner: GroupCombineFunction[T, R])(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+Applies a GroupCombineFunction on a grouped DataSet.
+```
