@@ -1483,6 +1483,7 @@ web ui中的执行效果：
 ##crossWithHuge
 ```
 def crossWithHuge[O](other: DataSet[O]): CrossDataSet[T, O]
+
 Special cross operation for explicitly telling the system that the left side 
 is assumed to be a lot smaller than the right side of the cartesian product.
 
