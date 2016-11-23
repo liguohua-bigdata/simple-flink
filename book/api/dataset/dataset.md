@@ -98,10 +98,18 @@ Student(18,"lisi",174.5))
 val output0: DataSet[Student] = input.min(0)
 output0.collect
 
+//3.获取age最小的元素
+val output1: DataSet[Student] = input.min("age")
+output1.collect
+
 ```
 执行结果：
 ```
+Scala-Flink> output0.collect
 res78: Seq[Student] = Buffer(Student(16,lisi,174.5))
+
+Scala-Flink> output1.collect
+res79: Seq[Student] = Buffer(Student(16,lisi,174.5))
 ```
 
 ##max
