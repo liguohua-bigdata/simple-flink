@@ -1662,7 +1662,7 @@ terminal中查看文件效果：
 
 
 ---
-##writeAsText
+##writeAsCsv
 ```
 def writeAsCsv(filePath: String, rowDelimiter: String = ..., fieldDelimiter: String = ..., writeMode: WriteMode = null): DataSink[T]
 参数说明：
