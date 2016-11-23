@@ -4,7 +4,9 @@
 ##print
 ```
 def print(): Unit
+
 Prints the elements in a DataSet to the standard output stream System.
+
 将信息输出到标准输出设备。
 ```
 
@@ -29,7 +31,9 @@ web ui中的执行效果：
 ##printToErr 
 ```
 def printToErr(): Unit
+
 Prints the elements in a DataSet to the standard error stream System.
+
 将信息输出到标准错误输出。
 ```
 
@@ -681,6 +685,7 @@ web ui中的执行效果：
 ##minBy
 ```
 def minBy(fields: Int*): DataSet[T]
+
 Applies a special case of a reduce transformation minBy on a grouped DataSet. 
 
 在分组后的数据中，获取每组最小的元素。
@@ -727,6 +732,7 @@ def maxBy(fields: Int*): DataSet[T]
 def max(field: Int): AggregateDataSet[T]
 
 Applies a special case of a reduce transformation maxBy on a grouped DataSet 
+
 在分组后的数据中，获取每组最大的元素。
 ```
 执行程序：
@@ -1439,8 +1445,8 @@ res65: Seq[(Int, Int, Int)] = Buffer(
 
 ##crossWithTiny
 ```
-def
-crossWithTiny[O](other: DataSet[O]): CrossDataSet[T, O]
+def crossWithTiny[O](other: DataSet[O]): CrossDataSet[T, O]
+
 Special cross operation for explicitly telling the system that the right side 
 is assumed to be a lot smaller than the left side of the cartesian product.
 
