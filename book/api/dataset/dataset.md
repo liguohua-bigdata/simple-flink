@@ -273,9 +273,9 @@ web ui中的执行效果：
 
 ##flatMap  
 ```
-def flatMap[R](fun: (T) ⇒ TraversableOnce[R])(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
-def flatMap[R](fun: (T, Collector[R]) ⇒ Unit)(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
-def flatMap[R](flatMapper: FlatMapFunction[T, R])(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+def flatMap[R](fun:(T)⇒TraversableOnce[R])(implicit arg0:TypeInformation[R],arg1:ClassTag[R]):DataSet[R]
+def flatMap[R](fun:(T, Collector[R])⇒Unit)(implicit arg0:TypeInformation[R],arg1:ClassTag[R]):DataSet[R]
+def flatMap[R](flatMapper:FlatMapFunction[T,R])(implicit arg0:TypeInformation[R],arg1:ClassTag[R]):DataSet[R]
 
 Creates a new DataSet by applying the given function to every element and flattening the results.
 ```
