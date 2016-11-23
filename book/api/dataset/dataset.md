@@ -136,8 +136,7 @@ res79: Seq[Student] = Buffer(Student(18,lisi,174.5))
 ```
 
 
-
-##max
+##sum
 ```
 def sum(field: String): AggregateDataSet[T]
 def sum(field: Int): AggregateDataSet[T]
@@ -182,10 +181,6 @@ res112: Seq[Student] = Buffer(Student(102,lisi,174.5))
 Scala-Flink> s2.collect
 res113: Seq[Student] = Buffer(Student(18,lisi,1107.0))
 ```
-
-
-
-
 
 
 
