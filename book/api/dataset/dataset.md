@@ -136,6 +136,59 @@ res79: Seq[Student] = Buffer(Student(18,lisi,174.5))
 ```
 
 
+
+##max
+```
+def sum(field: String): AggregateDataSet[T]
+def sum(field: Int): AggregateDataSet[T]
+
+Syntactic sugar for aggregate with SUM
+
+获取元素的累加和，只能作用于数值类型
+```
+执行程序：
+```scale
+//1.创建 DataSet[Student]
+case class Student(age: Int, name: String,height:Double)
+val input: DataSet[Student] = benv.fromElements(
+Student(16,"zhangasn",194.5),
+Student(17,"zhangasn",184.5),
+Student(18,"zhangasn",174.5),
+Student(16,"lisi",194.5),
+Student(17,"lisi",184.5),
+Student(18,"lisi",174.5))
+
+//2.fieldIndex=0的列进行sum
+val s0=input.sum(0)
+s0.collect
+
+//3.fieldName="age"的列进行sum
+val s1=input.sum("age")
+s1.collect
+
+//4.fieldName="height"的列进行sum
+val s2=input.sum("height")
+s2.collect
+
+```
+执行结果：
+```
+Scala-Flink> s0.collect
+res111: Seq[Student] = Buffer(Student(102,lisi,174.5))
+
+Scala-Flink> s1.collect
+res112: Seq[Student] = Buffer(Student(102,lisi,174.5))
+
+Scala-Flink> s2.collect
+res113: Seq[Student] = Buffer(Student(18,lisi,1107.0))
+```
+
+
+
+
+
+
+
 ##getType
 ```
 def getType(): TypeInformation[T]
@@ -1662,6 +1715,11 @@ terminal中查看文件效果：
 
 
 
+
+
+
+
+
 ---
 ##getExecutionEnvironment
 ```
@@ -1737,23 +1795,6 @@ Applies a GroupCombineFunction on a grouped DataSet.
 $#####################
 $#####################
 
-
-
-
-
-
-
-
-
-def
-write(outputFormat: FileOutputFormat[T], filePath: String, writeMode: WriteMode = null): DataSink[T]
-Writes this DataSet to the specified location using a custom org.apache.flink.api.common.io.FileOutputFormat.
-
-
-
-def
-writeAsCsv(filePath: String, rowDelimiter: String = ..., fieldDelimiter: String = ..., writeMode: WriteMode = null): DataSink[T]
-Writes this DataSet to the specified location as CSV file(s).
 
 
 
