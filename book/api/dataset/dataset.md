@@ -329,9 +329,14 @@ web ui中的执行效果：
 
 ##mapPartition 
 ```
-def mapPartition[R](fun: (Iterator[T]) ⇒ TraversableOnce[R])(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
-def mapPartition[R](fun: (Iterator[T], Collector[R]) ⇒ Unit)(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
-def mapPartition[R](partitionMapper: MapPartitionFunction[T, R])(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+def mapPartition[R](fun: (Iterator[T]) ⇒ 
+TraversableOnce[R])(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+
+def mapPartition[R](fun: (Iterator[T], Collector[R]) ⇒ 
+Unit)(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+
+def mapPartition[R](partitionMapper: MapPartitionFunction[T, R])
+(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
 
 Creates a new DataSet by applying the given function to each parallel partition of the DataSet.
 
@@ -478,7 +483,8 @@ Creates a GroupedDataSet which provides operations on groups of elements.
 case class WC(val word: String, val salary: Int) 
 
 //2.定义DataSet[WC]
-val words: DataSet[WC] = benv.fromElements(WC("LISI",600),WC("LISI",400),WC("WANGWU",300),WC("ZHAOLIU",700))
+val words: DataSet[WC] = benv.fromElements(
+WC("LISI",600),WC("LISI",400),WC("WANGWU",300),WC("ZHAOLIU",700))
 
 //3.使用自定义的reduce方法,使用key-expressions 
 val wordCounts1 = words.groupBy("word").reduce {
@@ -566,9 +572,13 @@ web ui中的执行效果：
 
 ##ReduceGroup
 ```
-def reduceGroup[R](fun: (Iterator[T]) ⇒ R)(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
-def reduceGroup[R](fun: (Iterator[T], Collector[R]) ⇒ Unit)(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
-def reduceGroup[R](reducer: GroupReduceFunction[T, R])(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+def reduceGroup[R](fun:(Iterator[T])⇒R)(implicit arg0:TypeInformation[R],arg1:ClassTag[R]):DataSet[R]
+
+def reduceGroup[R](fun: (Iterator[T], Collector[R]) ⇒ 
+Unit(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+
+def reduceGroup[R](reducer: GroupReduceFunction[T, R])
+(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
 
 Creates a new DataSet by passing all elements in this DataSet to the group reduce function.
 
@@ -866,7 +876,7 @@ Scala-Flink> age_r.collect
 res38: Seq[Student] = Buffer(Student(zhangsan,24), Student(zhangsan,25))
 
 Scala-Flink> name_r.collect
-res39: Seq[Student] = Buffer(Student(lisi,24), Student(wangwu,24), Student(zhangsan,24))
+res39: Seq[Student] = Buffer(Student(lisi,24),Student(wangwu,24),Student(zhangsan,24))
 
 Scala-Flink> all_r.collect
 res40: Seq[Student] = Buffer(Student(lisi,24), Student(lisi,25), Student(wangwu,24),
@@ -1680,7 +1690,8 @@ terminal中查看文件效果：
 
 ##writeAsCsv
 ```
-def writeAsCsv(filePath: String, rowDelimiter: String = ..., fieldDelimiter: String = ..., writeMode: WriteMode = null): DataSink[T]
+def writeAsCsv(filePath: String, rowDelimiter: String = ..., 
+fieldDelimiter: String = ..., writeMode: WriteMode = null): DataSink[T]
 参数说明：
 rowDelimiter：行分隔符
 fieldDelimiter：列分隔符
@@ -1742,13 +1753,16 @@ env0==env1
 执行结果：
 ```
 Scala-Flink> benv
-res96: org.apache.flink.api.scala.ExecutionEnvironment = org.apache.flink.api.scala.ExecutionEnvironment@2efd2f21
+res96: org.apache.flink.api.scala.ExecutionEnvironment = 
+org.apache.flink.api.scala.ExecutionEnvironment@2efd2f21
 
 Scala-Flink> val env0=input0.getExecutionEnvironment
-env0: org.apache.flink.api.scala.ExecutionEnvironment = org.apache.flink.api.scala.ExecutionEnvironment@4f87dfc6
+env0: org.apache.flink.api.scala.ExecutionEnvironment = 
+org.apache.flink.api.scala.ExecutionEnvironment@4f87dfc6
 
 Scala-Flink> val env1=input1.getExecutionEnvironment
-env1: org.apache.flink.api.scala.ExecutionEnvironment = org.apache.flink.api.scala.ExecutionEnvironment@1a46d614
+env1: org.apache.flink.api.scala.ExecutionEnvironment =
+ org.apache.flink.api.scala.ExecutionEnvironment@1a46d614
 
 Scala-Flink> env0==env1
 res97: Boolean = false
@@ -1771,15 +1785,19 @@ Creates a new DataSet by aggregating the specified tuple field using the given a
 def
 coGroup[O](other: DataSet[O])(implicit arg0: ClassTag[O]): UnfinishedCoGroupOperation[T, O]
 
-For each key in this DataSet and the other DataSet, create a tuple containing a list of elements for that key from both DataSets.
+For each key in this DataSet and the other DataSet, create a tuple 
+containing a list of elements for that key from both DataSets.
 ```
 
 
 ##combineGroup???
 
 ```
-def combineGroup[R](fun: (Iterator[T], Collector[R]) ⇒ Unit)(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
-def combineGroup[R](combiner: GroupCombineFunction[T, R])(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+def combineGroup[R](fun: (Iterator[T], Collector[R]) ⇒ 
+Unit)(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+def combineGroup[R](combiner: GroupCombineFunction[T, R])
+(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+
 Applies a GroupCombineFunction on a grouped DataSet.
 ```
 
@@ -1936,7 +1954,7 @@ import org.apache.flink.api.scala.extensions._
 
 ##mapWith
 ```
-def mapWith[R](fun: (T) ⇒ R)(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+def mapWith[R](fun: (T) ⇒ R)(implicit arg0: TypeInformation[R], arg1: ClassTag[R]):DataSet[R]
 
 Applies a function fun to each item of the data set
 
@@ -2080,9 +2098,11 @@ res159: Seq[Point] = Buffer(Point(9.0,12.0))
 
 ##flatMapWith
 ```
-def flatMapWith[R](fun: (T) ⇒ TraversableOnce[R])(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+def flatMapWith[R](fun: (T) ⇒ 
+TraversableOnce[R])(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
 
-Applies a function fun to each item of the dataset, producing a collection of items that will be flattened in the resulting data set
+Applies a function fun to each item of the dataset, producing a 
+collection of items that will be flattened in the resulting data set
 
 可以使用偏函数进行flatMap操作。
 ```
