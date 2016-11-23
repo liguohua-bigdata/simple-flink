@@ -273,9 +273,14 @@ web ui中的执行效果：
 
 ##flatMap  
 ```
-def flatMap[R](fun:(T)⇒TraversableOnce[R])(implicit arg0:TypeInformation[R],arg1:ClassTag[R]):DataSet[R]
-def flatMap[R](fun:(T, Collector[R])⇒Unit)(implicit arg0:TypeInformation[R],arg1:ClassTag[R]):DataSet[R]
-def flatMap[R](flatMapper:FlatMapFunction[T,R])(implicit arg0:TypeInformation[R],arg1:ClassTag[R]):DataSet[R]
+def flatMap[R](fun:(T)⇒
+TraversableOnce[R])(implicit arg0:TypeInformation[R],arg1:ClassTag[R]):DataSet[R]
+
+def flatMap[R](fun:(T, Collector[R])⇒
+Unit)(implicit arg0:TypeInformation[R],arg1:ClassTag[R]):DataSet[R]
+
+def flatMap[R](flatMapper:FlatMapFunction[T,R])
+(implicit arg0:TypeInformation[R],arg1:ClassTag[R]):DataSet[R]
 
 Creates a new DataSet by applying the given function to every element and flattening the results.
 ```
@@ -2010,7 +2015,8 @@ res155: Seq[Double] = Buffer(2.0, 6.0, 10.0)
 ##filterWith
 ```
 def filterWith(fun: (T) ⇒ Boolean): DataSet[T]
-Applies a predicate fun to each item of the data set, keeping only those for which the predicate holds
+Applies a predicate fun to each item of the data set,
+keeping only those for which the predicate holds
 
 可以使用片函数进行filter操作。
 ```
