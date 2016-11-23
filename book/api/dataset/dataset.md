@@ -1275,6 +1275,10 @@ res41: Seq[(String, Int)] = Buffer((cat,1), (dog,5), (moon,3), (sun,4))
 
 ##cross
 ```
+def cross[O](other: DataSet[O]): CrossDataSet[T, O]
+
+Creates a new DataSet by forming the cartesian product of this DataSet and the other DataSet.
+
 交叉。拿第一个输入的每一个元素和第二个输入的每一个元素进行交叉操作。
 ```
 ###cross实例一：基本tuple
@@ -1356,6 +1360,11 @@ res65: Seq[(Int, Int, Int)] = Buffer(
 
 ##crossWithTiny
 ```
+def
+crossWithTiny[O](other: DataSet[O]): CrossDataSet[T, O]
+Special cross operation for explicitly telling the system that the right side 
+is assumed to be a lot smaller than the left side of the cartesian product.
+
 暗示第二个输入较小的交叉。
 拿第一个输入的每一个元素和第二个输入的每一个元素进行交叉操作。
 ```
@@ -1388,6 +1397,10 @@ web ui中的执行效果：
 
 ##crossWithHuge
 ```
+def crossWithHuge[O](other: DataSet[O]): CrossDataSet[T, O]
+Special cross operation for explicitly telling the system that the left side 
+is assumed to be a lot smaller than the right side of the cartesian product.
+
 暗示第二个输入较大的交叉。
 拿第一个输入的每一个元素和第二个输入的每一个元素进行交叉操作。
 ```
@@ -1417,13 +1430,12 @@ web ui中的执行效果：
 ![](images/Snip20161119_10.png) 
 
 
-
-
- 
- 
-
 ##Union
 ```
+def union(other: DataSet[T]): DataSet[T]
+
+Creates a new DataSet containing the elements from both this DataSet and the other DataSet.
+
 合并多个DataSet。
 ```
 执行程序：
@@ -1457,12 +1469,6 @@ Student(lisi-3,shandong,2400.0), Student(zhangsan-3,henan,2600.0))
 ```
 web ui中的执行效果：
 ![](images/Snip20161119_14.png) 
-
-
-
-
-
-
 
 
 
@@ -1546,3 +1552,49 @@ def combineGroup[R](fun: (Iterator[T], Collector[R]) ⇒ Unit)(implicit arg0: Ty
 def combineGroup[R](combiner: GroupCombineFunction[T, R])(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
 Applies a GroupCombineFunction on a grouped DataSet.
 ```
+
+
+$#####################
+$#####################
+
+def
+getExecutionEnvironment: ExecutionEnvironment
+Returns the execution environment associated with the current DataSet.
+
+
+
+def
+getParallelism: Int
+Returns the parallelism of this operation.
+
+
+def
+write(outputFormat: FileOutputFormat[T], filePath: String, writeMode: WriteMode = null): DataSink[T]
+Writes this DataSet to the specified location using a custom org.apache.flink.api.common.io.FileOutputFormat.
+
+
+
+def
+writeAsCsv(filePath: String, rowDelimiter: String = ..., fieldDelimiter: String = ..., writeMode: WriteMode = null): DataSink[T]
+Writes this DataSet to the specified location as CSV file(s).
+
+
+
+def
+writeAsText(filePath: String, writeMode: WriteMode = null): DataSink[T]
+Writes this DataSet to the specified location.
+
+
+
+
+def
+withBroadcastSet(data: DataSet[_], name: String): DataSet[T]
+Adds a certain data set as a broadcast set to this operator.
+def
+withForwardedFields(forwardedFields: String*): DataSet[T]
+def
+withForwardedFieldsFirst(forwardedFields: String*): DataSet[T]
+def
+withForwardedFieldsSecond(forwardedFields: String*): DataSet[T]
+def
+withParameters(parameters: Configuration): DataSet[T]
