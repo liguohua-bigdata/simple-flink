@@ -1526,6 +1526,143 @@ Student(xiaoqi,guangdong,2400.0), Student(zhangsan,hainan,2600.0), Student(zhaol
 
 
 ---
+##getParallelism
+```
+def getParallelism: Int
+
+Returns the parallelism of this operation.
+
+获取DataSet的并行度。
+```
+执行程序：
+```scale
+//1.创建一个 DataSet其元素为String类型
+val input0: DataSet[String] = benv.fromElements("A", "B", "C")
+
+//2.获取DataSet的并行度。
+input0.getParallelism
+```
+执行结果：
+```
+res98: Int = 1
+```
+
+
+---
+##setParallelism
+```
+def setParallelism(parallelism: Int): DataSet[T]
+
+Sets the parallelism of this operation. This must be greater than 1.
+
+设置DataSet的并行度，设置的并行度必须大于1
+```
+执行程序：
+```scale
+//1.创建一个 DataSet其元素为String类型
+val input0: DataSet[String] = benv.fromElements("A", "B", "C")
+
+//2.设置DataSet的并行度。
+input0.setParallelism(2)
+
+//3.获取DataSet的并行度。
+input0.getParallelism
+```
+执行结果：
+```
+res102: Int = 2
+```
+
+
+
+
+---
+##writeAsText
+```
+def writeAsText(filePath: String, writeMode: WriteMode = null): DataSink[T]
+
+Writes this DataSet to the specified location.
+
+将DataSet写出到存储系统。不同的存储系统写法不一样。
+
+hdfs文件路径：
+    hdfs:///path/to/data
+本地文件路径：
+    file:///path/to/data
+```
+执行程序：
+```scale
+//1.创建 DataSet[Student]
+case class Student(age: Int, name: String,height:Double)
+val input: DataSet[Student] = benv.fromElements(
+Student(16,"zhangasn",194.5),
+Student(17,"zhangasn",184.5),
+Student(18,"zhangasn",174.5),
+Student(16,"lisi",194.5),
+Student(17,"lisi",184.5),
+Student(18,"lisi",174.5))
+
+//2.将DataSet写出到存储系统
+input.writeAsText("hdfs:///output/flink/dataset/testdata/students.txt")
+```
+
+hadoop web ui中的执行效果：
+![](images/Snip20161123_13.png) 
+terminal中查看文件效果：
+![](images/Snip20161123_14.png) 
+
+
+
+
+
+
+
+
+
+
+---
+##getExecutionEnvironment
+```
+def getExecutionEnvironment: ExecutionEnvironment
+
+Returns the execution environment associated with the current DataSet.
+
+获取DataSet的执行环境上下文,这个歌上下文和当前的DataSet有关，不是全局的。
+```
+执行程序：
+```scale
+//1.创建一个 DataSet其元素为String类型
+val input0: DataSet[String] = benv.fromElements("A", "B", "C")
+val input1: DataSet[String] = benv.fromElements("A", "B")
+
+//2.获取DataSet的执行环境上下文。
+benv 
+
+val env0=input0.getExecutionEnvironment
+
+val env1=input1.getExecutionEnvironment
+
+env0==env1
+```
+执行结果：
+```
+Scala-Flink> benv
+res96: org.apache.flink.api.scala.ExecutionEnvironment = org.apache.flink.api.scala.ExecutionEnvironment@2efd2f21
+
+Scala-Flink> val env0=input0.getExecutionEnvironment
+env0: org.apache.flink.api.scala.ExecutionEnvironment = org.apache.flink.api.scala.ExecutionEnvironment@4f87dfc6
+
+Scala-Flink> val env1=input1.getExecutionEnvironment
+env1: org.apache.flink.api.scala.ExecutionEnvironment = org.apache.flink.api.scala.ExecutionEnvironment@1a46d614
+
+Scala-Flink> env0==env1
+res97: Boolean = false
+```
+
+
+
+
+---
 ##Aggregate???
 ```
 def aggregate(agg: Aggregations, field: String): AggregateDataSet[T]
@@ -1554,18 +1691,40 @@ Applies a GroupCombineFunction on a grouped DataSet.
 ```
 
 
+
 $#####################
 $#####################
 
-def
-getExecutionEnvironment: ExecutionEnvironment
-Returns the execution environment associated with the current DataSet.
 
 
 
-def
-getParallelism: Int
-Returns the parallelism of this operation.
+
+
+
+
+
+
+
+
+
+val input1: DataSet[String] = benv.fromElements("A", "B")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def
