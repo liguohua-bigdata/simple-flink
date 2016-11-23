@@ -1521,13 +1521,13 @@ web ui中的执行效果：
 
 
 
-
-
-
-##First-n
-
+##first
 
 ```
+def first(n: Int): DataSet[T]
+
+Creates a new DataSet containing the first n elements of this DataSet
+
 取前n个元素
 ```
 执行程序：
