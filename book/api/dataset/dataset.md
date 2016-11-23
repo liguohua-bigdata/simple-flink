@@ -238,9 +238,188 @@ res8: Seq[String] = Buffer(zhangsan boy lisi girl)
 web ui中的执行效果：
 ![](images/Snip20161118_94.png) 
 
+---
+##groupBy
+```
+暗示第二个输入较小的交叉。
+拿第一个输入的每一个元素和第二个输入的每一个元素进行交叉操作。
+```
+
+###groupBy示例一：使用一个Case Class Fields
+执行程序：
+```scale
+//1.定义 class
+case class WC(val word: String, val salary: Int) 
+
+//2.定义DataSet[WC]
+val words: DataSet[WC] = benv.fromElements(WC("LISI",600),WC("LISI",400),WC("WANGWU",300),WC("ZHAOLIU",700))
+
+//3.使用自定义的reduce方法,使用key-expressions 
+val wordCounts1 = words.groupBy("word").reduce {
+    (w1, w2) => new WC(w1.word, w1.salary + w2.salary)
+}
+
+
+//4.使用自定义的reduce方法,使用key-selector
+val wordCounts2 = words.groupBy { _.word } reduce {
+     (w1, w2) => new WC(w1.word, w1.salary + w2.salary)
+}
+
+//5.显示结果
+wordCounts1.collect
+wordCounts2.collect
+```
+执行结果：
+```
+Scala-Flink> wordCounts1.collect
+res5: Seq[WC] = Buffer(WC(LISI,1000), WC(WANGWU,300), WC(ZHAOLIU,700))
+
+
+Scala-Flink> wordCounts1.collec2
+res6: Seq[WC] = Buffer(WC(LISI,1000), WC(WANGWU,300), WC(ZHAOLIU,700))
+
+```
+web ui中的执行效果：
+![](images/Snip20161119_11.png) 
+
+###groupBy示例二：使用多个Case Class Fields
+执行程序：
+```scale
+//1.定义 case class
+case class Student(val name: String, addr: String, salary: Double)
+
+//2.定义DataSet[Student]
+val tuples:DataSet[Student] = benv.fromElements(
+Student("lisi","shandong",2400.00),Student("zhangsan","henan",2600.00),
+Student("lisi","shandong",2700.00),Student("lisi","guangdong",2800.00))
+
+//3.使用自定义的reduce方法,使用多个Case Class Fields name
+val reducedTuples1 = tuples.groupBy("name", "addr").reduce {
+  (s1, s2) => Student(s1.name+"-"+s2.name,s1.addr+"-"+s2.addr,s1.salary+s2.salary)
+}
+
+//4.使用自定义的reduce方法,使用多个Case Class Fields index
+val reducedTuples2 = tuples.groupBy(0, 1).reduce {
+  (s1, s2) => Student(s1.name+"-"+s2.name,s1.addr+"-"+s2.addr,s1.salary+s2.salary)
+}
+
+//5.使用自定义的reduce方法,name和index混用
+val reducedTuples3 = tuples.groupBy(0, 1).reduce {
+  (s1, s2) => Student(s1.name+"-"+s2.name,s1.addr+"-"+s2.addr,s1.salary+s2.salary)
+}
+
+
+//6.显示结果
+reducedTuples1.collect
+reducedTuples2.collect
+reducedTuples3.collect
+```
+执行结果：
+```
+Scala-Flink> reducedTuples1.collect
+res96: Seq[Student] = Buffer(
+Student(lisi,guangdong,2800.0),
+Student(lisi-lisi,shandong-shandong,5100.0), 
+Student(zhangsan,henan,2600.0))
+
+Scala-Flink> reducedTuples2.collect
+res97: Seq[Student] = Buffer(
+Student(lisi,guangdong,2800.0),
+Student(lisi-lisi,shandong-shandong,5100.0), 
+Student(zhangsan,henan,2600.0))
+
+Scala-Flink> reducedTuples3.collect
+res98: Seq[Student] = Buffer(
+Student(lisi,guangdong,2800.0),
+Student(lisi-lisi,shandong-shandong,5100.0), 
+Student(zhangsan,henan,2600.0))
+```
+web ui中的执行效果：
+![](images/Snip20161119_12.png) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ---
 ##ReduceGroup???
+```
+Creates a new DataSet by passing all elements in this DataSet to the group reduce function.
+
+此函数和reduce函数类似，不过它每次处理一个grop而非一个元素。
+
+这个函数对grouped DataSet上每一个group进行操作。 它和Reduce的区别在于， group－reduce函数是一次拿到一个完整的group。
+```
+###ReduceGroup示例一，操作tuple
+执行程序：
+```scale
+//1.定义 DataSet[(Int, String)]
+val input: DataSet[(Int, String)] = benv.fromElements(
+(20,"zhangsan"),(22,"zhangsan"),
+(22,"lisi"),(20,"zhangsan"))
+
+//2.先用string分组，然后对分组进行reduceGroup
+val output = input.groupBy(1).reduceGroup {
+     //将相同的元素用set去重
+     (in, out: Collector[(Int, String)]) =>
+        in.toSet foreach (out.collect)
+}
+
+//3.显示结果
+output.collect
+```
+执行结果：
+```scala
+res14: Seq[(Int, String)] = Buffer((22,lisi), (20,zhangsan), (22,zhangsan))
+```
+web ui中的执行效果：
+![](images/Snip20161123_9.png) 
+
+###ReduceGroup示例二，操作case class
+```scala
+//1.定义case class
+case class Student(age: Int, name: String)
+
+//2.创建DataSet[Student]
+val input: DataSet[Student] = benv.fromElements(
+Student(20,"zhangsan"),
+Student(22,"zhangsan"),
+Student(22,"lisi"),
+Student(20,"zhangsan"))
+//3.以age进行分组，然后对分组进行reduceGroup
+val output = input.groupBy(_.age).reduceGroup {
+      //将相同的元素用set去重
+      (in, out: Collector[Student]) =>
+        in.toSet foreach (out.collect)
+ }
+ 
+//4.显示结果
+output.collect
+```
+执行结果：
+```scala
+res16: Seq[Student] = Buffer(Student(20,zhangsan), Student(22,zhangsan), Student(22,lisi))
+```
+
+
+
+
+
+
+
+
+
 
 ---
 ##Aggregate??
