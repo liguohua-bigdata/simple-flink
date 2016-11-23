@@ -20,5 +20,6 @@ object WordCountJob {
 
     //4.打印测试结构
     counts.print()
+
   }
 }

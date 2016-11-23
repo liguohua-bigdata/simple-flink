@@ -115,7 +115,7 @@ https://github.com/apache/flink
 2.增量迭代可以根据计算的依赖关系，优化计算环境，获得最好的计算效率
 ```
 ###hadoop MR的迭代计算   
-![](images/Snip20161123_1.pngg)     
+![](images/Snip20161123_1.png)     
 ###spark的迭代计算   
 ![](images/Snip20161123_2.png)    
 ###flink的迭代计算   
