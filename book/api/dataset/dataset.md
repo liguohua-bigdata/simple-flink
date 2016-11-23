@@ -1784,8 +1784,6 @@ Applies a GroupCombineFunction on a grouped DataSet.
 ```
 
 
-
-
 #二、Flink DataSetUtils常用API
 ##self
 ```
@@ -1926,4 +1924,156 @@ res137: Seq[(Long, String)] = Buffer((0,A), (1,B), (2,C), (3,D), (4,E), (5,F))
 ```
 flink web ui中的执行效果：
 ![](images/Snip20161123_18.png) 
+
+
+
+#三、Flink DataSet API增强
+##注意：必须引入
+
+```
+import org.apache.flink.api.scala.extensions._
+```
+
+##mapWith
+```
+def mapWith[R](fun: (T) ⇒ R)(implicit arg0: TypeInformation[R], arg1: ClassTag[R]): DataSet[R]
+
+Applies a function fun to each item of the data set
+
+可以使用偏函数进行map操作。
+```
+##mapWith示例一：全函数
+执行程序：
+```
+//1.引入增强依赖
+import org.apache.flink.api.scala.extensions._
+
+//2.创建DataSet[Point]
+case class Point(x: Double, y: Double)
+val ds = benv.fromElements(Point(1, 2), Point(3, 4), Point(5, 6))
+
+//3.使用mapWith进行元素转化
+val r=ds.mapWith {
+	case Point(x, y) => Point( x*2,y+1)
+}
+
+//4.显示结果
+r.collect
+```
+执行结果：
+```
+res156: Seq[Point] = Buffer(Point(2.0,3.0), Point(6.0,5.0), Point(10.0,7.0))
+```
+
+##mapWith示例二：偏函数
+执行程序：
+```
+//1.引入增强依赖
+import org.apache.flink.api.scala.extensions._
+
+//2.创建DataSet[Point]
+case class Point(x: Double, y: Double)
+val ds = benv.fromElements(Point(1, 2), Point(3, 4), Point(5, 6))
+
+//3.使用mapWith进行元素转化
+val r=ds.mapWith {
+	case Point(x, _) => x*2
+}
+
+//4.显示结果
+r.collect
+```
+执行结果：
+```
+res155: Seq[Double] = Buffer(2.0, 6.0, 10.0)
+```
+
+
+##filterWith
+```
+def filterWith(fun: (T) ⇒ Boolean): DataSet[T]
+Applies a predicate fun to each item of the data set, keeping only those for which the predicate holds
+
+可以使用片函数进行filter操作。
+```
+
+###filterWith示例一：全函数
+执行程序：
+```
+//1.引入增强依赖
+import org.apache.flink.api.scala.extensions._
+
+//2.创建DataSet[Point]
+case class Point(x: Double, y: Double)
+val ds = benv.fromElements(Point(1, 2), Point(3, 4), Point(5, 6))
+
+//3.使用filterWith进行元素过滤
+val r=ds.filterWith {
+	case Point(x, y) => x > 1 && y <5
+}
+
+//4.显示结果
+r.collect
+```
+执行结果：
+```
+res153: Seq[Point] = Buffer(Point(3.0,4.0))
+```
+flink web ui中的执行效果：
+![](images/Snip20161123_19.png) 
+
+###filterWith示例二：全函数
+执行程序：
+```
+//1.引入增强依赖
+import org.apache.flink.api.scala.extensions._
+
+//2.创建DataSet[Point]
+case class Point(x: Double, y: Double)
+val ds = benv.fromElements(Point(1, 2), Point(3, 4), Point(5, 6))
+
+//3.使用filterWith进行元素过滤
+val r=ds.filterWith {
+	case Point(x, _) => x > 1
+}
+
+//4.显示结果
+r.collect
+```
+执行结果：
+```
+res154: Seq[Point] = Buffer(Point(3.0,4.0), Point(5.0,6.0))
+```
+
+
+##reduceWith
+```
+def reduceWith(fun: (T, T) ⇒ T): DataSet[T]
+Applies a reducer fun to the data set
+
+可以使用偏函数进行reduce操作。
+```
+执行程序：
+```
+//1.引入增强依赖
+import org.apache.flink.api.scala.extensions._
+
+//2.创建DataSet[Point]
+case class Point(x: Double, y: Double)
+val ds = benv.fromElements(Point(1, 2), Point(3, 4), Point(5, 6))
+
+
+//3.使用reduceWith进行元素的merger
+val r=ds.reduceWith {
+    case (Point(x1, y1), (Point(x2, y2))) => Point(x1 + x2, y1 + y2)
+}
+
+//4.显示结果
+r.collect
+```
+执行结果：
+```
+res159: Seq[Point] = Buffer(Point(9.0,12.0))
+```
+
 
