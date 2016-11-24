@@ -1,4 +1,4 @@
-package idetest
+package uitls
 
 import org.apache.flink.api.scala._
 object ReadHdfsFile {
