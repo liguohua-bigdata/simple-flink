@@ -1610,8 +1610,6 @@ Student(xiaoqi,guangdong,2400.0), Student(zhangsan,hainan,2600.0), Student(zhaol
 ```
 
 
-
-
 ##getParallelism
 ```
 def getParallelism: Int
@@ -2106,8 +2104,6 @@ r.collect
 ```
 res159: Seq[Point] = Buffer(Point(9.0,12.0))
 ```
-
-
 
 ##flatMapWith
 ```
