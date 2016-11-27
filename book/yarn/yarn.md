@@ -3,18 +3,18 @@
 ```
 1.编辑命令
 vim ${HADOOP_HOME}/etc/hadoop/yarn-site.xml
+
 2.配置内容
 <property>  
     <name>yarn.nodemanager.vmem-pmem-ratio</name>  
     <value>4</value>  
 </property> 
-
 <property>  
     <name>yarn.nodemanager.vmem-check-enabled</name>  
     <value>false</value>  
 </property> 
 
-说明：
+3.配置说明
 yarn.nodemanager.vmem-pmem-ratio是yarn内存与虚拟内存的比率默认2.1，适当调大。
 yarn.nodemanager.vmem-check-enabled是yarn在启动程序时虚拟内存超标不要杀死程序。
 ```
