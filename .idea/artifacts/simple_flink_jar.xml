@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="simple-flink:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/simple_flink_jar</output-path>
+    <root id="archive" name="simple-flink.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$APPLICATION_HOME_DIR$/bin/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="simple-flink" />
+    </root>
+  </artifact>
+</component>

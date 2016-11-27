@@ -77,3 +77,28 @@ object HelloFlink {
 
 ###8.运行效果
 ![](images/Snip20161127_35.png) 
+
+##三、打包到服务器上运行
+###1.配置artfact
+![](images/Snip20161127_42.png)
+###2.选择程序入口class
+![](images/Snip20161127_44.png)
+###3.删除不必要的libraries
+![](images/Snip20161127_45.png)
+###4.配置好的效果
+![](images/Snip20161127_46.png)
+###5.build artfact
+![](images/Snip20161127_49.png)
+###6.选择build或rebuild
+![](images/Snip20161127_50.png)
+###7.选择build成果物展示
+![](images/Snip20161127_53.png)
+###8.上传到服务器，并运行jar
+```
+${FLINK_HOME}/bin/flink run  -m qingcheng11:6123  simple-flink.jar
+```
+###9.terminal中的执行效果
+![](images/Snip20161127_55.png)
+![](images/Snip20161127_56.png)
+###10.flink-web-UI中的执行效果
+![](images/Snip20161127_57.png)
