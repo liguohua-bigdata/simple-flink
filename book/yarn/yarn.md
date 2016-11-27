@@ -205,7 +205,27 @@ Options for yarn-cluster mode:
 ![](images/Snip20161127_66.png) 
 ![](images/Snip20161127_67.png) 
 
-
-
-
-
+##五、flink-on-yarn实现原理
+![](images/FlinkOnYarn.svg) 
+```
+1.通过配置信息找到yarn
+    a.Flink-Yarn-Client(FRC)读取YARN_CONF_DIR,HADOOP_CONF_DIR或HADOOP_CONF_PATH环境变量。
+    b.如果a读取不到，则flink-yarn-client读取HADOOP_HOME环境变量，如果读到HADOOP_HOME
+      若安装的是Hadoop2,设定yarn配置文件在$HADOOP_HOME/etc/hadoop文件夹中
+      若安装的是Hadoope,设定yarn配置文件在$HADOOP_HOME/conf文件夹中
+    c.如果b失败，则认为yarn没有安装，报错。
+2.用yarn准备flink集群所需介质
+    a.上传启动flink集群所需介质[step1]FRC会判断所申请的资源是否可用，如果可用则上传运行介质到hdfs,
+      包括flink-jar和flink-config等文件。
+    b.申请启动ApplicationMaster(AM)[step2,step3,step4]FRC向ResourceManager(RM)申请启动AM.因
+      为job介质已经上传到hdfs，所以NodeManager(NM)可以下载介质，准备container.当所有container准备
+      完毕后AM启动成功。
+3.用yarn启动flink集群
+    a.AM在自己内部启动JobManager(JM),AM所管理的container中启动TaskManager(TM).
+    b.因为AM和JM在一个container中，所以AM和JM的地址相同，AM就能为TM重新生成一份flink的配置文件，并将它
+      上传到hdfs.这样TM就能解析这份配置文件来连接JM.JM和TM连接成功，则flink集群启动成功。
+    c.因为AM和JM在一个container中，所以AM能代理处一个JM的管理界面，也就是flink-webUI,这样我们在yarn的
+      application中就能查看到flink-webUI来监控flink任务的运行情况。
+4.用yarn运行flink程序
+      当FRC提交job到AM,job所需的jar会先上传到hdfs,然后由TM下载，解析，执行。运行情况实时反应到JM中。
+```
