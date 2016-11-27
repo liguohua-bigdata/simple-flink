@@ -65,23 +65,23 @@ $FLINK_HOME/bin/yarn-session.sh
 
 2.参数说明
 Usage:
-   Required
-     -n,--container <arg>   Number of YARN container to allocate (=Number of Task Managers)
-   Optional
-     -D <arg>                        Dynamic properties
-     -d,--detached                   Start detached
-     -id,--applicationId <arg>       Attach to running YARN session
-     -j,--jar <arg>                  Path to Flink jar file
-     -jm,--jobManagerMemory <arg>    Memory for JobManager Container [in MB]
-     -n,--container <arg>            Number of YARN container to allocate (=Number of Task Managers)
-     -nm,--name <arg>                Set a custom name for the application on YARN
-     -q,--query                      Display available YARN resources (memory, cores)
-     -qu,--queue <arg>               Specify YARN queue.
-     -s,--slots <arg>                Number of slots per TaskManager
-     -st,--streaming                 Start Flink in streaming mode
-     -t,--ship <arg>                 Ship files in the specified directory (t for transfer)
-     -tm,--taskManagerMemory <arg>   Memory per TaskManager Container [in MB]
-     -z,--zookeeperNamespace <arg>   Namespace to create the Zookeeper sub-paths for high availability mode
+Required
+ -n,--container <arg>   Number of YARN container to allocate (=Number of Task Managers)
+Optional
+ -D <arg>                        Dynamic properties
+ -d,--detached                   Start detached
+ -id,--applicationId <arg>       Attach to running YARN session
+ -j,--jar <arg>                  Path to Flink jar file
+ -jm,--jobManagerMemory <arg>    Memory for JobManager Container [in MB]
+ -n,--container <arg>            Number of YARN container to allocate (=Number of Task Managers)
+ -nm,--name <arg>                Set a custom name for the application on YARN
+ -q,--query                      Display available YARN resources (memory, cores)
+ -qu,--queue <arg>               Specify YARN queue.
+ -s,--slots <arg>                Number of slots per TaskManager
+ -st,--streaming                 Start Flink in streaming mode
+ -t,--ship <arg>                 Ship files in the specified directory (t for transfer)
+ -tm,--taskManagerMemory <arg>   Memory per TaskManager Container [in MB]
+ -z,--zookeeperNamespace <arg>   Namespace to create the Zookeeper sub-paths for high availability mode
 ```
 ####2.3验证yarn-session启动
 ```
