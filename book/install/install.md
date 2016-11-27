@@ -80,7 +80,7 @@ parallelism.default: 12
 
 # You can also directly specify the paths to hdfs-default.xml and hdfs-site.xml
 # via keys 'fs.hdfs.hdfsdefault' and 'fs.hdfs.hdfssite'.
- fs.hdfs.hadoopconf: /bigdata/software/hadoop-2.7.2
+ fs.hdfs.hadoopconf: $HADOOP_HOME/etc/hadoop
 ```
 
 ###3.配置slaves文件  
