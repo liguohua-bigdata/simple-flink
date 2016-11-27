@@ -65,6 +65,7 @@ $FLINK_HOME/bin/flink run /bigdata/software/simple-flink.jar
 ```
 ###7.yarn-session代理出来的flink监控界面
 ![](images/Snip20161127_74.png) 
+![](images/Snip20161127_75.png) 
 ###8.terminal下的运行效果
 ![](images/Snip20161127_72.png) 
 ![](images/Snip20161127_73.png) 
