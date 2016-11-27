@@ -41,6 +41,7 @@ https://ci.apache.org/projects/flink/flink-docs-release-1.1/apis/common/index.ht
 ```scala
 package idetest
 
+//0.引入必要的程序元素
 import org.apache.flink.api.scala._
 
 /**
