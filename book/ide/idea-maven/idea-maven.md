@@ -63,3 +63,10 @@ object WordCountJob {
 ```
 3.运行效果
 ![](images/Snip20161127_37.png) 
+
+##三、打包到服务器上运行
+```
+省略说明：
+1.有人用maven进行package操作，需要另行查看maven的配置方法。
+2.我这里只是让maven管理一部分jar依赖，不用maven打包，打包方法和不使用maven一致。
+```
