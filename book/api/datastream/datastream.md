@@ -194,3 +194,42 @@ object KeyByTest001 {
 4> (zhangsan,3200)
 4> (lisi,2200)
 ```
+
+
+
+##Reduce
+```
+将DataStream 转化为 KeyedStream
+```
+执行程序：
+```scale
+package code.datastream
+
+import org.apache.flink.streaming.api.scala._
+
+object KeyByTest001 {
+  def main(args: Array[String]): Unit = {
+    //1.创建流处理环境
+    val senv = StreamExecutionEnvironment.getExecutionEnvironment
+
+    //2.准备数据
+    val text = senv.fromElements(("zhangsan",1200),("lisi",1200),("zhangsan",3200),("lisi",2200))
+
+    //3.执行运算
+    val result = text.keyBy(0)
+
+    //4.将结果打印出来
+    result.print()
+
+    //5.触发流计算
+    senv.execute(this.getClass.getName)
+  }
+}
+```
+执行结果：
+```scale
+4> (zhangsan,1200)
+4> (lisi,1200)
+4> (zhangsan,3200)
+4> (lisi,2200)
+```
