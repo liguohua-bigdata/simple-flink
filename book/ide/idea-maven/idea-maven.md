@@ -44,9 +44,6 @@ package idetest
 //0.引入必要的程序元素
 import org.apache.flink.api.scala._
 
-/**
-  * Created by liguohua on 21/11/2016.
-  */
 object WordCountJob {
   def main(args: Array[String]) {
     // 1.设置运行环境
