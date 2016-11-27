@@ -1,4 +1,4 @@
-##slot和parallelism
+##一、slot和parallelism的关系
 ###1.slot是指taskmanager的并发执行能力
 ![](images/Snip20161127_77.png) 
 ```
@@ -30,4 +30,72 @@ parallelism.default:1
 2.parallelism是动态的概念，是指程序运行时实际使用的并发能力
 3.设置合适的parallelism能提高运算效率，太多了和太少了都不行
 4.设置parallelism有多中方式，优先级为api>env>p>file
+```
+
+
+##二、设置parallelism的方法
+###1.在操作符级别上设置parallelism
+```scala
+val env = StreamExecutionEnvironment.getExecutionEnvironment
+val text = [...]
+val wordCounts = text
+    .flatMap{ _.split(" ") map { (_, 1) } }
+    .keyBy(0)
+    .timeWindow(Time.seconds(5))
+    .sum(1).setParallelism(5)
+wordCounts.print()
+env.execute("Word Count Example")
+```
+
+###2.在运行环境级别上设置parallelism
+```scala
+val env = StreamExecutionEnvironment.getExecutionEnvironment
+env.setParallelism(3)
+
+val text = [...]
+val wordCounts = text
+    .flatMap{ _.split(" ") map { (_, 1) } }
+    .keyBy(0)
+    .timeWindow(Time.seconds(5))
+    .sum(1)
+wordCounts.print()
+
+env.execute("Word Count Example")
+```
+
+###3.在客户端级别上设置parallelism
+####3.1通过p参数设置parallelism
+```scala
+./bin/flink run -p 10 ../examples/*WordCount-java*.jar
+```
+####3.1通过ClientAPI设置parallelism
+```scala
+try {
+    PackagedProgram program = new PackagedProgram(file, args)
+    InetSocketAddress jobManagerAddress = RemoteExecutor.getInetFromHostport("localhost:6123")
+    Configuration config = new Configuration()
+
+    Client client = new Client(jobManagerAddress, new Configuration(), program.getUserCodeClassLoader())
+
+    // set the parallelism to 10 here
+    client.run(program, 10, true)
+
+} catch {
+    case e: Exception => e.printStackTrace
+}
+```
+
+###4.在系统级别上设置parallelism
+```scala
+1.配置文件
+    $FLINK_HOME/conf/flink-conf.yaml
+2.配置属性
+    parallelism.default
+```
+
+###5.实战总结
+```
+1.系统级别的设置是全局的，对所有的job有效。
+2.其他级别的设置是局部的，对当前的job有效。
+3.多个级别上混合设置，高优先级的设置会覆盖低优先级的设置。
 ```
