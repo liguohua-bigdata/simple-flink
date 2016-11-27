@@ -21,7 +21,7 @@
 ```
 1.配置java的source目录，以便进行flink的Java开发
 2.配置scala的source目录，以便进行flink的scala开发
-3.其他目录，以后用到在进行配置
+3.其他目录，以后用到再进行配置
 ```
 
 ###7.配置libraries
