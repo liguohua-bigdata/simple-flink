@@ -23,6 +23,7 @@ parallelism.default:1
 4.可以通过设置flink的编程API修改过并行度
 5.这些并行度设置优先级从低到高排序，排序为api>env>p>file.
 6.设置合适的并行度，能提高运算效率
+7.parallelism不能多与slot个数。
 ```
 ###4.slot和parallelism总结
 ```
@@ -105,3 +106,32 @@ try {
 3.多个级别上混合设置，高优先级的设置会覆盖低优先级的设置。
 ```
 ##三、在webUI上分析parallelism
+
+
+
+##四、parallelism超过slot错误分析
+###1.集群slot情况
+![](images/Snip20161127_85.png) 
+```
+1.集群中有两个TaskManager
+2.每个TaskManager有4个slot，一共8个slot
+```
+
+###2.申请parallelism情况
+![](images/Snip20161127_87.png) 
+```
+操作符上申请12个parallelism，已经超过slot的总数8
+```
+
+###3.错误日志分析
+![](images/Snip20161127_89.png) 
+```
+日志中显示
+Caused by: org.apache.flink.runtime.jobmanager.scheduler.NoResourceAvailableException:
+Not enough free slots available to run the job. You can decrease the operator parallelism
+or increase the number of slots per TaskManager in the configuration. Task to schedule: 
+< Attempt #0 (Reduce (SUM(1)) (9/12)) @ (unassigned) - [SCHEDULED] > with groupID 
+< 70a2ad904bfc721e56fdd4653db09010 > in sharing group < SlotSharingGroup 
+[fea21ff89d7e74ea81f34e90de4ddda2,9323a052e7ec5273c4b85ea0f9beb7fa,70a2ad904bfc721e56fdd4653db09010] 
+>. Resources available to scheduler:Number of instances=2,total number of slots=8,available slots=0
+```
