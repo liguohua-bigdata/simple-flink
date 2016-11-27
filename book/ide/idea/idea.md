@@ -31,11 +31,11 @@
 2.选择flink的本地安装目录，也就是$FLINK_HOME
 ```
 ##二、开发并运行flink程序
-###1.配置创建package
+###1.创建package
 ![](images/Snip20161127_21.png) 
 ###2.输入package名称
 ![](images/Snip20161127_25.png) 
-###3.配置创建object
+###3.创建object
 ![](images/Snip20161127_26.png) 
 ```
 注意：为了简单起见，要选择object，不要选择class.不然在代码里面还要改动。
