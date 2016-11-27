@@ -42,6 +42,9 @@
 * [002待整理：flink的内存管理](book/memory/memory.md)
 
 * [003待整理：data](book/data/data.md)
+* [004待整理：并行度](book//internal/slot-parallelism/slot-parallelism.md)
+
+
 
 
 
