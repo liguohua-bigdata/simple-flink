@@ -81,7 +81,7 @@ Optional
 -st,--streaming                 Start Flink in streaming mode
 -t,--ship <arg>                 Ship files in the specified directory (t for transfer)
 -tm,--taskManagerMemory <arg>   Memory per TaskManager Container [in MB]
--z,--zookeeperNamespace <arg>   Namespace to create the Zookeeper sub-paths for high availability mode
+-z,--zookeeperNamespace <arg>   Namespace to create the Zookeeper subpaths for high availability mode
 ```
 ####2.3验证启动
 ```
