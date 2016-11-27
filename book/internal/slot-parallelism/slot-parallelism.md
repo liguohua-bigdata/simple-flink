@@ -149,14 +149,8 @@ Reduce操作和DataSink操作都是12个parallelism，正好占完所有的slot.
 ```
 
 ###3.错误日志分析
+```
+日志中显示没有足够的资源进行分配
+```
 ![](images/Snip20161127_89.png) 
-```
-日志中显示
-Caused by: org.apache.flink.runtime.jobmanager.scheduler.NoResourceAvailableException:
-Not enough free slots available to run the job. You can decrease the operator parallelism
-or increase the number of slots per TaskManager in the configuration. Task to schedule: 
-< Attempt #0 (Reduce (SUM(1)) (9/12)) @ (unassigned) - [SCHEDULED] > with groupID 
-< 70a2ad904bfc721e56fdd4653db09010 > in sharing group < SlotSharingGroup 
-[fea21ff89d7e74ea81f34e90de4ddda2,9323a052e7ec5273c4b85ea0f9beb7fa,70a2ad904bfc721e56fdd4653db09010] 
->. Resources available to scheduler:Number of instances=2,total number of slots=8,available slots=0
-```
+
