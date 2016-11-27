@@ -42,6 +42,8 @@ val wordCounts = text
     .flatMap{ _.split(" ") map { (_, 1) } }
     .keyBy(0)
     .timeWindow(Time.seconds(5))
+    
+    //设置parallelism为5
     .sum(1).setParallelism(5)
 wordCounts.print()
 env.execute("Word Count Example")
@@ -50,6 +52,8 @@ env.execute("Word Count Example")
 ###2.在运行环境级别上设置parallelism
 ```scala
 val env = StreamExecutionEnvironment.getExecutionEnvironment
+
+//设置parallelism为5
 env.setParallelism(3)
 
 val text = [...]
@@ -66,6 +70,7 @@ env.execute("Word Count Example")
 ###3.在客户端级别上设置parallelism
 ####3.1通过p参数设置parallelism
 ```scala
+//设置parallelism为10
 ./bin/flink run -p 10 ../examples/*WordCount-java*.jar
 ```
 ####3.1通过ClientAPI设置parallelism
@@ -77,7 +82,7 @@ try {
     
     Client client=new Client(jobManagerAddress,new Configuration(),program.getUserCodeClassLoader())
     
-    // set the parallelism to 10 here
+    //设置parallelism为10
     client.run(program, 10, true)
 
 } catch {
