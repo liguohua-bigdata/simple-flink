@@ -126,12 +126,12 @@ Reduce操作和DataSink操作都是12个parallelism，正好占完所有的slot.
 ```
 可以分析出，各个subtask在相应的机器上的调度时间。
 ```
-![](images/Snip20161127_98.png) 
+![](images/Snip20161128_98.png) 
 ###5.job在terminal中的执行情况
 ```
 从terminal输出的日志不难看出各个操作符号的subtask的执行情况
 ```
-![](images/Snip20161127_99.png) 
+![](images/Snip20161128_99.png) 
 
 
 ##四、parallelism超过slot错误分析
