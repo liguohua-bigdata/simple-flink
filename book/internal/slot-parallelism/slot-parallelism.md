@@ -72,11 +72,11 @@ env.execute("Word Count Example")
 ```scala
 try {
     PackagedProgram program = new PackagedProgram(file, args)
-    InetSocketAddress jobManagerAddress = RemoteExecutor.getInetFromHostport("localhost:6123")
+    InetSocketAddress jobManagerAddress =RemoteExecutor.getInetFromHostport("localhost:6123")
     Configuration config = new Configuration()
-
-    Client client = new Client(jobManagerAddress, new Configuration(), program.getUserCodeClassLoader())
-
+    
+    Client client=new Client(jobManagerAddress,new Configuration(),program.getUserCodeClassLoader())
+    
     // set the parallelism to 10 here
     client.run(program, 10, true)
 
