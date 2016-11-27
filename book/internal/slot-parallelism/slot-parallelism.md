@@ -10,7 +10,7 @@ taskmanager.numberOfTaskSlots:3
 ![](images/Snip20161127_78.png) 
 ```
 parallelism.default:1 
-运行程序默认的并行度为1，9个TaskSlot只用了1个，有8个空闲。增加并行度才能提高效率。
+运行程序默认的并行度为1，9个TaskSlot只用了1个，有8个空闲。设置合适的并行度才能提高效率。
 ```
 
 ###3.parallelism是可配置、可指定的
@@ -104,3 +104,4 @@ try {
 2.其他级别的设置是局部的，对当前的job有效。
 3.多个级别上混合设置，高优先级的设置会覆盖低优先级的设置。
 ```
+##三、在webUI上分析parallelism
