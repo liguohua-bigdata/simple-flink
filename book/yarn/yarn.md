@@ -50,12 +50,17 @@ ${FLINK_HOME}/bin/stop-cluster.sh
 3.程序运行结束后集群不结束，只用yarn-session关闭了，集群才会关闭。
 ```
 ###2.启动yarn-session
-
+####2.1启动yarn-session
 ```
+1.前台启动
 $FLINK_HOME/bin/yarn-session.sh -n 3 -s 3
+
+2.后台启动
+$FLINK_HOME/bin/yarn-session.sh -n 3 -s 3 -d
 ```
+####2.2查看yarn-session参数
 ```
-1.查看yarn-session参数
+1.查看命令
 $FLINK_HOME/bin/yarn-session.sh 
 
 2.参数说明
@@ -77,6 +82,15 @@ Usage:
      -t,--ship <arg>                 Ship files in the specified directory (t for transfer)
      -tm,--taskManagerMemory <arg>   Memory per TaskManager Container [in MB]
      -z,--zookeeperNamespace <arg>   Namespace to create the Zookeeper sub-paths for high availability mode
+```
+####2.3验证yarn-session启动
+```
+1.查看命令
+jps
+
+2.可见进程
+FlinkYarnSessionCli
+YarnApplicationMasterRunner
 ```
 
 ###3.yarn-session在terminal下的启动效果
