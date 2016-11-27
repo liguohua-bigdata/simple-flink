@@ -50,7 +50,7 @@ object WordCountJob {
     val env = ExecutionEnvironment.getExecutionEnvironment
 
     //2.创造测试数据
-    val text = env.fromElements("hdfs:/qingcheng11:9000//input/flink/README.txt")
+    val text = env.readTextFile("hdfs://qingcheng11:9000/input/flink/README.txt")
 
     //3.进行wordcount运算
     val counts = text.flatMap(_.toLowerCase.split("\\W+"))
