@@ -16,7 +16,7 @@ vim ${HADOOP_HOME}/etc/hadoop/yarn-site.xml
 
 3.配置说明
 yarn.nodemanager.vmem-pmem-ratio是yarn内存与虚拟内存的比率默认2.1，适当调大。
-yarn.nodemanager.vmem-check-enabled是yarn在启动程序时虚拟内存超标不要杀死程序。
+yarn.nodemanager.vmem-check-enabled是yarn在启动程序不检查它申请的虚拟内存。
 ```
 
 ###2.分发yarn的配置文件
@@ -59,14 +59,14 @@ $FLINK_HOME/bin/yarn-session.sh -n 3 -s 3
 ![](images/Snip20161127_70.png) 
 ###5.yarn-session代理出来的flink监控界面
 ![](images/Snip20161127_71.png) 
-###6.运行程序
+###6.运行flink程序
 ```
 $FLINK_HOME/bin/flink run /bigdata/software/simple-flink.jar
 ```
-###7.yarn-session代理出来的flink监控界面
+###7.程序运行后flink监控界面的效果
 ![](images/Snip20161127_74.png) 
 ![](images/Snip20161127_75.png) 
-###8.terminal下的运行效果
+###8.程序运行后terminal的运行效果
 ![](images/Snip20161127_72.png) 
 ![](images/Snip20161127_73.png) 
 
