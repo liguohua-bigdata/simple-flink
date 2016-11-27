@@ -50,7 +50,7 @@ ${FLINK_HOME}/bin/stop-cluster.sh
 3.程序运行结束后集群不结束，只用yarn-session关闭了，集群才会关闭。
 ```
 ###2.启动yarn-session
-####2.1启动yarn-session
+####2.1启动命令
 ```
 1.前台启动
 $FLINK_HOME/bin/yarn-session.sh -n 3 -s 3
@@ -58,7 +58,7 @@ $FLINK_HOME/bin/yarn-session.sh -n 3 -s 3
 2.后台启动
 $FLINK_HOME/bin/yarn-session.sh -n 3 -s 3 -d
 ```
-####2.2查看yarn-session参数
+####2.2参数说明
 ```
 1.查看命令
 $FLINK_HOME/bin/yarn-session.sh 
@@ -83,7 +83,7 @@ Optional
  -tm,--taskManagerMemory <arg>   Memory per TaskManager Container [in MB]
  -z,--zookeeperNamespace <arg>   Namespace to create the Zookeeper sub-paths for high availability mode
 ```
-####2.3验证yarn-session启动
+####2.3验证启动
 ```
 1.查看命令
 jps
@@ -117,11 +117,88 @@ $FLINK_HOME/bin/flink run /bigdata/software/simple-flink.jar
 2.yarn为这个application启动一个临时flink集群
 3.application运行结束后后,yarn关闭临时flink集群
 ```
-###2.运程序
+
+###2.运行程序
+
+####2.1启动命令
 ```
 $FLINK_HOME/bin/flink run -m yarn-cluster -yn 3
 /bigdata/software/simple-flink.jar
 ```
+####2.2参数说明
+```
+1.查看参数
+$FLINK_HOME/bin/flink run -h
+
+2.参数说明
+Action "run" compiles and runs a program.
+Syntax: run [OPTIONS] <jar-file> <arguments>
+"run" action options:
+ -c,--class <classname>                         Class with the program entry
+                                                point ("main" method or
+                                                "getPlan()" method. Only
+                                                needed if the JAR file does
+                                                not specify the class in its
+                                                manifest.
+ -C,--classpath <url>                           Adds a URL to each user code
+                                                classloader  on all nodes in
+                                                the cluster. The paths must
+                                                specify a protocol (e.g.
+                                                file://) and be accessible
+                                                on all nodes (e.g. by means
+                                                of a NFS share). You can use
+                                                this option multiple times
+                                                for specifying more than one
+                                                URL. The protocol must be
+                                                supported by the {@link
+                                                java.net.URLClassLoader}.
+ -d,--detached                                  If present, runs the job in
+                                                detached mode
+ -m,--jobmanager <host:port>                    Address of the JobManager
+                                                (master) to which to
+                                                connect. Use this flag to
+                                                connect to a different
+                                                JobManager than the one
+                                                specified in the
+                                                configuration.
+ -p,--parallelism <parallelism>                 The parallelism with which
+                                                to run the program. Optional
+                                                flag to override the default
+                                                value specified in the
+                                                configuration.
+ -q,--sysoutLogging                             If present, suppress logging
+                                                output to standard out.
+ -s,--fromSavepoint <savepointPath>             Path to a savepoint to reset
+                                                the job back to (for example
+                                                file:///flink/savepoint-1537
+                                                ).
+ -z,--zookeeperNamespace <zookeeperNamespace>   Namespace to create the
+                                                Zookeeper sub-paths for high
+                                                availability mode
+Options for yarn-cluster mode:
+ -yD <arg>                            Dynamic properties
+ -yd,--yarndetached                   Start detached
+ -yid,--yarnapplicationId <arg>       Attach to running YARN session
+ -yj,--yarnjar <arg>                  Path to Flink jar file
+ -yjm,--yarnjobManagerMemory <arg>    Memory for JobManager Container [in
+                                      MB]
+ -yn,--yarncontainer <arg>            Number of YARN container to allocate
+                                      (=Number of Task Managers)
+ -ynm,--yarnname <arg>                Set a custom name for the application
+                                      on YARN
+ -yq,--yarnquery                      Display available YARN resources
+                                      (memory, cores)
+ -yqu,--yarnqueue <arg>               Specify YARN queue.
+ -ys,--yarnslots <arg>                Number of slots per TaskManager
+ -yst,--yarnstreaming                 Start Flink in streaming mode
+ -yt,--yarnship <arg>                 Ship files in the specified directory
+                                      (t for transfer)
+ -ytm,--yarntaskManagerMemory <arg>   Memory per TaskManager Container [in
+                                      MB]
+ -yz,--yarnzookeeperNamespace <arg>   Namespace to create the Zookeeper
+                                      sub-paths for high availability mode
+```
+
 ###3.yarn-web下的运行效果
 ![](images/Snip20161127_68.png) 
 ###4.terminal下的运行效果
