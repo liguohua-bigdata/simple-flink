@@ -37,12 +37,13 @@
 * [第三章：Flink编程模型之基本DataSet API](book/api/dataset/dataset.md)
 * [第四章：Flink基于IntelliJ IDEA开发环境的搭建(不用maven)](book/ide/idea/idea.md)
 * [第五章：Flink基于IntelliJ IDEA开发环境的搭建(使用maven)](book/ide/idea-maven/idea-maven.md)
-* [第六章：Flink On Yarn](book/yarn/yarn.md)
+* [第六章：Flink的parallelism解析](book/internal/slot-parallelism/slot-parallelism.md)
+* [第七章：Flink-on-yarn模式解析](book/yarn/yarn.md)
+
+
+
 * [001待整理：flink的背压机制](book/backpressure/backpressure.md)
 * [002待整理：flink的内存管理](book/memory/memory.md)
-
-
-* [004待整理：并行度](book/internal/slot-parallelism/slot-parallelism.md)
 * [004待整理：error](book/error/error.md)
 * [003待整理：data](book/data/data.md)
 
