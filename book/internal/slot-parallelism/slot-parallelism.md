@@ -106,7 +106,32 @@ try {
 3.多个级别上混合设置，高优先级的设置会覆盖低优先级的设置。
 ```
 ##三、在webUI上分析parallelism
+###1.集群情况
+```
+3个taskManager,每个taskmanager有4个slot,共12slot,完全被占用，0个Available。
+```
+![](images/Snip20161127_92.png) 
 
+###2.job使用parallelism情况
+```
+Reduce操作和DataSink操作都是12个parallelism，正好占完所有的slot.
+```
+![](images/Snip20161127_94.png) 
+###3.查看具体的操作执行情况
+```
+不难看出，每个机器上有4个subtask在执行，实际上就是thread。
+```
+![](images/Snip20161127_96.png) 
+###4.查看具体的操作调度情况
+```
+可以分析出，各个subtask在相应的机器上的调度时间。
+```
+![](images/Snip20161127_98.png) 
+###5.job在terminal中的执行情况
+```
+从terminal输出的日志不难看出各个操作符号的subtask的执行情况
+```
+![](images/Snip20161127_99.png) 
 
 
 ##四、parallelism超过slot错误分析
