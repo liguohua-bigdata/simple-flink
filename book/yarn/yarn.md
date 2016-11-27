@@ -37,9 +37,9 @@ ${FLINK_HOME}/bin/stop-cluster.sh
 ```
 ###2.原因说明
 ```
-1.因为yarn可以自动启动flink的jobmanager和taskmanager，应当将standalone集群关闭掉。
-2.standalone集群都关闭掉了，因此在允许flink的作业，就不能使用standalone集群的web界面进行监控了。
-3.应当使用yarn的监控界面，在yarn中可以进入flink的yarn模式下的web界面，和standalone是类似的。
+1.因为yarn可以自动启动受yanr管理flink集群，所以应当将standalone集群关闭掉。
+2.standalone集群都关闭掉了，因此再运行flink作业，就不能使用standalone集群的web界面进行监控了。
+3.应当使用yarn的监控界面，在yarn中可以进入受yarn管理的flink-cluster-webUI进行监控。
 ```
 
 ##三、使用yarn-session创建flink集群
