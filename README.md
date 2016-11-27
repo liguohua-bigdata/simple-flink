@@ -47,7 +47,7 @@
 * [004待整理：error](book/error/error.md)
 * [003待整理：data](book/data/data.md)
 
-/Users/liguohua/Documents/F/code/idea/git/simple-flink/book/
+
 
 
 
