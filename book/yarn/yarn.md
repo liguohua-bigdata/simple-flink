@@ -206,7 +206,7 @@ Options for yarn-cluster mode:
 ![](images/Snip20161127_67.png) 
 
 ##五、flink-on-yarn实现原理
-![](images/FlinkOnYarn.svg) 
+![](images/Snip20161127_76.png) 
 ```
 1.通过配置信息找到yarn
     a.Flink-Yarn-Client(FRC)读取YARN_CONF_DIR,HADOOP_CONF_DIR或HADOOP_CONF_PATH环境变量。
