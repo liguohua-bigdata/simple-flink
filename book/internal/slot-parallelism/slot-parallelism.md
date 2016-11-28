@@ -36,9 +36,8 @@
   在执行程序的过程中可以根据程序的DAG做计算优化，可以合并或省略一些中间步骤。
 ```
 
-###3.并行度（parallelism）和数据传输模式
-
-####3.1并行度
+##三、并行度（parallelism）和任务链（Task Chains）
+###1.并行度
 ```
 1.flink架构是分布式的，也就决定了程序（Progrram）和数据流（Dataflows）也是分别式的。
 2.Dataflow也是一个分布式概念，它的Stream被查分成Stream-Partition,Operator被查分成subtask.
@@ -51,7 +50,7 @@
   是描述数据被分片的情况，Operator-subtask是描述线程的并行情况。
 ```
 ![](images/Snip20161128_5.png) 
-####3.2数据传输模式
+###2.数据传输模式
 ```
 1.Stream在transform过程中有两种传输模式,Forwarding模式和Redistributing模式。
 2.Forwarding模式是指Stream-Partition之间一对一(One-to-One)传输。子stream保留父stream的分区个数和元素的顺序。
@@ -64,7 +63,7 @@
   Map-KeyBy/Window和KeyBy/Window-sink直接就是Redistributing模式。
 ```
 
-###4.任务以及操作链(Task & Operator Chains)
+###3.任务以及操作链(Task & Operator Chains)
 ```
 1.为了减少不必要的thread通信和缓冲等开销，可以将Forwarding模式下的多个subtask做成一个subtask-chain
 2.将一个thread对应一个subtask优化为一个thread对应一个subtask-chain中的多个subtask。
@@ -76,7 +75,9 @@
 ```
 原来需要7个thread的任务在进行chain优化后，5个thread就能更好的完成。
 ```
-###5.任务槽（Task slot）
+
+##四、任务槽（task-slot）和槽共享（Slot Sharing）
+###1.任务槽（Task slot）
 ![](images/Snip20161128_3.png) 
 ```
 1.flink的TM就是运行在不同节点上的JVM进程（process）,这个进程会拥有一定量的资源。比如内存，cpu，网络，磁盘等。
@@ -89,7 +90,7 @@
     共享TCP连接和心跳消息（Heatbeat Message）。
 ```
 
-###6.槽共享（Slot Sharing）
+###2.槽共享（Slot Sharing）
 ![](images/Snip20161128_4.png) 
 
 ```
@@ -105,7 +106,7 @@
 4.经验上讲Slot的数量与CPU-core的数量一致为好。但考虑到超线程，可以让slotNumber=2*cpuCore.
 ```
 
-##一、slot和parallelism的关系
+##五、slot和parallelism
 ###1.slot是指taskmanager的并发执行能力
 ![](images/Snip20161127_77.png) 
 ```
@@ -141,7 +142,7 @@ parallelism.default:1
 ```
 
 
-##二、设置parallelism的方法
+##六、设置parallelism的方法
 ###1.在操作符级别上设置parallelism
 ```scala
 val env = StreamExecutionEnvironment.getExecutionEnvironment
@@ -212,7 +213,7 @@ try {
 2.其他级别的设置是局部的，对当前的job有效。
 3.多个级别上混合设置，高优先级的设置会覆盖低优先级的设置。
 ```
-##三、在webUI上分析parallelism
+##七、在webUI上分析parallelism
 ###1.集群情况
 ```
 3个taskManager,每个taskmanager有4个slot,共12slot,完全被占用，0个Available。
@@ -241,7 +242,7 @@ Reduce操作和DataSink操作都是12个parallelism，正好占完所有的slot.
 ![](images/Snip20161128_99.png) 
 
 
-##四、parallelism超过slot错误分析
+##八、parallelism超过slot错误分析
 ###1.集群slot情况
 ![](images/Snip20161127_85.png) 
 ```
