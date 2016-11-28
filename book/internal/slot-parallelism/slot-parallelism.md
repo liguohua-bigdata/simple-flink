@@ -102,7 +102,7 @@
   c.有了任务槽共享，可以将基本并行度（base parallelism）从2提升到6.提高了分槽资源的利用率。
     同时它还可以保障TaskManager给subtask的分配的slot方案更加公平。
     
-4.经验上讲Slot的数量与CPU-core的数量一致为好。但考虑到超线程计算，可以让slotNumber=2*cpuCore.
+4.经验上讲Slot的数量与CPU-core的数量一致为好。但考虑到超线程，可以让slotNumber=2*cpuCore.
 ```
 
 
