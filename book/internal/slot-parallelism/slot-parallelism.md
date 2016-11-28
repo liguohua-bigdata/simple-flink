@@ -54,12 +54,12 @@
 ####3.2数据传输模式
 ```
 1.Stream在transform过程中有两种传输模式,Forwarding模式和Redistributing模式。
-2.Forwarding模式是指Stream-Partition之间是一对一(One-to-One)的传输。子stream保留父stream的分区个数和元素的顺序。
+2.Forwarding模式是指Stream-Partition之间一对一(One-to-One)传输。子stream保留父stream的分区个数和元素的顺序。
   Source向map传输stream-partition就在这种情况，分区个数，元素顺序都能保持不变，这里可以进行优化。可以把source和
   map做成一个TaskChain,用一个thread去执行一个source-subtask和map-subtask.原本4个thread处理的任务，
   优化后2个thread就能完成了，因为减少了不必要的thread开销，效率还能提升。
 3.Redistributing模式是指Stream-Partition之间是多对多的传输。stream转化过程中partition之间进行了shuffer操作,
-  这会把分区个数和元素顺序全部打乱，可能会牵涉到数据的夸节点传输。因为数据可能夸节点传输，你无法确定应该在哪个节点上启动
+  这会把分区个数和元素顺序全部打乱，可能会牵涉到数据的夸节点传输。因为数据可能夸节点传输，无法确定应该在哪个节点上启动
   一个thread去处理在两个节点上的数据，因此无法将Redistributing模式下的task做成一个task-chain。
   Map-KeyBy/Window和KeyBy/Window-sink直接就是Redistributing模式。
 ```
@@ -69,8 +69,8 @@
 1.为了减少不必要的thread通信和缓冲等开销，可以将Forwarding模式下的多个subtask做成一个subtask-chain
 2.将一个thread对应一个subtask优化为一个thread对应一个subtask-chain中的多个subtask。
   可提高总体吞吐量（throughput）并降低延迟（latency）。
-3.如果说stream-partition对数据分区是为了通过提高并发度，来提高程序的运行效率。那么subtask-chain就是在程序的运行过程中
-  合并不必要的thread来提高程序的运行效率。
+3.如果说stream-partition对数据分区是为了通过提高并发度，来提高程序的运行效率。那么subtask-chain就是在程序的运行
+  过程中合并不必要的thread来提高程序的运行效率。
 ```
 ![](images/Snip20161128_6.png) 
 ```
