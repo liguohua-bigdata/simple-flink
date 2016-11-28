@@ -15,7 +15,6 @@
     a.client能够将user提交的application分析成Dataflow提交给JM.JM会分配给TM做具体的执行工作。
       在提交完Dataflow可以关闭，也可以不关闭.
     b.client不关闭的话还可以接受cluster处理进度报告，以便user能跟着任务的运行情况。
-
 ```
 
 ##二、程序（Progrram）和数据流（Dataflows）
