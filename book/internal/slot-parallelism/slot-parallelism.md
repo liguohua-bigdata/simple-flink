@@ -76,11 +76,34 @@
 ```
 原来需要7个thread的任务在进行chain优化后，5个thread就能更好的完成。
 ```
-
-
+###5.任务槽（Task slot）
 ![](images/Snip20161128_3.png) 
+```
+1.flink的TM就是运行在不同节点上的JVM进程（process）,这个进程会拥有一定量的资源。比如内存，cpu，网络，磁盘等。
+  flink将进程的内存进行了划分到多个slot中.图中有2个TaskManager，每个TM有3个slot的，每个slot占有1/3的内存。
+  
+2.内存被划分到不同的slot之后可以获得如下好处。
+  a.TaskManager最多能同时并发执行的任务是可以控制的，那就是3个,因为不能超过slot的数量。
+  b.slot有独占的内存空间，这样在一个TaskManager中可以运行多个不同的作业，作业之间不受影响。
+  c.slot之间可以共享JVM资源, 可以共享Dataset和数据结构，也可以通过多路复用（Multiplexing）
+    共享TCP连接和心跳消息（Heatbeat Message）。
+```
+
+###6.槽共享（Slot Sharing）
 ![](images/Snip20161128_4.png) 
 
+```
+1.flink默认允许同一个job下的subtask可以共享slot.
+2.这样可以使得同一个slot运行整个job的流水线（pipleline）
+3.槽共享可以获得如下好处：
+  a.只需计算Job中最高并行度（parallelism）的task slot,只要这个满足，其他的job也都能满足。
+  b.资源分配更加公平，如果有比较空闲的slot可以将更多的任务分配给它。图中若没有任务槽共享，负载
+    不高的Source/Map等subtask将会占据许多资源，而负载较高的窗口subtask则会缺乏资源。
+  c.有了任务槽共享，可以将基本并行度（base parallelism）从2提升到6.提高了分槽资源的利用率。
+    同时它还可以保障TaskManager给subtask的分配的slot方案更加公平。
+    
+4.经验上讲Slot的数量与CPU-core的数量一致为好。但考虑到超线程计算，可以让slotNumber=2*cpuCore.
+```
 
 
 
