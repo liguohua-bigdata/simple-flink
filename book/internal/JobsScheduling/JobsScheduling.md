@@ -34,18 +34,15 @@
 2.最正常的状态是created->running->finished
 3.running的job还可能被取消，运行失败，挂起运行等，这样job就会切换到相应的状态
 ```
+![](images/Snip20161129_5.png) 
+```
+1.在程序执行期间，每个并行任务要经过多个阶段，从created到finished或failed
+2.一个任务可能被多次执行（如在失效恢复的过程中），所以我们以一个Exection跟踪一个ExecutionVertex。
+3.每个ExecutionVertex都有一个当前Execution(current execution)和一个前驱Execution(prior execution)
+```
 ####2.1Job状态转化在terminal中的体现
 ![](images/Snip20161129_9.png) 
 
 ####2.2Job状态转化在webUI中的体现
-![](images/Snip20161129_7.png) 
-![](images/Snip20161129_8.png) 
-####2.3subtask状态转化在webUI中的体现
-![](images/Snip20161129_10.png) 
-![](images/Snip20161129_11.png) 
-![](images/Snip20161129_12.png) 
+![](images/Snip20161129_16.png) 
 
-
-
-
-![](images/Snip20161129_5.png) 
