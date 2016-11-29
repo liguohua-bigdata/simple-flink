@@ -1,5 +1,5 @@
 
-##一、程
+##一、作业（Job）和调度（Scheduling）
 ###1.调度（Scheduling）
 ```
 1.Flink集群一般有一个或多个TaskManager，每个TaskManager有一个或多个slot来区分不同的资源（当前是内存）
@@ -16,5 +16,34 @@
 ```
 ###2.JobManager数据结构（JobManager Data Structures）
 ![](images/Snip20161129_2.png) 
+```
+1.client将program解析成dataflow,并将dataflow的描述信息JobGraph提交给JobManager。
+  JobGraph包含Operator（JobVertex），IntermediateResult(IntermediateDataSet)，并行度，执行代码，附加的库等信息。
+2.JobManager将JobGraph并行化处理成ExecutionGraph。
+  Operator（JobVertex）处理成包含多个Subtask(ExecutionVertex)的ExecutionJobVertex。
+  IntermediateResult(IntermediateDataSet)并行化成包含多个IntermediateResultPartition的IntermediateResult.
+  也就是
+  任务并行化： JobVertex->ExecutionJobVertex(含多个ExecutionVertex)
+  数据并行化： IntermediateResult->IntermediateResult(含多个IntermediateResultPartition)
+```
+
+###2.Flink的任务调度转化图
 ![](images/Snip20161129_3.png) 
+```
+1.flink的定了了job运行的状态有2种。
+2.最正常的状态是created->running->finished
+3.running的job还可能被取消，运行失败，挂起运行等，这样job就会切换到相应的状态
+```
+
+#####2.1Job状态转化在terminal中的体现
+![](images/Snip20161129_9.png) 
+
+#####2.2Job状态转化在webUI中的体现
+![](images/Snip20161129_7.png) 
+![](images/Snip20161129_8.png) 
+![](images/Snip20161129_10.png) 
+
+
+
+
 ![](images/Snip20161129_5.png) 
