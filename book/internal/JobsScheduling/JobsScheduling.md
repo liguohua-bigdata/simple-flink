@@ -34,13 +34,13 @@
 2.最正常的状态是created->running->finished
 3.running的job还可能被取消，运行失败，挂起运行等，这样job就会切换到相应的状态
 ```
-#####2.1Job状态转化在terminal中的体现
+####2.1Job状态转化在terminal中的体现
 ![](images/Snip20161129_9.png) 
 
-#####2.2Job状态转化在webUI中的体现
+####2.2Job状态转化在webUI中的体现
 ![](images/Snip20161129_7.png) 
 ![](images/Snip20161129_8.png) 
-#####2.3subtask状态转化在webUI中的体现
+####2.3subtask状态转化在webUI中的体现
 ![](images/Snip20161129_10.png) 
 ![](images/Snip20161129_11.png) 
 ![](images/Snip20161129_12.png) 
