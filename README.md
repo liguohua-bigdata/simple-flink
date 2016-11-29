@@ -44,6 +44,7 @@
 
 * [001待整理：flink的背压机制](book/backpressure/backpressure.md)
 * [002待整理：flink的内存管理](book/memory/memory.md)
+* [002待整理：flink的调度](book/internal/JobsScheduling/JobsScheduling.md)
 * [004待整理：error](book/error/error.md)
 * [003待整理：data](book/data/data.md)
 
