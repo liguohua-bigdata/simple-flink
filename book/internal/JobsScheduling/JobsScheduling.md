@@ -42,7 +42,7 @@
 ```
 ####2.1Job状态转化在terminal中的体现
 ![](images/Snip20161129_9.png) 
-
-####2.2Job状态转化在webUI中的体现
+####2.2Job状态转化在webUI中的体现（执行成功）
 ![](images/Snip20161129_16.png) 
-
+####2.3Job状态转化在webUI中的体现（执行失败）
+![](images/Snip20161129_19.png) 
