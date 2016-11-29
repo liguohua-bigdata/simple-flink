@@ -18,13 +18,14 @@
 ![](images/Snip20161129_2.png) 
 ```
 1.client将program解析成dataflow,并将dataflow的描述信息JobGraph提交给JobManager。
-  JobGraph包含Operator(JobVertex),IntermediateResult(IntermediateDataSet),并行度,执行代码,附加的库等信息。
+JobGraph包含Operator(JobVertex),IntermediateResult(IntermediateDataSet),并行度,执行代码,附加的库等信息。
+
 2.JobManager将JobGraph并行化处理成ExecutionGraph。
-  Operator（JobVertex）处理成包含多个Subtask(ExecutionVertex)的ExecutionJobVertex。
-  IntermediateResult(IntermediateDataSet)并行化成包含多个IntermediateResultPartition的IntermediateResult.
-  也就是
-  任务并行化： JobVertex->ExecutionJobVertex(含多个ExecutionVertex)
-  数据并行化： IntermediateResult->IntermediateResult(含多个IntermediateResultPartition)
+Operator（JobVertex）处理成包含多个Subtask(ExecutionVertex)的ExecutionJobVertex。
+IntermediateResult(IntermediateDataSet)并行化成含多个IntermediateResultPartition的IntermediateResult.
+也就是
+任务并行化： JobVertex->ExecutionJobVertex(含多个ExecutionVertex)
+数据并行化： IntermediateResult->IntermediateResult(含多个IntermediateResultPartition)
 ```
 
 ###2.Flink的任务调度转化图
