@@ -196,7 +196,7 @@ object FlinkKafkaStreamingWC {
     properties.setProperty("bootstrap.servers", kafkaCluster)
     properties.setProperty("zookeeper.connect",zkCluster )
     properties.setProperty("group.id", kafkaTopicName)
-    val kafka09 = new FlinkKafkaConsumer09[String](kafkaTopicName, new SimpleStringSchema(), properties)
+    val kafka09=new FlinkKafkaConsumer09[String](kafkaTopicName,new SimpleStringSchema(),properties)
     val text = env.addSource(kafka09).setParallelism(4)
 
     //5.执行运算
