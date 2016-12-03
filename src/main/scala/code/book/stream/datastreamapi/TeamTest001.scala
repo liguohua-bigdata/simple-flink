@@ -1,8 +1,8 @@
-package code.datastream
+package code.book.stream.datastreamapi
 
 import org.apache.flink.streaming.api.scala._
 
-object ReduceTest001 {
+object TeamTest001 {
   def main(args: Array[String]): Unit = {
     //1.创建流处理环境
     val senv = StreamExecutionEnvironment.getExecutionEnvironment
@@ -11,7 +11,7 @@ object ReduceTest001 {
     val text = senv.fromElements(1, 3, 2, 4, 6, 5)
 
     //3.执行运算
-    val result = text.keyBy(0).reduce(_ + _)
+    val result = text.map(_ * 2)
 
     //4.将结果打印出来
     result.print()

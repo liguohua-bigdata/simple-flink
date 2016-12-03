@@ -1,4 +1,4 @@
-package code.datastream
+package code.book.stream.datastreamapi
 
 import org.apache.flink.streaming.api.scala._
 

@@ -1,4 +1,4 @@
-package uitls
+package code.uitls
 
 import org.apache.flink.api.scala._
 object ReadHdfsFile {

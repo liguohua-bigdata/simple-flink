@@ -1,4 +1,4 @@
-package code.book.wordcount.batch
+package code.book.batch.batchwc
 
 import org.apache.flink.api.scala._
 

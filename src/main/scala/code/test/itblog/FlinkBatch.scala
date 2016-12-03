@@ -1,4 +1,4 @@
-package code.itblog
+package code.test.itblog
 
 /**
   * Created by liguohua on 24/11/2016.

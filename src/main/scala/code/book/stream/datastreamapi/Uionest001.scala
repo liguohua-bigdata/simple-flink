@@ -1,20 +1,21 @@
-package code.datastream
+package code.book.stream.datastreamapi
 
 import org.apache.flink.streaming.api.scala._
 
-object KeyByTest001 {
+object Uionest001 {
   def main(args: Array[String]): Unit = {
     //1.创建流处理环境
     val senv = StreamExecutionEnvironment.getExecutionEnvironment
 
     //2.准备数据
-    val text = senv.fromElements(("zhangsan",1200),("lisi",1200),("zhangsan",3200),("lisi",2200))
+    val dataSteam1 = senv.fromElements(1, 3, 2, 4, 6, 5)
+    val dataSteam2 = senv.fromElements(4, 7, 2, 4, 6, 5)
 
     //3.执行运算
-    val result = text.keyBy(0)
+    val dataStream3 = dataSteam1.union(dataSteam2)
 
     //4.将结果打印出来
-    result.print()
+    dataStream3.print()
 
     //5.触发流计算
     senv.execute(this.getClass.getName)

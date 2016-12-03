@@ -1,4 +1,4 @@
-package code.helloword
+package code.test.helloword
 
 //0.引入必要的程序元素
 import org.apache.flink.api.scala._
