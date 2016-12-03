@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact build-on-make="true" name="simple-flink:jar2">
+    <output-path>$PROJECT_DIR$/out/artifacts/simple_flink_jar2</output-path>
+    <root id="root">
+      <element id="archive" name="simple-flink.jar">
+        <element id="module-output" name="simple-flink" />
+      </element>
+    </root>
+  </artifact>
+</component>

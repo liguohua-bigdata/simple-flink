@@ -1,0 +1,65 @@
+<component name="libraryTable">
+  <library name="aopalliance-repackaged-2.4.0-b31">
+    <CLASSES>
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/aopalliance-repackaged-2.4.0-b31.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/argparse4j-0.5.0.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/connect-api-0.9.0.1.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/connect-file-0.9.0.1.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/connect-json-0.9.0.1.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/connect-runtime-0.9.0.1.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/hk2-api-2.4.0-b31.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/hk2-locator-2.4.0-b31.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/hk2-utils-2.4.0-b31.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/jackson-annotations-2.5.0.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/jackson-core-2.5.4.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/jackson-databind-2.5.4.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/jackson-jaxrs-base-2.5.4.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/jackson-jaxrs-json-provider-2.5.4.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/jackson-module-jaxb-annotations-2.5.4.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/javassist-3.18.1-GA.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/javax.annotation-api-1.2.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/javax.inject-1.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/javax.inject-2.4.0-b31.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/javax.servlet-api-3.1.0.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/javax.ws.rs-api-2.0.1.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/jersey-client-2.22.1.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/jersey-common-2.22.1.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/jersey-container-servlet-2.22.1.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/jersey-container-servlet-core-2.22.1.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/jersey-guava-2.22.1.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/jersey-media-jaxb-2.22.1.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/jersey-server-2.22.1.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/jetty-http-9.2.12.v20150709.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/jetty-io-9.2.12.v20150709.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/jetty-security-9.2.12.v20150709.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/jetty-server-9.2.12.v20150709.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/jetty-servlet-9.2.12.v20150709.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/jetty-util-9.2.12.v20150709.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/jopt-simple-3.2.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/kafka-clients-0.9.0.1.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/kafka-log4j-appender-0.9.0.1.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/kafka-tools-0.9.0.1.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/kafka_2.11-0.9.0.1-test.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/kafka_2.11-0.9.0.1.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/log4j-1.2.17.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/lz4-1.2.0.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/metrics-core-2.2.0.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/osgi-resource-locator-1.0.1.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/scala-library-2.11.7.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/scala-parser-combinators_2.11-1.0.4.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/scala-xml_2.11-1.0.4.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/slf4j-api-1.7.6.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/slf4j-log4j12-1.7.6.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/snappy-java-1.1.1.7.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/validation-api-1.1.0.Final.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/zkclient-0.7.jar!/" />
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/zookeeper-3.4.6.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/kafka_2.11-0.9.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/kafka_2.11-0.9.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

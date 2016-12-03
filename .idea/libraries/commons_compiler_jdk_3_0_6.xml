@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="commons-compiler-jdk-3.0.6">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/commons-compiler-jdk-3.0.6.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
