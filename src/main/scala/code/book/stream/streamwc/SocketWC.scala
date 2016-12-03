@@ -1,4 +1,4 @@
-package code.book.stream.socketwc
+package code.book.stream.streamwc
 
 //0.引用必要的元素
 import org.apache.flink.streaming.api.scala._
