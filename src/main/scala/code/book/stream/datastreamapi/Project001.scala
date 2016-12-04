@@ -2,16 +2,17 @@ package code.book.stream.datastreamapi
 
 import org.apache.flink.streaming.api.scala._
 
-object FilterTest001 {
+object Project001 {
   def main(args: Array[String]): Unit = {
     //1.创建流处理环境
     val senv = StreamExecutionEnvironment.getExecutionEnvironment
 
     //2.准备数据
-    val text = senv.fromElements(1, 3, 2, 4, 6, 5)
+    val stu:DataStream[(String,Int,Int)] = senv.fromElements(("zhangsan", 15, 137), ("lisi", 21, 154), ("wagnwu", 16, 145))
+
 
     //3.执行运算
-    val result = text.filter(_ % 2 == 0)
+    val result =stu.project(2,0)
 
     //4.将结果打印出来
     result.print()

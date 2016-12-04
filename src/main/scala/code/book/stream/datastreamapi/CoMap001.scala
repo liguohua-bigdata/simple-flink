@@ -2,27 +2,21 @@ package code.book.stream.datastreamapi
 
 import org.apache.flink.streaming.api.scala._
 
-object Split001 {
+object CoMap001 {
   def main(args: Array[String]): Unit = {
     //1.创建流处理环境
     val senv = StreamExecutionEnvironment.getExecutionEnvironment
 
     //2.准备数据
-    val text = senv.fromElements(1, 3, 2, 4, 6, 5)
+    val dataSteam1 = senv.fromElements(1, 3, 2, 4, 6, 5)
+    val dataSteam2 = senv.fromElements(40, 17, 12, 41, 16, 25)
 
     //3.执行运算
-    val split = text.split(
-      (num: Int) =>
-        (num % 2) match {
-          case 0 => List("even")
-          case 1 => List("odd")
-        }
-    )
-    split.print()
+    val connectedStreams = dataSteam1.connect(dataSteam2)
+    val dataSteam3 = connectedStreams
     //4.将结果打印出来
-    split.select("even").print()
-    split.select("odd").print()
-    split.select("even", "odd").print()
+//    dataSteam3.print()
+
     //5.触发流计算
     senv.execute(this.getClass.getName)
   }
