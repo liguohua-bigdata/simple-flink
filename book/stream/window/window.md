@@ -66,6 +66,7 @@
 ```
 1.发送命令
 nc -lk 9999
+
 2.发送内容
 9,3
 9,2
@@ -78,6 +79,7 @@ nc -lk 9999
 5,4
 ```
 ####1.2处理数据
+#####执行程序
 ```
 package code.book.stream.window.time
 
@@ -116,6 +118,7 @@ object TumblingTW {
   }
 }
 ```
+#####执行效果
 ![](images/Snip20161204_2.png) 
 
 
@@ -124,6 +127,7 @@ object TumblingTW {
 ```
 1.发送命令
 nc -lk 9999
+
 2.发送内容
 9,3
 9,2
@@ -136,6 +140,7 @@ nc -lk 9999
 5,4
 ```
 ####2.2处理数据
+#####执行程序
 ```
 package code.book.stream.window.time
 
@@ -175,7 +180,14 @@ object SlidingTW {
   }
 }
 ```
+#####执行效果
 ![](images/Snip20161204_3.png) 
+
+
+
+
+
+
 
 
 
