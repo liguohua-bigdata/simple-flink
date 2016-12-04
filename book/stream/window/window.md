@@ -330,11 +330,12 @@ object SlidingCW {
 2.flink支持窗口的两个重要属性（size和interval）
     如果size=interval,那么就会形成tumbling-window(无重叠数据)
     如果size>interval,那么就会形成sliding-window(有重叠数据)
+    如果size<interval,那么这种窗口将会丢失数据。比如每5秒钟，统计过去3秒的通过路口汽车的数据，将会漏掉2秒钟的数据。
 3.通过组合可以得出四种基本窗口
-    time-tumbling-window 无重叠数据的时间窗口
-    time-sliding-window  有重叠数据的时间窗口
-    count-tumbling-window无重叠数据的数量窗口
-    count-sliding-window 有重叠数据的数量窗口
+    time-tumbling-window 无重叠数据的时间窗口，设置方式举例：timeWindow(Time.seconds(5))
+    time-sliding-window  有重叠数据的时间窗口，设置方式举例：timeWindow(Time.seconds(5), Time.seconds(3))
+    count-tumbling-window无重叠数据的数量窗口，设置方式举例：countWindow(5)
+    count-sliding-window 有重叠数据的数量窗口，设置方式举例：countWindow(5,3)
 4.flink支持在stream上的通过key去区分多个窗口
 ```
 
