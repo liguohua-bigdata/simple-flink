@@ -11,7 +11,7 @@
 ```
 
 
-##一、time和time-window理论
+##一、time-window理论
 ###1.time
 ![](images/Snip20161203_12.png) 
 ```
@@ -60,8 +60,8 @@
 2.flink可以用多个时间窗口去统计多条车流信息。
 3.图中有3条车流信息，用3个窗口去统计，形成了 (sensorId, carCnt)的数据信息。
 ```
-##一、time和time-window实战
-###1.tumbling-window (无重叠数据)实战
+##一、time-window实战
+###1.tumbling-time-window (无重叠数据)实战
 ####1.1发送数据
 ```
 1.发送命令
@@ -80,7 +80,7 @@ nc -lk 9999
 ```
 ####1.2处理数据
 #####执行程序
-```
+```scala
 package code.book.stream.window.time
 
 //0.引入必要的编程元素
@@ -122,7 +122,7 @@ object TumblingTW {
 ![](images/Snip20161204_2.png) 
 
 
-###2.sliding-window  (有重叠数据)实战
+###2.sliding-time-window  (有重叠数据)实战
 ####2.1发送数据
 ```
 1.发送命令
@@ -141,7 +141,7 @@ nc -lk 9999
 ```
 ####2.2处理数据
 #####执行程序
-```
+```scala
 package code.book.stream.window.time
 
 //0.引入必要的编程元素
@@ -187,12 +187,127 @@ object SlidingTW {
 
 
 
+##一、count-window实战
+###1.tumbling-count-window (无重叠数据)实战
+####1.1发送数据
+```
+1.发送命令
+nc -lk 9999
 
+2.发送内容
+9,3
+9,2
+9,7
+4,9
+2,6
+1,5
+2,3
+5,7
+5,4
+```
+####1.2处理数据
+#####执行程序
+```scala
+package code.book.stream.window.count
 
+//0.引入必要的编程元素
+import org.apache.flink.streaming.api.scala.{StreamExecutionEnvironment, _}
 
+object TumblingCW {
+  def main(args: Array[String]): Unit = {
 
+    //1.创建运行环境
+    val env = StreamExecutionEnvironment.getExecutionEnvironment
 
-Window就是用来对一个无限的流设置一个有限的集合，在有界的数据集上进行操作的一种机制。window又可以分为基于时间（Time-based）的window以及基于数量（Count-based）的window。
+    //2.定义数据流来源
+    val text = env.socketTextStream("qingcheng11", 9999)
+
+    //3.转换数据格式，text->CarWc
+    case class CarWc(sensorId: Int, carCnt: Int)
+    val ds1: DataStream[CarWc] = text.map {
+      (f) => {
+        val tokens = f.split(",")
+        CarWc(tokens(0).trim.toInt, tokens(1).trim.toInt)
+      }
+    }
+    //4.执行统计操作，每个sensorId一个tumbling窗口，窗口的大小为5
+    //也就是说，每个sensorId收到5条数据时统计一次，各自路口通过的汽车数量
+    val ds2: DataStream[CarWc] = ds1
+      .keyBy("sensorId")
+      .countWindow(5)
+      .sum("carCnt")
+
+    //5.显示统计结果
+    ds2.print()
+
+    //6.触发流计算
+    env.execute(this.getClass.getName)
+  }
+}
+```
+#####执行效果
+![](images/Snip20161204_4.png) 
+
+###2.sliding-count-window  (有重叠数据)实战
+####2.1发送数据
+```
+1.发送命令
+nc -lk 9999
+
+2.发送内容
+9,3
+9,2
+9,7
+4,9
+2,6
+1,5
+2,3
+5,7
+5,4
+```
+####2.2处理数据
+#####执行程序
+```scala
+package code.book.stream.window.count
+
+//0.引入必要的编程元素
+import org.apache.flink.streaming.api.scala.{StreamExecutionEnvironment, _}
+
+object SlidingCW {
+  def main(args: Array[String]): Unit = {
+
+    //1.创建运行环境
+    val env = StreamExecutionEnvironment.getExecutionEnvironment
+
+    //2.定义数据流来源
+    val text = env.socketTextStream("qingcheng11", 9999)
+
+    //3.转换数据格式，text->CarWc
+    case class CarWc(sensorId: Int, carCnt: Int)
+    val ds1: DataStream[CarWc] = text.map {
+      (f) => {
+        val tokens = f.split(",")
+        CarWc(tokens(0).trim.toInt, tokens(1).trim.toInt)
+      }
+    }
+    //4.执行统计操作，每个sensorId一个sliding窗口，窗口大小3条数据,窗口滑动为3条数据
+    //也就是说，每个sensorId收到3条数据时统计一次，过去5条消息中，各自路口通过的汽车数量
+    val ds2: DataStream[CarWc] = ds1
+      .keyBy("sensorId")
+      .countWindow(5, 3)
+      .sum("carCnt")
+
+    //5.显示统计结果
+    ds2.print()
+
+    //6.触发流计算
+    env.execute(this.getClass.getName)
+  }
+}
+```
+#####执行效果
+![](images/Snip20161204_5.png) 
+
 
 
 总结
