@@ -47,14 +47,7 @@
 4.如果窗口的滑动时间和窗口的大小时间相等，那么sliding-window就变成了tumbling-window
   也就是说将每30秒统计一次,统计1分钟通过汽车数量，改成.每1分钟统计一次,1分钟内通过汽车数量。
 ```
-###5.两钟time-window的总结
-```
-1.时间窗口有两个重要的时间属性，一个是窗口滑动时间(interval-time)，另一个是窗口大小时间(size-time)
-2.如果窗口滑动时间=窗口大小时间就会形成tumbling-window (无重叠数据)
-3.如果窗口滑动时间<窗口大小时间就会形成sliding-window (有重叠数据)
-```
-
-###6.现实的交通场景中的多time-window
+###5.现实的交通场景中的多time-window
 ![](images/windows-keyed.png) 
 ```
 1.城市当中有多个红绿灯路口，每个红绿灯路口处都能形成车流。
@@ -329,16 +322,20 @@ object SlidingCW {
 ![](images/Snip20161204_5.png) 
 
 
-
-总结
+五、window总结
 ```
-1.划分窗口的方式，确定了窗口的驱动方式。
-  如果根据时间划分窗口，那么它就是一个time-window
-  如果根据数据划分窗口，那么它就是一个count-window
-2.移动窗口的方式，确定了窗口是否有重叠数据。
-  如果无重叠数据，那么它是一个tumbling-windows
-  如果有重叠数据，那么它是一个sliding-windows 
-
+1.flink支持两种划分窗口的方式（time和count）
+    如果根据时间划分窗口，那么它就是一个time-window
+    如果根据数据划分窗口，那么它就是一个count-window
+2.flink支持窗口的两个重要属性（size和interval）
+    如果size=interval,那么就会形成tumbling-window(无重叠数据)
+    如果size>interval,那么就会形成sliding-window(有重叠数据)
+3.通过组合可以得出四种基本窗口
+    time-tumbling-window 无重叠数据的时间窗口
+    time-sliding-window  有重叠数据的时间窗口
+    count-tumbling-window无重叠数据的数量窗口
+    count-sliding-window 有重叠数据的数量窗口
+4.flink支持在stream上的通过key去区分多个窗口
 ```
 
 
