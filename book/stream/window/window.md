@@ -1,5 +1,6 @@
 
-##一、stream和window
+##一、流处理的基本概念
+###1.stream和window
 ![](images/Snip20161204_1.png) 
 ```
 1.源源不断的数据流是无法进行统计工作的，因为数据流没有边界，就无法统计到底有多少数据经过了这个流。
@@ -9,35 +10,35 @@
   2.根据数据进行截取(data-driven-window)，比如每5个数据统计一次或每50个数据统计一次。
 3.图中上面是time-window,下面是count-window。
 ```
-
-
-##一、time-window理论
-###1.time
+###2.time
 ![](images/Snip20161203_12.png) 
 ```
 1.事件时间（Event Time）:事件在它的生产设备上发生的时间 
 2.提取时间是（Ingestion time）:事件进入Flink的时间
 3.处理时间（Processing Time）:执行对应Operation设备的系统时间
 ```
-###2.stream
+
+
+##二、time-window理论
+###1.车流通过红绿灯的场景
 ![](images/window-stream.png) 
 ```
 1.红绿灯路口会有汽车通过，一共会有多少汽车通过，无法计算。因为车流源源不断，计算没有边界。
 2.统计每15秒钟通过红路灯的汽车数量，第一个15秒为2辆，第二个15秒为3辆，第三个15秒为1辆。。。
 ```
-###2.count
+###2.车流通过红绿灯的计算
 ![](images/window-rolling-sum.png) 
 ```
 1.每15秒统计一次，一共有多少汽车通过红路灯。新数据和原来数据一起统计。
 2.第一个15秒为2辆，第二个15秒为2+3=5辆，第三个15秒为2+3+1=6辆。。。
 ```
-###3.tumbling-window (无重叠数据)
+###3.其中的tumbling-window (无重叠数据)
 ![](images/window-tumbling-window.png) 
 ```
 1.每分钟统计一次，这一分钟内一共有多少汽车通过红绿灯。
 2.第一分钟的为8辆，第二分钟为22辆，第三分钟为27辆。。。这样，1个小时内会有60个tumbling window。
 ```
-###4.sliding-window (有重叠数据)
+###4.其中的sliding-window (有重叠数据)
 ![](images/window-sliding-window.png) 
 ```
 1.每30秒统计一次,1分钟内通过汽车数量。（30秒窗口滑动时间，1分钟窗口大小时间）
@@ -46,22 +47,27 @@
 4.如果窗口的滑动时间和窗口的大小时间相等，那么sliding-window就变成了tumbling-window
   也就是说将每30秒统计一次,统计1分钟通过汽车数量，改成.每1分钟统计一次,1分钟内通过汽车数量。
 ```
-###5.time-window总结
+###5.两钟time-window的总结
 ```
 1.时间窗口有两个重要的时间属性，一个是窗口滑动时间(interval-time)，另一个是窗口大小时间(size-time)
 2.如果窗口滑动时间=窗口大小时间就会形成tumbling-window (无重叠数据)
 3.如果窗口滑动时间<窗口大小时间就会形成sliding-window (有重叠数据)
 ```
 
-###6.多time-window
+###6.现实的交通场景中的多time-window
 ![](images/windows-keyed.png) 
 ```
 1.城市当中有多个红绿灯路口，每个红绿灯路口处都能形成车流。
 2.flink可以用多个时间窗口去统计多条车流信息。
 3.图中有3条车流信息，用3个窗口去统计，形成了 (sensorId, carCnt)的数据信息。
 ```
-##一、time-window实战
+##三、交通场景下time-window实战
 ###1.tumbling-time-window (无重叠数据)实战
+####1.0实战目的
+```
+每5秒钟统计一次，在这过去的5秒钟内，各个路口通过红绿灯汽车的数量。
+```
+
 ####1.1发送数据
 ```
 1.发送命令
@@ -105,6 +111,7 @@ object TumblingTW {
     }
    
     //4.执行统计操作，每个sensorId一个tumbling窗口，窗口的大小为5秒
+    //也就是说，每5秒钟统计一次，在这过去的5秒钟内，各个路口通过红绿灯汽车的数量。
     val ds2: DataStream[CarWc] = ds1
       .keyBy("sensorId")
       .timeWindow(Time.seconds(5))
@@ -123,6 +130,11 @@ object TumblingTW {
 
 
 ###2.sliding-time-window  (有重叠数据)实战
+####2.0实战目的
+```
+每5秒钟统计一次，在这过去的10秒钟内，各个路口通过红绿灯汽车的数量。
+```
+
 ####2.1发送数据
 ```
 1.发送命令
@@ -166,7 +178,7 @@ object SlidingTW {
       }
     }
     //4.执行统计操作，每个sensorId一个sliding窗口，窗口时间10秒,滑动时间5秒
-    //也就是每5秒统计一次，过去10秒钟通过红绿灯的汽车数量
+    //也就是说，每5秒钟统计一次，在这过去的10秒钟内，各个路口通过红绿灯汽车的数量。
     val ds2: DataStream[CarWc] = ds1
       .keyBy("sensorId")
       .timeWindow(Time.seconds(10), Time.seconds(5))
@@ -184,11 +196,13 @@ object SlidingTW {
 ![](images/Snip20161204_3.png) 
 
 
-
-
-
-##一、count-window实战
+##四、交通场景下的count-window实战
 ###1.tumbling-count-window (无重叠数据)实战
+####1.0实战目的
+```
+每个路口分别统计，收到关于它的5条消息时统计在最近5条消息中，各自路口通过的汽车数量
+```
+
 ####1.1发送数据
 ```
 1.发送命令
@@ -231,7 +245,7 @@ object TumblingCW {
       }
     }
     //4.执行统计操作，每个sensorId一个tumbling窗口，窗口的大小为5
-    //也就是说，每个sensorId收到5条数据时统计一次，各自路口通过的汽车数量
+    //也就是说，每个路口分别统计，收到关于它的5条消息时统计在最近5条消息中，各自路口通过的汽车数量
     val ds2: DataStream[CarWc] = ds1
       .keyBy("sensorId")
       .countWindow(5)
@@ -249,6 +263,12 @@ object TumblingCW {
 ![](images/Snip20161204_4.png) 
 
 ###2.sliding-count-window  (有重叠数据)实战
+####2.0实战目的
+```
+每个路口分别统计，收到关于它的3条消息时统计在最近5条消息中，各自路口通过的汽车数量
+```
+
+
 ####2.1发送数据
 ```
 1.发送命令
@@ -291,7 +311,7 @@ object SlidingCW {
       }
     }
     //4.执行统计操作，每个sensorId一个sliding窗口，窗口大小3条数据,窗口滑动为3条数据
-    //也就是说，每个sensorId收到3条数据时统计一次，过去5条消息中，各自路口通过的汽车数量
+    //也就是说，每个路口分别统计，收到关于它的3条消息时统计在最近5条消息中，各自路口通过的汽车数量
     val ds2: DataStream[CarWc] = ds1
       .keyBy("sensorId")
       .countWindow(5, 3)
