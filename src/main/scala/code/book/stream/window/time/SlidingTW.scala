@@ -22,7 +22,7 @@ object SlidingTW {
       }
     }
     //4.执行统计操作，每个sensorId一个sliding窗口，窗口时间10秒,滑动时间5秒
-    //也就是每5秒统计一此，过去10秒钟通过红绿灯的汽车数量
+    //也就是每5秒统计一次，过去10秒钟通过红绿灯的汽车数量
     val ds2: DataStream[CarWc] = ds1
       .keyBy("sensorId")
       .timeWindow(Time.seconds(10), Time.seconds(5))
