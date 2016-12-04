@@ -12,10 +12,10 @@ object Project001 {
 
 
     //3.执行运算
-    val result =stu.project(2,0)
+//    val result =stu.project(2,0)
 
     //4.将结果打印出来
-    result.print()
+//    result.print()
 
     //5.触发流计算
     senv.execute(this.getClass.getName)

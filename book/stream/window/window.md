@@ -11,7 +11,7 @@
 ```
 
 
-##一、time和time-window
+##一、time和time-window理论
 ###1.time
 ![](images/Snip20161203_12.png) 
 ```
@@ -48,10 +48,134 @@
 ```
 ###5.time-window总结
 ```
-1.时间窗口有两个重要的时间属性，一个是窗口滑动时间()，另一个是窗口大小时间
+1.时间窗口有两个重要的时间属性，一个是窗口滑动时间(interval-time)，另一个是窗口大小时间(size-time)
 2.如果窗口滑动时间=窗口大小时间就会形成tumbling-window (无重叠数据)
 3.如果窗口滑动时间<窗口大小时间就会形成sliding-window (有重叠数据)
 ```
+
+###6.多time-window
+![](images/windows-keyed.png) 
+```
+1.城市当中有多个红绿灯路口，每个红绿灯路口处都能形成车流。
+2.flink可以用多个时间窗口去统计多条车流信息。
+3.图中有3条车流信息，用3个窗口去统计，形成了 (sensorId, carCnt)的数据信息。
+```
+##一、time和time-window实战
+###1.tumbling-window (无重叠数据)实战
+####1.1发送数据
+```
+1.发送命令
+nc -lk 9999
+2.发送内容
+9,3
+9,2
+9,7
+4,9
+2,6
+1,5
+2,3
+5,7
+5,4
+```
+####1.2处理数据
+```
+package code.book.stream.window.time
+
+//0.引入必要的编程元素
+import org.apache.flink.streaming.api.scala.{StreamExecutionEnvironment, _}
+import org.apache.flink.streaming.api.windowing.time.Time
+
+object TumblingTW {
+  def main(args: Array[String]): Unit = {
+    //1.创建运行环境
+    val env = StreamExecutionEnvironment.getExecutionEnvironment
+  
+    //2.定义数据流来源
+    val text = env.socketTextStream("qingcheng11", 9999)
+
+    //3.转换数据格式，text->CarWc
+    case class CarWc(sensorId: Int, carCnt: Int)
+    val ds1: DataStream[CarWc] = text.map {
+      (f) => {
+        val tokens = f.split(",")
+        CarWc(tokens(0).trim.toInt, tokens(1).trim.toInt)
+      }
+    }
+   
+    //4.执行统计操作，每个sensorId一个tumbling窗口，窗口的大小为5秒
+    val ds2: DataStream[CarWc] = ds1
+      .keyBy("sensorId")
+      .timeWindow(Time.seconds(5))
+      .sum("carCnt")
+   
+    //5.显示统计结果
+    ds2.print()
+
+    //6.触发流计算
+    env.execute(this.getClass.getName)
+  }
+}
+```
+![](images/Snip20161204_2.png) 
+
+
+###2.sliding-window  (有重叠数据)实战
+####2.1发送数据
+```
+1.发送命令
+nc -lk 9999
+2.发送内容
+9,3
+9,2
+9,7
+4,9
+2,6
+1,5
+2,3
+5,7
+5,4
+```
+####2.2处理数据
+```
+package code.book.stream.window.time
+
+//0.引入必要的编程元素
+import org.apache.flink.streaming.api.scala.{StreamExecutionEnvironment, _}
+import org.apache.flink.streaming.api.windowing.time.Time
+
+object SlidingTW {
+  def main(args: Array[String]): Unit = {
+
+    //1.创建运行环境
+    val env = StreamExecutionEnvironment.getExecutionEnvironment
+
+    //2.定义数据流来源
+    val text = env.socketTextStream("qingcheng11", 9999)
+
+    //3.转换数据格式，text->CarWc
+    case class CarWc(sensorId: Int, carCnt: Int)
+    val ds1: DataStream[CarWc] = text.map {
+      (f) => {
+        val tokens = f.split(",")
+        CarWc(tokens(0).trim.toInt, tokens(1).trim.toInt)
+      }
+    }
+    //4.执行统计操作，每个sensorId一个sliding窗口，窗口时间10秒,滑动时间5秒
+    //也就是每5秒统计一此，过去10秒钟通过红绿灯的汽车数量
+    val ds2: DataStream[CarWc] = ds1
+      .keyBy("sensorId")
+      .timeWindow(Time.seconds(10), Time.seconds(5))
+      .sum("carCnt")
+
+    //5.显示统计结果
+    ds2.print()
+
+    //6.触发流计算
+    env.execute(this.getClass.getName)
+  }
+}
+```
+![](images/Snip20161204_3.png) 
 
 
 

@@ -8,7 +8,7 @@ object Reduce001 {
     val senv = StreamExecutionEnvironment.getExecutionEnvironment
 
     //2.准备数据
-    val text = senv.fromElements((1, 3), (2, 4),( 6, 5))
+    val text = senv.fromElements((1, 3), (2, 4),(6, 5))
 
     //3.执行运算
     val result: DataStream[String] =
