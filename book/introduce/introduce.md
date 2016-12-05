@@ -1,5 +1,6 @@
 #第一部分：flink概况
 ##一、flink简介
+![](images/Snip20161205_9.png) 
 ```
 1.flink和spark类似，是一个通用的，基于内存计算的，大数据处理引擎。
 2.2008年是德国柏林理工大学一个研究性项目，用Java和Scala混合编写而成的。
@@ -16,7 +17,7 @@ https://github.com/apache/flink
 ```
 
 ###3.flink基本架构
-![](images/Picture0.png) 
+![](images/Apache-Flink-Architecture.png) 
 ```
 1.flink和Hadoop一样是一个主从式的分布式系统,有主节点（master）和从节点（worker）组成。
 2.如果主节点不做HA，那么系统中有一个主节点和多个从节点组成。
@@ -24,6 +25,17 @@ https://github.com/apache/flink
 4.主节点的：负责分发计算任务，负责监控计算任务的执行情况。
 5.从节点的：负责执行计算任务，负责报告计算任务的执行情况。
 6.flinK使用一个client来提交计算任务。
+```
+![](images/Apache-Flink-node-daemons.png) 
+```
+1.主节点的上的进程为JobManager(JM)
+2.主节点的上的进程为TaskManager(TM)
+```
+![](images/Picture0.png) 
+```
+1.client用于向flink-cluster提交job
+2.JM负责将job解析为task，并将相应的task分发给相应的taskmanager执行，监控taskmanager的运行情况。
+3.TM负责执行相应的task,并将执行的进度情况实时上报给JM
 ```
 
 ###4.flink和hdfs结合
