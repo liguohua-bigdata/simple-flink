@@ -9,6 +9,7 @@ object ProcessingTimeExample {
 
     //1.创建执行环境，并设置为使用ProcessingTime
     val env = StreamExecutionEnvironment.getExecutionEnvironment
+    //设置为使用ProcessingTime
     env.setStreamTimeCharacteristic(TimeCharacteristic.ProcessingTime)
 
     //2.创建数据流，并进行数据转化
@@ -19,10 +20,10 @@ object ProcessingTimeExample {
       SalePrice(columns(0).toLong, columns(1), columns(2), columns(3).toDouble)
     })
 
-    //3.使用ProcessingTime进行求最值操作
+    //3.使用ProcessingTime进行求最值操作,不需要提取消息中的时间属性
     val dst2: DataStream[SalePrice] = dst1
       .keyBy(_.productName)
-      .timeWindow(Time.seconds(10))
+      .timeWindow(Time.seconds(5))
       .max("price")
 
     //4.显示结果
