@@ -49,8 +49,7 @@
 * [第十章：Flink基于流的watermark操作](book/stream/wartermark/watermark.md)
 * [第十章：Flink基于流的join操作](book/stream/join/join.md)
 * [第十章：Flink基于流的checkpoint操作](book/stream/checkpoint/checkpoint.md)
-
-
+* [第十章：Flink基于流的customSource操作](book/stream/customSource/customSource.md)
 
 * [flink的背压机制](book/backpressure/backpressure.md)
 * [flink的内存管理](book/memory/memory.md)
@@ -60,3 +59,9 @@
 
 
 
+---
+
+
+
+http://data-artisans.com/how-apache-flink-enables-new-streaming-applications-part-1/
+http://data-artisans.com/session-windowing-in-flink/
