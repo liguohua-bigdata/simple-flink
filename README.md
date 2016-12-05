@@ -39,19 +39,19 @@
 * [第五章：Flink基于IntelliJ IDEA开发环境的搭建(使用maven)](book/ide/idea-maven/idea-maven.md)
 * [第六章：Flink的slot和parallelism](book/internal/slot-parallelism/slot-parallelism.md)
 * [第七章：Flink-on-yarn模式解析](book/yarn/yarn.md)
-* [第八章：Flink基于流的wordcount](book/stream/streamwc/streamwc.md)
-
+* [第八章：Flink基于流的wordcount示例](book/stream/streamwc/streamwc.md)
+* [第九章：Flink基于流的window操作](book/stream/window/window.md)
 
 
 
 ---
-* [第八章：window](book/stream/window/window.md)
 
-* [001待整理：flink的背压机制](book/backpressure/backpressure.md)
-* [002待整理：flink的内存管理](book/memory/memory.md)
-* [002待整理：flink的调度](book/internal/JobsScheduling/JobsScheduling.md)
-* [004待整理：error](book/error/error.md)
-* [003待整理：data](book/data/data.md)
+
+* [flink的背压机制](book/backpressure/backpressure.md)
+* [flink的内存管理](book/memory/memory.md)
+* [flink的调度](book/internal/JobsScheduling/JobsScheduling.md)
+* [error](book/error/error.md)
+* [data](book/data/data.md)
 
 
 
