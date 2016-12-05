@@ -84,4 +84,5 @@ input
     .<windowed transformation>(<window function>)
 ```
 
-http:http://data-artisans.com/session-windowing-in-flink/
+http://www.cnblogs.com/lanyun0520/p/5774831.html
+https://ci.apache.org/projects/flink/flink-docs-release-1.1/apis/streaming/windows.html#sliding-windows
