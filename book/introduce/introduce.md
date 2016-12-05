@@ -257,6 +257,12 @@ flink liberaries:
     6.提供FlinkML API来支持机器学习场景
 ```
 
+![](images/Apache-Flink-ecosystem-components.png)    
+```
+flink为了和大数据生态圈的其他技术进行融合，也在努力的扩展器存储层的支撑。
+```
+
+
 ###spark的软件栈  
 ![](images/spark-stack.png)   
 ```
