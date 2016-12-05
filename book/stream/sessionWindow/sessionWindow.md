@@ -1,12 +1,21 @@
 
 ##一、流处理的基本概念
-###1.基本数据流示例
-![](images/example-input.png) 
+###1.全局窗口（Global Windows）
+###1.1全局窗口概念
+![](images/Snip20161205_10.png) 
 ```
 1.用户上京东购物，会进行一系列的操作，比如（点击、浏览、搜索、购买、付款等），用户的操作可以被记录为用户操作数据流。
 2.京东上的用户会同时有多个，每个用户的操作都是独立的，随机的，因此用户之间的行为没有必然联系，没有统一规律。
 ```
-###2.基本数据流分析之TumblingWindow
+###1.2全局窗口定义
+```
+// global windows
+input
+.keyBy(<key selector>)
+.window(GlobalWindows.create())
+```
+
+###2.TumblingWindow
 ![](images/example-input-with-tumbling-windows.png) 
 ```
 如果我们用原来的tumbling-window对stream进行窗口划分，也就是用统一的时间去划分window，
@@ -14,11 +23,21 @@
 造成本来一连串的操作被划分到不同的window中去了
 ```
 
-###3.基本数据流分析之SessionWindow
+###3.SessionWindow（概念）
 ![](images/example-input-with-sessions.png) 
 ```
 1.用户的行为有时是一连串的，形成的数据流也是一连串的
 2.我们把每一串称为一个session，不同的用户的session划分结果是不一样的。
+3.我们把这种window称作SessionWindow
+```
+
+###4.SessionWindow（实现）
+```
+DataStream input = …
+DataStream result = input
+  .keyBy(<key selector>)
+  .window(SessionWindows.withGap(Time.seconds(<seconds>))
+  .apply(<window function>) // or reduce() or fold()
 ```
 
 http:http://data-artisans.com/session-windowing-in-flink/
