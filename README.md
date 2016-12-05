@@ -45,6 +45,11 @@
 
 
 ---
+* [第十章：Flink基于流的SessionWindow操作](book/stream/sessionWindow/sessionWindow.md)
+* [第十章：Flink基于流的watermark操作](book/stream/wartermark/watermark.md)
+* [第十章：Flink基于流的join操作](book/stream/join/join.md)
+* [第十章：Flink基于流的checkpoint操作](book/stream/checkpoint/checkpoint.md)
+
 
 
 * [flink的背压机制](book/backpressure/backpressure.md)
@@ -52,8 +57,6 @@
 * [flink的调度](book/internal/JobsScheduling/JobsScheduling.md)
 * [error](book/error/error.md)
 * [data](book/data/data.md)
-
-
 
 
 
