@@ -15,7 +15,7 @@
 3.我们把这种window称作SessionWindow
 ```
 ####2.2会话窗口gap
-![](images/example-input-with-sessions.png) 
+![](images/session-window-closeup.png) 
 ```
 1.SessionWindow中的Gap是一个非常重要的概念，它指的是session之间的间隔。
 2.如果session之间的间隔大于指定的间隔，数据将会被划分到不同的session中。
