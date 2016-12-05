@@ -322,7 +322,7 @@ object SlidingCW {
 ![](images/Snip20161204_5.png) 
 
 
-五、window总结
+##五、window总结
 ```
 1.flink支持两种划分窗口的方式（time和count）
     如果根据时间划分窗口，那么它就是一个time-window
@@ -340,6 +340,99 @@ object SlidingCW {
 ```
 
 
+##六、time-windwo的高级用法
+![](images/Snip20161205_6.png) 
+```
+1.现实世界中的时间是不一致的，在flink中被划分为事件时间，提取时间，处理时间三种。
+2.如果以EventTime为基准来定义时间窗口那将形成EventTimeWindow,要求消息本身就应该携带EventTime
+2.如果以IngesingtTime为基准来定义时间窗口那将形成IngestingTimeWindow,以source的systemTime为准。
+2.如果以ProcessingTime基准来定义时间窗口那将形成ProcessingTimeWindow，以operator的systemTime为准。
+
+```
+
+###1.使用EventTime用法示例
+```
+1.要求消息本身就应该携带EventTime
+
+2.时间对应关系如下
+2016-04-27 11:34:22  1461756862000
+2016-04-27 11:34:27  1461756867000
+2016-04-27 11:34:32  1461756872000
+```
+
+####1.1实验目的
+```
+以EventTime划分窗口，计算5秒钟内出价最高的信息
+```
+
+####1.2输入数据
+```
+1461756862000,boos1,pc1,100.0
+1461756867000,boos2,pc1,200.0
+1461756872000,boos1,pc1,300.0
+1461756862000,boos2,pc2,500.0
+1461756867000,boos2,pc2,600.0
+1461756872000,boos2,pc2,700.0
+```
+
+####1.3执行代码
+```scala 
+package code.book.stream.window.advance
+
+import org.apache.flink.streaming.api.TimeCharacteristic
+import org.apache.flink.streaming.api.scala._
+import org.apache.flink.streaming.api.windowing.time.Time
+
+object EventTimeExample {
+  def main(args: Array[String]) {
+
+    //1.创建执行环境，并设置为使用EventTime
+    val env = StreamExecutionEnvironment.getExecutionEnvironment
+    env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)
+
+    //2.创建数据流，并进行数据转化
+    val source = env.socketTextStream("qingcheng11", 9999)
+    case class SalePrice(time: Long, boosName: String, productName: String, price: Double)
+    val dst1: DataStream[SalePrice] = source.map(value => {
+      val columns = value.split(",")
+      SalePrice(columns(0).toLong, columns(1), columns(2), columns(3).toDouble)
+    })
+
+    //3.使用EventTime进行求最值操作
+    val dst2: DataStream[SalePrice] = dst1
+      .assignAscendingTimestamps(_.time)
+      .keyBy(_.productName)
+      .timeWindow(Time.seconds(5))
+      .max("price")
+
+    //4.显示结果
+    dst2.print()
+
+    //5.触发流计算
+    env.execute()
+  }
+}
+```
+####1.4执行效果
+![](images/Snip20161205_7.png) 
+
+
+
+```
+stream
+window
+watermark
+checkpoint
+```
+
+
+
+
+
+
+
+
+
 http://www.cnblogs.com/lanyun0520/p/5745259.html
 http://blog.csdn.net/lmalds/article/details/51604501
 http://wuchong.me/blog/2016/05/25/flink-internals-window-mechanism/
@@ -347,3 +440,7 @@ http://flink.apache.org/news/2015/12/04/Introducing-windows.html
 https://ci.apache.org/projects/flink/flink-docs-release-1.1/concepts/concepts.html#time
 https://ci.apache.org/projects/flink/flink-docs-release-1.1/apis/streaming/event_time.html
 https://ci.apache.org/projects/flink/flink-docs-release-1.2/dev/windows.html
+
+
+https://www.oreilly.com/ideas/the-world-beyond-batch-streaming-101
+https://www.oreilly.com/ideas/the-world-beyond-batch-streaming-102
