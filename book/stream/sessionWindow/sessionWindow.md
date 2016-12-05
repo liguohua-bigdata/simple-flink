@@ -11,9 +11,9 @@
 ####1.2全局窗口定义
 ```
 //global windows
-val input: DataStream[T] = ...
-input.keyBy(<key selector>)
-.window(GlobalWindows.create())
+input
+    .keyBy(<key selector>)
+    .window(GlobalWindows.create())
 ```
 
 ###2.翻滚窗口(Tumbling Windows)
@@ -28,16 +28,16 @@ input.keyBy(<key selector>)
 ####2.2翻滚窗口概念定义
 ```
 // tumbling event-time windows
-val input: DataStream[T] = ...
-input.keyBy(<key selector>)
-.window(TumblingEventTimeWindows.of(Time.seconds(5)))
-.<windowed transformation>(<window function>)
+input
+    .keyBy(<key selector>)
+    .window(TumblingEventTimeWindows.of(Time.seconds(5)))
+    .<windowed transformation>(<window function>)
 
 // tumbling processing-time windows
-val input: DataStream[T] = ...
-input.keyBy(<key selector>)
-.window(TumblingProcessingTimeWindows.of(Time.seconds(5)))
-.<windowed transformation>(<window function>)
+input
+    .keyBy(<key selector>)
+    .window(TumblingProcessingTimeWindows.of(Time.seconds(5)))
+    .<windowed transformation>(<window function>)
 
 ```
 ###3.滑动窗口（Sliding Windows）
@@ -49,16 +49,16 @@ input.keyBy(<key selector>)
 ####3.2滑动窗口定义
 ```
 // sliding event-time windows
-val input: DataStream[T] = ...
-input.keyBy(<key selector>)
-.window(SlidingEventTimeWindows.of(Time.seconds(10), Time.seconds(5)))
-.<windowed transformation>(<window function>)
+input
+    .keyBy(<key selector>)
+    .window(SlidingEventTimeWindows.of(Time.seconds(10), Time.seconds(5)))
+    .<windowed transformation>(<window function>)
     
 // sliding processing-time windows
-val input: DataStream[T] = ...
-input.keyBy(<key selector>)
-.window(SlidingProcessingTimeWindows.of(Time.seconds(10), Time.seconds(5)))
-.<windowed transformation>(<window function>)
+input
+    .keyBy(<key selector>)
+    .window(SlidingProcessingTimeWindows.of(Time.seconds(10), Time.seconds(5)))
+    .<windowed transformation>(<window function>)
 ```
 
 ###4.会话窗口（Session Windows）
@@ -72,16 +72,16 @@ input.keyBy(<key selector>)
 ####4.2会话窗口定义
 ```  
 // event-time session windows
-val input: DataStream[T] = ...
-input.keyBy(<key selector>)
-.window(EventTimeSessionWindows.withGap(Time.minutes(10)))
-.<windowed transformation>(<window function>)
+input
+    .keyBy(<key selector>)
+    .window(EventTimeSessionWindows.withGap(Time.minutes(10)))
+    .<windowed transformation>(<window function>)
 
 // processing-time session windows
-val input: DataStream[T] = ...
-input.keyBy(<key selector>)
-.window(ProcessingTimeSessionWindows.withGap(Time.minutes(10)))
-.<windowed transformation>(<window function>)
+input
+    .keyBy(<key selector>)
+    .window(ProcessingTimeSessionWindows.withGap(Time.minutes(10)))
+    .<windowed transformation>(<window function>)
 ```
 
 http:http://data-artisans.com/session-windowing-in-flink/
