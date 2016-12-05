@@ -404,7 +404,8 @@ object EventTimeExample {
       //提取消息中的时间戳属性
       .assignAscendingTimestamps(_.time)
       .keyBy(_.productName)
-      .timeWindow(Time.seconds(5))
+      //.timeWindow(Time.seconds(5))//设置window方法一
+      .window(TumblingEventTimeWindows.of(Time.seconds(5)))//设置window方法二
       .max("price")
 
     //4.显示结果
@@ -460,7 +461,8 @@ object ProcessingTimeExample {
     //3.使用ProcessingTime进行求最值操作,不需要提取消息中的时间属性
     val dst2: DataStream[SalePrice] = dst1
       .keyBy(_.productName)
-      .timeWindow(Time.seconds(5))
+      //.timeWindow(Time.seconds(5))//设置window方法一
+      .window(TumblingEventTimeWindows.of(Time.seconds(5)))//设置window方法二
       .max("price")
 
     //4.显示结果

@@ -2,6 +2,7 @@ package code.book.stream.window.advance
 
 import org.apache.flink.streaming.api.TimeCharacteristic
 import org.apache.flink.streaming.api.scala._
+import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows
 import org.apache.flink.streaming.api.windowing.time.Time
 
 object ProcessingTimeExample {
@@ -23,7 +24,8 @@ object ProcessingTimeExample {
     //3.使用ProcessingTime进行求最值操作,不需要提取消息中的时间属性
     val dst2: DataStream[SalePrice] = dst1
       .keyBy(_.productName)
-      .timeWindow(Time.seconds(5))
+      //.timeWindow(Time.seconds(5))//设置window方法一
+      .window(TumblingEventTimeWindows.of(Time.seconds(5)))//设置window方法二
       .max("price")
 
     //4.显示结果
