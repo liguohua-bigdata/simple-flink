@@ -1,4 +1,4 @@
-package code.book.stream.window.advance
+package code.book.stream.window.test
 
 import org.apache.flink.streaming.api.TimeCharacteristic
 import org.apache.flink.streaming.api.scala.DataStream
