@@ -415,9 +415,11 @@ public class ReduceGroup001java {
         text2.print();
 
         //3.对DataSet的元素进行分组合并，这里是分别计算偶数和奇数的累加和
-        DataSet<Tuple2<Integer, Integer>> text3 = text.reduceGroup(new GroupReduceFunction<Integer, Tuple2<Integer, Integer>>() {
+        DataSet<Tuple2<Integer, Integer>> text3 = text.reduceGroup(
+        new GroupReduceFunction<Integer, Tuple2<Integer, Integer>>() {
             @Override
-            public void reduce(Iterable<Integer> iterable, Collector<Tuple2<Integer, Integer>> collector) throws Exception {
+            public void reduce(Iterable<Integer> iterable, Collector<Tuple2<Integer, Integer>> collector)
+            throws Exception {
                 int sum0 = 0;
                 int sum1 = 0;
                 Iterator<Integer> itor = iterable.iterator();
@@ -435,11 +437,15 @@ public class ReduceGroup001java {
         text3.print();
 
         //4.对DataSet的元素进行分组合并，这里是对分组后的数据进行合并操作，统计每个人的工资总和（每个分组会合并出一个结果）
-        DataSet<Tuple2<String, Integer>> data = env.fromElements(new Tuple2("zhangsan", 1000), new Tuple2("lisi", 1001), new Tuple2("zhangsan", 3000), new Tuple2("lisi", 1002));
+        DataSet<Tuple2<String, Integer>> data = env.fromElements(
+        new Tuple2("zhangsan", 1000), new Tuple2("lisi", 1001), 
+        new Tuple2("zhangsan", 3000), new Tuple2("lisi", 1002));
         //4.1根据name进行分组
-        DataSet<Tuple2<String, Integer>> data2 = data.groupBy(0).reduceGroup(new GroupReduceFunction<Tuple2<String, Integer>, Tuple2<String, Integer>>() {
+        DataSet<Tuple2<String, Integer>> data2 = data.groupBy(0).reduceGroup(
+        new GroupReduceFunction<Tuple2<String, Integer>, Tuple2<String, Integer>>() {
             @Override
-            public void reduce(Iterable<Tuple2<String, Integer>> iterable, Collector<Tuple2<String, Integer>> collector) throws Exception {
+            public void reduce(Iterable<Tuple2<String, Integer>> iterable, 
+            Collector<Tuple2<String, Integer>> collector) throws Exception {
                 int salary = 0;
                 String name = "";
                 Iterator<Tuple2<String, Integer>> itor = iterable.iterator();

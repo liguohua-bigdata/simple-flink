@@ -373,7 +373,8 @@ object ReduceGroup001scala {
     val data = env.fromElements(("zhangsan", 1000), ("lisi", 1001), ("zhangsan", 3000), ("lisi", 1002))
     //4.1根据name进行分组，
     val data2 = data.groupBy(0).reduceGroup(new GroupReduceFunction[(String, Int), (String, Int)] {
-      override def reduce(iterable: Iterable[(String, Int)], collector: Collector[(String, Int)]): Unit = {
+      override def reduce(iterable: Iterable[(String, Int)], collector: Collector[(String, Int)]):
+      Unit = {
         var salary = 0
         var name = ""
         val itor = iterable.iterator()
