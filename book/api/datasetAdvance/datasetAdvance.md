@@ -80,7 +80,7 @@ Wc{line='FLINK VS SPARK', lineLength='14'}
 Wc{line='BUFFER VS  SHUFFLE', lineLength='18'}
 ```
 
-##Map
+##MapPartition
 ###执行程序：
 ```java
 package code.book.batch.dataset.advance.api;
