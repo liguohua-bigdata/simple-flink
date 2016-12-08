@@ -403,7 +403,8 @@ public class ReduceGroup001java {
         //2.对DataSet的元素进行合并，这里是计算累加和
         DataSet<Integer> text2 = text.reduceGroup(new GroupReduceFunction<Integer, Integer>() {
             @Override
-            public void reduce(Iterable<Integer> iterable, Collector<Integer> collector) throws Exception {
+            public void reduce(Iterable<Integer> iterable, 
+            Collector<Integer> collector) throws Exception {
                 int sum = 0;
                 Iterator<Integer> itor = iterable.iterator();
                 while (itor.hasNext()) {
