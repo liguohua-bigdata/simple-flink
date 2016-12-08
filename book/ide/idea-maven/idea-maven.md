@@ -106,7 +106,7 @@ object WordCountJob {
 ![](images/Snip20161208_2.png) 
 ```
 如果顺利的话，在进行package操作后，将会生成。simple-flink-1.0-SNAPSHOT.jar文件
-此文件的名称跟我们在maven中的配置是有关系的。因为在pom.xml中配置了
+此文件的名称跟我们在maven的pom.xml配置是有关系的。因为在pom.xml中配置了
 <artifactId>simple-flink</artifactId>
 <version>1.0-SNAPSHOT</version>
 所以产生了文件simple-flink-1.0-SNAPSHOT.jar

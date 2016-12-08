@@ -6,9 +6,9 @@ object WordCountJob {
   def main(args: Array[String]) {
     // 1.设置运行环境
     val env = ExecutionEnvironment.getExecutionEnvironment
-
+    env.setParallelism(4)
     //2.创造测试数据
-    val text = env.readTextFile("hdfs://qingcheng11:9000/input/flink/README.txt")
+    val text = env.readTextFile("hdfs://qingcheng12:9000/input/spark/README.md")
 
     //3.进行wordcount运算
     val counts = text.flatMap(_.toLowerCase.split("\\W+"))

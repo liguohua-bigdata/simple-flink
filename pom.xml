@@ -94,8 +94,6 @@
                                 <classpathPrefix>lib/</classpathPrefix>
                             </manifest>
                         </archive>
-                        <classesDirectory>
-                        </classesDirectory>
                     </configuration>
                 </plugin>
             </plugins>
