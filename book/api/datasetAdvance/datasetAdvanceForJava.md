@@ -418,8 +418,8 @@ public class ReduceGroup001java {
         DataSet<Tuple2<Integer, Integer>> text3 = text.reduceGroup(
         new GroupReduceFunction<Integer, Tuple2<Integer, Integer>>() {
             @Override
-            public void reduce(Iterable<Integer> iterable, Collector<Tuple2<Integer, Integer>> collector)
-            throws Exception {
+            public void reduce(Iterable<Integer> iterable,
+            Collector<Tuple2<Integer, Integer>> collector)throws Exception {
                 int sum0 = 0;
                 int sum1 = 0;
                 Iterator<Integer> itor = iterable.iterator();
@@ -436,7 +436,8 @@ public class ReduceGroup001java {
         });
         text3.print();
 
-        //4.对DataSet的元素进行分组合并，这里是对分组后的数据进行合并操作，统计每个人的工资总和（每个分组会合并出一个结果）
+        //4.对DataSet的元素进行分组合并，这里是对分组后的数据进行合并操作，统计每个人的工资总和
+        //（每个分组会合并出一个结果）
         DataSet<Tuple2<String, Integer>> data = env.fromElements(
         new Tuple2("zhangsan", 1000), new Tuple2("lisi", 1001), 
         new Tuple2("zhangsan", 3000), new Tuple2("lisi", 1002));
