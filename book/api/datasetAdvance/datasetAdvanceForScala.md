@@ -1,5 +1,9 @@
 #一、Flink DateSet定制API详解(Scala版)
 ##Map
+```
+以element为粒度，对element进行1：1的转化
+```
+
 ###执行程序：
 ```scala
 package code.book.batch.dataset.advance.api
@@ -53,6 +57,9 @@ Wc(BUFFER VS  SHUFFER,18)
 ```
 
 ##mapPartition
+```
+以partition为粒度，对element进行1：1的转化。有时候会比map效率高。
+```
 ###执行程序：
 ```scala
 package code.book.batch.dataset.advance.api
@@ -119,6 +126,9 @@ Wc(BUFFER VS  SHUFFER,18)
 ```
 
 ##flatMap
+```
+以element为粒度，对element进行1：n的转化。
+```
 ###执行程序：
 ```scala
 package code.book.batch.dataset.advance.api
