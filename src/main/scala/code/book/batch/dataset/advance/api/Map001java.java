@@ -30,9 +30,7 @@ public class Map001java {
         });
         text3.print();
 
-
         // 4.以element为粒度，将element进行map操作，转化为大写并,并计算line的长度。
-
         //4.1定义class
         class Wc{
             private String line;

@@ -11,16 +11,25 @@ object Map001scala {
 
     val text = env.fromElements("flink vs spark", "buffer vs  shuffer")
 
-    // 3.以element为粒度，将element进行map操作，转化为大写并添加后缀字符串"--##bigdata##"
+    // 2.以element为粒度，将element进行map操作，转化为大写并添加后缀字符串"--##bigdata##"
     val text2 = text.map(new MapFunction[String, String] {
       override def map(s: String): String = s.toUpperCase() + "--##bigdata##"
     })
     text2.print()
 
-    // 4.以element为粒度，将element进行map操作，转化为大写并,并计算line的长度。
+    // 3.以element为粒度，将element进行map操作，转化为大写并,并计算line的长度。
     val text3 = text.map(new MapFunction[String, (String, Int)] {
       override def map(s: String): (String, Int) = (s.toUpperCase(), s.length)
     })
     text3.print()
+
+    // 4.以element为粒度，将element进行map操作，转化为大写并,并计算line的长度。
+    //4.1定义class
+    case class Wc(line: String, lenght: Int)
+    //4.2转化成class类型
+    val text4 = text.map(new MapFunction[String, Wc] {
+      override def map(s: String): Wc = Wc(s.toUpperCase(), s.length)
+    })
+    text4.print()
   }
 }
