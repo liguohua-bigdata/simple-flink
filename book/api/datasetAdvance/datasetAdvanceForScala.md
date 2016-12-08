@@ -11,7 +11,6 @@ object Map001scala {
   def main(args: Array[String]): Unit = {
     // 1.设置运行环境,并创造测试数据
     val env = ExecutionEnvironment.getExecutionEnvironment
-
     val text = env.fromElements("flink vs spark", "buffer vs  shuffer")
 
     // 2.以element为粒度，将element进行map操作，转化为大写并添加后缀字符串"--##bigdata##"
@@ -59,7 +58,6 @@ Wc(BUFFER VS  SHUFFER,18)
 package code.book.batch.dataset.advance.api
 
 import java.lang.Iterable
-
 import org.apache.flink.api.common.functions.{MapFunction, MapPartitionFunction}
 import org.apache.flink.api.scala.{ExecutionEnvironment, _}
 import org.apache.flink.util.Collector
