@@ -100,7 +100,8 @@ public class MapPartition001java {
         DataSet<String> text = env.fromElements("flink vs spark", "buffer vs  shuffer");
 
         //2.以partition为粒度，进行map操作，计算element个数
-        final MapPartitionOperator<String, Long> text2 = text.mapPartition(new MapPartitionFunction<String, Long>() {
+        final MapPartitionOperator<String, Long> text2 = text.mapPartition(
+        new MapPartitionFunction<String, Long>() {
             @Override
             public void mapPartition(Iterable<String> iterable, Collector<Long> collector) throws Exception {
                 long c = 0;
@@ -113,7 +114,8 @@ public class MapPartition001java {
         text2.print();
 
         //3.以partition为粒度，进行map操作，转化element内容
-        final MapPartitionOperator<String, String> text3 = text.mapPartition(new MapPartitionFunction<String, String>() {
+        final MapPartitionOperator<String, String> text3 = text.mapPartition(
+        new MapPartitionFunction<String, String>() {
             @Override
             public void mapPartition(Iterable<String> iterable, Collector<String> collector) throws Exception {
                 for (String s : iterable) {
