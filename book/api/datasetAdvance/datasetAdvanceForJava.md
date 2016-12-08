@@ -1,6 +1,10 @@
 #一、Flink DateSet定制API详解(JAVA版)
 ##Map
-###执行程序：
+```
+以element为粒度，对element进行1：1的转化
+```
+
+####执行程序：
 ```java
 package code.book.batch.dataset.advance.api;
 
@@ -62,7 +66,7 @@ public class Map001java {
 }
 
 ```
-###执行结果：
+####执行结果：
 ```java
 text2.print();
 FLINK VS SPARK--##bigdata##
@@ -78,7 +82,11 @@ Wc{line='BUFFER VS  SHUFFLE', lineLength='18'}
 ```
 
 ##MapPartition
-###执行程序：
+```
+以element为粒度，对element进行1：n的转化。
+```
+
+####执行程序：
 ```java
 package code.book.batch.dataset.advance.api;
 
@@ -152,7 +160,7 @@ public class MapPartition001java {
 }
 
 ```
-###执行结果：
+####执行结果：
 ```java
 text2.print();
 2
@@ -167,106 +175,105 @@ Wc{line='BUFFER VS  SHUFFER', lineLength='18'}
 ```
 
 
-##XXXX
-###执行程序：
-```java
+##flatMap
 ```
-###执行结果：
-```java
+以element为粒度，对element进行1：n的转化。
 ```
+####执行程序：
+```java
+package code.book.batch.dataset.advance.api;
+import org.apache.flink.api.common.functions.FlatMapFunction;
+import org.apache.flink.api.java.DataSet;
+import org.apache.flink.api.java.ExecutionEnvironment;
+import org.apache.flink.util.Collector;
 
-##XXXX
-###执行程序：
-```java
-```
-###执行结果：
-```java
-```
+import java.util.List;
+public class FlatMap001java {
+    public static void main(String[] args) throws Exception {
+        // 1.设置运行环境，准备运行的数据
+        final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
+        DataSet<String> text = env.fromElements("flink vs spark", "buffer vs  shuffle");
 
-##XXXX
-###执行程序：
-```java
-```
-###执行结果：
-```java
-```
+        // 2.以element为粒度，将element进行map操作，转化为大写并添加后缀字符串"--##bigdata##"
+        DataSet<String> text2 = text.flatMap(new FlatMapFunction<String, String>() {
+            @Override
+            public void flatMap(String s, Collector<String> collector) throws Exception {
+                collector.collect(s.toUpperCase() + "--##bigdata##");
+            }
+        });
+        text2.print();
 
-##XXXX
-###执行程序：
-```java
+        // 3.以element为粒度，将element进行map操作，转化为大写并添加后缀字符串"--##bigdata##"
+        DataSet<String[]> text3 = text.flatMap(new FlatMapFunction<String, String[]>() {
+            @Override
+            public void flatMap(String s, Collector<String[]> collector) throws Exception {
+                collector.collect(s.toUpperCase().split("\\s+"));
+            }
+        });
+        final List<String[]> collect = text3.collect();
+        //显示结果，使用Lambda表达式的写法
+        collect.forEach(arr -> {
+            for (String token : arr) {
+                System.out.println(token);
+            }
+        });
+        //显示结果，不使用Lambda表达式的写法
+        for (String[] arr : collect) {
+            for (String token : arr) {
+                System.out.println(token);
+            }
+        }
+    }
+}
 ```
-###执行结果：
+####执行结果：
 ```java
-```
+text2.print();
+FLINK VS SPARK--##bigdata##
+BUFFER VS  SHUFFLE--##bigdata##
 
-##XXXX
-###执行程序：
-```java
-```
-###执行结果：
-```java
-```
+collect.forEach(arr -> {
+for (String token : arr) {System.out.println(token);}});
+FLINK
+VS
+SPARK
+BUFFER
+VS
+SHUFFLE
 
-
-##XXXX
-###执行程序：
-```java
-```
-###执行结果：
-```java
-```
-
-
-##XXXX
-###执行程序：
-```java
-```
-###执行结果：
-```java
-```
-
-
-##XXXX
-###执行程序：
-```java
-```
-###执行结果：
-```java
-```
-
-
-##XXXX
-###执行程序：
-```java
-```
-###执行结果：
-```java
 ```
 
 
-##XXXX
-###执行程序：
-```java
-```
-###执行结果：
-```java
-```
+
+
+
+
+
+
+
+
+
+
+
 
 
 ##XXXX
-###执行程序：
-```java
 ```
-###执行结果：
-```java
 ```
+####执行程序：
+```java
 
+```
+####执行结果：
+```java
+```
 
 ##XXXX
-###执行程序：
+####执行程序：
 ```java
+
 ```
-###执行结果：
+####执行结果：
 ```java
 ```
 

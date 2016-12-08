@@ -23,7 +23,7 @@ object FlatMap001scala {
     val text3 = text.flatMap {
       new FlatMapFunction[String, Array[String]] {
         override def flatMap(s: String, collector: Collector[Array[String]]): Unit = {
-          val arr: Array[String] = s.toUpperCase().split(" ")
+          val arr: Array[String] = s.toUpperCase().split("\\s+")
           collector.collect(arr)
         }
       }
