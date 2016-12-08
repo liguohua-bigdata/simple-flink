@@ -356,7 +356,7 @@ Creates a new DataSet by applying the given function to each parallel partition 
 //1.创建一个 DataSet其元素为String类型
 val input: DataSet[String] = benv.fromElements("zhangsan boy", "lisi is a girl so sex")
 
-//2.??????????????
+//2.获取partition的个数
 val result=input.mapPartition{in => Some(in.size)}
 
 //3.将结果显示出来
