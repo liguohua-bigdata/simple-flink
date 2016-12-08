@@ -370,9 +370,10 @@ object ReduceGroup001scala {
     text3.print()
 
     //4.对DataSet的元素进行分组合并，这里是对分组后的数据进行合并操作，统计每个人的工资总和（每个分组会合并出一个结果）
-    val data = env.fromElements(("zhangsan", 1000), ("lisi", 1001), ("zhangsan", 3000), ("lisi", 1002))
+    val data = env.fromElements(
+    ("zhangsan", 1000), ("lisi", 1001), ("zhangsan", 3000), ("lisi", 1002))
     //4.1根据name进行分组，
-    val data2 = data.groupBy(0).reduceGroup(new GroupReduceFunction[(String, Int), (String, Int)] {
+    val data2 = data.groupBy(0).reduceGroup(new GroupReduceFunction[(String, Int), (String, Int)]{
       override def reduce(iterable: Iterable[(String, Int)], collector: Collector[(String, Int)]):
       Unit = {
         var salary = 0
