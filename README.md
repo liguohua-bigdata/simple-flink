@@ -38,6 +38,7 @@
 * [第四章：Flink基于IntelliJ IDEA开发环境的搭建(不用maven)](book/ide/idea/idea.md)
 * [第五章：Flink基于IntelliJ IDEA开发环境的搭建(使用maven)](book/ide/idea-maven/idea-maven.md)
 * [第六章：Flink的DataSet定制API(Java版)](book/api/datasetAdvance/datasetAdvanceForJava.md)
+* [第六章：Flink的DataSet定制API(Scala版)](book/api/datasetAdvance/datasetAdvanceForScala.md)
 
 * [第六章：Flink的slot和parallelism](book/internal/slot-parallelism/slot-parallelism.md)
 * [第七章：Flink-on-yarn模式解析](book/yarn/yarn.md)

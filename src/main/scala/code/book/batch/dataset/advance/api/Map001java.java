@@ -7,13 +7,11 @@ import org.apache.flink.api.java.tuple.Tuple2;
 
 public class Map001java {
     public static void main(String[] args) throws Exception {
-        // 1.设置运行环境
+        // 1.设置运行环境，准备运行的数据
         final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
-
-        // 2.准备运行的数据
         DataSet<String> text = env.fromElements("flink vs spark", "buffer vs  shuffle");
 
-        // 3.以element为粒度，将element进行map操作，转化为大写并添加后缀字符串"--##bigdata##"
+        // 2.以element为粒度，将element进行map操作，转化为大写并添加后缀字符串"--##bigdata##"
         DataSet<String> text2 = text.map(new MapFunction<String, String>() {
             @Override
             public String map(String s) throws Exception {
