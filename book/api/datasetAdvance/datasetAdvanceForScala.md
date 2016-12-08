@@ -4,7 +4,7 @@
 以element为粒度，对element进行1：1的转化
 ```
 
-###执行程序：
+####执行程序：
 ```scala
 package code.book.batch.dataset.advance.api
 
@@ -41,7 +41,7 @@ object Map001scala {
 }
 
 ```
-###执行结果：
+####执行结果：
 ```scala
 text2.print();
 FLINK VS SPARK--##bigdata##
@@ -60,7 +60,7 @@ Wc(BUFFER VS  SHUFFER,18)
 ```
 以partition为粒度，对element进行1：1的转化。有时候会比map效率高。
 ```
-###执行程序：
+####执行程序：
 ```scala
 package code.book.batch.dataset.advance.api
 
@@ -111,7 +111,7 @@ object MapPartition001scala {
   }
 }
 ```
-###执行结果：
+####执行结果：
 ```scala
 text2.print();
 2
@@ -129,7 +129,7 @@ Wc(BUFFER VS  SHUFFER,18)
 ```
 以element为粒度，对element进行1：n的转化。
 ```
-###执行程序：
+####执行程序：
 ```scala
 package code.book.batch.dataset.advance.api
 
@@ -171,7 +171,7 @@ object FlatMap001scala {
   }
 }
 ```
-###执行结果：
+####执行结果：
 ```scala
 text2.print()
 FLINK VS SPARK--##bigdata##
@@ -198,168 +198,47 @@ VS
 
 
 ##XXXX
-###执行程序：
+```
+```
+####执行程序：
 ```scala
 ```
-###执行结果：
+####执行结果：
+```scala
+```
+
+
+##XXXX
+```
+```
+####执行程序：
+```scala
+```
+####执行结果：
 ```scala
 ```
 
 
 
 ##XXXX
-###执行程序：
+```
+```
+####执行程序：
 ```scala
 ```
-###执行结果：
-```scala
-```
-
-
-
-##XXXX
-###执行程序：
-```scala
-```
-###执行结果：
+####执行结果：
 ```scala
 ```
 
 
 
 ##XXXX
-###执行程序：
+```
+```
+####执行程序：
 ```scala
 ```
-###执行结果：
+####执行结果：
 ```scala
 ```
-
-
-
-##XXXX
-###执行程序：
-```scala
-```
-###执行结果：
-```scala
-```
-
-
-##XXXX
-###执行程序：
-```scala
-```
-###执行结果：
-```scala
-```
-
-
-
-##XXXX
-###执行程序：
-```scala
-```
-###执行结果：
-```scala
-```
-
-
-##XXXX
-###执行程序：
-```scala
-```
-###执行结果：
-```scala
-```
-
-
-##XXXX
-###执行程序：
-```scala
-```
-###执行结果：
-```scala
-```
-
-
-##XXXX
-###执行程序：
-```scala
-```
-###执行结果：
-```scala
-```
-
-
-
-##XXXX
-###执行程序：
-```scala
-```
-###执行结果：
-```scala
-```
-
-
-
-##XXXX
-###执行程序：
-```scala
-```
-###执行结果：
-```scala
-```
-
-
-##XXXX
-###执行程序：
-```scala
-```
-###执行结果：
-```scala
-```
-
-
-##XXXX
-###执行程序：
-```scala
-```
-###执行结果：
-```scala
-```
-
-
-
-##XXXX
-###执行程序：
-```scala
-```
-###执行结果：
-```scala
-```
-
-
-##XXXX
-###执行程序：
-```scala
-```
-###执行结果：
-```scala
-```
-
-
-
-##XXXX
-###执行程序：
-```scala
-```
-###执行结果：
-```scala
-```
-
-
-
-
-
 
