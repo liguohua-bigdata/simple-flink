@@ -42,15 +42,15 @@ object Map001scala {
 ```scala
 text2.print();
 FLINK VS SPARK--##bigdata##
-BUFFER VS  SHUFFLE--##bigdata##
+BUFFER VS  SHUFFER--##bigdata##
 
 text3.print();
 (FLINK VS SPARK,14)
-(BUFFER VS  SHUFFLE,18)
+(BUFFER VS  SHUFFER,18)
 
 text4.print();
-Wc{line='FLINK VS SPARK', lineLength='14'}
-Wc{line='BUFFER VS  SHUFFLE', lineLength='18'}
+Wc(FLINK VS SPARK,14)
+Wc(BUFFER VS  SHUFFER,18)
 ```
 
 
