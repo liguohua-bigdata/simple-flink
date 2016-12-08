@@ -62,7 +62,6 @@ public class MapPartition001java {
             }
         });
         text4.print();
-
     }
 }
 
