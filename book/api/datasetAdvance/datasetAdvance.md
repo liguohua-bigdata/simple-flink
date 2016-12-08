@@ -103,7 +103,8 @@ public class MapPartition001java {
         final MapPartitionOperator<String, Long> text2 = text.mapPartition(
         new MapPartitionFunction<String, Long>() {
             @Override
-            public void mapPartition(Iterable<String> iterable, Collector<Long> collector) throws Exception {
+            public void mapPartition(Iterable<String> iterable, Collector<Long> collector)
+            throws Exception {
                 long c = 0;
                 for (String s : iterable) {
                     c++;
@@ -117,7 +118,8 @@ public class MapPartition001java {
         final MapPartitionOperator<String, String> text3 = text.mapPartition(
         new MapPartitionFunction<String, String>() {
             @Override
-            public void mapPartition(Iterable<String> iterable, Collector<String> collector) throws Exception {
+            public void mapPartition(Iterable<String> iterable, Collector<String> collector)
+            throws Exception {
                 for (String s : iterable) {
                     s = s.toUpperCase() + "--##bigdata##";
                     collector.collect(s);
