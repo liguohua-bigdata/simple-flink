@@ -28,7 +28,8 @@ public class Map001java {
         text2.print();
 
         // 4.以element为粒度，将element进行map操作，转化为大写并,并计算line的长度。
-        DataSet< Tuple2<String, Integer>> text3= text.map(new MapFunction<String, Tuple2<String,Integer> >() {
+        DataSet< Tuple2<String, Integer>> text3= text.map(new MapFunction<String,
+        Tuple2<String,Integer> >() {
             @Override
             public Tuple2<String, Integer> map(String s) throws Exception {
                 //转化为大写并,并计算矩阵的长度。
