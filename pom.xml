@@ -88,7 +88,8 @@
                         <archive>
                             <manifest>
                                 <!--设置程序的入口类-->
-                                <mainClass>code.book.stream.streamwc.SocketWC</mainClass>
+                                <!--<mainClass>code.book.stream.streamwc.SocketWC</mainClass>-->
+                                <mainClass>code.book.idetes.WordCountJob</mainClass>
                                 <addClasspath>true</addClasspath>
                                 <classpathPrefix>lib/</classpathPrefix>
                             </manifest>

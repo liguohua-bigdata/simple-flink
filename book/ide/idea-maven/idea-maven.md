@@ -78,7 +78,7 @@ object WordCountJob {
                         <archive>
                             <manifest>
                                 <!--设置程序的入口类-->
-                                <mainClass>code.book.stream.streamwc.SocketWC</mainClass>
+                                <mainClass>code.book.idetes.WordCountJob</mainClass>
                                 <addClasspath>true</addClasspath>
                                 <classpathPrefix>lib/</classpathPrefix>
                             </manifest>
@@ -102,7 +102,6 @@ object WordCountJob {
     </build>
 </project>
 ```
-
 ###2.打包程序
 ![](images/Snip20161208_2.png) 
 ```
@@ -113,3 +112,8 @@ object WordCountJob {
 所以产生了文件simple-flink-1.0-SNAPSHOT.jar
 ```
 ![](images/Snip20161208_4.png) 
+
+###3.上传到服务器，并运行jar
+```
+${FLINK_HOME}/bin/flink run  -m qingcheng11:6123  simple-flink-1.0-SNAPSHOT.jar
+```
