@@ -3,9 +3,13 @@
     <output-path>$PROJECT_DIR$/out/artifacts/simple_flink_jar</output-path>
     <root id="archive" name="simple-flink.jar">
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$APPLICATION_HOME_DIR$/bin/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/src/main/scala/META-INF/MANIFEST.MF" />
       </element>
       <element id="module-output" name="simple-flink" />
+      <element id="library" level="project" name="flink-connector-kafka-0.9_2.10-1.1.3" />
+      <element id="library" level="project" name="flink-connector-kafka-base_2.10" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/kafka-clients-0.9.0.1-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/kafka-clients-0.8.2.1.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

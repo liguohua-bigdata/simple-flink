@@ -39,11 +39,8 @@ https://ci.apache.org/projects/flink/flink-docs-release-1.1/apis/common/index.ht
 ###1.创建package和object（略）
 ###2.编写程序
 ```scala
-package idetest
-
-//0.引入必要的程序元素
+package code.book.idetes
 import org.apache.flink.api.scala._
-
 object WordCountJob {
   def main(args: Array[String]) {
     // 1.设置运行环境
@@ -65,8 +62,54 @@ object WordCountJob {
 ![](images/Snip20161127_37.png) 
 
 ##三、打包到服务器上运行
+###1.在pom.xml的<project></project>中配置打包插件
 ```
-省略说明：
-1.有人用maven进行package操作，需要另行查看maven的配置方法。
-2.我这里只是让maven管理一部分jar依赖，不用maven打包，打包方法和不使用maven一致。
+<project>
+    <build>
+        <!--设置src的目录和test的根目录-->
+        <sourceDirectory>src/main/scala</sourceDirectory>
+        <testSourceDirectory>src/test/scala</testSourceDirectory>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <!--设置程序的入口类-->
+                                <mainClass>code.book.stream.streamwc.SocketWC</mainClass>
+                                <addClasspath>true</addClasspath>
+                                <classpathPrefix>lib/</classpathPrefix>
+                            </manifest>
+                        </archive>
+                        <classesDirectory>
+                        </classesDirectory>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
 ```
+
+###2.打包程序
+![](images/Snip20161208_2.png) 
+```
+如果顺利的话，在进行package操作后，将会生成。simple-flink-1.0-SNAPSHOT.jar文件
+此文件的名称跟我们在maven中的配置是有关系的。因为在pom.xml中配置了
+<artifactId>simple-flink</artifactId>
+<version>1.0-SNAPSHOT</version>
+所以产生了文件simple-flink-1.0-SNAPSHOT.jar
+```
+![](images/Snip20161208_4.png) 

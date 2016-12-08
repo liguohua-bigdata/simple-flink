@@ -60,6 +60,7 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar:///Applications/kafka_2.11-0.9.0.1/libs/kafka_2.11-0.9.0.1-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.ideaLibSources/kafka-clients-0.9.0.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
