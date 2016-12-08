@@ -1,7 +1,6 @@
-#一、Flink DateSetD定制API详解
-
+#一、Flink DateSetD定制API详解(JAVA版)
 ##Map
-###执行程序（java）：
+###执行程序：
 ```java
 package code.book.batch.dataset.advance.api;
 
@@ -66,7 +65,7 @@ public class Map001java {
     }
 }
 ```
-###执行结果（java）：
+###执行结果：
 ```
 text2.print();
 FLINK VS SPARK--##bigdata##
