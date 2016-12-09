@@ -561,9 +561,7 @@ import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.api.java.tuple.Tuple4;
 import org.apache.flink.util.Collector;
-
 import java.util.Iterator;
-
 
 public class CoGroupFunction001java {
 
