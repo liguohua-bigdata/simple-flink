@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="ddda8182-08b8-46a6-bc01-7eecdc07728c" name="qingcheng11" url="http://qingcheng11">
+        <fileTransfer host="qingcheng11" port="22" rootFolder="/bigdata/software/" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="62f448b6-c464-4b5a-8e45-d8b45a0e92ad" name="qingcheng12" url="http://qingcheng12">
+        <fileTransfer host="qingcheng12" port="22" rootFolder="/bigdata/software/" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="06dd32f1-c7e1-4e16-874b-5cf19b469b53" name="qingcheng13" url="http://qingcheng13">
+        <fileTransfer host="qingcheng13" port="22" rootFolder="/bigdata/software/" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

@@ -4,7 +4,7 @@ import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
 
-public class Filter001java {
+public class FilterFunction001java {
     public static void main(String[] args) throws Exception {
         // 1.设置运行环境，准备运行的数据
         final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();

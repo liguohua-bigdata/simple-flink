@@ -11,7 +11,7 @@ package code.book.batch.dataset.advance.api
 import org.apache.flink.api.common.functions.MapFunction
 import org.apache.flink.api.scala.{ExecutionEnvironment, _}
 
-object Map001scala {
+object MapFunction001scala {
   def main(args: Array[String]): Unit = {
     // 1.设置运行环境,并创造测试数据
     val env = ExecutionEnvironment.getExecutionEnvironment
@@ -69,7 +69,7 @@ import org.apache.flink.api.common.functions.{MapFunction, MapPartitionFunction}
 import org.apache.flink.api.scala.{ExecutionEnvironment, _}
 import org.apache.flink.util.Collector
 
-object MapPartition001scala {
+object MapPartitionFunction001scala {
   def main(args: Array[String]): Unit = {
     // 1.设置运行环境,创造测试数据
     val env = ExecutionEnvironment.getExecutionEnvironment
@@ -104,8 +104,14 @@ object MapPartition001scala {
     //4.1定义class
     case class Wc(line: String, lenght: Int)
     //4.2转化成class类型
-    val text4 = text.map(new MapFunction[String, Wc] {
-      override def map(s: String): Wc = Wc(s.toUpperCase(), s.length)
+    val text4 = text.mapPartition(new MapPartitionFunction[String, Wc] {
+      override def mapPartition(iterable: Iterable[String], collector: Collector[Wc]): Unit = {
+        val itor = iterable.iterator()
+        while (itor.hasNext) {
+          var s = itor.next()
+          collector.collect(Wc(s.toUpperCase(), s.length))
+        }
+      }
     })
     text4.print()
   }
@@ -136,7 +142,7 @@ package code.book.batch.dataset.advance.api
 import org.apache.flink.api.common.functions.FlatMapFunction
 import org.apache.flink.api.scala.{ExecutionEnvironment, _}
 import org.apache.flink.util.Collector
-object FlatMap001scala {
+object FlatMapFunction001scala {
   def main(args: Array[String]): Unit = {
     // 1.设置运行环境,并创造测试数据
     val env = ExecutionEnvironment.getExecutionEnvironment
@@ -197,7 +203,7 @@ package code.book.batch.dataset.advance.api
 import org.apache.flink.api.common.functions.FilterFunction
 import org.apache.flink.api.scala.{ExecutionEnvironment, _}
 
-object Filter001scala {
+object FilterFunction001scala {
   def main(args: Array[String]): Unit = {
     // 1.设置运行环境,并创造测试数据
     val env = ExecutionEnvironment.getExecutionEnvironment
@@ -248,7 +254,7 @@ package code.book.batch.dataset.advance.api
 import org.apache.flink.api.common.functions.ReduceFunction
 import org.apache.flink.api.scala.{ExecutionEnvironment, _}
 
-object Reduce001scala {
+object ReduceFunction001scala {
   def main(args: Array[String]): Unit = {
     // 1.设置运行环境,并创造测试数据
     val env = ExecutionEnvironment.getExecutionEnvironment
@@ -329,7 +335,7 @@ import org.apache.flink.api.common.functions.GroupReduceFunction
 import org.apache.flink.api.scala.{ExecutionEnvironment, _}
 import org.apache.flink.util.Collector
 
-object ReduceGroup001scala {
+object GroupReduceFunction001scala {
   def main(args: Array[String]): Unit = {
     // 1.设置运行环境,并创造测试数据
     val env = ExecutionEnvironment.getExecutionEnvironment

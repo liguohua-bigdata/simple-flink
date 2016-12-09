@@ -7,7 +7,7 @@ import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.util.Collector;
 import java.util.Iterator;
 
-public class ReduceGroup001java {
+public class GroupReduceFunction001java {
     public static void main(String[] args) throws Exception {
         // 1.设置运行环境，准备运行的数据
         final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();

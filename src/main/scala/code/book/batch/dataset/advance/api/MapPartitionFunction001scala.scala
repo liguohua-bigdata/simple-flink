@@ -2,11 +2,11 @@ package code.book.batch.dataset.advance.api
 
 import java.lang.Iterable
 
-import org.apache.flink.api.common.functions.{MapFunction, MapPartitionFunction}
+import org.apache.flink.api.common.functions.MapPartitionFunction
 import org.apache.flink.api.scala.{ExecutionEnvironment, _}
 import org.apache.flink.util.Collector
 
-object MapPartition001scala {
+object MapPartitionFunction001scala {
   def main(args: Array[String]): Unit = {
     // 1.设置运行环境,创造测试数据
     val env = ExecutionEnvironment.getExecutionEnvironment
@@ -41,8 +41,14 @@ object MapPartition001scala {
     //4.1定义class
     case class Wc(line: String, lenght: Int)
     //4.2转化成class类型
-    val text4 = text.map(new MapFunction[String, Wc] {
-      override def map(s: String): Wc = Wc(s.toUpperCase(), s.length)
+    val text4 = text.mapPartition(new MapPartitionFunction[String, Wc] {
+      override def mapPartition(iterable: Iterable[String], collector: Collector[Wc]): Unit = {
+        val itor = iterable.iterator()
+        while (itor.hasNext) {
+          var s = itor.next()
+          collector.collect(Wc(s.toUpperCase(), s.length))
+        }
+      }
     })
     text4.print()
   }

@@ -5,7 +5,7 @@ import org.apache.flink.api.common.functions.GroupReduceFunction
 import org.apache.flink.api.scala.{ExecutionEnvironment, _}
 import org.apache.flink.util.Collector
 
-object ReduceGroup001scala {
+object GroupReduceFunction001scala {
   def main(args: Array[String]): Unit = {
     // 1.设置运行环境,并创造测试数据
     val env = ExecutionEnvironment.getExecutionEnvironment

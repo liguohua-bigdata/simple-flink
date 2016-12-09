@@ -3,7 +3,7 @@ package code.book.batch.dataset.advance.api
 import org.apache.flink.api.common.functions.FlatMapFunction
 import org.apache.flink.api.scala.{ExecutionEnvironment, _}
 import org.apache.flink.util.Collector
-object FlatMap001scala {
+object FlatMapFunction001scala {
   def main(args: Array[String]): Unit = {
     // 1.设置运行环境,并创造测试数据
     val env = ExecutionEnvironment.getExecutionEnvironment

@@ -1,13 +1,14 @@
 package code.book.batch.dataset.advance.api;
 
-import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.functions.MapPartitionFunction;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.api.java.operators.MapPartitionOperator;
 import org.apache.flink.util.Collector;
 
-public class MapPartition001java {
+import java.util.Iterator;
+
+public class MapPartitionFunction001java {
     public static void main(String[] args) throws Exception {
 
         // 1.设置运行环境,准备运行的数据
@@ -55,13 +56,19 @@ public class MapPartition001java {
             }
         }
         //4.2转化成class类型
-        DataSet<Wc> text4= text.map(new MapFunction<String, Wc>() {
+        final MapPartitionOperator<String, Wc> text4 = text.mapPartition(new MapPartitionFunction<String, Wc>() {
             @Override
-            public Wc map(String s) throws Exception {
-                return new Wc(s.toUpperCase(),s.length());
+            public void mapPartition(Iterable<String> iterable, Collector<Wc> collector) throws Exception {
+                Iterator<String> itor = iterable.iterator();
+                while (itor.hasNext()) {
+                    String  s = itor.next();
+                    collector.collect(new Wc(s.toUpperCase(), s.length()));
+                }
+
             }
         });
         text4.print();
+
     }
 }
 

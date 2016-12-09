@@ -13,7 +13,7 @@ import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.api.java.tuple.Tuple2;
 
-public class Map001java {
+public class MapFunction001java {
     public static void main(String[] args) throws Exception {
         // 1.设置运行环境，准备运行的数据
         final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
@@ -97,7 +97,7 @@ import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.api.java.operators.MapPartitionOperator;
 import org.apache.flink.util.Collector;
 
-public class MapPartition001java {
+public class MapPartitionFunction001java {
     public static void main(String[] args) throws Exception {
 
         // 1.设置运行环境,准备运行的数据
@@ -149,10 +149,16 @@ public class MapPartition001java {
             }
         }
         //4.2转化成class类型
-        DataSet<Wc> text4= text.map(new MapFunction<String, Wc>() {
+        final MapPartitionOperator<String, Wc> text4 = text.mapPartition(
+        new MapPartitionFunction<String, Wc>() {
             @Override
-            public Wc map(String s) throws Exception {
-                return new Wc(s.toUpperCase(),s.length());
+            public void mapPartition(Iterable<String> iterable, Collector<Wc> collector) throws Exception {
+                Iterator<String> itor = iterable.iterator();
+                while (itor.hasNext()) {
+                    String  s = itor.next();
+                    collector.collect(new Wc(s.toUpperCase(), s.length()));
+                }
+
             }
         });
         text4.print();
@@ -188,7 +194,7 @@ import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.util.Collector;
 
 import java.util.List;
-public class FlatMap001java {
+public class FlatMapFunction001java {
     public static void main(String[] args) throws Exception {
         // 1.设置运行环境，准备运行的数据
         final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
@@ -255,7 +261,7 @@ import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
 
-public class Filter001java {
+public class FilterFunction001java {
     public static void main(String[] args) throws Exception {
         // 1.设置运行环境，准备运行的数据
         final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
@@ -308,7 +314,7 @@ import org.apache.flink.api.common.functions.ReduceFunction;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
 
-public class Reduce001java {
+public class ReduceFunction001java {
     public static void main(String[] args) throws Exception {
         // 1.设置运行环境，准备运行的数据
         final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
@@ -394,7 +400,7 @@ import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.util.Collector;
 import java.util.Iterator;
 
-public class ReduceGroup001java {
+public class GroupReduceFunction001java {
     public static void main(String[] args) throws Exception {
         // 1.设置运行环境，准备运行的数据
         final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();

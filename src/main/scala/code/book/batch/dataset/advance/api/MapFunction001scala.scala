@@ -4,7 +4,7 @@ import org.apache.flink.api.common.functions.MapFunction
 import org.apache.flink.api.scala.{ExecutionEnvironment, _}
 
 
-object Map001scala {
+object MapFunction001scala {
   def main(args: Array[String]): Unit = {
     // 1.设置运行环境,并创造测试数据
     val env = ExecutionEnvironment.getExecutionEnvironment

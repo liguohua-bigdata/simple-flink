@@ -3,7 +3,7 @@ package code.book.batch.dataset.advance.api
 import org.apache.flink.api.common.functions.ReduceFunction
 import org.apache.flink.api.scala.{ExecutionEnvironment, _}
 
-object Reduce001scala {
+object ReduceFunction001scala {
   def main(args: Array[String]): Unit = {
     // 1.设置运行环境,并创造测试数据
     val env = ExecutionEnvironment.getExecutionEnvironment
