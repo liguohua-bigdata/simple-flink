@@ -152,7 +152,8 @@ public class MapPartitionFunction001java {
         final MapPartitionOperator<String, Wc> text4 = text.mapPartition(
         new MapPartitionFunction<String, Wc>() {
             @Override
-            public void mapPartition(Iterable<String> iterable, Collector<Wc> collector) throws Exception {
+            public void mapPartition(Iterable<String> iterable, Collector<Wc> collector)
+            throws Exception {
                 Iterator<String> itor = iterable.iterator();
                 while (itor.hasNext()) {
                     String  s = itor.next();
