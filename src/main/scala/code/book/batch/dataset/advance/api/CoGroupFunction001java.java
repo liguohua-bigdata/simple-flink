@@ -22,7 +22,7 @@ public class CoGroupFunction001java {
                 new Tuple3<>("A001", "lisi", "lisi@qq.com"),
                 new Tuple3<>("A001", "wangwu", "wangwu@qq.com")
         );
-        //Archive (title, author name)
+        //Post (title, author name)
         DataSet<Tuple2<String, String>> posts = env.fromElements(
                 new Tuple2<>("P001", "zhangsan"),
                 new Tuple2<>("P002", "lisi"),
@@ -30,7 +30,7 @@ public class CoGroupFunction001java {
                 new Tuple2<>("P004", "lisi")
 
         );
-        // 2.用自定义的方式进行join操作
+        // 2.用自定义的方式进行coGroup操作,将相同name的Author和Post协同分组。
         DataSet<Tuple4<String, String, String, String
                 >> text2 = authors.coGroup(posts).where(1).equalTo(1).with(new CoGroupFunction<Tuple3<String, String, String>, Tuple2<String, String>, Tuple4<String, String, String, String>>() {
 
@@ -42,13 +42,13 @@ public class CoGroupFunction001java {
                 while (aitor.hasNext()) {
                     at = aitor.next();
                 }
-                //取出Archive信息
+                //取出Post信息
                 Tuple2<String, String> pt = null;
                 Iterator<Tuple2<String, String>> pitor = posts.iterator();
                 while (pitor.hasNext()) {
                     pt = pitor.next();
                 }
-                //重新组装并发送AuthorArchive信息
+                //重新组装并发送AuthorPost信息
                 collector.collect(new Tuple4<>(pt.f0, at.f0, at.f1, at.f2));
             }
         });

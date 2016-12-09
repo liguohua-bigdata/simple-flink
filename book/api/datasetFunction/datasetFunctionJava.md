@@ -485,6 +485,144 @@ data2.print
 
 
 
+##Join
+```
+join将两个DataSet按照一定的关联度进行类似SQL中的Join操作。
+```
+####执行程序：
+```java
+package code.book.batch.dataset.advance.api;
+
+import org.apache.flink.api.common.functions.JoinFunction;
+import org.apache.flink.api.java.DataSet;
+import org.apache.flink.api.java.ExecutionEnvironment;
+import org.apache.flink.api.java.tuple.Tuple2;
+import org.apache.flink.api.java.tuple.Tuple3;
+import org.apache.flink.api.java.tuple.Tuple4;
+
+public class JoinFunction001java {
+
+    public static void main(String[] args) throws Exception {
+        // 1.设置运行环境，准备运行的数据
+        final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
+        // Author (id, name, email)
+        DataSet<Tuple3<String, String, String>> authors = env.fromElements(
+                new Tuple3<>("A001", "zhangsan", "zhangsan@qq.com"),
+                new Tuple3<>("A001", "lisi", "lisi@qq.com"),
+                new Tuple3<>("A001", "wangwu", "wangwu@qq.com")
+        );
+        //Archive (title, author name)
+        DataSet<Tuple2<String, String>> posts = env.fromElements(
+                new Tuple2<>("P001", "zhangsan"),
+                new Tuple2<>("P002", "lisi"),
+                new Tuple2<>("P003", "wangwu"),
+                new Tuple2<>("P004", "lisi")
+        );
+        // 2.用自定义的方式进行join操作
+        DataSet<Tuple4<String, String, String, String>> text2 = authors.join(posts).where(1).
+        equalTo(1).with(new JoinFunction<Tuple3<String, String, String>, Tuple2<String, String>, 
+        Tuple4<String, String, String, String>>() {
+            @Override
+            public Tuple4<String, String, String, String> join(Tuple3<String, String, String> author, 
+            Tuple2<String, String> post) throws Exception {
+                //AuthorArchive (title, id, name, email)
+                return new Tuple4<>(post.f0, author.f0, author.f1, author.f2);
+            }
+        });
+
+        //3.显示结果
+        text2.print();
+    }
+}
+```
+####执行结果：
+```java
+text2.print();
+(P003,A001,wangwu,wangwu@qq.com)
+(P001,A001,zhangsan,zhangsan@qq.com)
+(P002,A001,lisi,lisi@qq.com)
+(P004,A001,lisi,lisi@qq.com)
+```
+
+
+##CoGroup
+```
+将2个DataSet中的元素，按照key进行分组，一起分组2个DataSet。而groupBy值能分组一个DataSet
+```
+####执行程序：
+```java
+package code.book.batch.dataset.advance.api;
+
+import org.apache.flink.api.common.functions.CoGroupFunction;
+import org.apache.flink.api.java.DataSet;
+import org.apache.flink.api.java.ExecutionEnvironment;
+import org.apache.flink.api.java.tuple.Tuple2;
+import org.apache.flink.api.java.tuple.Tuple3;
+import org.apache.flink.api.java.tuple.Tuple4;
+import org.apache.flink.util.Collector;
+
+import java.util.Iterator;
+
+
+public class CoGroupFunction001java {
+
+    public static void main(String[] args) throws Exception {
+        // 1.设置运行环境，准备运行的数据
+        final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
+        // Author (id, name, email)
+        DataSet<Tuple3<String, String, String>> authors = env.fromElements(
+                new Tuple3<>("A001", "zhangsan", "zhangsan@qq.com"),
+                new Tuple3<>("A001", "lisi", "lisi@qq.com"),
+                new Tuple3<>("A001", "wangwu", "wangwu@qq.com")
+        );
+        //Post (title, author name)
+        DataSet<Tuple2<String, String>> posts = env.fromElements(
+                new Tuple2<>("P001", "zhangsan"),
+                new Tuple2<>("P002", "lisi"),
+                new Tuple2<>("P003", "wangwu"),
+                new Tuple2<>("P004", "lisi")
+
+        );
+        // 2.用自定义的方式进行coGroup操作,将相同name的Author和Post协同分组。
+        DataSet<Tuple4<String, String, String, String text2 = authors.coGroup(posts).where(1)
+        .equalTo(1).with(new CoGroupFunction<Tuple3<String, String, String>, Tuple2<String, String>,
+        Tuple4<String, String, String, String>>() {
+
+            @Override
+            public void coGroup(Iterable<Tuple3<String, String, String>> authors,
+            Iterable<Tuple2<String,String>> posts,Collector<Tuple4<String,String,String,String>> collector)
+            throws Exception {
+                //取出Author信息
+                Tuple3<String, String, String> at = null;
+                Iterator<Tuple3<String, String, String>> aitor = authors.iterator();
+                while (aitor.hasNext()) {
+                    at = aitor.next();
+                }
+                //取出Post信息
+                Tuple2<String, String> pt = null;
+                Iterator<Tuple2<String, String>> pitor = posts.iterator();
+                while (pitor.hasNext()) {
+                    pt = pitor.next();
+                }
+                //重新组装并发送AuthorPost信息
+                collector.collect(new Tuple4<>(pt.f0, at.f0, at.f1, at.f2));
+            }
+        });
+
+        //3.显示结果
+        text2.print();
+    }
+}
+```
+####执行结果：
+```java
+text2.print();
+(P003,A001,wangwu,wangwu@qq.com)
+(P004,A001,lisi,lisi@qq.com)
+(P001,A001,zhangsan,zhangsan@qq.com)
+```
+
+
 
 
 
