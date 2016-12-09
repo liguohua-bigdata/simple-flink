@@ -523,7 +523,7 @@ public class JoinFunction001java {
         equalTo(1).with(new JoinFunction<Tuple3<String, String, String>, Tuple2<String, String>, 
         Tuple4<String, String, String, String>>() {
             @Override
-            public Tuple4<String, String, String, String> join(Tuple3<String, String, String> author, 
+            public Tuple4<String,String,String,String> join(Tuple3<String,String,String> author, 
             Tuple2<String, String> post) throws Exception {
                 //AuthorArchive (title, id, name, email)
                 return new Tuple4<>(post.f0, author.f0, author.f1, author.f2);
@@ -590,8 +590,8 @@ public class CoGroupFunction001java {
 
             @Override
             public void coGroup(Iterable<Tuple3<String, String, String>> authors,
-            Iterable<Tuple2<String,String>> posts,Collector<Tuple4<String,String,String,String>> collector)
-            throws Exception {
+            Iterable<Tuple2<String,String>> posts,Collector<Tuple4<String,String,String,String>>
+            collector)throws Exception {
                 //取出Author信息
                 Tuple3<String, String, String> at = null;
                 Iterator<Tuple3<String, String, String>> aitor = authors.iterator();
