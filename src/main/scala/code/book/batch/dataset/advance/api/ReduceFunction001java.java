@@ -50,5 +50,7 @@ public class ReduceFunction001java {
             }
         });
         text5.collect();
+
+
     }
 }
