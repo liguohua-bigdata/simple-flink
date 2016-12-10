@@ -4,7 +4,7 @@ import org.apache.flink.api.common.operators.Order
 import org.apache.flink.api.scala.{DataSet, ExecutionEnvironment, _}
 import org.apache.flink.core.fs.FileSystem.WriteMode
 
-object DataSink002 {
+object DataSink002scala {
   def main(args: Array[String]): Unit = {
     val env = ExecutionEnvironment.getExecutionEnvironment
     //stu(age,name,height)

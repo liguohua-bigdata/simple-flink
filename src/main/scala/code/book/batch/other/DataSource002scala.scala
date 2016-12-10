@@ -2,7 +2,7 @@ package code.book.batch.other
 
 import org.apache.flink.api.scala.{DataSet, ExecutionEnvironment,_}
 
-object DataSource002 {
+object DataSource002scala {
   def main(args: Array[String]): Unit = {
 
     val env = ExecutionEnvironment.getExecutionEnvironment

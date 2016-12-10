@@ -4,7 +4,13 @@ import org.apache.flink.api.common.functions.RichMapFunction
 import org.apache.flink.api.scala.{DataSet, ExecutionEnvironment, _}
 import org.apache.flink.configuration.Configuration
 
-object Parameters003 {
+/**
+  * Globally via the ExecutionConfig
+  * *
+  * Flink also allows to pass custom configuration values to the ExecutionConfig
+  * interface of the environment. Since the execution config is accessible in all (rich) user functions, the custom configuration will be available globally in all functions.
+  */
+object Parameters003scala {
   def main(args: Array[String]): Unit = {
     val env = ExecutionEnvironment.getExecutionEnvironment
 

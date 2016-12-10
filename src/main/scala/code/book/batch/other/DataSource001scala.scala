@@ -6,7 +6,7 @@ import scala.collection.immutable.{Queue, Stack}
 import scala.collection.mutable
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
-object DataSource001 {
+object DataSource001scala {
   def main(args: Array[String]): Unit = {
     val env = ExecutionEnvironment.getExecutionEnvironment
     //0.用element创建DataSet(fromElements)

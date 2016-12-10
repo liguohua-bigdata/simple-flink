@@ -9,7 +9,7 @@ import org.apache.hadoop.io.NullWritable
 import org.apache.hadoop.mapred.lib.MultipleTextOutputFormat
 import org.apache.hadoop.mapred.{FileOutputFormat, JobConf}
 
-object DataSink003 {
+object DataSink003scala {
 
   class IteblogMultipleTextOutputFormat[K, V] extends MultipleTextOutputFormat[K, V] {
     override def generateActualKey(key: K, value: V): K = NullWritable.get().asInstanceOf[K]
