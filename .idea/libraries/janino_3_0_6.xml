@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="janino-3.0.6">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/janino-3.0.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
