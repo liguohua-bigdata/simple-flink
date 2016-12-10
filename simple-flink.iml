@@ -19,6 +19,7 @@
     <orderEntry type="library" name="flink-connector-kafka-base_2.10" level="project" />
     <orderEntry type="library" name="aopalliance-repackaged-2.4.0-b31" level="project" />
     <orderEntry type="library" name="flink-connector-kafka-0.9_2.10" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-5.1.35-bin" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.4" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.specs:specs:1.2.5" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.scalatest:scalatest:0.9.1" level="project" />
@@ -71,20 +72,7 @@
     <orderEntry type="library" name="Maven: com.twitter:chill_2.11:0.7.4" level="project" />
     <orderEntry type="library" name="Maven: com.twitter:chill-java:0.7.4" level="project" />
     <orderEntry type="library" name="Maven: commons-cli:commons-cli:1.3.1" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.flink:flink-table_2.10:1.1.3" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.flink:flink-streaming-scala_2.10:1.1.3" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.flink:flink-streaming-java_2.10:1.1.3" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.flink:flink-runtime_2.10:1.1.3" level="project" />
-    <orderEntry type="library" name="Maven: com.typesafe.akka:akka-actor_2.10:2.3.7" level="project" />
-    <orderEntry type="library" name="Maven: com.typesafe.akka:akka-remote_2.10:2.3.7" level="project" />
-    <orderEntry type="library" name="Maven: com.typesafe.akka:akka-slf4j_2.10:2.3.7" level="project" />
-    <orderEntry type="library" name="Maven: org.clapper:grizzled-slf4j_2.10:1.0.2" level="project" />
-    <orderEntry type="library" name="Maven: com.github.scopt:scopt_2.10:3.2.0" level="project" />
-    <orderEntry type="library" name="Maven: com.twitter:chill_2.10:0.7.4" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.flink:flink-clients_2.10:1.1.3" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.flink:flink-scala_2.10:1.1.3" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.flink:flink-optimizer_2.10:1.1.3" level="project" />
-    <orderEntry type="library" name="Maven: org.scalamacros:quasiquotes_2.10:2.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.flink:flink-table_2.11:1.1.3" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.janino:janino:2.7.5" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.janino:commons-compiler:2.7.5" level="project" />
     <orderEntry type="library" name="Maven: org.apache.kafka:kafka-clients:0.8.2.1" level="project" />
@@ -126,6 +114,5 @@
     <orderEntry type="library" name="Maven: org.apache.flink:flink-connector-kafka-0.9_2.11:1.1.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.flink:flink-connector-kafka-base_2.11:1.1.3" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.35" level="project" />
-    <orderEntry type="library" name="mysql-connector-java-5.1.35-bin" level="project" />
   </component>
 </module>

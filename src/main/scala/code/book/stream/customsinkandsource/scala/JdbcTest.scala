@@ -28,7 +28,7 @@ object JdbcTest {
         println(student)
       }
     } catch {
-      case e => e.printStackTrace
+      case e:Throwable => e.printStackTrace
     } finally {
       //6.关闭连接，释放资源
       if (connection != null) {
