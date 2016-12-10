@@ -1,8 +1,6 @@
 <component name="libraryTable">
   <library name="flink-connector-kafka-0.9_2.10-1.1.3">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/flink-connector-kafka-0.9_2.10-1.1.3.jar!/" />
-    </CLASSES>
+    <CLASSES />
     <JAVADOC />
     <SOURCES>
       <root url="jar://$USER_HOME$/.ideaLibSources/flink-connector-kafka-0.9_2.10-1.1.3-sources.jar!/" />
