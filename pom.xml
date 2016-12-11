@@ -109,7 +109,7 @@
                             <manifest>
                                 <!--设置程序的入口类-->
                                 <!--<mainClass>code.book.stream.streamwc.SocketWC</mainClass>-->
-                                <mainClass>code.book.idetes.WordCountJob</mainClass>
+                                <mainClass>code.book.batch.other.Alluxio001</mainClass>
                                 <addClasspath>true</addClasspath>
                                 <classpathPrefix>lib/</classpathPrefix>
                             </manifest>
