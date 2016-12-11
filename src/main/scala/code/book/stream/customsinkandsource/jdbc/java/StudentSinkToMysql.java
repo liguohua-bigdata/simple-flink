@@ -1,17 +1,18 @@
-package code.book.stream.customsinkandsource.java;
+package code.book.stream.customsinkandsource.jdbc.java;
 
 import org.apache.flink.configuration.Configuration;
-import org.apache.flink.streaming.api.functions.source.RichSourceFunction;
+import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
-
-public class StudentSourceFromMysql extends RichSourceFunction<Student> {
-    PreparedStatement ps;
-    private Connection connection;
+/**
+ * Created by liguohua on 10/12/2016.
+ */
+public class StudentSinkToMysql extends RichSinkFunction<Student> {
+    private Connection connection = null;
+    private PreparedStatement ps = null;
 
     /**
      * 一、open()方法中建立连接，这样不用每次invoke的时候都要建立连接和释放连接。
@@ -27,40 +28,33 @@ public class StudentSourceFromMysql extends RichSourceFunction<Student> {
         Class.forName(driver);
         //2.创建连接
         connection = DriverManager.getConnection(url, username, password);
+        String sql = "insert into Student(stuid,stuname,stuaddr,stusex)values(?,?,?,?);";
         //3.获得执行语句
-        String sql = "select stuid,stuname,stuaddr,stusex from Student;";
         ps = connection.prepareStatement(sql);
     }
 
+
     /**
-     * 二、DataStream调用一次run()方法用来获取数据
+     * 二、每个元素的插入都要调用一次invoke()方法，这里主要进行插入操作
      */
     @Override
-    public void run(SourceContext<Student> sourceContext) throws Exception {
+    public void invoke(Student student) throws Exception {
         try {
-            //4.执行查询，封装数据
-            ResultSet resultSet = ps.executeQuery();
-            while (resultSet.next()) {
-                Student student = new Student(resultSet.getInt("stuid"), resultSet.getString("stuname").trim(), resultSet.getString("stuaddr").trim(), resultSet.getString("stusex").trim());
-                sourceContext.collect(student);
-            }
+            //4.组装数据，执行插入操作
+            ps.setInt(1, student.getStuid());
+            ps.setString(2, student.getStuname());
+            ps.setString(3, student.getStuaddr());
+            ps.setString(4, student.getStusex());
+            ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void cancel() {
-
-    }
-
-    /**
-     * 三、 程序执行完毕就可以进行，关闭连接和释放资源的动作了
-     */
-    @Override
     public void close() throws Exception {
-        //5.关闭连接和释放资源
         super.close();
+        //5.关闭连接和释放资源
         if (connection != null) {
             connection.close();
         }

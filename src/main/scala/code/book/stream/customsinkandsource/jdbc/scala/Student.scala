@@ -1,4 +1,4 @@
-package code.book.stream.customsinkandsource.scala
+package code.book.stream.customsinkandsource.jdbc.scala
 /**
   * 用于存储数据库中的数据，作为bean使用
   */

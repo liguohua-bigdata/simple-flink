@@ -1,4 +1,4 @@
-package code.book.stream.customsinkandsource.scala
+package code.book.stream.customsinkandsource.jdbc.scala
 
 import org.apache.flink.streaming.api.scala.{StreamExecutionEnvironment, _}
 object StudentSourceFromMysqlTest {
@@ -14,5 +14,7 @@ object StudentSourceFromMysqlTest {
 
     //4.触发流执行
     env.execute()
+
+
   }
 }

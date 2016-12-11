@@ -1,4 +1,4 @@
-package code.book.stream.customsinkandsource.scala
+package code.book.stream.customsinkandsource.jdbc.scala
 
 import org.apache.flink.streaming.api.scala.{StreamExecutionEnvironment, _}
 

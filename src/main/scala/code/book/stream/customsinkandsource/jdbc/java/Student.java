@@ -1,4 +1,4 @@
-package code.book.stream.customsinkandsource.java;
+package code.book.stream.customsinkandsource.jdbc.java;
 
 /**
  * 用于存储数据库中的数据，作为bean使用

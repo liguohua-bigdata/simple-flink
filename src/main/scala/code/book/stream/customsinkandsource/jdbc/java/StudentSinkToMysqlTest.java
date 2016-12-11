@@ -1,4 +1,4 @@
-package code.book.stream.customsinkandsource.java;
+package code.book.stream.customsinkandsource.jdbc.java;
 
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;

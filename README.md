@@ -72,7 +72,7 @@
 /Users/liguohua/Documents/F/code/idea/git/simple-flink/src/main/scala/code/book/stream/customsinkandsource
 /Users/liguohua/Documents/F/code/idea/git/simple-flink/src/main/scala/code/book/batch/other
 
-
+/Users/liguohua/Documents/F/code/idea/git/simple-flink/src/main/scala/code/book/batch/outputformat
 
 
 

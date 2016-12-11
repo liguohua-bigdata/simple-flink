@@ -1,4 +1,4 @@
-package code.book.stream.customsinkandsource.java;
+package code.book.stream.customsinkandsource.jdbc.java;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
