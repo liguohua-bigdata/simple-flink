@@ -8,9 +8,9 @@
 
 * [第003章：Flink编程模型之基本DataSet API](book/api/dataset/dataset.md)
 
-* [第004章：Flink基于IntelliJ IDEA开发环境的搭建(不用maven)](book/ide/idea/idea.md)
+* [第004章：基于IntelliJ IDEA搭建不用maven管理的集成开发环境](book/ide/idea/idea.md)
 
-* [第005章：Flink基于IntelliJ IDEA开发环境的搭建(使用maven)](book/ide/idea-maven/idea-maven.md)
+* [第005章：基于IntelliJ IDEA搭建使用maven管理的集成开发环境](book/ide/idea-maven/idea-maven.md)
 
 * [第006章：Flink的DataSet常用Function(Java版)](book/api/datasetFunction/datasetFunctionJava.md)
 
