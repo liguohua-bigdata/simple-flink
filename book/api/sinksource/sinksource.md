@@ -188,11 +188,13 @@ object DataSink001 {
     val env = ExecutionEnvironment.getExecutionEnvironment
     val ds1: DataSet[(Int, String)] = env.fromCollection(Map(1 -> "spark", 2 -> "flink"))
     //1.写入到本地，文本文档,NO_OVERWRITE模式下如果文件已经存在，则报错，OVERWRITE模式下如果文件已经存在，则覆盖
-    ds1.setParallelism(1).writeAsText("file:///output/flink/datasink/test001.txt", WriteMode.OVERWRITE)
+    ds1.setParallelism(1).writeAsText("file:///output/flink/datasink/test001.txt",
+    WriteMode.OVERWRITE)
     env.execute()
 
     //2.写入到hdfs，文本文档,路径不存在则自动创建路径。
-    ds1.setParallelism(1).writeAsText("hdfs:///output/flink/datasink/test001.txt", WriteMode.OVERWRITE)
+    ds1.setParallelism(1).writeAsText("hdfs:///output/flink/datasink/test001.txt",
+    WriteMode.OVERWRITE)
     env.execute()
 
     //3.写入到hdfs，CSV文档
@@ -259,7 +261,8 @@ object DataSink002 {
     env.execute()
     //5.3写入到hdfs,CSV文档
     val outPath2="hdfs:///output/flink/datasink/Student002.csv"
-    ds2.writeAsCsv(filePath = outPath2,rowDelimiter = "\n",fieldDelimiter = "|||",WriteMode.OVERWRITE)
+    ds2.writeAsCsv(filePath = outPath2,rowDelimiter = "\n",
+    fieldDelimiter = "|||",WriteMode.OVERWRITE)
     env.execute()
   }
 }
