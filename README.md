@@ -41,9 +41,9 @@
 * [第018章：Flink中参数传递和容错设定](book/api/sinksource/ParamFault.md)
 
 #四、Flink流处理API详解与编程实战
-* [第013章：Flink基于流的wordcount示例](book/stream/streamwc/streamwc.md)
+* [第019章：Flink基于流的wordcount示例](book/stream/streamwc/streamwc.md)
 
-* [第014章：Flink基于流的window操作](book/stream/window/window.md)
+* [第020章：Flink基于流的window操作](book/stream/window/window.md)
 
 
 ---
