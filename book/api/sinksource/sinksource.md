@@ -259,7 +259,7 @@ object DataSink002 {
     env.execute()
     //5.3写入到hdfs,CSV文档
     val outPath2="hdfs:///output/flink/datasink/Student002.csv"
-    ds2.writeAsCsv(filePath = outPath2, rowDelimiter = "\n", fieldDelimiter = "|||", WriteMode.OVERWRITE)
+    ds2.writeAsCsv(filePath = outPath2,rowDelimiter = "\n",fieldDelimiter = "|||",WriteMode.OVERWRITE)
     env.execute()
   }
 }
