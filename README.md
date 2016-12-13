@@ -55,11 +55,13 @@
 
 * [第011章：Flink中广播变量和分布式缓存](book/api/sinksource/VariablesCache.md)
 
+* [第012章：Flink中参数传递和容错设定](book/api/sinksource/ParamFault.md)
 
 
-* [第012章：Flink基于流的wordcount示例](book/stream/streamwc/streamwc.md)
 
-* [第013章：Flink基于流的window操作](book/stream/window/window.md)
+* [第013章：Flink基于流的wordcount示例](book/stream/streamwc/streamwc.md)
+
+* [第014章：Flink基于流的window操作](book/stream/window/window.md)
 
 
 

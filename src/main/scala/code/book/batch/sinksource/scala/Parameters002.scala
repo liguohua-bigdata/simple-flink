@@ -3,7 +3,7 @@ package code.book.batch.sinksource.scala
 import org.apache.flink.api.common.functions.MapFunction
 import org.apache.flink.api.scala.{DataSet, ExecutionEnvironment, _}
 
-object Parameters002scala {
+object Parameters002 {
   def main(args: Array[String]): Unit = {
     val env = ExecutionEnvironment.getExecutionEnvironment
 

@@ -6,7 +6,7 @@ import org.apache.flink.api.scala.{ExecutionEnvironment, _}
 /**
   * Passing Parameters to Functions
   */
-object Parameters001scala {
+object Parameters001 {
   def main(args: Array[String]): Unit = {
     val env = ExecutionEnvironment.getExecutionEnvironment
 
