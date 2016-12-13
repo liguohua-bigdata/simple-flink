@@ -1,5 +1,5 @@
 ##《Flink实战教程》
-###一、Flink部署与开发实战
+###一、Flink部署与开发
 
 * [第001章：第四代通用大数据处理引擎简介](book/introduce/introduce.md)
 
@@ -27,7 +27,7 @@
 
 * [第012章：DataSet实用Function详解(Java版)](book/api/datasetFunction/datasetFunctionJava.md)
 
-###三、Flink高级特性与高级应用实战
+###三、Flink高级特性与高级应用
 * [第013章：Flink的内存管理](book/memory/memory.md)
 
 * [第014章：Flink的作业调度情况](book/internal/JobsScheduling/JobsScheduling.md)
