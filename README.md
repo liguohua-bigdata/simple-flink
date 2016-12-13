@@ -1,5 +1,4 @@
-### 《Flink实战教程》
-* [第000章：前言](README.md)
+##《Flink实战教程》
 
 * [第001章：Flink简介](book/introduce/introduce.md)
 
@@ -56,6 +55,7 @@
 
 ---
 
+* [第000章：前言](README.md)
 
 
 
