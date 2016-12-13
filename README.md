@@ -41,8 +41,16 @@
 * [第007章：Flink的DataSet常用Function(Scala版)](book/api/datasetFunction/datasetFunctionScala.md)
 * [第008章：Flink的slot和parallelism](book/internal/slot-parallelism/slot-parallelism.md)
 * [第009章：Flink-on-yarn模式解析](book/yarn/yarn.md)
-* [第010章：Flink基于流的wordcount示例](book/stream/streamwc/streamwc.md)
-* [第011章：Flink基于流的window操作](book/stream/window/window.md)
+* [第010章：Flink的常见sink和source](book/api/sinksource/sinksource.md)
+
+
+
+* [第011章：Flink基于流的wordcount示例](book/stream/streamwc/streamwc.md)
+* [第012章：Flink基于流的window操作](book/stream/window/window.md)
+
+
+
+
 ---
 
 
