@@ -34,7 +34,7 @@
 ###1.创建package
 ![](images/Snip20161127_21.png) 
 ###2.输入package名称
-![](images/Snip20161127_25.png) 
+![](images/Snip20161127_23.png) 
 ###3.创建object
 ![](images/Snip20161127_26.png) 
 ```
