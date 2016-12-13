@@ -65,22 +65,23 @@
 
 ---
 
-* [第000章：前言](README.md)
+* [第000章：前言](README.md)  
 
 
 
+批处理：  
+累加器  
+/Users/liguohua/Documents/F/code/idea/git/simple-flink/src/main/scala/code/book/batch/outputformat   
 
+流处理：   
 /Users/liguohua/Documents/F/code/idea/git/simple-flink/src/main/scala/code/book/stream/customsinkandsource
-/Users/liguohua/Documents/F/code/idea/git/simple-flink/src/main/scala/code/book/batch/other
-
-/Users/liguohua/Documents/F/code/idea/git/simple-flink/src/main/scala/code/book/batch/outputformat
 
 
 
+
+重点参考链接：  
 https://www.oreilly.com/ideas/the-world-beyond-batch-streaming-101
 https://www.oreilly.com/ideas/the-world-beyond-batch-streaming-102
-
-
 http://data-artisans.com/blog/
 http://data-artisans.com/how-apache-flink-enables-new-streaming-applications-part-1/
 http://data-artisans.com/how-apache-flink-enables-new-streaming-applications/
