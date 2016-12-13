@@ -12,11 +12,11 @@ import scala.io.Source
   * zhagnsan:4
   * lisi:5
   */
-object DistributedCache001scala {
+object DistributedCache001 {
   def main(args: Array[String]): Unit = {
     val env = ExecutionEnvironment.getExecutionEnvironment
     //1.准备缓存数据，
-    val path = "file:///Users/liguohua/Documents/F/code/idea/git/simple-flink/src/main/scala/code/book/batch/other/test"
+    val path = "file:///Users/liguohua/Documents/F/code/idea/git/simple-flink/src/main/scala/code/book/batch/sinksource/scala/test"
     env.registerCachedFile(path, "MyTestFile")
 
     //2.准备工人数据

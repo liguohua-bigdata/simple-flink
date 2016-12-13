@@ -8,7 +8,7 @@ import org.apache.flink.configuration.Configuration
 /**
   * Created by liguohua on 10/12/2016.
   */
-object BroadcastVariables001scala {
+object BroadcastVariables001 {
   def main(args: Array[String]): Unit = {
     val env = ExecutionEnvironment.getExecutionEnvironment
     //1.准备工人数据（用于map）

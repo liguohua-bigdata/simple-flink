@@ -51,13 +51,15 @@
 
 * [第009章：Flink-on-yarn模式解析](book/yarn/yarn.md)
 
-* [第010章：Flink的常见sink和source](book/api/sinksource/sinksource.md)
+* [第010章：Flink中常见的sink和source](book/api/sinksource/sinksource.md)
+
+* [第011章：Flink中广播变量和分布式缓存](book/api/sinksource/VariablesCache.md)
 
 
 
-* [第011章：Flink基于流的wordcount示例](book/stream/streamwc/streamwc.md)
+* [第012章：Flink基于流的wordcount示例](book/stream/streamwc/streamwc.md)
 
-* [第012章：Flink基于流的window操作](book/stream/window/window.md)
+* [第013章：Flink基于流的window操作](book/stream/window/window.md)
 
 
 
