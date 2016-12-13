@@ -6,7 +6,7 @@ import org.apache.flink.core.fs.FileSystem.WriteMode
 /**
   * Created by liguohua on 10/12/2016.
   */
-object DataSink001scala {
+object DataSink001 {
   def main(args: Array[String]): Unit = {
     //0.主意：不论是本地还是hdfs.若Parallelism>1将把path当成目录名称，若Parallelism=1将把path当成文件名。
     val env = ExecutionEnvironment.getExecutionEnvironment

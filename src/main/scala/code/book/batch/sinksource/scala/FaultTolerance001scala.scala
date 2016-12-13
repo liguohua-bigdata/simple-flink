@@ -9,9 +9,7 @@ import org.apache.flink.api.scala.{ExecutionEnvironment, _}
   */
 object FaultTolerance001scala {
   def main(args: Array[String]): Unit = {
-
     val env = ExecutionEnvironment.createRemoteEnvironment("qingcheng13", 6123)
-
 //    val env = ExecutionEnvironment.getExecutionEnvironment
     //失败重试3次
     env.setNumberOfExecutionRetries(3)
