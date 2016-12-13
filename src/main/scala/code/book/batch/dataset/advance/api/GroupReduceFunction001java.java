@@ -7,10 +7,12 @@ import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.util.Collector;
 import java.util.Iterator;
 
+import static org.apache.flink.api.java.ExecutionEnvironment.getExecutionEnvironment;
+
 public class GroupReduceFunction001java {
     public static void main(String[] args) throws Exception {
         // 1.设置运行环境，准备运行的数据
-        final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
+        final ExecutionEnvironment env = getExecutionEnvironment();
         DataSet<Integer> text = env.fromElements(1, 2, 3, 4, 5, 6, 7);
 
         //2.对DataSet的元素进行合并，这里是计算累加和

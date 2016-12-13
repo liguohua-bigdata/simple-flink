@@ -1,4 +1,4 @@
-package code.book.batch.other
+package code.book.batch.sinksource.scala
 
 import org.apache.flink.api.scala.{DataSet, ExecutionEnvironment}
 
@@ -13,14 +13,15 @@ import org.apache.flink.api.scala.{DataSet, ExecutionEnvironment}
   <value>alluxio.hadoop.FileSystem</value>
 </property>
 
-3.
+
   */
 object Alluxio001 {
   def main(args: Array[String]): Unit = {
     val env = ExecutionEnvironment.getExecutionEnvironment
+    //    val dataSetFromAlluxio: DataSet[String] = env.readTextFile("hdfs://qingcheng11:9000/input/flink/README.txt")
     val dataSetFromAlluxio: DataSet[String] = env.readTextFile("alluxio://qingcheng11:19998/input/flink/README.txt")
     dataSetFromAlluxio.print()
-    env.execute()
+
   }
 
 }

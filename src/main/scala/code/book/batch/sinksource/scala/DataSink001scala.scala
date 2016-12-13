@@ -1,4 +1,4 @@
-package code.book.batch.other
+package code.book.batch.sinksource.scala
 
 import org.apache.flink.api.scala.{DataSet, ExecutionEnvironment, _}
 import org.apache.flink.core.fs.FileSystem.WriteMode

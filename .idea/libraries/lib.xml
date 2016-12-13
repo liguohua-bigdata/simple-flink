@@ -7,6 +7,7 @@
     <SOURCES>
       <root url="file:///Applications/flink-1.1.3/lib" />
       <root url="jar:///Applications/flink-1.1.3/lib/log4j-1.2.17.jar!/" />
+      <root url="jar://$USER_HOME$/.ideaLibSources/commons-cli-1.3-sources.jar!/" />
     </SOURCES>
     <jarDirectory url="file:///Applications/flink-1.1.3/lib" recursive="false" />
     <jarDirectory url="file:///Applications/flink-1.1.3/lib" recursive="false" type="SOURCES" />

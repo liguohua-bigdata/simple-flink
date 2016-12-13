@@ -1,4 +1,4 @@
-package code.book.batch.other
+package code.book.batch.sinksource.scala
 
 import org.apache.flink.api.common.functions.RichMapFunction
 import org.apache.flink.api.scala.{DataSet, ExecutionEnvironment, _}

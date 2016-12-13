@@ -1,4 +1,4 @@
-package code.book.batch.other
+package code.book.batch.sinksource.scala
 
 import java.util
 

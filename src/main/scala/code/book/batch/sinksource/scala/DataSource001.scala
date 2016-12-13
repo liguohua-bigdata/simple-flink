@@ -1,12 +1,11 @@
-package code.book.batch.other
+package code.book.batch.sinksource.scala
 
 import org.apache.flink.api.scala.{DataSet, ExecutionEnvironment, _}
-
 import scala.collection.immutable.{Queue, Stack}
 import scala.collection.mutable
 import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 
-object DataSource001scala {
+object DataSource001 {
   def main(args: Array[String]): Unit = {
     val env = ExecutionEnvironment.getExecutionEnvironment
     //0.用element创建DataSet(fromElements)
@@ -80,6 +79,5 @@ object DataSource001scala {
     //17.用fromElements创建DataSet
     val ds17: DataSet[Long] =  env.generateSequence(1,9)
     ds17.print()
-
   }
 }
