@@ -32,20 +32,31 @@
 
 ### Flink简明实战教程
 * [第000章：前言](README.md)
+
 * [第001章：Flink简介](book/introduce/introduce.md)
+
 * [第002章：Flink集群部署和集群测试](book/install/install.md)
+
 * [第003章：Flink编程模型之基本DataSet API](book/api/dataset/dataset.md)
+
 * [第004章：Flink基于IntelliJ IDEA开发环境的搭建(不用maven)](book/ide/idea/idea.md)
+
 * [第005章：Flink基于IntelliJ IDEA开发环境的搭建(使用maven)](book/ide/idea-maven/idea-maven.md)
+
 * [第006章：Flink的DataSet常用Function(Java版)](book/api/datasetFunction/datasetFunctionJava.md)
+
 * [第007章：Flink的DataSet常用Function(Scala版)](book/api/datasetFunction/datasetFunctionScala.md)
+
 * [第008章：Flink的slot和parallelism](book/internal/slot-parallelism/slot-parallelism.md)
+
 * [第009章：Flink-on-yarn模式解析](book/yarn/yarn.md)
+
 * [第010章：Flink的常见sink和source](book/api/sinksource/sinksource.md)
 
 
 
 * [第011章：Flink基于流的wordcount示例](book/stream/streamwc/streamwc.md)
+
 * [第012章：Flink基于流的window操作](book/stream/window/window.md)
 
 
