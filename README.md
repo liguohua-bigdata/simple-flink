@@ -1,8 +1,10 @@
 ##《Flink实战教程》
 
-* [第001章：Flink简介](book/introduce/introduce.md)
+* [第001章：第四代大数据处理引擎简介](book/introduce/introduce.md)
 
-* [第002章：Flink集群部署和集群测试](book/install/install.md)
+* [第002章：StandAlone模式下无HA集群部署实战](book/install/installnha.md)
+
+* [第002章：StandAlone模式下有HA集群部署实战](book/install/installha.md)
 
 * [第003章：Flink编程模型之基本DataSet API](book/api/dataset/dataset.md)
 
