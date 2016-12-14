@@ -45,8 +45,8 @@
 
 * [第020章：Flink基于流的window操作](book/stream/window/window.md)
 
-* [第020章：DataStream自定义sink和source(Scala版)](book/stream/customSource/customSourceScala.md)
-* [第020章：DataStream自定义sink和source(Java版)](book/stream/customSource/customSourceJava.md)
+* [第020章：DataStream与MySql自定义sink和source(Scala版)](book/stream/customSource/customSourceScala.md)
+* [第020章：DataStream与MySql自定义sink和source(Java版)](book/stream/customSource/customSourceJava.md)
 
 ---
 
@@ -75,11 +75,9 @@
 累加器  
 /Users/liguohua/Documents/F/code/idea/git/simple-flink/src/main/scala/code/book/batch/outputformat   
 
-流处理：   
-/Users/liguohua/Documents/F/code/idea/git/simple-flink/src/main/scala/code/book/stream/customsinkandsource
 
 
-/Users/liguohua/Documents/F/code/idea/git/simple-flink/
+
 
 重点参考链接：  
 https://www.oreilly.com/ideas/the-world-beyond-batch-streaming-101
