@@ -46,6 +46,7 @@
 * [第020章：Flink基于流的window操作](book/stream/window/window.md)
 
 * [第020章：DataStream自定义sink和source(Scala版)](book/stream/customSource/customSourceScala.md)
+* [第020章：DataStream自定义sink和source(Java版)](book/stream/customSource/customSourceJava.md)
 
 ---
 
