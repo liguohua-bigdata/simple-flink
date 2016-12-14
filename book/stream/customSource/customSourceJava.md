@@ -136,7 +136,8 @@ public class JdbcTest {
             ResultSet resultSet = statement.executeQuery("select stuid,stuname,stuaddr,stusex from Student");
             //5.处理结果集
             while (resultSet.next()) {
-                Student student = new Student(resultSet.getInt("stuid"), resultSet.getString("stuname").trim(), resultSet.getString("stuaddr").trim(), resultSet.getString("stusex").trim());
+                Student student = new Student(resultSet.getInt("stuid"), resultSet.getString("stuname").trim(),
+                resultSet.getString("stuaddr").trim(), resultSet.getString("stusex").trim());
                 System.out.println(student);
             }
         } catch (Exception e) {
@@ -207,7 +208,8 @@ public class StudentSourceFromMysql extends RichSourceFunction<Student> {
             //4.执行查询，封装数据
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
-                Student student = new Student(resultSet.getInt("stuid"), resultSet.getString("stuname").trim(), resultSet.getString("stuaddr").trim(), resultSet.getString("stusex").trim());
+                Student student = new Student(resultSet.getInt("stuid"), resultSet.getString("stuname").trim(),
+                resultSet.getString("stuaddr").trim(), resultSet.getString("stusex").trim());
                 sourceContext.collect(student);
             }
         } catch (Exception e) {
