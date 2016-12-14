@@ -77,8 +77,9 @@ object MultipleTextOutputFormat001Test {
   }
 }
 ```
-###2.自定义MultipleTextOutputFormat执行效果
+###3.自定义MultipleTextOutputFormat执行效果
 ![](images/Snip20161211_2.png) 
+###4.查看hdfs文件
 ![](images/Snip20161211_3.png) 
 
 ##二、MultipleTextOutputFormat设置二
@@ -162,7 +163,7 @@ object MultipleTextOutputFormat002Test {
   }
 }
 ```
-###2.自定义MultipleTextOutputFormat执行效果
+###3.自定义MultipleTextOutputFormat执行效果
 ![](images/Snip20161211_1.png) 
 
 
@@ -247,5 +248,5 @@ object MultipleTextOutputFormat003Test {
   }
 }
 ```
-###2.自定义MultipleTextOutputFormat执行效果
+###3.自定义MultipleTextOutputFormat执行效果
 ![](images/Snip20161211_4.png) 
