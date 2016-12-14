@@ -72,11 +72,6 @@
 
 
 ---
-
-
-
-
----
 ##六、重点参考链接：  
 ```
 https://www.oreilly.com/ideas/the-world-beyond-batch-streaming-101
@@ -85,7 +80,6 @@ http://data-artisans.com/blog/
 http://data-artisans.com/how-apache-flink-enables-new-streaming-applications-part-1/
 http://data-artisans.com/how-apache-flink-enables-new-streaming-applications/
 http://data-artisans.com/session-windowing-in-flink/
-
 ```
 
 
