@@ -14,7 +14,5 @@ object StudentSourceFromMysqlTest {
 
     //4.触发流执行
     env.execute()
-
-
   }
 }
