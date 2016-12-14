@@ -1,4 +1,8 @@
 #《Flink实战教程》
+##零、前言说明
+
+* [第000章：前言](README.md)  
+
 ##一、Flink部署与开发
 
 * [第001章：第四代通用大数据处理引擎简介](book/introduce/introduce.md)
@@ -51,24 +55,27 @@
 
 ---
 ##五、待整理部分
-* [第11章：Flink基于流的SessionWindow操作](book/stream/sessionWindow/sessionWindow.md)
+* [第000章：Flink基于流的SessionWindow操作](book/stream/sessionWindow/sessionWindow.md)
 
-* [第12章：Flink基于流的windowAndFunction操作](book/stream/windowAndFunction/sessionWindow.md)
+* [第000章：Flink基于流的windowAndFunction操作](book/stream/windowAndFunction/sessionWindow.md)
 
-* [第12章：Flink基于流的watermark操作](book/stream/wartermark/watermark.md)
-* [第13章：Flink基于流的join操作](book/stream/join/join.md)
-* [第14章：Flink基于流的checkpoint操作](book/stream/checkpoint/checkpoint.md)
-* [第15章：Flink基于流的customSource操作](book/stream/customSource/customSource.md)
+* [第000章：Flink基于流的watermark操作](book/stream/wartermark/watermark.md)
 
-* [flink的背压机制](book/backpressure/backpressure.md)
+* [第000章：Flink基于流的join操作](book/stream/join/join.md)
 
-* [error](book/error/error.md)
-* [data](book/data/data.md)
+* [第000章：Flink基于流的checkpoint操作](book/stream/checkpoint/checkpoint.md)
+
+* [第000章：Flink基于流的customSource操作](book/stream/customSource/customSource.md)
+
+* [第000章：flink的背压机制](book/backpressure/backpressure.md)
+
+* [第000章：error](book/error/error.md)
+
+* [第000章：data](book/data/data.md)
 
 
 ---
 
-* [第000章：前言](README.md)  
 
 
 
