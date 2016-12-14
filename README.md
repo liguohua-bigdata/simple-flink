@@ -41,15 +41,16 @@
 * [第018章：Flink中参数传递和容错设定](book/api/sinksource/ParamFault.md)
 
 ##四、Flink流处理API详解与编程实战
-* [第019章：Flink基于流的wordcount示例](book/stream/streamwc/streamwc.md)
+* [第000章：Flink基于流的wordcount示例](book/stream/streamwc/streamwc.md)
 
-* [第020章：Flink基于流的window操作](book/stream/window/window.md)
+* [第000章：Flink基于流的window操作](book/stream/window/window.md)
 
-* [第020章：DataStream与MySql自定义sink和source(Scala版)](book/stream/customSource/customSourceScala.md)
-* [第020章：DataStream与MySql自定义sink和source(Java版)](book/stream/customSource/customSourceJava.md)
+* [第000章：DataStream与MySql自定义sink和source(Scala版)](book/stream/customSource/customSourceScala.md)
+
+* [第000章：DataStream与MySql自定义sink和source(Java版)](book/stream/customSource/customSourceJava.md)
 
 ---
-
+##五、待整理部分
 * [第11章：Flink基于流的SessionWindow操作](book/stream/sessionWindow/sessionWindow.md)
 
 * [第12章：Flink基于流的windowAndFunction操作](book/stream/windowAndFunction/sessionWindow.md)
@@ -71,18 +72,21 @@
 
 
 
-批处理：  
-累加器  
-/Users/liguohua/Documents/F/code/idea/git/simple-flink/src/main/scala/code/book/batch/outputformat   
-
-
-
-
-
-重点参考链接：  
+---
+##六、重点参考链接：  
 https://www.oreilly.com/ideas/the-world-beyond-batch-streaming-101
 https://www.oreilly.com/ideas/the-world-beyond-batch-streaming-102
 http://data-artisans.com/blog/
 http://data-artisans.com/how-apache-flink-enables-new-streaming-applications-part-1/
 http://data-artisans.com/how-apache-flink-enables-new-streaming-applications/
 http://data-artisans.com/session-windowing-in-flink/
+
+
+---
+##七、TODO LIST
+批处理：  
+累加器  
+/Users/liguohua/Documents/F/code/idea/git/simple-flink/src/main/scala/code/book/batch/outputformat   
+
+
+
