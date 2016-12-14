@@ -19,7 +19,8 @@ class MultipleTextOutputFormat001[K, V] extends MultipleTextOutputFormat[K, V] {
     * @param name  DataSet的partition的id(从1开始)
     * @return file的name
     */
-  override def generateFileNameForKeyValue(key: K, value: V, name: String): String = key.asInstanceOf[String]
+  override def generateFileNameForKeyValue(key: K, value: V, name: String): String =
+   key.asInstanceOf[String]
 
   /**
     * 此方法用于产生文件内容中的key，这里文件内容中的key是就是DataSet的key
@@ -105,7 +106,8 @@ class MultipleTextOutputFormat002[K, V] extends MultipleTextOutputFormat[K, V] {
     * @param name  DataSet的partition的id(从1开始)
     * @return file的name
     */
-  override def generateFileNameForKeyValue(key: K, value: V, name: String): String = (key + "_" + new Date().getTime).asInstanceOf[String]
+  override def generateFileNameForKeyValue(key: K, value: V, name: String): String = 
+  (key + "_" + new Date().getTime).asInstanceOf[String]
 
   /**
     * 此方法用于产生文件内容中的key，这里文件内容中的key是就是DataSet的key
@@ -188,7 +190,8 @@ class MultipleTextOutputFormat003[K, V] extends MultipleTextOutputFormat[K, V] {
     * @param name  DataSet的partition的id(从1开始)
     * @return file的name
     */
-  override def generateFileNameForKeyValue(key: K, value: V, name: String): String = ( name + "_" +key).asInstanceOf[String]
+  override def generateFileNameForKeyValue(key: K, value: V, name: String): String = 
+  ( name + "_" +key).asInstanceOf[String]
 
   /**
     * 此方法用于产生文件内容中的key，这里文件内容中的key是就是DataSet的key
