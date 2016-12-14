@@ -41,7 +41,7 @@
 
 * [第018章：Flink中参数传递和容错设定](book/api/sinksource/ParamFault.md)
 
-* [第019章：Flink中OutFormat设置(Scala版)](book/api/sinksource/ParamFault.md)
+* [第019章：Flink中OutFormat设置(Scala版)](book/outputformat/outputformat.md)
 
 ##四、Flink流处理API详解与编程实战
 * [第000章：Flink基于流的wordcount示例](book/stream/streamwc/streamwc.md)
@@ -93,3 +93,4 @@ http://data-artisans.com/session-windowing-in-flink/
 
 
 
+/Users/liguohua/Documents/F/code/idea/git/simple-flink/
