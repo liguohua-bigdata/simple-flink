@@ -78,7 +78,8 @@ object JdbcTest {
       val resultSet = statement.executeQuery("select stuid,stuname,stuaddr,stusex from Student")
       //5.处理结果集
       while (resultSet.next()) {
-        val student = Student(resultSet.getInt("stuid"), resultSet.getString("stuname").trim, resultSet.getString("stuaddr").trim, resultSet.getString("stusex").trim)
+        val student = Student(resultSet.getInt("stuid"), resultSet.getString("stuname").trim,
+         resultSet.getString("stuaddr").trim, resultSet.getString("stusex").trim)
         println(student)
       }
     } catch {
@@ -143,7 +144,8 @@ class StudentSourceFromMysql extends RichSourceFunction[Student] {
       //4.执行查询，封装数据
       val resultSet = ps.executeQuery()
       while (resultSet.next()) {
-        val student = Student(resultSet.getInt("stuid"), resultSet.getString("stuname").trim, resultSet.getString("stuaddr").trim, resultSet.getString("stusex").trim)
+        val student = Student(resultSet.getInt("stuid"), resultSet.getString("stuname").trim,
+         resultSet.getString("stuaddr").trim, resultSet.getString("stusex").trim)
         sourceContext.collect(student)
       }
     } catch {
