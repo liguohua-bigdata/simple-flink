@@ -1,7 +1,7 @@
 #《Flink实战教程》
 ##零、前言说明
 
-* [第000章：前言](README.md)  
+* [第000章：前言](book/prefix.md)  
 
 ##一、Flink部署与开发
 
