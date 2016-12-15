@@ -80,5 +80,7 @@ object DataSource001 {
     //17.用fromElements创建DataStream
     val ds17: DataStream[Long] = senv.generateSequence(1, 9)
     ds17.print()
+
+    senv.execute(this.getClass.getName)
   }
 }

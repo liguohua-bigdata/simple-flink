@@ -1,47 +1,25 @@
 package code.book.stream.sinksource.scala
 
+//0.引用必要的元素
+import org.apache.flink.streaming.api.scala._
 
-import org.apache.flink.streaming.api.scala.{StreamExecutionEnvironment, _}
-
-import scala.collection.immutable.{Queue, Stack}
-import scala.collection.mutable
-import scala.collection.mutable.{ArrayBuffer, ListBuffer}
-
+/**
+  * def socketTextStream(hostname: String, port: Int, delimiter: Char = '\n', maxRetry: Long = 0):
+  * DataStream[String]
+  */
 object DataSource002 {
   def main(args: Array[String]): Unit = {
+    //0.创建运行环境
+    val env = StreamExecutionEnvironment.getExecutionEnvironment
 
-    val env =  StreamExecutionEnvironment.getExecutionEnvironment
-    //1.读取本地文本文件,本地文件以file://开头
-    val ds1: DataStream[String] = env.readTextFile("file:///Applications/flink-1.1.3/README.txt")
-    ds1.print()
+    //1.定义text1数据流，采用默认值,行分隔符为'\n'，失败重试0次
+    val text1 = env.socketTextStream("qingcheng11", 9999)
+    text1.print()
 
-    //2.读取hdfs文本文件，hdfs文件以hdfs://开头,不指定master的短URL
-    val ds2: DataStream[String] = env.readTextFile("hdfs:///input/flink/README.txt")
-    ds2.print()
-
-    //3.读取hdfs CSV文件,转化为tuple
-    val path = "hdfs://qingcheng11:9000/input/flink/sales.csv"
-    val ds3 = env.readCsvFile[(String, Int, Int, Double)](
-      filePath = path,
-      lineDelimiter = "\n",
-      fieldDelimiter = ",",
-      lenient = false,
-      ignoreFirstLine = true,
-      includedFields = Array(0, 1, 2, 3))
-    ds3.print()
-
-    //4.读取hdfs CSV文件,转化为case class
-    case class Sales(transactionId: String, customerId: Int, itemId: Int, amountPaid: Double)
-    val ds4 = env.readCsvFile[Sales](
-      filePath = path,
-      lineDelimiter = "\n",
-      fieldDelimiter = ",",
-      lenient = false,
-      ignoreFirstLine = true,
-      includedFields = Array(0, 1, 2, 3),
-      pojoFields = Array("transactionId", "customerId", "itemId", "amountPaid")
-    )
-    ds4.print()
-
+    //2.定义text2数据流,行分隔符为'|'，失败重试3次
+    val text2 = env.socketTextStream("qingcheng11", 9998, delimiter = '|', maxRetry = 3)
+    text2.print()
+    //5.触发计算
+    env.execute(this.getClass.getName)
   }
 }
