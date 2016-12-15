@@ -1,5 +1,11 @@
-#一、flink常见的source
-##1.创建DataSet的方式
+#一、flink在批处理中常见的source
+```
+flink在批处理中常见的source主要有两大类。
+1.基于本地集合的source（Collection-based-source）
+2.基于文件的source（File-based-source）
+```
+
+##1.基于本地集合的source
 ```
 在flink最常见的创建DataSet方式有三种。
 1.使用env.fromElements()，这种方式也支持Tuple，自定义对象等复合形式。
@@ -93,7 +99,7 @@ object DataSource001 {
 }
 
 ```
-##2.支持的文件系统和存储格式
+##2.基于文件的source（File-based-source）
 ```
 flink支持多种存储设备上的文件，包括本地文件，hdfs文件，alluxio文件等。
 flink支持多种文件的存储格式，包括text文件，CSV文件等。
@@ -143,7 +149,7 @@ object DataSource002 {
 }
 ```
 
-##2.遍历目录
+##3.基于文件的source（遍历目录）
 ```
 flink支持对一个文件目录内的所有文件，包括所有子目录中的所有文件的遍历访问方式。
 ```
@@ -170,8 +176,38 @@ object DataSource003 {
   }
 }
 ```
-#二、flink常见的sink
-##1.sink支持的文件系统和存储格式
+#二、flink在批处理中常见的sink
+```
+1.基于本地集合的sink（Collection-based-sink）
+2.基于文件的sink（File-based-sink）
+```
+##1.基于本地集合的sink（Collection-based-sink）
+```
+package code.book.batch.sinksource.scala
+import org.apache.flink.api.scala.{DataSet, ExecutionEnvironment, _}
+object DataSink000 {
+  def main(args: Array[String]): Unit = {
+    //1.定义环境
+    val env = ExecutionEnvironment.getExecutionEnvironment
+    //2.定义数据 stu(age,name,height)
+    val stu: DataSet[(Int, String, Double)] = env.fromElements(
+      (19, "zhangsan", 178.8),
+      (17, "lisi", 168.8),
+      (18, "wangwu", 184.8),
+      (21, "zhaoliu", 164.8)
+    )
+    //3.sink到标准输出
+    stu.print
+
+    //3.sink到标准error输出
+    stu.printToErr()
+
+    //4.sink到本地Collection
+    print(stu.collect())
+  }
+}
+```
+##2.基于文件的sink（File-based-sink）
 ```
 flink支持多种存储设备上的文件，包括本地文件，hdfs文件，alluxio文件等。
 flink支持多种文件的存储格式，包括text文件，CSV文件等。
@@ -218,7 +254,7 @@ object DataSink001 {
   }
 }
 ```
-##2.flink支持对数据进行排序后再sink到外部系统
+##3.基于文件的sink（数据进行排序）
 ```
 可以使用sortPartition对数据进行排序后再sink到外部系统。
 ```
