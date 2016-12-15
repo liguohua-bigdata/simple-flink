@@ -35,7 +35,7 @@
 
 * [第015章：Slot和Parallelism的深入分析](book/internal/slot-parallelism/slot-parallelism.md)
 
-* [第016章：Flink中常见的sink和source](book/api/sinksource/sinksource.md)
+* [第016章：Flink在批处理中常见的sink和source](book/api/sinksource/sinksource.md)
 
 * [第017章：Flink中广播变量和分布式缓存](book/api/sinksource/VariablesCache.md)
 
@@ -51,6 +51,8 @@
 * [第000章：DataStream与MySql自定义sink和source(Scala版)](book/stream/customSource/customSourceScala.md)
 
 * [第000章：DataStream与MySql自定义sink和source(Java版)](book/stream/customSource/customSourceJava.md)
+
+* [第000章：Flink在流处理中常见的sink和source](book/stream/sinkSource/sinkSource.md)
 
 ---
 ##五、待整理部分
@@ -71,6 +73,10 @@
 * [第000章：error](book/error/error.md)
 
 * [第000章：data](book/data/data.md)
+
+
+
+/Users/liguohua/Documents/F/code/idea/git/simple-flink/book/
 
 
 ---

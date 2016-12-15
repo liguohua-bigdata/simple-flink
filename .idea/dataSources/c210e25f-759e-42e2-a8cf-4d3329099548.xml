@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MySQL - flinktest@qingcheng11">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+    <schema id="1" name="flinktest">
+      <visible>1</visible>
+    </schema>
+    <schema id="2" name="information_schema"/>
+    <schema id="3" name="mysql"/>
+    <schema id="4" name="performance_schema"/>
+    <schema id="5" name="qingchengkeji"/>
+    <schema id="6" name="sparktest"/>
+    <table id="7" parent="1" name="Student"/>
+    <column id="8" parent="7" name="stuid">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="9" parent="7" name="stuname">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <column id="10" parent="7" name="stuaddr">
+      <mandatory>1</mandatory>
+      <data-type>varchar(40)|0</data-type>
+    </column>
+    <column id="11" parent="7" name="stusex">
+      <mandatory>1</mandatory>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <key id="12" parent="7" name="PRIMARY">
+      <columns>stuid</columns>
+      <primary>1</primary>
+    </key>
+  </database-model>
+</dataSource>
