@@ -96,7 +96,27 @@ object DataSource001 {
   }
 }
 ```
-##2.基于网络套接字的source（Socket-based-source）
+##2.基于文件的source（File-based-source）
+```scala
+
+package code.book.stream.sinksource.scala
+
+import org.apache.flink.streaming.api.scala._
+object DataSource003 {
+  def main(args: Array[String]): Unit = {
+    //0.创建运行环境
+    val env = StreamExecutionEnvironment.getExecutionEnvironment
+    //1.读取本地文件
+    val text1 = env.readTextFile("file:///$FLINK_HOME/README.txt")
+    text1.print()
+    //1.读取hdfs文件
+    val text2 = env.readTextFile("hdfs://qingcheng11:9000/input/flink/README.txt")
+    text2.print()
+    env.execute()
+  }
+}
+```
+##3.基于网络套接字的source（Socket-based-source）
 ###方法原型
 ```
 def socketTextStream(hostname: String, port: Int, delimiter: Char = '\n',
@@ -122,6 +142,40 @@ object DataSource002 {
     text2.print()
     //5.触发计算
     env.execute(this.getClass.getName)
+  }
+}
+```
+
+##4.自定义的source（Custom-source,以kafka为例）
+```
+package code.book.stream.sinksource.scala
+import java.util.Properties
+import org.apache.flink.streaming.api.scala._
+import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer09
+import org.apache.flink.streaming.util.serialization.SimpleStringSchema
+object DataSource004 {
+  def main(args: Array[String]) {
+
+    //1指定kafka数据流的相关信息
+    val zkCluster = "qingcheng11,qingcheng12,qingcheng13:2181"
+    val kafkaCluster = "qingcheng11:9092,qingcheng12:9092,qingcheng13:9092"
+    val kafkaTopicName = "food"
+    //2.创建流处理环境
+    val env = StreamExecutionEnvironment.getExecutionEnvironment
+
+    //3.创建kafka数据流
+    val properties = new Properties()
+    properties.setProperty("bootstrap.servers", kafkaCluster)
+    properties.setProperty("zookeeper.connect", zkCluster)
+    properties.setProperty("group.id", kafkaTopicName)
+
+    val kafka09 = new FlinkKafkaConsumer09[String](kafkaTopicName, new SimpleStringSchema(), properties)
+    //4.添加数据源addSource(kafka09)
+    val text = env.addSource(kafka09).setParallelism(4)
+    text.print()
+
+    //5.触发运算
+    env.execute("flink-kafka-wordcunt")
   }
 }
 ```
