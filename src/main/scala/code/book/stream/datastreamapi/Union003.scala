@@ -2,7 +2,7 @@ package code.book.stream.datastreamapi
 
 import org.apache.flink.streaming.api.scala._
 
-object Uionest001 {
+object Union003 {
   def main(args: Array[String]): Unit = {
     //1.创建流处理环境
     val senv = StreamExecutionEnvironment.getExecutionEnvironment
