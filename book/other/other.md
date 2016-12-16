@@ -23,10 +23,12 @@ object ReadRegxPathDemo {
     config.setBoolean("recursive.file.enumeration", true)
     //3.定义数据
     val path = "hdfs://qingcheng12:9000/input/spark/README.md"
-    val texLines1: DataSet[(LongWritable, Text)] = env.readHadoopFile(new TextInputFormat, classOf[LongWritable], classOf[Text], path).withParameters(config)
+    val texLines1: DataSet[(LongWritable, Text)] = env.readHadoopFile(new TextInputFormat,
+    classOf[LongWritable], classOf[Text], path).withParameters(config)
     //4.读取数据
     val texLines2 = texLines1.mapPartition(new MapPartitionFunction[(LongWritable, Text), String]() {
-      override def mapPartition(iterable: Iterable[(LongWritable, Text)], collector: Collector[String]): Unit = {
+      override def mapPartition(iterable: Iterable[(LongWritable, Text)],
+      collector: Collector[String]): Unit = {
         val itor = iterable.iterator
         while (itor.hasNext) {
           //text
