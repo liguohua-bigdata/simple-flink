@@ -26,6 +26,7 @@
     <orderEntry type="library" name="janino-3.0.6" level="project" />
     <orderEntry type="library" name="alluxio-assemblies-1.3.0-jar-with-dependencies" level="application" />
     <orderEntry type="library" name="alluxio-1.3.0-flink-client-jar-with-dependencies" level="project" />
+    <orderEntry type="library" name="commons-compiler-3.0.6" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.4" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.specs:specs:1.2.5" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.scalatest:scalatest:0.9.1" level="project" />
@@ -117,9 +118,9 @@
     <orderEntry type="library" name="Maven: org.apache.flink:flink-connector-kafka-0.9_2.11:1.1.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.flink:flink-connector-kafka-base_2.11:1.1.3" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.janino:janino:3.0.6" level="project" />
-    <orderEntry type="library" name="Maven: org.codehaus.janino:commons-compiler:3.0.6" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.janino:commons-compiler-jdk:3.0.6" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.35" level="project" />
-    <orderEntry type="library" name="Maven: commons-cli:commons-cli:1.3" level="project" />
+    <orderEntry type="library" name="Maven: commons-cli:commons-cli:1.4" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.janino:commons-compiler:3.0.6" level="project" />
   </component>
 </module>

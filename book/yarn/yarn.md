@@ -229,3 +229,18 @@ Options for yarn-cluster mode:
 4.用yarn运行flink程序
       当FRC提交job到AM,job所需的jar会先上传到hdfs,然后由TM下载，解析，执行。运行情况实时反应到JM中。
 ```
+
+##六、flink部署模式总结
+```
+1.flink standalone
+	${FLINK_HOME}/bin/flink run  -m qingcheng11:6123  simple-flink-1.0-SNAPSHOT.jar
+2.flink on yarn
+    2.1 临时session
+        $FLINK_HOME/bin/flink run -m yarn-cluster -yn 3  /bigdata/software/simple-flink.jar
+    2.2 长期session
+	    a.后台启动yarn-session
+			$FLINK_HOME/bin/yarn-session.sh -n 3 -s 3 -d
+		b.运行jar包
+			$FLINK_HOME/bin/flink run /bigdata/software/simple-flink.jar
+```
+

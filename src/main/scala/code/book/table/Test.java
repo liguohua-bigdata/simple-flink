@@ -6,8 +6,6 @@ import org.apache.flink.api.java.table.BatchTableEnvironment;
 import org.apache.flink.api.table.Table;
 import org.apache.flink.api.table.TableEnvironment;
 import org.apache.flink.api.table.Types;
-import org.apache.flink.api.table.sinks.CsvTableSink;
-import org.apache.flink.api.table.sinks.TableSink;
 import org.apache.flink.api.table.sources.CsvTableSource;
 
 /**
@@ -24,24 +22,25 @@ public class Test {
                     new TypeInformation<?>[] {  Types.STRING(), Types.STRING() });
             tableEnv.registerTableSource("teacher", csvTableSource);
             Table tab = tableEnv.scan("teacher");
-            String patho="/Users/liguohua/Documents/F/code/idea/git/simple-flink/src/main/scala/code/book/table/teacher";
-
-            TableSink<?> sink = new CsvTableSink(patho, "|");
-            tab .writeToSink(sink);
-//            DataSet<Teacher> ds = tableEnv.toDataSet(tab, Teacher.class);
+            System.out.println(tab.select("tname").logicalPlan());
+//            String patho="/Users/liguohua/Documents/F/code/idea/git/simple-flink/src/main/scala/code/book/table/teacher";
 //
-//            tableEnv.registerDataSet("user2", ds, "trans_id,part_dt,lstg_format_name,leaf_categ_id,lstg_site_id,slr_segment_cd,price,item_count,seller_id");
-//
-//            Table result = tableEnv.sql("SELECT * FROM teacher");
-//
-//            TableSink<?> sink = new CsvTableSink(args[1], "|");
-//            // write the result Table to the TableSink
-//            result.writeToSink(sink);
-//
-//            // execute the program
-//            env.setParallelism(1);
-            env.execute("Flink Sales SUM");
-
+//            TableSink<?> sink = new CsvTableSink(patho, "|");
+//            tab .writeToSink(sink);
+////            DataSet<Teacher> ds = tableEnv.toDataSet(tab, Teacher.class);
+////
+////            tableEnv.registerDataSet("user2", ds, "trans_id,part_dt,lstg_format_name,leaf_categ_id,lstg_site_id,slr_segment_cd,price,item_count,seller_id");
+////
+////            Table result = tableEnv.sql("SELECT * FROM teacher");
+////
+////            TableSink<?> sink = new CsvTableSink(args[1], "|");
+////            // write the result Table to the TableSink
+////            result.writeToSink(sink);
+////
+////            // execute the program
+////            env.setParallelism(1);
+//            env.execute("Flink Sales SUM");
+//            org.codehaus.commons.compiler.CompileException
         } catch (Exception e) {
             e.printStackTrace();
         }
