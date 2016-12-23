@@ -169,7 +169,8 @@ object DataSource004 {
     properties.setProperty("zookeeper.connect", zkCluster)
     properties.setProperty("group.id", kafkaTopicName)
 
-    val kafka09 = new FlinkKafkaConsumer09[String](kafkaTopicName, new SimpleStringSchema(), properties)
+    val kafka09 = new FlinkKafkaConsumer09[String](kafkaTopicName,
+    new SimpleStringSchema(), properties)
     //4.添加数据源addSource(kafka09)
     val text = env.addSource(kafka09).setParallelism(4)
     text.print()

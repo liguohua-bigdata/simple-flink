@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="alluxio-1.3.0-flink-client-jar-with-dependencies">
+  <library name="alluxio-1.3.0-flink-client-jar-with-dependencies (2)">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/alluxio-1.3.0-flink-client-jar-with-dependencies.jar!/" />
     </CLASSES>
